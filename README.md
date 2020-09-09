@@ -8,4 +8,4 @@ Le but du sujet est de créer un server web complet avec la technologie **Docker
 Sujet -> [EN](https://github.com/tinaserra/Cub3D/blob/master/links/cub3d_en.pdf) | [FR](https://github.com/tinaserra/Cub3D/blob/master/links/cub3d_fr.pdf)
 
 ## USEFUL LINKS 🤙🏼
-* [Tutoriel on raycasting](https://courses.pikuma.com/courses/take/raycasting/lessons/7485598-introduction-and-learning-outcomes)
+* [Raycasting tutorial video](https://courses.pikuma.com/courses/take/raycasting/lessons/7485598-introduction-and-learning-outcomes)
