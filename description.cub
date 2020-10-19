@@ -1,9 +1,10 @@
-R 800 300
+  EA ./textures/greystone.xpm
+      R 800 300
 C 0,30,0
+
 NO ./textures/red.xpm
-WE ./textures/purplestone.xpm
+     WE ./textures/purplestone.xpm
 SO ./textures/bluestone.xpm
-EA ./textures/greystone.xpm
 S = ./textures/tonneau.xpm
 F 100,20,0
 

@@ -4,37 +4,42 @@ int     parsing_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 	/* /!\ aux lignes vides */
-		// if (*str[0] == '\0')
+		// if (*str[parse->i] == '\0')
 		// 	return (0);
 
 	/* /!\ aux espaces */
-	// if (*str[0] == ' ')
-		// 	0++;
-	ft_putstr_fd("OKKKK\n", 1);
+	while (str[parse->i] == ' ')
+		parse->i++;
+
 	//si c'est R resolution
-	if (str[0] == 'R')
+	if (str[parse->i] == 'R')
 		ft_putstr_fd("c'est R resolution\n", 1);
 
 	//si c'est F sol ou C plafond
-	if (str[0] == 'F' || str[0] == 'C')
+	if (str[parse->i] == 'F' || str[parse->i] == 'C')
 		ft_putstr_fd("c'est F sol ou C plafond\n", 1);
 
 	//si c'est texture (NO)
-	if (str[0] == 'N' && str[1] == 'O')
+	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (NO)\n", 1);
 
 	//si c'est texture (WE)
-	if (str[0] == 'W' && str[1] == 'E')
+	if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
 		ft_putstr_fd("c'est texture (WE)\n", 1);
 
 	//si c'est texture (SO)
-	if (str[0] == 'S' && str[1] == 'O')
+	if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (SO)\n", 1);
 
 	//si c'est texture (EA)
-	if (str[0] == 'E' && str[0 + 1] == 'A')
+	if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
 		ft_putstr_fd("c'est texture (EA)\n", 1);
-	ft_putstr_fd("OKKKK 2\n", 1);
+
+	//si c'est S sprite
+	if (str[parse->i] == 'S' && str[parse->i + 1] != 'O')
+		ft_putstr_fd("c'est S sprite\n", 1);
+
+	ft_putstr_fd("OKKKK\n", 1);
 	return (0);
 }
 
@@ -54,13 +59,12 @@ void	parsing(char *file, t_parsing *parse)
 	{
 		ft_putstr_fd("\n- ON VA LIRE\n", 1);
 		ret = get_next_line(fd, &str);
+		printf("ligne = %s\n", str);
 		parsing_elements(str, parse);
-		ft_putstr_fd("- ON A LU\n", 1);
 		// parse_color_resolution(&str, parse);
 		// parse_texture(str, parse);
 		// parse_map(str, parse);
 		free(str);
-		ft_putstr_fd("- ON A FREE\n", 1);
 	}
 	close(fd);
 	// if (parse->sizeline == 0 || parse->nblines == 0)
@@ -73,9 +77,9 @@ int		check_file_name(char *file, t_parsing *parse)
 	// int			i;
 
 	// i = 0;
-	// while (str[0] != '\0')
+	// while (str[parse->i] != '\0')
 	// 	i++;
-	// while (str[0] != '.')
+	// while (str[parse->i] != '.')
 	// {
 	// 	i--;
 	// 	if (i == 0)
