@@ -1,0 +1,22 @@
+R 800 300
+NO ./textures/red.xpm
+WE ./textures/purplestone.xpm
+SO ./textures/bluestone.xpm
+EA ./textures/greystone.xpm
+S ./textures/tonneau.xpm
+F 100,20,0
+C 0,30,0
+
+11111111111111111111111
+1                     1
+1                     1
+1                     1
+1                     1
+1                     1
+1                     1
+1                    S1
+11111111111111111111111
+100101
+102001
+1100N1
+111111
