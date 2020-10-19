@@ -4,7 +4,7 @@ NAME = Cub3D
 
 LIBFT_DIR = libft
 LIBFT = libft.a
-MLX_DIR = minilibx_mms_20200219
+MLX_DIR = mlx
 MLX = libmlx.dylib
 
 # diff entre .a et .dylib

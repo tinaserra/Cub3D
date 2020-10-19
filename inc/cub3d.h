@@ -8,20 +8,26 @@
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
 
+/* Toute la data de l'image (mlx_get_data_addr) ----------- */
+
 typedef struct	s_image
 {
 	void		*image; 
-	int			*data;
+	int			*data; //normalement char* addr
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
 }				t_image;
+
+/* Position de l'origine du carré dessiné ------------------ */
 
 typedef struct	s_coord
 {
 	int			x;
 	int			y;
 }				t_coord;
+
+/* Structure mère ------------------------------------------ */
 
 typedef struct	s_env
 {
@@ -33,7 +39,6 @@ typedef struct	s_env
 	t_coord		square_origin;
 	t_image		img;
 }				t_env;
-
 
 enum	e_bgra
 {
@@ -65,8 +70,8 @@ typedef union		u_color
 
 // toutes les variables commencent au meme endroit dans la memoire
 // l'union prend la taille du plus grand type
-#endif
 
 // Une union est, à l’image d’une structure, un regroupement d’objet de type différents. 
 // La nuance, et elle est de taille, est qu’une union est un agrégat qui ne peut contenir qu'un seul de ses membres à la fois.
 // Autrement dit, une union peut accueillir la valeur de n’importe lequel de ses membres, mais un seul à la fois.
+#endif

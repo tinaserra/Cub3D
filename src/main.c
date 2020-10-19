@@ -8,19 +8,23 @@ int error(char *str)
 
 void	put_px_to_img(t_image *img, int x, int y, int color)
 {
-    img->data[img->size_line / 4 * y + x] = color;
+	img->data[img->size_line / 4 * y + x] = color;
 }
-// *(int *)&img->data[img->size_line * y + x * img->bits_per_pixel / 8] = color;
-// size_line == taille de ligne de l image.
-// bits_per_pixel == un nombre de bit pour un pixel en memoire.
-// pour avancer de ligne en ligne avec un buffer de une dimmension : avancer de size_ligne en size_ligne.
-// Pour avancer d un pixel dans une ligne il faut avancer de bite par pixel / 8. (un byte = 8 bites)
-// Mettre un int dans un char* = on recupere l adresse de data(&). on le cast en int*. + *devant our y acceder.
 
-// ont cast directement la fontion mlx_get_data_adr du coup on le stock dans un int *data.
-// on peux supprimer le cast du debut, puisque c est deja un int qu on veux mettre dans un int.
-// vu que c est int int* on avance de 4. donc n supprime le '* img->bits_per_pixel / 8' car c etait = 4.
+/*
+** *(int *)&img->data[img->size_line * y + x * img->bits_per_pixel / 8] = color;
 
+** size_line == taille de ligne de l image.
+** bits_per_pixel == un nombre de bit pour un pixel en memoire.
+
+** pour avancer de ligne en ligne avec un buffer de une dimmension : avancer de size_ligne en size_ligne.
+** Pour avancer d un pixel dans une ligne il faut avancer de bite par pixel / 8. (un byte = 8 bites)
+** Mettre un int dans un char* = on recupere l adresse de data(&). on le cast en int*. + *devant pour y acceder.
+
+** ont cast directement la fontion mlx_get_data_adr du coup on le stock dans un int *data.
+** on peux supprimer le cast du debut, puisque c est deja un int qu on veux mettre dans un int.
+** vu que c est int int* on avance de 4. donc on supprime le '* img->bits_per_pixel / 8' car c etait = 4.
+*/
 
 int	ft_convert_color(t_color color, int endian)
 {
@@ -33,15 +37,7 @@ int	ft_convert_color(t_color color, int endian)
 		color.bgra[BGRA_RED] = color.argb[ARGB_RED];
 		color.bgra[BGRA_GREEN] = temp.argb[ARGB_GREEN];
 		color.bgra[BGRA_BLUE] = temp.argb[ARGB_BLUE];
-	}	
-
-	// result = a;
-	// result <<= 8; // result = result << 8
-	// result += r;
-	// result <<= 8; // result = result << 8
-	// result += g;
-	// result <<= 8; // result = result << 8
-	// result += b;
+	}
 	return (color.all);
 }
 
@@ -67,9 +63,9 @@ void draw_square(t_env *env)
 			// put_px_to_img(&img, x++, y, 0xFF4233);
 			t_color color;
 			color.argb[BGRA_ALPHA] = 0;
-			color.argb[BGRA_RED] = 0xff;
-			color.argb[BGRA_GREEN] = 0xff;
-			color.argb[BGRA_BLUE] = 0xff;
+			color.argb[BGRA_RED] = 240;
+			color.argb[BGRA_GREEN] = 210;
+			color.argb[BGRA_BLUE] = 108;
 			int	all = ft_convert_color(color, env->img.endian);
 			put_px_to_img(&env->img, env->square_origin.x + x, env->square_origin.y + y, all);
 			x++;
@@ -122,11 +118,9 @@ int	main(void)
 		return (error("FAILED : Init mlx\n"));
 	if (!(env.window = mlx_new_window(env.mlx, env.width_x, env.height_y, "Mon super titre")))
 		return (error("FAILED : Create new window\n"));
-
 	if (!(env.img.image = mlx_new_image(env.mlx, env.width_x, env.height_y)))
 		return (error("FAILED : Create new image"));
 	env.img.data = (int*)mlx_get_data_addr(env.img.image, &env.img.bits_per_pixel, &env.img.size_line, &env.img.endian);
-	
 	ft_putstr_fd("Hello World !\n", 1);
 	mlx_hook(env.window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, &env);
 	mlx_hook(env.window, KEYPRESS, KEYPRESSMASK, ft_key_press, &env);
