@@ -1,4 +1,6 @@
-SRC = main.c
+SRC = start_parse.c
+
+# main.c
 
 NAME = Cub3D
 
@@ -11,7 +13,7 @@ MLX = libmlx.dylib
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -MMD -O3
+CFLAGS = -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src

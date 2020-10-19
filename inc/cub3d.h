@@ -5,6 +5,15 @@
 # include "libft.h"
 # include "keycode_mac.h"
 
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <string.h>
+# include <math.h>
+
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
 
@@ -28,6 +37,11 @@ typedef struct	s_coord
 }				t_coord;
 
 /* Structure mère ------------------------------------------ */
+
+typedef struct	s_parsing
+{
+	int			i;
+}				t_parsing;
 
 typedef struct	s_env
 {
