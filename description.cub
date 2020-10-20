@@ -1,23 +1,4 @@
   EA ./textures/greystone.xpm
-      R 800 300
+R     800 uuu   300 20
 C 0,30,0
-
-NO ./textures/red.xpm
-     WE ./textures/purplestone.xpm
-SO ./textures/bluestone.xpm
-
-
-
-
-S = ./textures/tonneau.xpm
 F 100,20,0
-
-11111111111111111
-11011100111101111
-10001100000001111
-10020000200000111
-10020000000000201
-11110000N00020001
-10000000000002001
-10020000000110001
-11111111111111111

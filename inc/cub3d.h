@@ -13,6 +13,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
+# include <limits.h>
 
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
@@ -37,13 +38,6 @@ typedef struct	s_coord
 }				t_coord;
 
 /* Structure mère ------------------------------------------ */
-
-typedef struct	s_parsing
-{
-	int			i;
-	int			resx;
-	int			resy;
-}				t_parsing;
 
 typedef struct	s_env
 {
@@ -78,6 +72,16 @@ typedef union		u_color
 	unsigned char	argb[4];
 	unsigned char	bgra[4];
 }				t_color;
+
+typedef struct	s_parsing
+{
+	int			i;
+	int			resx;
+	int			resy;		
+}				t_parsing;
+
+
+int		get_resolution(char *str, t_parsing *parse);
 
 // argb[0] == alpha
 // argb[1] == r;

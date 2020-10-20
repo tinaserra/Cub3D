@@ -52,6 +52,7 @@ void draw_square(t_env *env)
 {
 	int x;
 	int y;
+	int all;
 
 	y = 0;
 	while (y < 100)
@@ -63,10 +64,10 @@ void draw_square(t_env *env)
 			// put_px_to_img(&img, x++, y, 0xFF4233);
 			t_color color;
 			color.argb[BGRA_ALPHA] = 0;
-			color.argb[BGRA_RED] = 240;
-			color.argb[BGRA_GREEN] = 210;
-			color.argb[BGRA_BLUE] = 108;
-			int	all = ft_convert_color(color, env->img.endian);
+			color.argb[BGRA_RED] = 255;
+			color.argb[BGRA_GREEN] = 95;
+			color.argb[BGRA_BLUE] = 95;
+			all = ft_convert_color(color, env->img.endian);
 			put_px_to_img(&env->img, env->square_origin.x + x, env->square_origin.y + y, all);
 			x++;
 		}
