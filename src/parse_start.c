@@ -19,8 +19,16 @@ int     parsing_elements(char *str, t_parsing *parse)
 		ft_putstr_fd("c'est R resolution\n", 1);
 		get_resolution(str, parse);
 	}
-	if (str[parse->i] == 'F' || str[parse->i] == 'C')
-		ft_putstr_fd("c'est F sol ou C plafond\n", 1);
+	if (str[parse->i] == 'F')
+	{
+		ft_putstr_fd("c'est F sol\n", 1);
+		get_color(str, parse);
+	}
+	if (str[parse->i] == 'C')
+	{
+		ft_putstr_fd("c'est C plafond\n", 1);
+		// get_color(str, parse);
+	}
 	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (NO)\n", 1);
 	if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')

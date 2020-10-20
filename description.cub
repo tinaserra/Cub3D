@@ -1,4 +1,2 @@
-  EA ./textures/greystone.xpm
-R     800 uuu   300 20
-C 0,30,0
-F 100,20,0
+
+F 255  , 95   , 88, 555

@@ -73,15 +73,27 @@ typedef union		u_color
 	unsigned char	bgra[4];
 }				t_color;
 
+typedef struct	s_pcolor
+{
+	int			red_c;
+	int			green_c;
+	int			blue_c;
+	int			red_f;
+	int			green_f;
+	int			blue_f;	
+}				t_pcolor;
+
 typedef struct	s_parsing
 {
 	int			i;
 	int			resx;
-	int			resy;		
+	int			resy;
+	t_pcolor	parse_color;	
 }				t_parsing;
 
 
 int		get_resolution(char *str, t_parsing *parse);
+int		get_color(char* str, t_parsing *parse);
 
 // argb[0] == alpha
 // argb[1] == r;
