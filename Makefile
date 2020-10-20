@@ -1,4 +1,4 @@
-SRC = start_parse.c
+SRC = parse_start.c
 
 # main.c
 

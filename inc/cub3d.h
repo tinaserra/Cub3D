@@ -41,6 +41,8 @@ typedef struct	s_coord
 typedef struct	s_parsing
 {
 	int			i;
+	int			resx;
+	int			resy;
 }				t_parsing;
 
 typedef struct	s_env

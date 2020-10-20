@@ -5,6 +5,10 @@ C 0,30,0
 NO ./textures/red.xpm
      WE ./textures/purplestone.xpm
 SO ./textures/bluestone.xpm
+
+
+
+
 S = ./textures/tonneau.xpm
 F 100,20,0
 
