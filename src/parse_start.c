@@ -22,12 +22,12 @@ int     parsing_elements(char *str, t_parsing *parse)
 	if (str[parse->i] == 'F')
 	{
 		ft_putstr_fd("c'est F sol\n", 1);
-		get_color(str, parse);
+		get_f_color(str, parse);
 	}
 	if (str[parse->i] == 'C')
 	{
 		ft_putstr_fd("c'est C plafond\n", 1);
-		// get_color(str, parse);
+		get_c_color(str, parse);
 	}
 	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (NO)\n", 1);
@@ -54,6 +54,7 @@ void	parsing(char *file, t_parsing *parse)
 		ft_putstr_fd("ERROR : Invalide : is a directory\n", 1); // ft_error(parse, "Invalide : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
 		ft_putstr_fd("ERROR : Invalide : file .cub invalide\n", 1); // ft_error(parse, "file .cub invalide\n");
+	init_color(parse);
 	while (ret != 0)
 	{
 		ft_putstr_fd("\n- ON VA LIRE\n", 1);

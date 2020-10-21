@@ -1,9 +1,13 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* HEADERS ----------- */
+
 # include "mlx.h"
 # include "libft.h"
 # include "keycode_mac.h"
+
+/* LIBRARIES ----------- */
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -14,6 +18,8 @@
 # include <string.h>
 # include <math.h>
 # include <limits.h>
+
+/* VALUES ----------- */
 
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
@@ -88,12 +94,14 @@ typedef struct	s_parsing
 	int			i;
 	int			resx;
 	int			resy;
-	t_pcolor	parse_color;	
+	t_pcolor	col;	
 }				t_parsing;
 
 
+void	init_color(t_parsing *parse);
 int		get_resolution(char *str, t_parsing *parse);
-int		get_color(char* str, t_parsing *parse);
+int		get_f_color(char* str, t_parsing *parse);
+int		get_c_color(char* str, t_parsing *parse);
 
 // argb[0] == alpha
 // argb[1] == r;
