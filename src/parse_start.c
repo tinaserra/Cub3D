@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 11:47:28 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 14:44:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 
 	// ft_putstr_fd("OKKKK\n", 1);
 
-int		parsing_map(char *str, t_parsing *parse)
+int		get_map(char *str, t_parsing *parse)
 {
-	/* code */
+	(void)str;
+	(void)parse;
+	return (0);
 }
 
-int     parsing_elements(char *str, t_parsing *parse)
+int     get_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 
@@ -71,14 +73,14 @@ void	parsing(char *file, t_parsing *parse)
 		ft_putstr_fd("ERROR : Invalide : is a directory\n", 1); // ft_error(parse, "Invalide : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
 		ft_putstr_fd("ERROR : Invalide : file .cub invalide\n", 1); // ft_error(parse, "file .cub invalide\n");
-	init_color(parse);
+	init_parse(parse);
 	while (ret != 0)
 	{
 		ft_putstr_fd("\n- ON VA LIRE\n", 1);
 		ret = get_next_line(fd, &str);
 		printf("ligne = %s\n", str);
-		parsing_elements(str, parse);
-		parsing_map(str, parse);
+		get_elements(str, parse);
+		get_map(str, parse);
 		free(str);
 	}
 	close(fd);

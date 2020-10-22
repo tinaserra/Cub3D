@@ -6,15 +6,14 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2020/10/22 11:43:33 by vserra           ###   ########.fr        #
+#    Updated: 2020/10/22 14:36:07 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = parse_start.c \
-		parse_int.c \
-		parse_map.c
+		parse_int.c
 
-# parse_start.c parse_int.c
+# parse_start.c parse_int.c parse_map.c
 
 # main.c
 

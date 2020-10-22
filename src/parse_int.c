@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 11:40:00 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 14:44:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_color(t_parsing *parse)
+void	init_parse(t_parsing *parse)
 {
 	parse->col.red_f = -1;
 	parse->col.green_f = -1;
@@ -21,6 +21,9 @@ void	init_color(t_parsing *parse)
 	parse->col.red_c = -1;
 	parse->col.green_c = -1;
 	parse->col.blue_c = -1;
+
+	parse->resx = -1;
+	parse->resy = -1;
 }
 
 int		bb_atoi(char *str, t_parsing *parse)
@@ -102,7 +105,7 @@ int		get_c_color(char* str, t_parsing *parse)
 	int ret;
 
 	ret = 0;
-	if (parse->col.red_c != -1)
+	if (parse->col.red_c != -1) // Check le double element C
 		return (-1);
 	if (str[parse->i])
 	{
@@ -138,7 +141,7 @@ int		get_f_color(char* str, t_parsing *parse)
 	int ret;
 
 	ret = 0;
-	if (parse->col.red_f != -1)
+	if (parse->col.red_f != -1) // Check le double element F
 		return (-1);
 	if (str[parse->i])
 	{
@@ -175,9 +178,9 @@ int		get_resolution(char *str, t_parsing *parse)
 	int ret;
 
 	ret = 0;
-	parse->resx = 0;
-	parse->resy = 0;
 
+	if (parse->resx != -1) // Check le double element R
+		return (-1);
 	if (str[parse->i])
 	{
 		parse->i++;
