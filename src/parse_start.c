@@ -16,17 +16,17 @@ int     parsing_elements(char *str, t_parsing *parse)
 		parse->i++;
 	if (str[parse->i] == 'R')
 	{
-		ft_putstr_fd("c'est R resolution\n", 1);
+		// ft_putstr_fd("c'est R resolution\n", 1);
 		get_resolution(str, parse);
 	}
 	if (str[parse->i] == 'F')
 	{
-		ft_putstr_fd("c'est F sol\n", 1);
+		// ft_putstr_fd("c'est F sol\n", 1);
 		get_f_color(str, parse);
 	}
 	if (str[parse->i] == 'C')
 	{
-		ft_putstr_fd("c'est C plafond\n", 1);
+		// ft_putstr_fd("c'est C plafond\n", 1);
 		get_c_color(str, parse);
 	}
 	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
@@ -61,8 +61,6 @@ void	parsing(char *file, t_parsing *parse)
 		ret = get_next_line(fd, &str);
 		printf("ligne = %s\n", str);
 		parsing_elements(str, parse);
-		// parse_color_resolution(&str, parse);
-		// parse_texture(str, parse);
 		// parse_map(str, parse);
 		free(str);
 	}
@@ -74,24 +72,19 @@ void	parsing(char *file, t_parsing *parse)
 
 int		check_file_name(char *file, t_parsing *parse)
 {
-	// int			i;
+	printf("arg = %s\n", file);
 
-	// i = 0;
-	// while (str[parse->i] != '\0')
-	// 	i++;
-	// while (str[parse->i] != '.')
-	// {
-	// 	i--;
-	// 	if (i == 0)
-	// 	{
-	// 		ft_error(parse, "Nom de la map invalide\n");
-	// 		return (0);
-	// 	}
-	// }
-	// if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
+	int			i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (file[0] == '.' || (file[i - 4] != '.' && file[i - 3] != 'c' && file[i - 2] != 'u' && file[i - 1] != 'b'))
+	{
+		ft_putstr_fd("ERROR : Invalide name map\n", 1);
+		return (-1);
+	}
 	parsing(file, parse);
-	// else
-	// 	ft_error(parse, "Nom de la map invalide\n");
 	return (0);
 }
 
