@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 14:44:32 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 16:47:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,32 @@
 
 void	init_parse(t_parsing *parse)
 {
-	parse->col.red_f = -1;
-	parse->col.green_f = -1;
-	parse->col.blue_f = -1;
+	*parse = (t_parsing){ 
+                            .resx = -1,
+                            .resy = -1,
+                            .col.red_f = -1,
+                            .col.green_f = -1,
+                            .col.blue_f = -1,
+                            .col.red_c = -1,
+                            .col.green_c = -1,
+                            .col.blue_c = -1
+                        };
+	// parse->col.red_f = -1;
+	// parse->col.green_f = -1;
+	// parse->col.blue_f = -1;
 
-	parse->col.red_c = -1;
-	parse->col.green_c = -1;
-	parse->col.blue_c = -1;
+	// parse->col.red_c = -1;
+	// parse->col.green_c = -1;
+	// parse->col.blue_c = -1;
 
-	parse->resx = -1;
-	parse->resy = -1;
+	// parse->resx = -1;
+	// parse->resy = -1;
+	printf("R = %d\n", parse->col.red_f);
+	printf("G = %d\n", parse->col.green_f);
+	printf("B = %d\n", parse->col.blue_f);
+	printf("R = %d\n", parse->col.red_c);
+	printf("G = %d\n", parse->col.green_c);
+	printf("B = %d\n", parse->col.blue_c);
 }
 
 int		bb_atoi(char *str, t_parsing *parse)
@@ -111,13 +127,13 @@ int		get_c_color(char* str, t_parsing *parse)
 	{
 		parse->i++;
 		parse->col.red_c = bb_atoi(str, parse);
-		while ((str[parse->i] >= 9 && str[parse->i] <= 13) && str[parse->i] == 32)
+		while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
 			parse->i++;
-		if ((parse->col.red_c < -1 || parse->col.red_c < 256) && str[parse->i] == ',')
+		if ((parse->col.red_c > -1 && parse->col.red_c < 256) && str[parse->i] == ',')
 		{
 			parse->i++;
 			parse->col.green_c = bb_atoi(str, parse);
-			while ((str[parse->i] >= 9 && str[parse->i] <= 13) && str[parse->i] == 32)
+			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
 				parse->i++;
 			if (parse->col.green_c < 256 && str[parse->i] == ',')
 			{
@@ -147,13 +163,13 @@ int		get_f_color(char* str, t_parsing *parse)
 	{
 		parse->i++;
 		parse->col.red_f = bb_atoi(str, parse);
-		while ((str[parse->i] >= 9 && str[parse->i] <= 13) && str[parse->i] == 32)
+		while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
 			parse->i++;
-		if ((parse->col.red_f < -1 || parse->col.red_f < 256) && str[parse->i] == ',')
+		if ((parse->col.red_f > -1 && parse->col.red_f < 256) && str[parse->i] == ',')
 		{
 			parse->i++;
 			parse->col.green_f = bb_atoi(str, parse);
-			while ((str[parse->i] >= 9 && str[parse->i] <= 13) && str[parse->i] == 32)
+			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
 				parse->i++;
 			if (parse->col.green_f < 256 && str[parse->i] == ',')
 			{
