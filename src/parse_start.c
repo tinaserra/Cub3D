@@ -6,17 +6,16 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 17:21:04 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 17:43:57 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 /*
 ** /!\ aux espaces
 ** /!\ aux lignes vides
 */
-
-	// ft_putstr_fd("OKKKK\n", 1);
 
 int		get_map(char *str, t_parsing *parse)
 {
