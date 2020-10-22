@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 11:40:13 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 11:47:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 */
 
 	// ft_putstr_fd("OKKKK\n", 1);
+
+int		parsing_map(char *str, t_parsing *parse)
+{
+	/* code */
+}
 
 int     parsing_elements(char *str, t_parsing *parse)
 {
@@ -73,7 +78,7 @@ void	parsing(char *file, t_parsing *parse)
 		ret = get_next_line(fd, &str);
 		printf("ligne = %s\n", str);
 		parsing_elements(str, parse);
-		// parse_map(str, parse);
+		parsing_map(str, parse);
 		free(str);
 	}
 	close(fd);
