@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_int.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
+/*   Updated: 2020/10/22 11:40:00 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	init_color(t_parsing *parse)
@@ -59,8 +71,6 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 {
 	while (str[parse->i])
 	{
-	// if (!(str[parse->i] == '\t' || str[parse->i] == '\n' || str[parse->i] == '\r'
-	// 	|| str[parse->i] == '\v' || str[parse->i] == '\f' || str[parse->i] == ' '))
 		if ((str[parse->i] < 9 && str[parse->i] > 13) && str[parse->i] != 32)
 		{
 		// if (str[parse->i] && str[parse->i] >= '0' && str[parse->i] <= '9')
@@ -82,8 +92,8 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 				return (-1);
 			}
 		}
+		parse->i++;
 	}
-	parse->i++;
 	return (0);
 }
 
