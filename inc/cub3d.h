@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 14:44:30 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 17:18:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,18 @@ typedef struct	s_parsing
 	t_pcolor	col;	
 }				t_parsing;
 
+/* init_struct ------------------------------------------ */
 
 void	init_parse(t_parsing *parse);
+
+/* parse_start ------------------------------------------ */
+
+void	parsing(char *file, t_parsing *parse);
+int     get_elements(char *str, t_parsing *parse);
+// int		get_map(char *str, t_parsing *parse);
+
+/* parse_int ------------------------------------------ */
+
 int		get_resolution(char *str, t_parsing *parse);
 int		get_f_color(char* str, t_parsing *parse);
 int		get_c_color(char* str, t_parsing *parse);

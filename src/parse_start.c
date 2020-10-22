@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 14:44:41 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/22 17:21:04 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	parsing(char *file, t_parsing *parse)
 		ft_putstr_fd("ERROR : Invalide : is a directory\n", 1); // ft_error(parse, "Invalide : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
 		ft_putstr_fd("ERROR : Invalide : file .cub invalide\n", 1); // ft_error(parse, "file .cub invalide\n");
-	init_parse(parse);
 	while (ret != 0)
 	{
 		ft_putstr_fd("\n- ON VA LIRE\n", 1);
@@ -87,46 +86,4 @@ void	parsing(char *file, t_parsing *parse)
 	// if (parse->sizeline == 0 || parse->nblines == 0)
 	// 	ft_error(parse, "Map absente\n");
 	// ft_parsing_map(file, parse);
-}
-
-int		check_file_name(char *file, t_parsing *parse)
-{
-	printf("arg = %s\n", file);
-
-	int			i;
-
-	i = 0;
-	while (file[i])
-		i++;
-	if (file[0] == '.' || (file[i - 4] != '.' && file[i - 3] != 'c' && file[i - 2] != 'u' && file[i - 1] != 'b'))
-	{
-		ft_putstr_fd("ERROR : Invalide name map\n", 1);
-		return (-1);
-	}
-	parsing(file, parse);
-	return (0);
-}
-
-// int			ft_printf(const char *str, ...)
-// {
-// 	int		i;
-// 	t_data	data;
-
-// 	i = 0;
-// 	data.format = (unsigned char *)str;
-
-// 	va_start(data.ap, str);
-
-// 	parsing(&data);
-// 	va_end(data.ap);
-// 	return (data.nb_char);
-// }
-
-int main(int argc, char **argv)
-{
-	t_parsing parse;
-
-	(void)argc;
-
-	check_file_name(argv[1], &parse);
 }
