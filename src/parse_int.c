@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 16:50:13 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 16:43:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 {
 	while (str[parse->i])
 	{
-		if ((str[parse->i] < 9 && str[parse->i] > 13) && str[parse->i] != 32)
+		if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
 		{
 		// if (str[parse->i] && str[parse->i] >= '0' && str[parse->i] <= '9')
 		// 	ft_putstr_fd("Error :\nMore than 3 numbers\n", 1);
@@ -68,16 +68,19 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 			if (ctrl == 'F')
 			{
 				ft_putstr_fd("Error :\n[F] Wrong caracter at the end\n", 1);
+				parse->col.blue_f = -1;
 				return (-1);
 			}
 			if (ctrl == 'C')
 			{
 				ft_putstr_fd("Error :\n[C] Wrong caracter at the end\n", 1);
+				parse->col.blue_f = -1;
 				return (-1);
 			}
 			if (ctrl == 'R')
 			{
 				ft_putstr_fd("Error :\n[R] Wrong caracter at the end\n", 1);
+				parse->resx = -1;
 				return (-1);
 			}
 		}
@@ -111,14 +114,16 @@ int		get_c_color(char* str, t_parsing *parse)
 				parse->col.blue_c = bb_atoi(str, parse);
 			}
 		}
+		if (parse->col.blue_c > 255)
+			parse->col.blue_c = -1;
 		printf("R = %d\n", parse->col.red_c);
 		printf("G = %d\n", parse->col.green_c);
 		printf("B = %d\n", parse->col.blue_c);
-		if (parse->col.blue_c > 255)
-			parse->col.blue_c = -1;
-		ret = check_strend(str, parse, 'C');
+		// ret = check_strend(str, parse, 'C');
+		return (check_strend(str, parse, 'C'));
 	}
 	ret = check_color(parse, 'C');
+	printf("ret = %d\n", ret);
 	return (ret);
 }
 
@@ -147,16 +152,17 @@ int		get_f_color(char* str, t_parsing *parse)
 				parse->col.blue_f = bb_atoi(str, parse);
 			}
 		}
+		if (parse->col.blue_f > 255)
+			parse->col.blue_f = -1;
 		printf("R = %d\n", parse->col.red_f);
 		printf("G = %d\n", parse->col.green_f);
 		printf("B = %d\n", parse->col.blue_f);
-		if (parse->col.blue_f > 255)
-			parse->col.blue_f = -1;
-		ret = check_strend(str, parse, 'F');
+		// ret = check_strend(str, parse, 'F');
+		return (check_strend(str, parse, 'F'));
 	}
-	else
 	ret = check_color(parse, 'F');
-	return (ret);
+	printf("ret = %d\n", ret);
+	return (ret); // 0
 }
 
 int		get_resolution(char *str, t_parsing *parse)
