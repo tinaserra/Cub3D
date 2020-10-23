@@ -1,7 +1,3 @@
-### ⚠️  Ne pas oublier de ```make fclean``` avant de ```git push``` ⚠️
-
-gcc ./src/parsing.c ./src/parsing_map.c ./src/parsing_color_resolution_texture.c ./src/parsing_utils.c ./src/get_next_line.c ./src/get_next_line_utils.c ./inc/cub3d.h libmlx.dylib src/raycasting.c src/minimap.c src/keys.c&& ./a.out description.cub
-
 # Cub3D
 A 3D game using raycasting.
 
