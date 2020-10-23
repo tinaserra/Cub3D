@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 17:07:30 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 17:25:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,6 @@ int		is_char_map(char *str, t_parsing *parse)
 	return (0);
 }
 
-// int		is_map(char *str, t_parsing *parse)
-// {
-// 	// if (!str)
-// 	// 	return (0);
-// 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
-// 		return (1);
-// 	return (0);
-// }
-
 int		get_size_map(char *str, t_parsing *parse)
 {
 	int			len;
@@ -76,6 +67,8 @@ int		get_size_map(char *str, t_parsing *parse)
 		ft_putstr_fd("\nCette ligne est une map\n", 1);
 		if ((check_element(parse)) == -1)
 			return (-1);
+		if (parse->nb_lines == -1)
+			parse->nb_lines++;
 		parse->nb_lines++;
 		len = ft_strlen(str);
 		if (len > parse->len_line)
