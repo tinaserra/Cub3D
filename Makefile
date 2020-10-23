@@ -6,11 +6,12 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2020/10/23 15:51:37 by vserra           ###   ########.fr        #
+#    Updated: 2020/10/23 17:46:05 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = 	main.c \
+		debug.c \
 		parse_start.c \
 		init_struct.c \
 		parse_int.c \
@@ -26,11 +27,12 @@ LIBFT = libft.a
 MLX_DIR = mlx
 MLX = libmlx.dylib
 
-# diff entre .a et .dylib
+# diff entre .a et .dylib :
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+# override -> permet de reecrire la suite de la variable
+override CFLAGS += -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
@@ -62,6 +64,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT) | .gitign
 
 .gitignore:
 		@echo $(NAME) > .gitignore
+
+debug : fclean
+	make all CFLAGS:="-DDEBUG -g"
 
 clean:
 	@$(MAKE) clean -C $(MLX_DIR)

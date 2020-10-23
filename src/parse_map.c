@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 17:25:06 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 17:56:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		is_char_map(char *str, t_parsing *parse)
 				&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 				&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 				{
-					ft_putstr_fd("Cette ligne n'est pas une map\n", 1);
+					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1);
 					return (-1);
 				}
 			parse->i++;
@@ -64,7 +64,7 @@ int		get_size_map(char *str, t_parsing *parse)
 	len = 0;
 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
 	{
-		ft_putstr_fd("\nCette ligne est une map\n", 1);
+		// ft_putstr_fd("\nCette ligne est une map\n", 1);
 		if ((check_element(parse)) == -1)
 			return (-1);
 		if (parse->nb_lines == -1)
@@ -74,7 +74,6 @@ int		get_size_map(char *str, t_parsing *parse)
 		if (len > parse->len_line)
 			parse->len_line = len;
 	}
-	printf("nb_lines = %d\n", parse->nb_lines);
-	printf("len_line = %d\n", parse->len_line);
+	// debug_size_map(parse);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 16:43:33 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 17:59:50 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,7 @@ int		get_c_color(char* str, t_parsing *parse)
 		}
 		if (parse->col.blue_c > 255)
 			parse->col.blue_c = -1;
-		printf("R = %d\n", parse->col.red_c);
-		printf("G = %d\n", parse->col.green_c);
-		printf("B = %d\n", parse->col.blue_c);
+		// debug_colors(parse, 'C');
 		// ret = check_strend(str, parse, 'C');
 		return (check_strend(str, parse, 'C'));
 	}
@@ -154,9 +152,7 @@ int		get_f_color(char* str, t_parsing *parse)
 		}
 		if (parse->col.blue_f > 255)
 			parse->col.blue_f = -1;
-		printf("R = %d\n", parse->col.red_f);
-		printf("G = %d\n", parse->col.green_f);
-		printf("B = %d\n", parse->col.blue_f);
+		// debug_colors(parse, 'F');
 		// ret = check_strend(str, parse, 'F');
 		return (check_strend(str, parse, 'F'));
 	}
@@ -182,8 +178,7 @@ int		get_resolution(char *str, t_parsing *parse)
 		if ((parse->resy = bb_atoi(str, parse)) == -1)
 			// ft_putstr_fd("Error :\n[R] -> Wrong resolution\n", 1); //Wrong input for resolution
 			return (-1);
-		printf("resx = %d\n", parse->resx);
-		printf("resy = %d\n", parse->resy);
+		// debug_resolution(parse);
 		ret = check_strend(str, parse, 'R');
 	}
 	return (ret);

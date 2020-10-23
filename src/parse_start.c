@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 15:50:49 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 18:00:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,17 @@ void	parsing(char *file, t_parsing *parse)
 		ft_putstr_fd("ERROR : Invalide : file .cub invalide\n", 1); // ft_error(parse, "file .cub invalide\n");
 	while (ret != 0)
 	{
-		ft_putstr_fd("\n- ON VA LIRE\n", 1);
+		// ft_putstr_fd("\n- ON VA LIRE\n", 1);
 		ret = get_next_line(fd, &str);
-		printf("ligne = %s\n", str);
+		// printf("ligne = %s\n", str);
 		get_elements(str, parse);
 		get_size_map(str, parse);
 		free(str);
 	}
 	close(fd);
+	debug_resolution(parse);
+	debug_colors(parse, 'B');
+	debug_size_map(parse);
 	// if (parse->sizeline == 0 || parse->nblines == 0)
 	// 	ft_error(parse, "Map absente\n");
 	// ft_parsing_map(file, parse);
