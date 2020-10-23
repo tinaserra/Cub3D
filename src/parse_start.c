@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 17:43:57 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 15:50:49 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 ** /!\ aux lignes vides
 */
 
-int		get_map(char *str, t_parsing *parse)
-{
-	(void)str;
-	(void)parse;
-	return (0);
-}
+// int		get_size_map(char *str, t_parsing *parse)
+// {
+// 	(void)str;
+
+// 	parse->i = 0;
+// 	return (0);
+// }
 
 int     get_elements(char *str, t_parsing *parse)
 {
@@ -78,7 +79,7 @@ void	parsing(char *file, t_parsing *parse)
 		ret = get_next_line(fd, &str);
 		printf("ligne = %s\n", str);
 		get_elements(str, parse);
-		get_map(str, parse);
+		get_size_map(str, parse);
 		free(str);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 17:18:18 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 15:51:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,13 @@ typedef struct	s_parsing
 	int			i;
 	int			resx;
 	int			resy;
+	int			nb_lines;
+	int			len_line;
+
+	int			no;
+	int			ea;
+	int			so;
+	int			we;
 	t_pcolor	col;	
 }				t_parsing;
 
@@ -117,7 +124,7 @@ void	init_parse(t_parsing *parse);
 
 void	parsing(char *file, t_parsing *parse);
 int     get_elements(char *str, t_parsing *parse);
-// int		get_map(char *str, t_parsing *parse);
+int		get_size_map(char *str, t_parsing *parse);
 
 /* parse_int ------------------------------------------ */
 

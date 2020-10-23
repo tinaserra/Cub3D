@@ -6,56 +6,82 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 13:00:19 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/23 17:07:30 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_is_map(char *str, t_parsing *parse)
+int		check_element(t_parsing *parse)
 {
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (ft_charinstr(str, '1') == 1 || ft_charinstr(str, '0') == 1)
+	// if (parse->col.blue_c == -1 || parse->col.blue_f == -1 || parse->resx == -1
+	// 	|| parse->no == -1 || parse->ea == -1 || parse->so == -1 || parse->we == -1)
+	if (parse->resx == -1)
+		ft_putstr_fd("Error :\n[R] is wrong or not specified\n", 1);
+	// if (parse->no == -1)
+	// 	ft_putstr_fd("Error :\n[NO] is wrong or not specified\n", 1);
+	// if (parse->ea == -1)
+	// 	ft_putstr_fd("Error :\n[EA] is wrong or not specified\n", 1);
+	// if (parse->so == -1)
+	// 	ft_putstr_fd("Error :\n[SO] is wrong or not specified\n", 1);
+	// if (parse->we == -1)
+	// 	ft_putstr_fd("Error :\n[WE] is wrong or not specified\n", 1);
+	if (parse->col.blue_f == -1)
+		ft_putstr_fd("Error :\n[F] is wrong or not specified\n", 1);
+	if (parse->col.blue_c == -1)
 	{
-		while (str[i] != '\0')
-		{
-			if (str[i] != ' ' && str[i] != '0' && str[i] != '1' \
-					&& str[i] != '2' && str[i] != 'N' && str[i] != 'S' \
-					&& str[i] != 'E' && str[i] != 'W' && str[i] != '\n'
-					&& str[i] != '\t')
-			{
-				if (parse->insidemap == 1)
-					parse->wrongcharmap = 2;
-				return (0);
-			}
-			i++;
-		}
-		return (1);
+		ft_putstr_fd("Error :\n[C] is wrong or not specified\n", 1);
+		return (-1);
 	}
 	return (0);
 }
 
-void	ft_map(char *str, t_parsing *parse)
+int		is_char_map(char *str, t_parsing *parse)
 {
-	int			i;
-	static int	snblines = 0;
-	static int	ssizeline = 0;
+		while (str[parse->i])
+		{
+			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+				parse->i++;
+			if (str[parse->i] != '1' && str[parse->i] != ' ' && str[parse->i] != '0' 
+				&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
+				&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
+				{
+					ft_putstr_fd("Cette ligne n'est pas une map\n", 1);
+					return (-1);
+				}
+			parse->i++;
+		}
+	return (0);
+}
 
-	i = 0;
-	if (ft_is_map(str, parse) == 1)
+// int		is_map(char *str, t_parsing *parse)
+// {
+// 	// if (!str)
+// 	// 	return (0);
+// 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
+// 		return (1);
+// 	return (0);
+// }
+
+int		get_size_map(char *str, t_parsing *parse)
+{
+	int			len;
+
+	// if (!str)
+	// 	return (0);
+	parse->i = 0;
+	len = 0;
+	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
 	{
-		if (parse->f == -1 || parse->c == -1 || parse->no == NULL ||
-				parse->so == NULL || parse->we == NULL ||
-				parse->ea == NULL || parse->sp == NULL)
-			parse->erreur = 2;
-		if ((i = ft_strlen(str)) > ssizeline)
-			ssizeline = i;
-		snblines = snblines + 1;
+		ft_putstr_fd("\nCette ligne est une map\n", 1);
+		if ((check_element(parse)) == -1)
+			return (-1);
+		parse->nb_lines++;
+		len = ft_strlen(str);
+		if (len > parse->len_line)
+			parse->len_line = len;
 	}
-	parse->nblines = snblines;
-	parse->sizeline = ssizeline;
+	printf("nb_lines = %d\n", parse->nb_lines);
+	printf("len_line = %d\n", parse->len_line);
+	return (0);
 }
