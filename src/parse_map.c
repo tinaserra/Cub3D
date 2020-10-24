@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 17:56:09 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/24 11:19:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		check_element(t_parsing *parse)
 	// if (parse->col.blue_c == -1 || parse->col.blue_f == -1 || parse->resx == -1
 	// 	|| parse->no == -1 || parse->ea == -1 || parse->so == -1 || parse->we == -1)
 	if (parse->resx == -1)
-		ft_putstr_fd("Error :\n[R] is wrong or not specified\n", 1);
+		print_error(parse, RESOLUTION);
 	// if (parse->no == -1)
 	// 	ft_putstr_fd("Error :\n[NO] is wrong or not specified\n", 1);
 	// if (parse->ea == -1)
@@ -27,11 +27,11 @@ int		check_element(t_parsing *parse)
 	// if (parse->we == -1)
 	// 	ft_putstr_fd("Error :\n[WE] is wrong or not specified\n", 1);
 	if (parse->col.blue_f == -1)
-		ft_putstr_fd("Error :\n[F] is wrong or not specified\n", 1);
+		print_error(parse, F_COLOR);
 	if (parse->col.blue_c == -1)
 	{
-		ft_putstr_fd("Error :\n[C] is wrong or not specified\n", 1);
-		return (-1);
+		print_error(parse, C_COLOR);
+		// return (-1);
 	}
 	return (0);
 }

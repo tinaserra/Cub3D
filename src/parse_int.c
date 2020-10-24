@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 17:59:50 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/24 11:15:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int		check_color(t_parsing *parse, int ctrl)
 	{
 		if (parse->col.red_c == -1 || parse->col.green_c == -1 || parse->col.blue_c == -1)
 		{
-			ft_putstr_fd("Error :\n[C] Wrong color\n", 1);
-			return (-1);
+			print_error(parse, C_COLOR);
+			// return (-1);
 		}
 	}
 	if (ctrl == 'F')
 	{
 		if (parse->col.red_f == -1 || parse->col.green_f == -1 || parse->col.blue_f == -1)
 		{
-			ft_putstr_fd("Error :\n[F] Wrong color\n", 1);
-			return (-1);
+			print_error(parse, F_COLOR);
+			// return (-1);
 		}
 	}
 	return (0);
@@ -67,21 +67,21 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 		// else
 			if (ctrl == 'F')
 			{
-				ft_putstr_fd("Error :\n[F] Wrong caracter at the end\n", 1);
 				parse->col.blue_f = -1;
-				return (-1);
+				print_error(parse, F_COLOR_END);
+				// return (-1);
 			}
 			if (ctrl == 'C')
 			{
-				ft_putstr_fd("Error :\n[C] Wrong caracter at the end\n", 1);
 				parse->col.blue_f = -1;
-				return (-1);
+				print_error(parse, C_COLOR_END);
+				// return (-1);
 			}
 			if (ctrl == 'R')
 			{
-				ft_putstr_fd("Error :\n[R] Wrong caracter at the end\n", 1);
 				parse->resx = -1;
-				return (-1);
+				print_error(parse, RESOLUTION_END);
+				// return (-1);
 			}
 		}
 		parse->i++;
@@ -173,11 +173,11 @@ int		get_resolution(char *str, t_parsing *parse)
 	{
 		parse->i++;
 		if ((parse->resx = bb_atoi(str, parse)) == -1)
-			// ft_putstr_fd("Error :\n[R] -> Wrong resolution\n", 1); //Wrong input for resolution
-			return (-1);
+			print_error(parse, RESOLUTION);
+			// return (-1);
 		if ((parse->resy = bb_atoi(str, parse)) == -1)
-			// ft_putstr_fd("Error :\n[R] -> Wrong resolution\n", 1); //Wrong input for resolution
-			return (-1);
+			print_error(parse, RESOLUTION);
+			// return (-1);
 		// debug_resolution(parse);
 		ret = check_strend(str, parse, 'R');
 	}

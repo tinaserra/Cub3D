@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 18:00:02 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/24 10:52:12 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	parsing(char *file, t_parsing *parse)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
-		ft_putstr_fd("ERROR : Invalide : is a directory\n", 1); // ft_error(parse, "Invalide : is a directory\n");
+		print_error(parse, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		ft_putstr_fd("ERROR : Invalide : file .cub invalide\n", 1); // ft_error(parse, "file .cub invalide\n");
+		print_error(parse, CUB_INVALIDE);
 	while (ret != 0)
 	{
 		// ft_putstr_fd("\n- ON VA LIRE\n", 1);

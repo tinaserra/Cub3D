@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 18:00:11 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/24 11:06:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,17 @@ typedef union		u_color
 	unsigned char	bgra[4];
 }				t_color;
 
+typedef enum	e_error{
+	CUB_DIR,
+	CUB_INVALIDE,
+	RESOLUTION,
+	RESOLUTION_END,
+	F_COLOR,
+	F_COLOR_END,
+	C_COLOR,
+	C_COLOR_END
+}				t_error;
+
 typedef struct	s_pcolor
 {
 	int			red_c;
@@ -122,17 +133,28 @@ typedef struct	s_parsing
 
 void	init_parse(t_parsing *parse);
 
-/* parse_start ------------------------------------------ */
+
+/*
+** PARSE_START
+*/
 
 void	parsing(char *file, t_parsing *parse);
 int     get_elements(char *str, t_parsing *parse);
 int		get_size_map(char *str, t_parsing *parse);
 
-/* parse_int ------------------------------------------ */
+/*
+** PARSE_INT 
+*/
 
 int		get_resolution(char *str, t_parsing *parse);
 int		get_f_color(char* str, t_parsing *parse);
 int		get_c_color(char* str, t_parsing *parse);
+
+/*
+** ERROR
+*/
+
+
 
 /*
 ** DEBUG
