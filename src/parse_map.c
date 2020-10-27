@@ -61,10 +61,12 @@ int		get_size_map(char *str, t_parsing *parse)
 	// if (!str)
 	// 	return (0);
 	parse->i = 0;
-	len = 0;
+	len = -1;
+	if (str[parse->i] == '\0' && parse->nb_lines != -1)
+		print_error(parse, MAP_EMPTY_LINE);
 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
 	{
-		// ft_putstr_fd("\nCette ligne est une map\n", 1);
+		ft_putstr_fd("\nCette ligne est une map\n", 1);
 		if ((check_element(parse)) == -1)
 			return (-1);
 		if (parse->nb_lines == -1)

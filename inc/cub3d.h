@@ -99,7 +99,8 @@ typedef enum	e_error{
 	F_COLOR,
 	F_COLOR_END,
 	C_COLOR,
-	C_COLOR_END
+	C_COLOR_END,
+	MAP_EMPTY_LINE
 }				t_error;
 
 typedef struct	s_pcolor
