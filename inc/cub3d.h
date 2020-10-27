@@ -154,7 +154,7 @@ int		get_c_color(char* str, t_parsing *parse);
 ** ERROR
 */
 
-
+void	print_error(t_parsing *parse, int error);
 
 /*
 ** DEBUG
