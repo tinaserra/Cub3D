@@ -12,20 +12,33 @@
 
 #include "cub3d.h"
 
-/*
-** /!\ aux espaces
-** /!\ aux lignes vides
-*/
+int		get_size_map(char *str, t_parsing *parse)
+{
+	int			len;
 
-// int		get_size_map(char *str, t_parsing *parse)
-// {
-// 	(void)str;
+	parse->i = 0;
+	len = -1;
+	if(parse->end_map == 1)
+		check_after_map(str, parse);
+	if (str[parse->i] == '\0' && parse->nb_lines != -1) // Check apres map
+		parse->end_map = 1;
+	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
+	{
+		ft_putstr_fd("\nCette ligne est une map\n", 1);
+		if ((check_element(parse)) == -1)
+			return (-1);
+		if (parse->nb_lines == -1)
+			parse->nb_lines++;
+		parse->nb_lines++;
+		len = ft_strlen(str);
+		if (len > parse->len_line)
+			parse->len_line = len;
+	}
+	// debug_size_map(parse);
+	return (0);
+}
 
-// 	parse->i = 0;
-// 	return (0);
-// }
-
-int     get_elements(char *str, t_parsing *parse)
+int		get_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 

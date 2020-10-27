@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+int		check_after_map(char *str, t_parsing *parse)
+{
+	while (str[parse->i])
+	{
+		if (str[parse->i] != '\t' || str[parse->i] != '\n' || str[parse->i] != '\r'
+			|| str[parse->i] != '\v' || str[parse->i] != '\f' || str[parse->i] != ' ')
+		// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
+			print_error(parse, MAP_CHAR_AFTER);
+		parse->i++;
+	}
+	return (0);
+}
+
 int		check_element(t_parsing *parse)
 {
 	// if (parse->col.blue_c == -1 || parse->col.blue_f == -1 || parse->resx == -1
@@ -51,31 +64,5 @@ int		is_char_map(char *str, t_parsing *parse)
 				}
 			parse->i++;
 		}
-	return (0);
-}
-
-int		get_size_map(char *str, t_parsing *parse)
-{
-	int			len;
-
-	// if (!str)
-	// 	return (0);
-	parse->i = 0;
-	len = -1;
-	if (str[parse->i] == '\0' && parse->nb_lines != -1)
-		print_error(parse, MAP_EMPTY_LINE);
-	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
-	{
-		ft_putstr_fd("\nCette ligne est une map\n", 1);
-		if ((check_element(parse)) == -1)
-			return (-1);
-		if (parse->nb_lines == -1)
-			parse->nb_lines++;
-		parse->nb_lines++;
-		len = ft_strlen(str);
-		if (len > parse->len_line)
-			parse->len_line = len;
-	}
-	// debug_size_map(parse);
 	return (0);
 }

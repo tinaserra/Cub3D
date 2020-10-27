@@ -18,6 +18,7 @@ void	init_parse(t_parsing *parse)
 							.resy = -1,
 							.nb_lines = -1,
 							.len_line = -1,
+							.end_map = 0,
 							.no = -1,
 							.ea = -1,
 							.so = -1,

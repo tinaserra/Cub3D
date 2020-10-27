@@ -100,7 +100,8 @@ typedef enum	e_error{
 	F_COLOR_END,
 	C_COLOR,
 	C_COLOR_END,
-	MAP_EMPTY_LINE
+	DOUBLE_ELEMENT,
+	MAP_CHAR_AFTER
 }				t_error;
 
 typedef struct	s_pcolor
@@ -120,6 +121,7 @@ typedef struct	s_parsing
 	int			resy;
 	int			nb_lines;
 	int			len_line;
+	int			end_map;
 
 	int			no;
 	int			ea;
@@ -140,16 +142,24 @@ void	init_parse(t_parsing *parse);
 */
 
 void	parsing(char *file, t_parsing *parse);
-int     get_elements(char *str, t_parsing *parse);
+int		get_elements(char *str, t_parsing *parse);
 int		get_size_map(char *str, t_parsing *parse);
 
 /*
-** PARSE_INT 
+** PARSE_INT
 */
 
 int		get_resolution(char *str, t_parsing *parse);
 int		get_f_color(char* str, t_parsing *parse);
 int		get_c_color(char* str, t_parsing *parse);
+
+/*
+** PARSE_MAP
+*/
+
+int		is_char_map(char *str, t_parsing *parse);
+int		check_element(t_parsing *parse);
+int		check_after_map(char *str, t_parsing *parse);
 
 /*
 ** ERROR

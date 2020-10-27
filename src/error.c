@@ -38,8 +38,10 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[C] Wrong color or not specified\n", 2);
 	if (error == C_COLOR_END)
 		ft_putstr_fd("Error :\n[C] Wrong caracter at the end\n", 2);
-	if (error == MAP_EMPTY_LINE)
-		ft_putstr_fd("Error :\n[MAP] Empty line in map\n", 2);
+	if (error == MAP_CHAR_AFTER)
+		ft_putstr_fd("Error :\n[MAP] Wrong caracter after the map\n", 2);
+	if (error == DOUBLE_ELEMENT)
+		ft_putstr_fd("Error :\n[ELEMENT] in double\n", 2);
 	exit(EXIT_FAILURE);
 	// quit(parse);
 }

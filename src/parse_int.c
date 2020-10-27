@@ -95,7 +95,7 @@ int		get_c_color(char* str, t_parsing *parse)
 
 	ret = 0;
 	if (parse->col.red_c != -1) // Check le double element C
-		return (-1);
+		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -131,7 +131,7 @@ int		get_f_color(char* str, t_parsing *parse)
 
 	ret = 0;
 	if (parse->col.red_f != -1) // Check le double element F
-		return (-1);
+		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -168,7 +168,7 @@ int		get_resolution(char *str, t_parsing *parse)
 	ret = 0;
 
 	if (parse->resx != -1) // Check le double element R
-		return (-1);
+		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
