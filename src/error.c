@@ -14,13 +14,14 @@
 
 // ft_putstr_fd("Error :\n[F] Wrong caracter at the end\n", 2);
 
-void	quit(t_parsing *parse)
-{
-	exit(EXIT_FAILURE);
-}
+// void	quit(t_parsing *parse)
+// {
+// 	exit(EXIT_FAILURE);
+// }
 
 void	print_error(t_parsing *parse, int error)
 {
+	(void)parse;
 	if (error == CUB_DIR)
 		ft_putstr_fd("Error :\n[OPEN] The argument .cub is a directory\n", 2);
 	if (error == CUB_INVALIDE)
@@ -37,7 +38,8 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[C] Wrong color or not specified\n", 2);
 	if (error == C_COLOR_END)
 		ft_putstr_fd("Error :\n[C] Wrong caracter at the end\n", 2);
-	quit(parse);
+	exit(EXIT_FAILURE);
+	// quit(parse);
 }
 
 // print_error(parse, RESOLUTION);

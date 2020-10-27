@@ -12,6 +12,7 @@
 
 SRC = 	main.c \
 		debug.c \
+		error.c \
 		parse_start.c \
 		init_struct.c \
 		parse_int.c \
