@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/28 11:29:25 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 16:01:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		get_size_map(char *str, t_parsing *parse)
 		check_after_map(str, parse);
 	if (str[parse->i] == '\0' && parse->nb_lines != -1) // Check apres map
 		parse->end_map = 1;
-	printf("end_map = %d\n", parse->end_map);
 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
 	{
 		ft_putstr_fd("\nCette ligne est une map\n", 1);
@@ -43,25 +42,16 @@ int		get_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 
-	if (str[parse->i] == '\0')
+	if (str[parse->i] == '\0') // Useless ?
 		return (0);
 	while (str[parse->i] == ' ')
 		parse->i++;
 	if (str[parse->i] == 'R')
-	{
-		// ft_putstr_fd("c'est R resolution\n", 1);
 		get_resolution(str, parse);
-	}
 	if (str[parse->i] == 'F')
-	{
-		// ft_putstr_fd("c'est F sol\n", 1);
 		get_f_color(str, parse);
-	}
 	if (str[parse->i] == 'C')
-	{
-		// ft_putstr_fd("c'est C plafond\n", 1);
 		get_c_color(str, parse);
-	}
 	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (NO)\n", 1);
 	if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
