@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/24 11:17:56 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 12:32:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ void	print_error(t_parsing *parse, int error)
 	if (error == RESOLUTION)
 		ft_putstr_fd("Error :\n[R] Wrong resolution or not specified\n", 2);
 	if (error == RESOLUTION_END)
-		ft_putstr_fd("Error :\n[R] Wrong caracter at the end\n", 2);
+		ft_putstr_fd("Error :\n[R] Wrong caracter\n", 2);
 	if (error == F_COLOR)
 		ft_putstr_fd("Error :\n[F] Wrong color or not specified\n", 2);
 	if (error == F_COLOR_END)
-		ft_putstr_fd("Error :\n[F] Wrong caracter at the end\n", 2);
+		ft_putstr_fd("Error :\n[F] Wrong caracter\n", 2);
 	if (error == C_COLOR)
 		ft_putstr_fd("Error :\n[C] Wrong color or not specified\n", 2);
 	if (error == C_COLOR_END)
-		ft_putstr_fd("Error :\n[C] Wrong caracter at the end\n", 2);
+		ft_putstr_fd("Error :\n[C] Wrong caracter\n", 2);
+	if (error == MORE_NUM)
+		ft_putstr_fd("Error :\n[INT] More numbers than expected\n", 2);
 	if (error == MAP_CHAR_AFTER)
 		ft_putstr_fd("Error :\n[MAP] Wrong caracter after the map\n", 2);
 	if (error == DOUBLE_ELEMENT)

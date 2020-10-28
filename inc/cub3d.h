@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/24 11:06:36 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 12:26:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef enum	e_error{
 	F_COLOR_END,
 	C_COLOR,
 	C_COLOR_END,
+	MORE_NUM,
 	DOUBLE_ELEMENT,
 	MAP_CHAR_AFTER
 }				t_error;

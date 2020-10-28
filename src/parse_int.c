@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/28 11:51:22 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 12:32:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,12 @@ int		check_color(t_parsing *parse, int ctrl)
 	if (ctrl == 'C')
 	{
 		if (parse->col.red_c == -1 || parse->col.green_c == -1 || parse->col.blue_c == -1)
-		{
 			print_error(parse, C_COLOR);
-			// return (-1);
-		}
 	}
 	if (ctrl == 'F')
 	{
 		if (parse->col.red_f == -1 || parse->col.green_f == -1 || parse->col.blue_f == -1)
-		{
 			print_error(parse, F_COLOR);
-			// return (-1);
-		}
 	}
 	return (0);
 }
@@ -64,9 +58,8 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 	{
 		if (str[parse->i] != ' ')
 		{
-		// if (str[parse->i] && str[parse->i] >= '0' && str[parse->i] <= '9')
-		// 	ft_putstr_fd("Error :\nMore than 3 numbers\n", 1);
-		// else
+			if (str[parse->i] >= '0' && str[parse->i] <= '9')
+				print_error(parse, MORE_NUM);
 			if (ctrl == 'F')
 			{
 				parse->col.blue_f = -1;
@@ -74,7 +67,7 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 			}
 			if (ctrl == 'C')
 			{
-				parse->col.blue_f = -1;
+				parse->col.blue_c = -1;
 				print_error(parse, C_COLOR_END);
 			}
 			if (ctrl == 'R')
@@ -92,9 +85,9 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 
 int		get_c_color(char* str, t_parsing *parse)
 {
-	int ret;
+	// int ret;
 
-	ret = 0;
+	// ret = 0;
 	if (parse->col.red_c != -1) // Check le double element C
 		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
@@ -121,9 +114,8 @@ int		get_c_color(char* str, t_parsing *parse)
 		// ret = check_strend(str, parse, 'C');
 		return (check_strend(str, parse, 'C'));
 	}
-	ret = check_color(parse, 'C');
-	printf("ret = %d\n", ret);
-	return (ret);
+	check_color(parse, 'C');
+	return (0);
 }
 
 int		get_f_color(char* str, t_parsing *parse)
