@@ -6,19 +6,20 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/24 11:19:22 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 11:46:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+		// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
+		// (str[parse->i] != '\t' && str[parse->i] != '\n' && str[parse->i] != '\r'
+		//	&& str[parse->i] != '\v' && str[parse->i] != '\f' && str[parse->i] != ' ')
 int		check_after_map(char *str, t_parsing *parse)
 {
 	while (str[parse->i])
 	{
-		if (str[parse->i] != '\t' || str[parse->i] != '\n' || str[parse->i] != '\r'
-			|| str[parse->i] != '\v' || str[parse->i] != '\f' || str[parse->i] != ' ')
-		// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
+		if (str[parse->i] != ' ')
 			print_error(parse, MAP_CHAR_AFTER);
 		parse->i++;
 	}

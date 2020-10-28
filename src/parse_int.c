@@ -6,12 +6,14 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/24 11:15:33 by vserra           ###   ########.fr       */
+/*   Updated: 2020/10/28 11:51:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// while (str[parse->i] == '\t' || str[parse->i] == '\n' || str[parse->i] == '\r'
+//			|| str[parse->i] == '\v' || str[parse->i] == '\f' || str[parse->i] == ' ')
 int		bb_atoi(char *str, t_parsing *parse)
 {
 	int			len;
@@ -19,8 +21,7 @@ int		bb_atoi(char *str, t_parsing *parse)
 
 	len = 0;
 	nbr = -1;
-	while (str[parse->i] == '\t' || str[parse->i] == '\n' || str[parse->i] == '\r'
-			|| str[parse->i] == '\v' || str[parse->i] == '\f' || str[parse->i] == ' ')
+	while (str[parse->i] == ' ')
 		parse->i++;
 	if (str[parse->i] && str[parse->i] >= '0' && str[parse->i] <= '9')
 		nbr = 0;
@@ -56,11 +57,12 @@ int		check_color(t_parsing *parse, int ctrl)
 	return (0);
 }
 
+// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != ' ')
 int	check_strend(char *str, t_parsing *parse, int ctrl)
 {
 	while (str[parse->i])
 	{
-		if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
+		if (str[parse->i] != ' ')
 		{
 		// if (str[parse->i] && str[parse->i] >= '0' && str[parse->i] <= '9')
 		// 	ft_putstr_fd("Error :\nMore than 3 numbers\n", 1);
@@ -69,25 +71,24 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 			{
 				parse->col.blue_f = -1;
 				print_error(parse, F_COLOR_END);
-				// return (-1);
 			}
 			if (ctrl == 'C')
 			{
 				parse->col.blue_f = -1;
 				print_error(parse, C_COLOR_END);
-				// return (-1);
 			}
 			if (ctrl == 'R')
 			{
 				parse->resx = -1;
 				print_error(parse, RESOLUTION_END);
-				// return (-1);
 			}
 		}
 		parse->i++;
 	}
 	return (0);
 }
+
+// while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == ' ')
 
 int		get_c_color(char* str, t_parsing *parse)
 {
@@ -100,13 +101,13 @@ int		get_c_color(char* str, t_parsing *parse)
 	{
 		parse->i++;
 		parse->col.red_c = bb_atoi(str, parse);
-		while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+		while (str[parse->i] == ' ')
 			parse->i++;
 		if ((parse->col.red_c > -1 && parse->col.red_c < 256) && str[parse->i] == ',')
 		{
 			parse->i++;
 			parse->col.green_c = bb_atoi(str, parse);
-			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+			while (str[parse->i] == ' ')
 				parse->i++;
 			if (parse->col.green_c < 256 && str[parse->i] == ',')
 			{
@@ -136,13 +137,13 @@ int		get_f_color(char* str, t_parsing *parse)
 	{
 		parse->i++;
 		parse->col.red_f = bb_atoi(str, parse);
-		while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+		while (str[parse->i] == ' ')
 			parse->i++;
 		if ((parse->col.red_f > -1 && parse->col.red_f < 256) && str[parse->i] == ',')
 		{
 			parse->i++;
 			parse->col.green_f = bb_atoi(str, parse);
-			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+			while (str[parse->i] == ' ')
 				parse->i++;
 			if (parse->col.green_f < 256 && str[parse->i] == ',')
 			{
