@@ -19,6 +19,14 @@
 // 	exit(EXIT_FAILURE);
 // }
 
+void	free_error(t_parsing *parse, int error)
+{
+	if (parse->map != NULL)
+		free(parse->map);
+	if (error == MALLOC_FAILED)
+		ft_putstr_fd("Error :\n[Failed] memory allocation in get_map\n", 2);
+}
+
 void	print_error(t_parsing *parse, int error)
 {
 	(void)parse;
@@ -40,10 +48,14 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[C] Wrong caracter\n", 2);
 	if (error == MORE_NUM)
 		ft_putstr_fd("Error :\n[INT] More numbers than expected\n", 2);
-	if (error == MAP_CHAR_AFTER)
-		ft_putstr_fd("Error :\n[MAP] Wrong caracter after the map\n", 2);
 	if (error == DOUBLE_ELEMENT)
 		ft_putstr_fd("Error :\n[ELEMENT] in double\n", 2);
+	if (error == MAP_CHAR_AFTER)
+		ft_putstr_fd("Error :\n[MAP] Wrong caracter after the map\n", 2);
+	if (error == NO_MAP)
+		ft_putstr_fd("Error :\n[MAP] No map in file\n", 2);
+	if (error == MULTI_PLAYER)
+		ft_putstr_fd("Error :\n[MAP] More than 1 player\n", 2);
 	exit(EXIT_FAILURE);
 	// quit(parse);
 }

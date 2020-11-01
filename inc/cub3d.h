@@ -57,16 +57,6 @@ typedef struct	s_coord
 
 /* Structure mère ------------------------------------------ */
 
-typedef struct	s_env
-{
-	void		*mlx;
-	void		*window;
-	int 		height_y;
-	int 		width_x;
-	char		keyboard[512];
-	t_coord		square_origin;
-	t_image		img;
-}				t_env;
 
 enum	e_bgra
 {
@@ -102,8 +92,31 @@ typedef enum	e_error{
 	C_COLOR_END,
 	MORE_NUM,
 	DOUBLE_ELEMENT,
-	MAP_CHAR_AFTER
+	MAP_CHAR_AFTER,
+	NO_MAP,
+	MULTI_PLAYER,
+	
+
+	MALLOC_FAILED
 }				t_error;
+
+typedef struct	s_env
+{
+	void		*mlx;
+	void		*window;
+	int 		height_y;
+	int 		width_x;
+	char		keyboard[512];
+	t_coord		square_origin;
+	t_image		img;
+}				t_env;
+
+typedef struct	s_player
+{
+	char		orient_start;
+	int			px;
+	int			py;
+}				t_player;
 
 typedef struct	s_pcolor
 {
@@ -112,7 +125,7 @@ typedef struct	s_pcolor
 	int			blue_c;
 	int			red_f;
 	int			green_f;
-	int			blue_f;	
+	int			blue_f;
 }				t_pcolor;
 
 typedef struct	s_parsing
@@ -128,7 +141,11 @@ typedef struct	s_parsing
 	int			ea;
 	int			so;
 	int			we;
-	t_pcolor	col;	
+
+	char		**map;
+
+	t_player	player;
+	t_pcolor	col;
 }				t_parsing;
 
 /*
@@ -143,8 +160,8 @@ void	init_parse(t_parsing *parse);
 */
 
 void	parsing(char *file, t_parsing *parse);
-void	get_elements(char *str, t_parsing *parse);
-void	get_size_map(char *str, t_parsing *parse);
+// void	get_elements(char *str, t_parsing *parse);
+// void	get_size_map(char *str, t_parsing *parse);
 
 /*
 ** PARSE_INT
@@ -167,6 +184,7 @@ int		check_after_map(char *str, t_parsing *parse);
 */
 
 void	print_error(t_parsing *parse, int error);
+void	free_error(t_parsing *parse, int error);
 
 /*
 ** DEBUG

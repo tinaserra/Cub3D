@@ -54,13 +54,13 @@ int		is_char_map(char *str, t_parsing *parse)
 {
 		while (str[parse->i])
 		{
-			while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == 32)
+			while (str[parse->i] == ' ')
 				parse->i++;
 			if (str[parse->i] != '1' && str[parse->i] != ' ' && str[parse->i] != '0' 
 				&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 				&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 				{
-					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1);
+					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
 					return (-1);
 				}
 			parse->i++;

@@ -14,22 +14,25 @@
 
 void	init_parse(t_parsing *parse)
 {
-	*parse = (t_parsing) { .resx = -1,
-							.resy = -1,
-							.nb_lines = -1,
-							.len_line = -1,
-							.end_map = 0,
-							.no = -1,
-							.ea = -1,
-							.so = -1,
-							.we = -1,
-							.col.red_f = -1,
-							.col.green_f = -1,
-							.col.blue_f = -1,
-							.col.red_c = -1,
-							.col.green_c = -1,
-							.col.blue_c = -1
-						};
+	*parse = (t_parsing) {
+	.resx = -1,
+	.resy = -1,
+	.nb_lines = -1,
+	.len_line = -1,
+	.end_map = 0,
+	.no = -1,
+	.ea = -1,
+	.so = -1,
+	.we = -1,
+	.col.red_f = -1,
+	.col.green_f = -1,
+	.col.blue_f = -1,
+	.col.red_c = -1,
+	.col.green_c = -1,
+	.col.blue_c = -1,
+	.map = NULL,
+	.player.orient_start = 'o'
+	};
 }
 
 /*
