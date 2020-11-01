@@ -83,11 +83,8 @@ int	check_strend(char *str, t_parsing *parse, int ctrl)
 
 // while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == ' ')
 
-int		get_c_color(char* str, t_parsing *parse)
+void	get_c_color(char* str, t_parsing *parse)
 {
-	// int ret;
-
-	// ret = 0;
 	if (parse->col.red_c != -1) // Check le double element C
 		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
@@ -111,18 +108,13 @@ int		get_c_color(char* str, t_parsing *parse)
 		if (parse->col.blue_c > 255)
 			parse->col.blue_c = -1;
 		// debug_colors(parse, 'C');
-		// ret = check_strend(str, parse, 'C');
-		return (check_strend(str, parse, 'C'));
+		check_strend(str, parse, 'C');
 	}
 	check_color(parse, 'C');
-	return (0);
 }
 
-int		get_f_color(char* str, t_parsing *parse)
+void	get_f_color(char* str, t_parsing *parse)
 {
-	int ret;
-
-	ret = 0;
 	if (parse->col.red_f != -1) // Check le double element F
 		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
@@ -146,20 +138,13 @@ int		get_f_color(char* str, t_parsing *parse)
 		if (parse->col.blue_f > 255)
 			parse->col.blue_f = -1;
 		// debug_colors(parse, 'F');
-		// ret = check_strend(str, parse, 'F');
-		return (check_strend(str, parse, 'F'));
+		check_strend(str, parse, 'F');
 	}
-	ret = check_color(parse, 'F');
-	printf("ret = %d\n", ret);
-	return (ret); // 0
+	check_color(parse, 'F');
 }
 
-int		get_resolution(char *str, t_parsing *parse)
+void	get_resolution(char *str, t_parsing *parse)
 {
-	int ret;
-
-	ret = 0;
-
 	if (parse->resx != -1) // Check le double element R
 		print_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
@@ -167,12 +152,9 @@ int		get_resolution(char *str, t_parsing *parse)
 		parse->i++;
 		if ((parse->resx = bb_atoi(str, parse)) == -1)
 			print_error(parse, RESOLUTION);
-			// return (-1);
 		if ((parse->resy = bb_atoi(str, parse)) == -1)
 			print_error(parse, RESOLUTION);
-			// return (-1);
 		// debug_resolution(parse);
-		ret = check_strend(str, parse, 'R');
+		check_strend(str, parse, 'R');
 	}
-	return (ret);
 }

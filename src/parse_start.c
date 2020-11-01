@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int		get_size_map(char *str, t_parsing *parse)
+void	get_size_map(char *str, t_parsing *parse)
 {
 	int			len;
 
@@ -25,8 +25,7 @@ int		get_size_map(char *str, t_parsing *parse)
 	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
 	{
 		ft_putstr_fd("\nCette ligne est une map\n", 1);
-		if ((check_element(parse)) == -1)
-			return (-1);
+		check_element(parse);
 		if (parse->nb_lines == -1)
 			parse->nb_lines++;
 		parse->nb_lines++;
@@ -35,15 +34,14 @@ int		get_size_map(char *str, t_parsing *parse)
 			parse->len_line = len;
 	}
 	// debug_size_map(parse);
-	return (0);
 }
 
-int		get_elements(char *str, t_parsing *parse)
+void	get_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 
 	if (str[parse->i] == '\0') // Useless ?
-		return (0);
+		return ;
 	while (str[parse->i] == ' ')
 		parse->i++;
 	if (str[parse->i] == 'R')
@@ -62,7 +60,6 @@ int		get_elements(char *str, t_parsing *parse)
 		ft_putstr_fd("c'est texture (EA)\n", 1);
 	if (str[parse->i] == 'S' && str[parse->i + 1] != 'O')
 		ft_putstr_fd("c'est S sprite\n", 1);
-	return (0);
 }
 
 void	parsing(char *file, t_parsing *parse)

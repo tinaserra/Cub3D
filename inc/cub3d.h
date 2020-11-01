@@ -143,16 +143,16 @@ void	init_parse(t_parsing *parse);
 */
 
 void	parsing(char *file, t_parsing *parse);
-int		get_elements(char *str, t_parsing *parse);
-int		get_size_map(char *str, t_parsing *parse);
+void	get_elements(char *str, t_parsing *parse);
+void	get_size_map(char *str, t_parsing *parse);
 
 /*
 ** PARSE_INT
 */
 
-int		get_resolution(char *str, t_parsing *parse);
-int		get_f_color(char* str, t_parsing *parse);
-int		get_c_color(char* str, t_parsing *parse);
+void	get_resolution(char *str, t_parsing *parse);
+void	get_f_color(char* str, t_parsing *parse);
+void	get_c_color(char* str, t_parsing *parse);
 
 /*
 ** PARSE_MAP
