@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/28 12:26:28 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 14:04:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	init_parse(t_parsing *parse);
 void	parsing(char *file, t_parsing *parse);
 // void	get_elements(char *str, t_parsing *parse);
 // void	get_size_map(char *str, t_parsing *parse);
+// int		get_map(char *file, t_parsing *parse);
 
 /*
 ** PARSE_INT
@@ -192,6 +193,7 @@ void	free_error(t_parsing *parse, int error);
 ** DEBUG
 */
 
+void	debug_parsing(t_parsing *parse);
 void	debug_colors(t_parsing *parse, int ctrl);
 void	debug_size_map(t_parsing *parse);
 void	debug_resolution(t_parsing *parse);

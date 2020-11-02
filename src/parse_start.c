@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 13:53:56 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 14:08:34 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_map(char *fichier, t_parsing *parse)
+int		get_map(char *file, t_parsing *parse)
 {
 	int fd;
 	int ret;
@@ -20,7 +20,7 @@ int		get_map(char *fichier, t_parsing *parse)
 
 	ret = 1;
 	str = NULL;
-	fd = open(fichier, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (!(parse->map = malloc(sizeof(char*) * parse->nb_lines)))
 		free_error(parse, MALLOC_FAILED);
 	while (ret != 0)
@@ -32,7 +32,7 @@ int		get_map(char *fichier, t_parsing *parse)
 	}
 	close(fd);
 	// ft_init_sprite(parse);
-	debug_print_map(parse);
+	// debug_print_map(parse);
 	return (0);
 }
 
@@ -106,10 +106,8 @@ void	parsing(char *file, t_parsing *parse)
 		free(str);
 	}
 	close(fd);
-	debug_resolution(parse);
-	debug_colors(parse, 'B');
-	debug_size_map(parse);
 	if (parse->nb_lines == -1)
 		print_error(parse, NO_MAP);
 	get_map(file, parse);
+	debug_parsing(parse);
 }
