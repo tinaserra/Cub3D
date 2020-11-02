@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 17:40:28 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 14:42:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int		check_file_name(char *file, t_parsing *parse)
 		i++;
 	if (file[0] == '.' || (file[i - 4] != '.' && file[i - 3] != 'c'
 		&& file[i - 2] != 'u' && file[i - 1] != 'b'))
-	{
-		ft_putstr_fd("ERROR : Invalide name map\n", 1);
-		return (-1);
-	}
+		print_error(parse, FILE_NAME);
 	parsing(file, parse);
 	return (0);
 }
@@ -36,4 +33,5 @@ int		main(int argc, char **argv)
 	(void)argc;
 	init_parse(&parse);
 	check_file_name(argv[1], &parse);
+	return (0);
 }

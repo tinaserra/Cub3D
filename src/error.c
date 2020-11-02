@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/28 12:32:33 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 14:41:51 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	free_error(t_parsing *parse, int error)
 void	print_error(t_parsing *parse, int error)
 {
 	(void)parse;
+	if (error == FILE_NAME)
+		ft_putstr_fd("Error :\n[FILE] Ivalide name or extention\n", 1);
 	if (error == CUB_DIR)
 		ft_putstr_fd("Error :\n[OPEN] The argument .cub is a directory\n", 2);
 	if (error == CUB_INVALIDE)

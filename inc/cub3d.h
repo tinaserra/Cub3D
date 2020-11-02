@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 14:04:55 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 14:42:10 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef union		u_color
 }				t_color;
 
 typedef enum	e_error{
+	FILE_NAME,
 	CUB_DIR,
 	CUB_INVALIDE,
 	RESOLUTION,
