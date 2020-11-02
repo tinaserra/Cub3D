@@ -178,6 +178,8 @@ void	get_c_color(char* str, t_parsing *parse);
 int		is_char_map(char *str, t_parsing *parse);
 int		check_element(t_parsing *parse);
 int		check_after_map(char *str, t_parsing *parse);
+// int		player_position(t_parsing *parse, char c, int i, int j);
+int		dup_map(char *str, t_parsing *parse);
 
 /*
 ** ERROR
@@ -193,6 +195,7 @@ void	free_error(t_parsing *parse, int error);
 void	debug_colors(t_parsing *parse, int ctrl);
 void	debug_size_map(t_parsing *parse);
 void	debug_resolution(t_parsing *parse);
+void	debug_print_map(t_parsing *parse);
 
 // argb[0] == alpha
 // argb[1] == r;
