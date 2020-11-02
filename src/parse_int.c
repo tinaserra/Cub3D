@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 13:49:08 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:02:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,51 +34,6 @@ int		bb_atoi(char *str, t_parsing *parse)
 	if (nbr > INT_MAX)
 		nbr = -1;
 	return (nbr);
-}
-
-int		check_color(t_parsing *parse, int ctrl)
-{
-	if (ctrl == 'C')
-	{
-		if (parse->col.red_c == -1 || parse->col.green_c == -1 || parse->col.blue_c == -1)
-			print_error(parse, C_COLOR);
-	}
-	if (ctrl == 'F')
-	{
-		if (parse->col.red_f == -1 || parse->col.green_f == -1 || parse->col.blue_f == -1)
-			print_error(parse, F_COLOR);
-	}
-	return (0);
-}
-
-// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != ' ')
-int	check_strend(char *str, t_parsing *parse, int ctrl)
-{
-	while (str[parse->i])
-	{
-		if (str[parse->i] != ' ')
-		{
-			if (str[parse->i] >= '0' && str[parse->i] <= '9')
-				print_error(parse, MORE_NUM);
-			if (ctrl == 'F')
-			{
-				parse->col.blue_f = -1;
-				print_error(parse, F_COLOR_END);
-			}
-			if (ctrl == 'C')
-			{
-				parse->col.blue_c = -1;
-				print_error(parse, C_COLOR_END);
-			}
-			if (ctrl == 'R')
-			{
-				parse->resx = -1;
-				print_error(parse, RESOLUTION_END);
-			}
-		}
-		parse->i++;
-	}
-	return (0);
 }
 
 // while ((str[parse->i] >= 9 && str[parse->i] <= 13) || str[parse->i] == ' ')

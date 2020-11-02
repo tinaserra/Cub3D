@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 14:42:10 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:06:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,16 @@ void	get_c_color(char* str, t_parsing *parse);
 */
 
 int		is_char_map(char *str, t_parsing *parse);
-int		check_element(t_parsing *parse);
-int		check_after_map(char *str, t_parsing *parse);
 // int		player_position(t_parsing *parse, char c, int i, int j);
 int		dup_map(char *str, t_parsing *parse);
+
+/*
+** PARSE_CHECK
+*/
+int		check_after_map(char *str, t_parsing *parse);
+int		check_element(t_parsing *parse);
+int		check_color(t_parsing *parse, int ctrl);
+int		check_strend(char *str, t_parsing *parse, int ctrl);
 
 /*
 ** ERROR

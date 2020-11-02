@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 12:15:11 by tinaserra        ###   ########.fr       */
+/*   Updated: 2020/11/02 15:06:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,44 +55,6 @@ int		dup_map(char *str, t_parsing *parse)
 	}
 	parse->map[i][j] = '\0';
 	i++;
-	return (0);
-}
-
-		// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != 32)
-		// (str[parse->i] != '\t' && str[parse->i] != '\n' && str[parse->i] != '\r'
-		//	&& str[parse->i] != '\v' && str[parse->i] != '\f' && str[parse->i] != ' ')
-int		check_after_map(char *str, t_parsing *parse)
-{
-	while (str[parse->i])
-	{
-		if (str[parse->i] != ' ')
-			print_error(parse, MAP_CHAR_AFTER);
-		parse->i++;
-	}
-	return (0);
-}
-
-int		check_element(t_parsing *parse)
-{
-	// if (parse->col.blue_c == -1 || parse->col.blue_f == -1 || parse->resx == -1
-	// 	|| parse->no == -1 || parse->ea == -1 || parse->so == -1 || parse->we == -1)
-	if (parse->resx == -1)
-		print_error(parse, RESOLUTION);
-	// if (parse->no == -1)
-	// 	ft_putstr_fd("Error :\n[NO] is wrong or not specified\n", 1);
-	// if (parse->ea == -1)
-	// 	ft_putstr_fd("Error :\n[EA] is wrong or not specified\n", 1);
-	// if (parse->so == -1)
-	// 	ft_putstr_fd("Error :\n[SO] is wrong or not specified\n", 1);
-	// if (parse->we == -1)
-	// 	ft_putstr_fd("Error :\n[WE] is wrong or not specified\n", 1);
-	if (parse->col.blue_f == -1)
-		print_error(parse, F_COLOR);
-	if (parse->col.blue_c == -1)
-	{
-		print_error(parse, C_COLOR);
-		// return (-1);
-	}
 	return (0);
 }
 
