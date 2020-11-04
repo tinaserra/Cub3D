@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:47:22 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 17:47:43 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 17:51:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	wall_in_row(t_parsing *parse)
 	int col;
 
 	row = 0;
-		printf("\n\nlen line %d\n", parse->len_line);
-		printf("nb lines %d\n\n", parse->nb_lines);
 	while (row < parse->nb_lines)
 	{
 		col = 0;
