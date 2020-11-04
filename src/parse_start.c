@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 11:58:15 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 13:53:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	get_size_map(char *str, t_parsing *parse)
 		check_after_map(str, parse);
 	if (str[parse->i] == '\0' && parse->nb_lines != -1) // Check apres map
 		parse->end_map = 1;
-	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse) == 0))
+	if ((str[0] != '\0') && (check_is_map(str, parse) == 0))
 	{
 		ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(parse);

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 11:38:28 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 13:42:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int		dup_map(char *str, t_parsing *parse)
 		if (player_position(parse, str[j], i, j) == 0)
 			parse->map[i][j] = '0';
 		else if (str[j] == ' ')
-			parse->map[i][j] = '1';
+			parse->map[i][j] = '.';
 		else
 			parse->map[i][j] = str[j];
 		j++;
 	}
 	while (j < parse->len_line)
 	{
-		parse->map[i][j] = '1';
+		parse->map[i][j] = '.';
 		j++;
 	}
 	parse->map[i][j] = '\0';
