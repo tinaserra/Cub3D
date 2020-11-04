@@ -6,30 +6,11 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:01:52 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 13:55:37 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 14:32:15 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int		check_is_map(char *str, t_parsing *parse)
-{
-	while (str[parse->i])
-	{
-		while (str[parse->i] == ' ')
-			parse->i++;
-		if (str[parse->i] != '1' && str[parse->i] != ' ' && str[parse->i] != '0' 
-			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
-			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
-			{
-				ft_putstr_fd("*** Wrong char in map ***\n", 1); // pas une erreur
-				// return (-1);
-				exit(EXIT_FAILURE);
-			}
-		parse->i++;
-	}
-	return (0);
-}
 
 int		check_after_map(char *str, t_parsing *parse)
 {

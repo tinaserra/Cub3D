@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 13:42:40 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 14:34:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		dup_map(char *str, t_parsing *parse)
 	return (0);
 }
 
-int		is_char_map(char *str, t_parsing *parse)
+int		is_char_map(char *str, t_parsing *parse, int ctrl)
 {
 	while (str[parse->i])
 	{
@@ -68,8 +68,13 @@ int		is_char_map(char *str, t_parsing *parse)
 			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 			{
-				ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
-				return (-1);
+				if (ctrl == 1)
+					print_error(parse, MAP_WRONG_CHAR);
+				if (ctrl == 2)
+				{
+					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
+					return (-1);
+				}
 			}
 		parse->i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 13:53:33 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 14:34:56 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		get_map(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		printf("str = |%s|\n", str);
-		if ((str[0] != '\0') && (is_char_map(str, parse) == 0))
+		// printf("str = |%s|\n", str);
+		if ((str[0] != '\0') && (is_char_map(str, parse, 2) == 0))
 			dup_map(str, parse);
 		free(str);
 	}
@@ -47,13 +47,11 @@ void	get_size_map(char *str, t_parsing *parse)
 	len = -1;
 	if(parse->end_map == 1)
 		check_after_map(str, parse);
-	if (str[parse->i] == '\0' && parse->nb_lines != -1) // Check apres map
-		parse->end_map = 1;
-	if ((str[0] != '\0') && (check_is_map(str, parse) == 0))
+	if ((str[0] != '\0') && (is_char_map(str, parse, 1) == 0))
 	{
-		ft_putstr_fd("Cette ligne est une map\n", 1);
+		// ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(parse);
-		if (parse->nb_lines == -1)
+		if (parse->nb_lines == -1) // init nb_lines a 0 pour virer ces deux lignes
 			parse->nb_lines++;
 		parse->nb_lines++;
 		len = ft_strlen(str);
@@ -108,9 +106,11 @@ void	parsing(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		printf("\n\n* ligne = |%s| ---------- *\n", str);
+		// printf("\n\n* ligne = |%s| ---------- *\n", str);
 		if (get_elements(str, parse) == -1)
 			get_size_map(str, parse);
+		if (str[0] == '\0' && parse->nb_lines != -1) // Check apres map
+			parse->end_map = 1;
 		free(str);
 	}
 	close(fd);

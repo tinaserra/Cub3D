@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 13:54:45 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 14:05:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef enum	e_error{
 	C_COLOR_END,
 	MORE_NUM,
 	DOUBLE_ELEMENT,
+	MAP_WRONG_CHAR,
 	MAP_CHAR_AFTER,
 	NO_MAP,
 	MULTI_PLAYER,
@@ -177,7 +178,7 @@ void	get_c_color(char* str, t_parsing *parse);
 ** PARSE_MAP
 */
 
-int		is_char_map(char *str, t_parsing *parse);
+int		is_char_map(char *str, t_parsing *parse, int ctrl);
 // int		player_position(t_parsing *parse, char c, int i, int j);
 int		dup_map(char *str, t_parsing *parse);
 

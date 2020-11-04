@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 14:41:51 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 14:08:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[INT] More numbers than expected\n", 2);
 	if (error == DOUBLE_ELEMENT)
 		ft_putstr_fd("Error :\n[ELEMENT] in double\n", 2);
+	if (error == MAP_WRONG_CHAR)
+		ft_putstr_fd("Error :\n[MAP] Wrong char in map\n", 2);
 	if (error == MAP_CHAR_AFTER)
 		ft_putstr_fd("Error :\n[MAP] Wrong caracter after the map\n", 2);
 	if (error == NO_MAP)
