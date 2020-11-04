@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 18:22:30 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 19:29:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef enum	e_error{
 	MAP_CHAR_AFTER,
 	NO_MAP,
 	MULTI_PLAYER,
+	NO_PLAYER,
 	MAP_WALL,
 
 	MALLOC_FAILED

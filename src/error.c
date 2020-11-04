@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 18:22:09 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 19:30:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	map_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[MAP] No map in file\n", 2);
 	if (error == MULTI_PLAYER)
 		ft_putstr_fd("Error :\n[MAP] More than 1 player\n", 2);
+	if (error == NO_PLAYER)
+		ft_putstr_fd("Error :\n[MAP] Miss a player\n", 2);
 	if (error == MAP_WALL)
 		ft_putstr_fd("Error :\n[MAP] Not close\n", 2);
 	exit(EXIT_FAILURE);
