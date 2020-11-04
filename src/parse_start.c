@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 19:28:53 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 20:13:29 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		get_map(char *file, t_parsing *parse)
 	if (parse->player.orient_start == 'o')
 		map_error(parse, NO_PLAYER);
 	wall_in_row(parse);
+	wall_in_col(parse);
 	// ft_init_sprite(parse);
 	// debug_print_map(parse);
 	return (0);

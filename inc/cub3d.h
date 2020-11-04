@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 19:29:24 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 19:59:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ int		check_strend(char *str, t_parsing *parse, int ctrl);
 */
 
 void	wall_in_row(t_parsing *parse);
+void	wall_in_col(t_parsing *parse);
 
 /*
 ** ERROR
