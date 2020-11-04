@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 15:06:24 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 11:38:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		is_char_map(char *str, t_parsing *parse)
 			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 			{
-				// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
+				ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
 				return (-1);
 			}
 		parse->i++;

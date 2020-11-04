@@ -6,11 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 14:12:18 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 11:58:15 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// (ft_strchr(str, '1') != NULL)
 
 int		get_map(char *file, t_parsing *parse)
 {
@@ -26,7 +28,8 @@ int		get_map(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
+		printf("str = |%s|\n", str);
+		if ((str[0] != '\0') && (is_char_map(str, parse) == 0))
 			dup_map(str, parse);
 		free(str);
 	}
@@ -46,9 +49,9 @@ void	get_size_map(char *str, t_parsing *parse)
 		check_after_map(str, parse);
 	if (str[parse->i] == '\0' && parse->nb_lines != -1) // Check apres map
 		parse->end_map = 1;
-	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse)) == 0)
+	if ((ft_strchr(str, '1') != NULL) && (is_char_map(str, parse) == 0))
 	{
-		// ft_putstr_fd("\nCette ligne est une map\n", 1);
+		ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(parse);
 		if (parse->nb_lines == -1)
 			parse->nb_lines++;
@@ -60,7 +63,7 @@ void	get_size_map(char *str, t_parsing *parse)
 	// debug_size_map(parse);
 }
 
-void	get_elements(char *str, t_parsing *parse)
+int		get_elements(char *str, t_parsing *parse)
 {
 	parse->i = 0;
 
@@ -82,6 +85,12 @@ void	get_elements(char *str, t_parsing *parse)
 		ft_putstr_fd("c'est texture (EA)\n", 1);
 	if (str[parse->i] == 'S' && str[parse->i + 1] != 'O')
 		ft_putstr_fd("c'est S sprite\n", 1);
+	if (str[parse->i] != '\0')
+	{
+		// pas un element
+		return (-1);
+	}
+	return (0);
 }
 
 void	parsing(char *file, t_parsing *parse)
@@ -99,9 +108,9 @@ void	parsing(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		// printf("ligne = %s\n", str);
-		get_elements(str, parse);
-		get_size_map(str, parse);
+		printf("\n\n* ligne = |%s| ---------- *\n", str);
+		if (get_elements(str, parse) == -1)
+			get_size_map(str, parse);
 		free(str);
 	}
 	close(fd);
