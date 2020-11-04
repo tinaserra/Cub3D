@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 14:08:36 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:22:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,21 @@ void	free_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[Failed] memory allocation in get_map\n", 2);
 }
 
-void	print_error(t_parsing *parse, int error)
+void	file_error(t_parsing *parse, int error)
 {
 	(void)parse;
 	if (error == FILE_NAME)
 		ft_putstr_fd("Error :\n[FILE] Ivalide name or extention\n", 1);
 	if (error == CUB_DIR)
-		ft_putstr_fd("Error :\n[OPEN] The argument .cub is a directory\n", 2);
+		ft_putstr_fd("Error :\n[FILE] The argument .cub is a directory\n", 2);
 	if (error == CUB_INVALIDE)
-		ft_putstr_fd("Error :\n[OPEN] The argument .cub dosn't exist or is invalide\n", 2);
+		ft_putstr_fd("Error :\n[FILE] The argument .cub dosn't exist or is invalide\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	element_error(t_parsing *parse, int error)
+{
+	(void)parse;
 	if (error == RESOLUTION)
 		ft_putstr_fd("Error :\n[R] Wrong resolution or not specified\n", 2);
 	if (error == RESOLUTION_END)
@@ -52,6 +58,13 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[INT] More numbers than expected\n", 2);
 	if (error == DOUBLE_ELEMENT)
 		ft_putstr_fd("Error :\n[ELEMENT] in double\n", 2);
+	exit(EXIT_FAILURE);
+	// quit(parse);
+}
+
+void	map_error(t_parsing *parse, int error)
+{
+	(void)parse;
 	if (error == MAP_WRONG_CHAR)
 		ft_putstr_fd("Error :\n[MAP] Wrong char in map\n", 2);
 	if (error == MAP_CHAR_AFTER)
@@ -60,8 +73,9 @@ void	print_error(t_parsing *parse, int error)
 		ft_putstr_fd("Error :\n[MAP] No map in file\n", 2);
 	if (error == MULTI_PLAYER)
 		ft_putstr_fd("Error :\n[MAP] More than 1 player\n", 2);
+	if (error == MAP_WALL)
+		ft_putstr_fd("Error :\n[MAP] Not close\n", 2);
 	exit(EXIT_FAILURE);
-	// quit(parse);
 }
 
 // print_error(parse, RESOLUTION);

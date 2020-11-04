@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 17:22:59 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:25:42 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	parsing(char *file, t_parsing *parse)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
-		print_error(parse, CUB_DIR);
+		file_error(parse, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		print_error(parse, CUB_INVALIDE);
+		file_error(parse, CUB_INVALIDE);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
@@ -116,7 +116,7 @@ void	parsing(char *file, t_parsing *parse)
 	}
 	close(fd);
 	if (parse->nb_lines == -1)
-		print_error(parse, NO_MAP);
+		map_error(parse, NO_MAP);
 	get_map(file, parse);
 	debug_parsing(parse);
 }

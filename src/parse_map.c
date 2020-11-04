@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 17:47:52 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:20:34 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 			return (0);
 		}
 		else
-			print_error(parse, MULTI_PLAYER);
+			map_error(parse, MULTI_PLAYER);
 	}
 	return (-1);
 }
@@ -69,7 +69,7 @@ int		is_char_map(char *str, t_parsing *parse, int ctrl)
 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 			{
 				if (ctrl == 1)
-					print_error(parse, MAP_WRONG_CHAR);
+					map_error(parse, MAP_WRONG_CHAR);
 				if (ctrl == 2)
 				{
 					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur

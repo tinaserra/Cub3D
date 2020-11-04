@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:47:22 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 17:51:54 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:24:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ void	wall_in_row(t_parsing *parse)
 		while (parse->map[row][col] == '.')
 			col++;
 		if (parse->map[row][col] != '1')
-		{
-			//error;
-			printf("Map not close\n");
-			return ;
-		}
+			map_error(parse, MAP_WALL);
 		printf("Mur trouvé G ---- ");
 		// else -> check angles
 
@@ -36,11 +32,7 @@ void	wall_in_row(t_parsing *parse)
 		while (parse->map[row][col] == '.')
 			col--;
 		if (parse->map[row][col] != '1')
-		{
-			//error;
-			printf("Map not close\n");
-			return ;
-		}
+			map_error(parse, MAP_WALL);
 		printf("Mur trouvé D\n");
 		// else -> check angles
 		row++;

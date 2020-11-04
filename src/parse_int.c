@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/02 15:02:23 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:26:42 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		bb_atoi(char *str, t_parsing *parse)
 void	get_c_color(char* str, t_parsing *parse)
 {
 	if (parse->col.red_c != -1) // Check le double element C
-		print_error(parse, DOUBLE_ELEMENT);
+		element_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -71,7 +71,7 @@ void	get_c_color(char* str, t_parsing *parse)
 void	get_f_color(char* str, t_parsing *parse)
 {
 	if (parse->col.red_f != -1) // Check le double element F
-		print_error(parse, DOUBLE_ELEMENT);
+		element_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -101,14 +101,14 @@ void	get_f_color(char* str, t_parsing *parse)
 void	get_resolution(char *str, t_parsing *parse)
 {
 	if (parse->resx != -1) // Check le double element R
-		print_error(parse, DOUBLE_ELEMENT);
+		element_error(parse, DOUBLE_ELEMENT);
 	if (str[parse->i])
 	{
 		parse->i++;
 		if ((parse->resx = bb_atoi(str, parse)) == -1)
-			print_error(parse, RESOLUTION);
+			element_error(parse, RESOLUTION);
 		if ((parse->resy = bb_atoi(str, parse)) == -1)
-			print_error(parse, RESOLUTION);
+			element_error(parse, RESOLUTION);
 		// debug_resolution(parse);
 		check_strend(str, parse, 'R');
 	}

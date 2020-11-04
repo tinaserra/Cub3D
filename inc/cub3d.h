@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 17:52:11 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/04 18:22:30 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef enum	e_error{
 	MAP_CHAR_AFTER,
 	NO_MAP,
 	MULTI_PLAYER,
-	
+	MAP_WALL,
 
 	MALLOC_FAILED
 }				t_error;
@@ -201,8 +201,10 @@ void	wall_in_row(t_parsing *parse);
 ** ERROR
 */
 
-void	print_error(t_parsing *parse, int error);
 void	free_error(t_parsing *parse, int error);
+void	file_error(t_parsing *parse, int error);
+void	element_error(t_parsing *parse, int error);
+void	map_error(t_parsing *parse, int error);
 
 /*
 ** DEBUG
