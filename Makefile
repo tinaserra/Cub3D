@@ -6,20 +6,18 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2020/10/24 10:06:17 by vserra           ###   ########.fr        #
+#    Updated: 2020/11/04 11:30:47 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = 	main.c \
 		debug.c \
 		error.c \
-		parse_start.c \
 		init_struct.c \
+		parse_start.c \
 		parse_int.c \
-		parse_map.c
-
-# error.c
-
+		parse_map.c \
+		parse_check.c
 
 NAME = Cub3D
 
