@@ -6,11 +6,63 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 18:20:34 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:24:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	wall_in_col(t_parsing *parse)
+{
+	int row;
+	int col;
+
+	col = 0;
+	while (col < parse->len_line)
+	{
+		row = 0;
+		while (parse->map[row][col] == '.')
+			row++;
+		if (parse->map[row][col] != '1')
+			map_error(parse, MAP_WALL);
+		check_top_left_angle(parse, row, col);
+		check_top_right_angle(parse, row, col);
+		row = parse->nb_lines - 1;
+		while (parse->map[row][col] == '.')
+			row--;
+		if (parse->map[row][col] != '1')
+			map_error(parse, MAP_WALL);
+		check_bot_left_angle(parse, row, col);
+		check_bot_right_angle(parse, row, col);
+		col++;
+	}
+}
+
+void	wall_in_row(t_parsing *parse)
+{
+	int row;
+	int col;
+
+	row = 0;
+	while (row < parse->nb_lines)
+	{
+		col = 0;
+		while (parse->map[row][col] == '.')
+			col++;
+		if (parse->map[row][col] != '1')
+			map_error(parse, MAP_WALL);
+		check_top_left_angle(parse, row, col);
+		check_bot_left_angle(parse, row, col);
+		col = parse->len_line - 1;
+		while (parse->map[row][col] == '.')
+			col--;
+		if (parse->map[row][col] != '1')
+			map_error(parse, MAP_WALL);
+		check_top_right_angle(parse, row, col);
+		check_bot_right_angle(parse, row, col);
+		row++;
+	}
+}
 
 int		player_position(t_parsing *parse, char c, int i, int j) // Static
 {

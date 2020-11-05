@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/05 14:09:32 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:17:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int		get_map(char *file, t_parsing *parse)
 		map_error(parse, NO_PLAYER);
 	wall_in_row(parse);
 	wall_in_col(parse);
-	// ft_init_sprite(parse);
-	// debug_print_map(parse);
 	return (0);
 }
 

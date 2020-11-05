@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:01:52 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 18:19:56 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:22:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int		check_after_map(char *str, t_parsing *parse)
 
 int		check_element(t_parsing *parse)
 {
-	// if (parse->col.blue_c == -1 || parse->col.blue_f == -1 || parse->resx == -1
-	// 	|| parse->no == -1 || parse->ea == -1 || parse->so == -1 || parse->we == -1)
 	if (parse->resx == -1)
 		element_error(parse, RESOLUTION);
 	// if (parse->no == -1)
@@ -40,10 +38,7 @@ int		check_element(t_parsing *parse)
 	if (parse->col.blue_f == -1)
 		element_error(parse, F_COLOR);
 	if (parse->col.blue_c == -1)
-	{
 		element_error(parse, C_COLOR);
-		// return (-1);
-	}
 	return (0);
 }
 
@@ -62,7 +57,6 @@ int		check_color(t_parsing *parse, int ctrl)
 	return (0);
 }
 
-// if ((str[parse->i] < 9 && str[parse->i] > 13) || str[parse->i] != ' ')
 int	check_strend(char *str, t_parsing *parse, int ctrl)
 {
 	while (str[parse->i])
