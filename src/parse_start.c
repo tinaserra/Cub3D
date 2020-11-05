@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 20:13:29 by vserra           ###   ########.fr       */
+/*   Updated: 2020/11/05 14:09:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	get_size_map(char *str, t_parsing *parse)
 		if (len > parse->len_line)
 			parse->len_line = len;
 	}
+	if (parse->nb_lines == 1 || parse->len_line == 1) // la map fait une ligne
+			map_error(parse, MAP_INCOMPLETE);
 	// debug_size_map(parse);
 }
 
