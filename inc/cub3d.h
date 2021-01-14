@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/05 14:26:25 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 15:51:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ typedef enum	e_error{
 	NO_PLAYER,
 	MAP_WALL,
 	MAP_INCOMPLETE,
+	MLX_INIT,
+	NEW_WINDOW,
+	NEW_IMAGE,
 
 	MALLOC_FAILED
 }				t_error;
@@ -134,6 +137,7 @@ typedef struct	s_pcolor
 
 typedef struct	s_parsing
 {
+	int			save;
 	int			i;
 	int			resx;
 	int			resy;
@@ -205,6 +209,12 @@ void check_top_right_angle(t_parsing *parse, int i, int j);
 void check_bot_right_angle(t_parsing *parse, int i, int j);
 
 /*
+** RAYCASTING_START
+*/
+
+int	start_mlx(t_parsing *parse);
+
+/*
 ** ERROR
 */
 
@@ -212,6 +222,7 @@ void	free_error(t_parsing *parse, int error);
 void	file_error(t_parsing *parse, int error);
 void	element_error(t_parsing *parse, int error);
 void	map_error(t_parsing *parse, int error);
+void	mlx_error(t_parsing *parse, int error);
 
 /*
 ** DEBUG
