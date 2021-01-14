@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/04 18:25:13 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 14:26:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_file_name(char *file, t_parsing *parse)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (file[i])
@@ -26,12 +26,22 @@ int		check_file_name(char *file, t_parsing *parse)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+// 2 args -> nom du programme & fichier.cub
+// 3 args -> nom du programme & fichier.cub & --save
+
+int		main(int ac, char **av)
 {
 	t_parsing parse;
 
-	(void)argc;
+	// (void)argc;
 	init_parse(&parse);
-	check_file_name(argv[1], &parse);
+	if (ac == 2 || ac == 3) // && check_save(argv[2]) == 1))
+	{
+		if (ac == 3) // argument save
+			parse.save = 1;
+		check_file_name(av[1], &parse);
+	}
+	else
+		write(1, "Error\nArguments invalides\n", 30);
 	return (0);
 }

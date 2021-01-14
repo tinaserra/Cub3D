@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/05 14:17:18 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 17:21:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	get_size_map(char *str, t_parsing *parse)
 	len = -1;
 	if(parse->end_map == 1)
 		check_after_map(str, parse);
-	if ((str[0] != '\0') && (is_char_map(str, parse, 1) == 0))
+	if ((str[0] != '\0') && (is_char_map(str, parse, 1) == 0)) //check que les char de la map soient good
 	{
 		// ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(parse);
@@ -60,9 +60,10 @@ void	get_size_map(char *str, t_parsing *parse)
 		if (len > parse->len_line)
 			parse->len_line = len;
 	}
-	if (parse->nb_lines == 1 || parse->len_line == 1) // la map fait une ligne
-			map_error(parse, MAP_INCOMPLETE);
 	// debug_size_map(parse);
+	debug_print_map(parse);
+	if (parse->len_line == 1) // la map fait une ligne parse->nb_lines == 1
+			map_error(parse, MAP_INCOMPLETE);
 }
 
 int		get_elements(char *str, t_parsing *parse)
@@ -73,23 +74,23 @@ int		get_elements(char *str, t_parsing *parse)
 		parse->i++;
 	if (str[parse->i] == 'R')
 		get_resolution(str, parse);
-	if (str[parse->i] == 'F')
+	else if (str[parse->i] == 'F')
 		get_f_color(str, parse);
-	if (str[parse->i] == 'C')
+	else if (str[parse->i] == 'C')
 		get_c_color(str, parse);
-	if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
+	else if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (NO)\n", 1);
-	if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
+	else if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
 		ft_putstr_fd("c'est texture (WE)\n", 1);
-	if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
+	else if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
 		ft_putstr_fd("c'est texture (SO)\n", 1);
-	if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
+	else if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
 		ft_putstr_fd("c'est texture (EA)\n", 1);
-	if (str[parse->i] == 'S' && str[parse->i + 1] != 'O')
+	else if (str[parse->i] == 'S')
 		ft_putstr_fd("c'est S sprite\n", 1);
-	if (str[parse->i] != '\0')
+	else
 	{
-		// pas un element
+		// ft_putstr_fd("cette ligne n'est pas un element\n", 1);
 		return (-1);
 	}
 	return (0);
@@ -110,7 +111,7 @@ void	parsing(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		// printf("\n\n* ligne = |%s| ---------- *\n", str);
+		printf("\n\n* ligne = |%s| ---------- *\n", str);
 		if (get_elements(str, parse) == -1)
 			get_size_map(str, parse);
 		if (str[0] == '\0' && parse->nb_lines != -1) // Check apres map
@@ -123,4 +124,5 @@ void	parsing(char *file, t_parsing *parse)
 	get_map(file, parse);
 	// debug_parsing(parse);
 	debug_print_map(parse);
+	start_mlx(parse);
 }

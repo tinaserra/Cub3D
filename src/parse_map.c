@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/05 14:24:03 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 17:28:29 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 		else
 			map_error(parse, MULTI_PLAYER);
 	}
+	printf("Player position = %c\n\n", parse->player.orient_start);
 	return (-1);
 }
 
@@ -92,7 +93,7 @@ int		dup_map(char *str, t_parsing *parse)
 		free_error(parse, MALLOC_FAILED); // A MODIF
 	while (str[j] != '\0')
 	{
-		if (player_position(parse, str[j], i, j) == 0)
+		if (player_position(parse, str[i][j], i, j) == 0)
 			parse->map[i][j] = '0';
 		else if (str[j] == ' ')
 			parse->map[i][j] = '.';

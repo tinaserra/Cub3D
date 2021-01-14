@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/23 14:09:46 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 14:26:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_parse(t_parsing *parse)
 {
 	*parse = (t_parsing) {
+	.save = 0,
 	.resx = -1,
 	.resy = -1,
 	.nb_lines = -1,

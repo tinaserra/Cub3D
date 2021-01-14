@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2020/11/05 14:07:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/14 15:41:31 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	file_error(t_parsing *parse, int error)
 {
 	(void)parse;
 	if (error == FILE_NAME)
-		ft_putstr_fd("Error :\n[FILE] Ivalide name or extention\n", 1);
+		ft_putstr_fd("Error :\n[FILE] Ivalide name or extention\n", 2);
 	if (error == CUB_DIR)
 		ft_putstr_fd("Error :\n[FILE] The argument .cub is a directory\n", 2);
 	if (error == CUB_INVALIDE)
@@ -82,4 +82,15 @@ void	map_error(t_parsing *parse, int error)
 	exit(EXIT_FAILURE);
 }
 
+void	mlx_error(t_parsing *parse, int error)
+{
+	(void)parse;
+	if (error == MLX_INIT)
+		ft_putstr_fd("Error :\n[MLX] Init mlx\n", 2);
+	if (error == NEW_WINDOW)
+		ft_putstr_fd("Error :\n[MLX] Create new window\n", 2);
+	if (error == NEW_IMAGE)
+		ft_putstr_fd("Error :\n[MLX] Create new image\n", 2);
+	exit(EXIT_FAILURE);
+}
 // print_error(parse, RESOLUTION);
