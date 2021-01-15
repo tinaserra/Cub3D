@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/15 16:15:41 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 16:18:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		main(int ac, char **av)
 
 	// (void)argc;
 	init_parse(&parse);
-	if (ac == 2 || ac == 3) // && check_save(argv[2]) == 0))
+	if ((ac == 2 || ac == 3) && (check_save(av[2]) == 0))
 	{
 		if (ac == 3) // argument save
 			parse.save = 1;
