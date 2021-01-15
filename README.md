@@ -10,6 +10,12 @@ Supprimer tout
 make fclean
 ```
 
+## TO DO ‼️
+
+# Le parsing
+- [ ] Les textures : recup le path, check s'il est good.
+- [ ] Les sprites : recuperer la texture et garder sa position.
+
 ## INTRODUCTION 🤓
 
 Sujet -> [EN](https://github.com/tinaserra/Cub3D/blob/master/links/cub3d_en.pdf) | [FR](https://github.com/tinaserra/Cub3D/blob/master/links/cube3d_fr.pdf)

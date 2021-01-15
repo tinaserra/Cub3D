@@ -9,10 +9,7 @@
 4. ***seg fault*** avec ```maps/good_map03.cub``` : il y a des espaces devant les identifiants des textures.
 5. ***bus error*** avec ```maps/wrong_map01e1.cub``` en foncant dans un mur, idem que n.2
 
-## Tableau de check
-
-- [x] une case cochée : le programme reconnait une erreur (on n'a pas forcément le bon message d'ereur)
-- [ ] une case non cochée : le programme ```segmentation fault``` ou ```bus error``` ou *ne reconnait pas d'erreur* ou *ne quitte pas*
+## Checks
 
 ### Good maps
 

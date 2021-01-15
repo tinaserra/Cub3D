@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 15:41:31 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 17:02:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 // void	quit(t_parsing *parse)
 // {
 // 	exit(EXIT_FAILURE);
+// }
+
+// int error(char *str)
+// {
+// 	ft_putstr_fd(str, 2);
+// 	return(1);
 // }
 
 void	free_error(t_parsing *parse, int error)

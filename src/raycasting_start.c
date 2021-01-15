@@ -6,17 +6,11 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 15:47:59 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 17:02:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int error(char *str)
-{
-	ft_putstr_fd(str, 2);
-	return(1);
-}
 
 void	put_px_to_img(t_image *img, int x, int y, int color)
 {
@@ -33,7 +27,7 @@ void	put_px_to_img(t_image *img, int x, int y, int color)
 ** Pour avancer d un pixel dans une ligne il faut avancer de bite par pixel / 8. (un byte = 8 bites)
 ** Mettre un int dans un char* = on recupere l adresse de data(&). on le cast en int*. + *devant pour y acceder.
 
-** ont cast directement la fontion mlx_get_data_adr du coup on le stock dans un int *data.
+** on cast directement la fontion mlx_get_data_adr du coup on le stock dans un int *data.
 ** on peux supprimer le cast du debut, puisque c est deja un int qu on veux mettre dans un int.
 ** vu que c est int int* on avance de 4. donc on supprime le '* img->bits_per_pixel / 8' car c etait = 4.
 */
@@ -134,7 +128,7 @@ int	start_mlx(t_parsing *parse)
 	if (!(env.img.image = mlx_new_image(env.mlx, env.width_x, env.height_y)))
 		mlx_error(parse, NEW_IMAGE);
 	env.img.data = (int*)mlx_get_data_addr(env.img.image, &env.img.bits_per_pixel, &env.img.size_line, &env.img.endian);
-	ft_putstr_fd("Hello World !\n", 1);
+	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	mlx_hook(env.window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, &env);
 	mlx_hook(env.window, KEYPRESS, KEYPRESSMASK, ft_key_press, &env);
 	mlx_hook(env.window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &env);
