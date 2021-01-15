@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 17:28:29 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 15:48:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	wall_in_row(t_parsing *parse)
 
 int		player_position(t_parsing *parse, char c, int i, int j) // Static
 {
+	// printf("str[j] = %c\n", c);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
 		if (parse->player.orient_start == 'o')
@@ -93,7 +94,7 @@ int		dup_map(char *str, t_parsing *parse)
 		free_error(parse, MALLOC_FAILED); // A MODIF
 	while (str[j] != '\0')
 	{
-		if (player_position(parse, str[i][j], i, j) == 0)
+		if (player_position(parse, str[j], i, j) == 0)
 			parse->map[i][j] = '0';
 		else if (str[j] == ' ')
 			parse->map[i][j] = '.';
@@ -111,7 +112,7 @@ int		dup_map(char *str, t_parsing *parse)
 	return (0);
 }
 
-int		is_char_map(char *str, t_parsing *parse, int ctrl)
+int		is_char_map(char *str, t_parsing *parse)
 {
 	while (str[parse->i])
 	{
@@ -121,15 +122,37 @@ int		is_char_map(char *str, t_parsing *parse, int ctrl)
 			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 			{
-				if (ctrl == 1)
 					map_error(parse, MAP_WRONG_CHAR);
-				if (ctrl == 2)
-				{
-					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
-					return (-1);
-				}
 			}
 		parse->i++;
 	}
 	return (0);
 }
+
+// OLD
+
+// int		is_char_map(char *str, t_parsing *parse, int ctrl)
+// {
+// 	printf("1 +++ str = |%s|\n", str);
+// 	while (str[parse->i])
+// 	{
+// 		while (str[parse->i] == ' ')
+// 			parse->i++;
+// 		if (str[parse->i] != '1' && str[parse->i] != ' ' && str[parse->i] != '0' 
+// 			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
+// 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
+// 			{
+// 				printf("2 +++ str = |%s|\n", str);
+// 				if (ctrl == 1)
+// 					map_error(parse, MAP_WRONG_CHAR);
+// 				if (ctrl == 2)
+// 				{
+// 					printf("3 +++ str = |%s|\n", str);
+// 					// ft_putstr_fd("Cette ligne n'est pas une map\n", 1); // pas une erreur
+// 					return (-1);
+// 				}
+// 			}
+// 		parse->i++;
+// 	}
+// 	return (0);
+// }

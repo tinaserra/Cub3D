@@ -6,13 +6,25 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 17:21:13 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 15:53:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// (ft_strchr(str, '1') != NULL)
+// int		is_a_map(char *str)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (str[i] == ' ')
+// 		i++;
+// 	if (str[i] == '1')
+// 		return (0);
+// 	return (-1);
+// }
+
+// printf("str = |%s|\n", str);
 
 int		get_map(char *file, t_parsing *parse)
 {
@@ -28,8 +40,10 @@ int		get_map(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		// printf("str = |%s|\n", str);
-		if ((str[0] != '\0') && (is_char_map(str, parse, 2) == 0))
+		parse->i = 0;
+		while (str[parse->i] == ' ')
+		parse->i++;
+		if (str[0] != '\0' && str[parse->i] == '1') //(is_a_map(str) == 0)  // (is_char_map(str, parse, 2) == 0))
 			dup_map(str, parse);
 		free(str);
 	}
@@ -49,7 +63,7 @@ void	get_size_map(char *str, t_parsing *parse)
 	len = -1;
 	if(parse->end_map == 1)
 		check_after_map(str, parse);
-	if ((str[0] != '\0') && (is_char_map(str, parse, 1) == 0)) //check que les char de la map soient good
+	if ((str[0] != '\0') && (is_char_map(str, parse) == 0)) //check que les char de la map soient good
 	{
 		// ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(parse);
