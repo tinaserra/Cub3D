@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/15 15:48:07 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 16:05:12 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 		else
 			map_error(parse, MULTI_PLAYER);
 	}
-	printf("Player position = %c\n\n", parse->player.orient_start);
+	// printf("Player position = %c\n\n", parse->player.orient_start);
 	return (-1);
 }
 

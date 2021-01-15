@@ -6,11 +6,25 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 14:26:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/15 16:15:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		check_save(char *save)
+{
+	int	i;
+
+	i = 0;
+	while (save[i])
+		i++;
+	if (save[i - 1] == 'e' && save[i - 2] == 'v' && save[i - 3] == 'a' &&
+		save[i - 4] == 's' && save[i - 5] == '-' && save[i - 6] == '-'
+		&& ft_strlen(save) < 7)
+		return (0);
+	return (-1);
+}
 
 int		check_file_name(char *file, t_parsing *parse)
 {
@@ -35,7 +49,7 @@ int		main(int ac, char **av)
 
 	// (void)argc;
 	init_parse(&parse);
-	if (ac == 2 || ac == 3) // && check_save(argv[2]) == 1))
+	if (ac == 2 || ac == 3) // && check_save(argv[2]) == 0))
 	{
 		if (ac == 3) // argument save
 			parse.save = 1;
