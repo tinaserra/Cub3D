@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/15 15:48:16 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/19 13:41:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,92 +31,12 @@
 # include <math.h>
 # include <limits.h>
 
-/* VALUES ----------- */
+/* VALUES ------------ */
 
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
 
-/* Toute la data de l'image (mlx_get_data_addr) ----------- */
-
-typedef struct	s_image
-{
-	void		*image; 
-	int			*data; //normalement char* addr
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-}				t_image;
-
-/* Position de l'origine du carré dessiné ------------------ */
-
-typedef struct	s_coord
-{
-	int			x;
-	int			y;
-}				t_coord;
-
-/* Structure mère ------------------------------------------ */
-
-
-enum	e_bgra
-{
-	BGRA_BLUE,
-	BGRA_GREEN,
-	BGRA_RED,
-	BGRA_ALPHA
-};
-
-enum	e_argb
-{
-	ARGB_ALPHA,
-	ARGB_RED,
-	ARGB_GREEN,
-	ARGB_BLUE
-};
-
-typedef union		u_color
-{
-	int				all;
-	unsigned char	argb[4];
-	unsigned char	bgra[4];
-}				t_color;
-
-typedef enum	e_error{
-	FILE_NAME,
-	CUB_DIR,
-	CUB_INVALIDE,
-	RESOLUTION,
-	RESOLUTION_END,
-	F_COLOR,
-	F_COLOR_END,
-	C_COLOR,
-	C_COLOR_END,
-	MORE_NUM,
-	DOUBLE_ELEMENT,
-	MAP_WRONG_CHAR,
-	MAP_CHAR_AFTER,
-	NO_MAP,
-	MULTI_PLAYER,
-	NO_PLAYER,
-	MAP_WALL,
-	MAP_INCOMPLETE,
-	MLX_INIT,
-	NEW_WINDOW,
-	NEW_IMAGE,
-
-	MALLOC_FAILED
-}				t_error;
-
-typedef struct	s_env
-{
-	void		*mlx;
-	void		*window;
-	int 		height_y;
-	int 		width_x;
-	char		keyboard[512];
-	t_coord		square_origin;
-	t_image		img;
-}				t_env;
+/* PARSING ----------- */
 
 typedef struct	s_player
 {
@@ -155,6 +75,107 @@ typedef struct	s_parsing
 	t_player	player;
 	t_pcolor	col;
 }				t_parsing;
+
+/* RAYCSTING ----------- */
+
+/* Toute la data de l'image (mlx_get_data_addr) */
+
+typedef struct	s_image
+{
+	void		*image; 
+	int			*data; //normalement char* addr
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}				t_image;
+
+/* Position de l'origine du carré dessiné */
+
+typedef struct	s_coord
+{
+	int			x;
+	int			y;
+}				t_coord;
+
+/* Couleurs */
+
+enum	e_bgra
+{
+	BGRA_BLUE,
+	BGRA_GREEN,
+	BGRA_RED,
+	BGRA_ALPHA
+};
+
+enum	e_argb
+{
+	ARGB_ALPHA,
+	ARGB_RED,
+	ARGB_GREEN,
+	ARGB_BLUE
+};
+
+typedef union		u_color
+{
+	int				all;
+	unsigned char	argb[4];
+	unsigned char	bgra[4];
+}				t_color;
+
+// argb[0] == alpha
+// argb[1] == r;
+// argb[2] == g;
+// argb[3] == b;
+
+// toutes les variables commencent au meme endroit dans la memoire
+// l'union prend la taille du plus grand type
+
+// Une union est, à l’image d’une structure, un regroupement d’objet de type différents. 
+// La nuance, et elle est de taille, est qu’une union est un agrégat qui ne peut contenir qu'un seul de ses membres à la fois.
+// Autrement dit, une union peut accueillir la valeur de n’importe lequel de ses membres, mais un seul à la fois.
+
+/* Errors */
+
+typedef enum	e_error{
+	FILE_NAME,
+	CUB_DIR,
+	CUB_INVALIDE,
+	RESOLUTION,
+	RESOLUTION_END,
+	F_COLOR,
+	F_COLOR_END,
+	C_COLOR,
+	C_COLOR_END,
+	MORE_NUM,
+	DOUBLE_ELEMENT,
+	MAP_WRONG_CHAR,
+	MAP_CHAR_AFTER,
+	NO_MAP,
+	MULTI_PLAYER,
+	NO_PLAYER,
+	MAP_WALL,
+	MAP_INCOMPLETE,
+	MLX_INIT,
+	NEW_WINDOW,
+	NEW_IMAGE,
+
+	MALLOC_FAILED
+}				t_error;
+
+/* Structure mère */
+
+typedef struct	s_env
+{
+	void		*mlx;
+	void		*window;
+	int 		height_y;
+	int 		width_x;
+	char		keyboard[512];
+	t_coord		square_origin;
+	t_image		img;
+}				t_env;
+
+/* PROTOTYPES ------------ */
 
 /*
 ** INIT_STRUCT
@@ -234,15 +255,4 @@ void	debug_size_map(t_parsing *parse);
 void	debug_resolution(t_parsing *parse);
 void	debug_print_map(t_parsing *parse);
 
-// argb[0] == alpha
-// argb[1] == r;
-// argb[2] == g;
-// argb[3] == b;
-
-// toutes les variables commencent au meme endroit dans la memoire
-// l'union prend la taille du plus grand type
-
-// Une union est, à l’image d’une structure, un regroupement d’objet de type différents. 
-// La nuance, et elle est de taille, est qu’une union est un agrégat qui ne peut contenir qu'un seul de ses membres à la fois.
-// Autrement dit, une union peut accueillir la valeur de n’importe lequel de ses membres, mais un seul à la fois.
 #endif
