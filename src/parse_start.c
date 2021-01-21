@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/15 16:05:35 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/21 16:23:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	get_size_map(char *str, t_parsing *parse)
 		if (len > parse->len_line)
 			parse->len_line = len;
 	}
-	// debug_size_map(parse);
-	debug_print_map(parse);
 	if (parse->len_line == 1) // la map fait une ligne parse->nb_lines == 1
 			map_error(parse, MAP_INCOMPLETE);
 }
@@ -110,7 +108,7 @@ int		get_elements(char *str, t_parsing *parse)
 	return (0);
 }
 
-void	parsing(char *file, t_parsing *parse)
+void	parsing(char *file, t_env *env)
 {
 	int fd;
 	int ret;
@@ -119,24 +117,24 @@ void	parsing(char *file, t_parsing *parse)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
-		file_error(parse, CUB_DIR);
+		file_error(&env->parse, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		file_error(parse, CUB_INVALIDE);
+		file_error(&env->parse, CUB_INVALIDE);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
 		// printf("\n\n* ligne = |%s| ---------- *\n", str);
-		if (get_elements(str, parse) == -1)
-			get_size_map(str, parse);
-		if (str[0] == '\0' && parse->nb_lines != -1) // Check apres map
-			parse->end_map = 1;
+		if (get_elements(str, &env->parse) == -1)
+			get_size_map(str, &env->parse);
+		if (str[0] == '\0' && env->parse.nb_lines != -1) // Check apres map
+			env->parse.end_map = 1;
 		free(str);
 	}
 	close(fd);
-	if (parse->nb_lines == -1)
-		map_error(parse, NO_MAP);
-	get_map(file, parse);
-	// debug_parsing(parse);
-	debug_print_map(parse);
-	start_mlx(parse);
+	if (env->parse.nb_lines == -1)
+		map_error(&env->parse, NO_MAP);
+	get_map(file, &env->parse);
+	debug_parsing(&env->parse);
+	// debug_print_map(&env->parse);
+	start_mlx(env);
 }

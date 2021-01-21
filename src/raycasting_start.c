@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/19 12:12:59 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/21 16:30:47 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	put_px_to_img(t_image *img, int x, int y, int color)
 {
-	img->data[img->size_line / 4 * y + x] = color;
+	// img->data[img->size_line / 4 * y + x] = color;
+	*(int *)&img->data[img->size_line * y + x * img->bits_per_pixel / 8] = color;
+	printf("\n\nNIQUE BIEN TA MERE FDP\n");
 }
 
 /*
@@ -86,15 +88,15 @@ int	game_update(t_env *env)
 {
 	if (env->keyboard[KEY_ESCAPE])
 		ft_quit(env);
-	if(env->keyboard[KEY_D] && env->square_origin.x < env->width_x)
+	if(env->keyboard[KEY_D] && env->square_origin.x < env->parse.resx)
 		env->square_origin.x++;
 	if(env->keyboard[KEY_A] && env->square_origin.x > 0)
 		env->square_origin.x--;
 	if(env->keyboard[KEY_W] && env->square_origin.y > 0)
 		env->square_origin.y--;
-	if(env->keyboard[KEY_S] && env->square_origin.y < env->height_y)
+	if(env->keyboard[KEY_S] && env->square_origin.y < env->parse.resy)
 		env->square_origin.y++;
-	ft_bzero(env->img.data, env->img.size_line * env->height_y);
+	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	draw_square(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 
@@ -113,26 +115,35 @@ int	ft_key_release(int key, t_env *env)
 	return (0);
 }
 
-int	start_mlx(t_parsing *parse)
+int	start_mlx(t_env *env)
 {
-	t_env env;
+	// t_env env;
 
-	ft_bzero(&env, sizeof(t_env));
+	// ft_bzero(&env, sizeof(t_env));
+	// env->parse.resx = 1200;
+	// env->parse.resy = 600;
 
-	env.height_y = 600;
-	env.width_x = 1200;
-	if ((env.mlx = mlx_init()) == NULL)
-		mlx_error(parse, MLX_INIT);
-	if (!(env.window = mlx_new_window(env.mlx, env.width_x, env.height_y, "Mon super titre")))
-		mlx_error(parse, NEW_WINDOW);
-	if (!(env.img.image = mlx_new_image(env.mlx, env.width_x, env.height_y)))
-		mlx_error(parse, NEW_IMAGE);
-	env.img.data = (int*)mlx_get_data_addr(env.img.image, &env.img.bits_per_pixel, &env.img.size_line, &env.img.endian);
+	// avec mlx_get_screen_size -> connaitre la resolutiion de l'ecran utilisé,
+	// si la res demandé dans le file.cub est supperieur a l'ecran alors choisr une resolution plus petite (celle de l'ecran)
+
+	// mlx_get_screen_size(env.mlx, env.screen_width, env.screen_height);
+	// if (parse->resx > env.screen_width)
+	// 	parse->resx = env.screen_width;
+	// if (parse->resy > env.screen_height)
+	// 	parse->resy = env.screen_height;
+	printf("env->parse.resx = %d\n", env->parse.resx);
+	if ((env->mlx = mlx_init()) == NULL)
+		mlx_error(&env->parse, MLX_INIT);
+	if (!(env->window = mlx_new_window(env->mlx, env->parse.resx, env->parse.resy, "Mon super titre")))
+		mlx_error(&env->parse, NEW_WINDOW);
+	if (!(env->img.image = mlx_new_image(env->mlx, env->parse.resx, env->parse.resy)))
+		mlx_error(&env->parse, NEW_IMAGE);
+	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
-	mlx_hook(env.window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, &env);
-	mlx_hook(env.window, KEYPRESS, KEYPRESSMASK, ft_key_press, &env);
-	mlx_hook(env.window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &env);
-	mlx_loop_hook(env.mlx, game_update, &env);
-	mlx_loop(env.mlx);
+	mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, &env);
+	mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, &env);
+	mlx_hook(env->window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, &env);
+	mlx_loop_hook(env->mlx, game_update, &env);
+	mlx_loop(env->mlx);
 	return (0);
 }

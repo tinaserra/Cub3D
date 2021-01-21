@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/19 13:41:35 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/21 15:18:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct	s_parsing
 {
 	int			save;
 	int			i;
-	int			resx;
-	int			resy;
+	int			resx; // Résolution fenetre
+	int			resy; // Résolution fenetre
 	int			nb_lines;
 	int			len_line;
 	int			end_map;
@@ -96,6 +96,20 @@ typedef struct	s_coord
 	int			x;
 	int			y;
 }				t_coord;
+
+/* Structure mère */
+
+typedef struct	s_env
+{
+	void		*mlx;
+	void		*window;
+	int 		screen_width;
+	int 		screen_height;
+	char		keyboard[512];
+	t_coord		square_origin;
+	t_image		img;
+	t_parsing	parse;
+}				t_env;
 
 /* Couleurs */
 
@@ -162,19 +176,6 @@ typedef enum	e_error{
 	MALLOC_FAILED
 }				t_error;
 
-/* Structure mère */
-
-typedef struct	s_env
-{
-	void		*mlx;
-	void		*window;
-	int 		height_y;
-	int 		width_x;
-	char		keyboard[512];
-	t_coord		square_origin;
-	t_image		img;
-}				t_env;
-
 /* PROTOTYPES ------------ */
 
 /*
@@ -188,7 +189,7 @@ void	init_parse(t_parsing *parse);
 ** PARSE_START
 */
 
-void	parsing(char *file, t_parsing *parse);
+void	parsing(char *file, t_env *env);
 // void	get_elements(char *str, t_parsing *parse);
 // void	get_size_map(char *str, t_parsing *parse);
 // int		get_map(char *file, t_parsing *parse);
@@ -233,7 +234,7 @@ void check_bot_right_angle(t_parsing *parse, int i, int j);
 ** RAYCASTING_START
 */
 
-int	start_mlx(t_parsing *parse);
+int	start_mlx(t_env *env);
 
 /*
 ** ERROR
