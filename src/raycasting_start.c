@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/21 16:30:47 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/21 16:35:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	put_px_to_img(t_image *img, int x, int y, int color)
 {
-	// img->data[img->size_line / 4 * y + x] = color;
-	*(int *)&img->data[img->size_line * y + x * img->bits_per_pixel / 8] = color;
+	img->data[img->size_line / 4 * y + x] = color;
+	// *(int *)&img->data[img->size_line * y + x * img->bits_per_pixel / 8] = color;
 	printf("\n\nNIQUE BIEN TA MERE FDP\n");
 }
 
