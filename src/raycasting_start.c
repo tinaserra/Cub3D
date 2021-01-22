@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/21 16:35:26 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/22 15:56:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int	start_mlx(t_env *env)
 	// 	parse->resx = env.screen_width;
 	// if (parse->resy > env.screen_height)
 	// 	parse->resy = env.screen_height;
+
 	printf("env->parse.resx = %d\n", env->parse.resx);
 	if ((env->mlx = mlx_init()) == NULL)
 		mlx_error(&env->parse, MLX_INIT);
