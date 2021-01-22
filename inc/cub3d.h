@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/21 15:18:33 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/22 15:25:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,10 @@ typedef struct	s_env
 	int 		screen_width;
 	int 		screen_height;
 	char		keyboard[512];
+
+	int			height_y; // learn_mlx
+	int			width_x; // learn_mlx
+
 	t_coord		square_origin;
 	t_image		img;
 	t_parsing	parse;

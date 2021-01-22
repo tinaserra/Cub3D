@@ -96,18 +96,18 @@ int main(int /*argc*/, char */*argv*/[])
       double sideDistX;
       double sideDistY;
 
-       // length of ray from one x or y-side to next x or y-side
-      double deltaDistX = std::abs(1 / rayDirX);
-      double deltaDistY = std::abs(1 / rayDirY);
+       // longueur du rayon d'un côté x ou y au coté x ou y
+      double deltaDistX = std::abs(1 / rayDirX); // = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
+      double deltaDistY = std::abs(1 / rayDirY); // = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
       double perpWallDist;
 
-      // what direction to step in x or y-direction (either +1 or -1)
+      // dans quelle direction avancer dans la direction x ou y (+1 ou -1)
       int stepX;
       int stepY;
 
-      int hit = 0; // was there a wall hit?
-      int side; // was a NS or a EW wall hit?
-      // calculate step and initial sideDist
+      int hit = 0; // y a-t-il eu un mur touché?
+      int side; // Un mur NS ou EW a-t-il été touché?
+      // calculer le pas et le sideDist initial
       if(rayDirX < 0)
       {
         stepX = -1;
@@ -128,10 +128,10 @@ int main(int /*argc*/, char */*argv*/[])
         stepY = 1;
         sideDistY = (mapY + 1.0 - posY) * deltaDistY;
       }
-      //perform DDA
+      // exécute DDA
       while (hit == 0)
       {
-        //jump to next map square, OR in x-direction, OR in y-direction
+        // passe au carré suivant de la carte, OU dans la direction x, OU dans la direction y
         if(sideDistX < sideDistY)
         {
           sideDistX += deltaDistX;
@@ -144,10 +144,10 @@ int main(int /*argc*/, char */*argv*/[])
           mapY += stepY;
           side = 1;
         }
-        //Check if ray has hit a wall
+        // Vérifie si le rayon a heurté un mur
         if(worldMap[mapX][mapY] > 0) hit = 1;
       }
-      //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
+      // Calculer la distance projetée sur la direction de la caméra (la distance euclidienne donnera un effet fisheye!)
       if(side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
       else          perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
