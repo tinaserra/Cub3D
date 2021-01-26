@@ -86,8 +86,8 @@ int main(int /*argc*/, char */*argv*/[])
     {
       // calculer la position et la direction
       double cameraX = 2 * x / (double)w - 1; // coordonnée x dans l'espace caméra
-      double rayDirX = dirX + planeX * cameraX;
-      double rayDirY = dirY + planeY * cameraX;
+      double rayDirX = dirX + planeX * cameraX; // la direction du rayon x
+      double rayDirY = dirY + planeY * cameraX; // la direction du rayon y
       // dans quel carré de la carte nous nous trouvons
       int mapX = int(posX);
       int mapY = int(posY);
@@ -96,16 +96,16 @@ int main(int /*argc*/, char */*argv*/[])
       double sideDistX;
       double sideDistY;
 
-       // longueur du rayon d'un côté x ou y au coté x ou y
+       // longueur du rayon d'un côté x ou y au coté x ou y suivant
       double deltaDistX = std::abs(1 / rayDirX); // = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
       double deltaDistY = std::abs(1 / rayDirY); // = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
-      double perpWallDist;
+      double perpWallDist; // distance du joueur au mur
 
       // dans quelle direction avancer dans la direction x ou y (+1 ou -1)
       int stepX;
       int stepY;
 
-      int hit = 0; // y a-t-il eu un mur touché?
+      int hit = 0; //1 si un mur a ete touche, 0 sinon
       int side; // Un mur NS ou EW a-t-il été touché?
       // calculer le pas et le sideDist initial
       if(rayDirX < 0)
@@ -151,16 +151,16 @@ int main(int /*argc*/, char */*argv*/[])
       if(side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
       else          perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
-      //Calculate height of line to draw on screen
-      int lineHeight = (int)(h / perpWallDist);
+      // Calcule la hauteur de la colonne à dessiner sur l'écran
+      int lineHeight = (int)(h / perpWallDist); // h = hauteur fenetre ?
 
-      //calculate lowest and highest pixel to fill in current stripe
+      // calcule le pixel le plus bas et le plus élevé pour remplir la bande courante
       int drawStart = -lineHeight / 2 + h / 2;
       if(drawStart < 0)drawStart = 0;
       int drawEnd = lineHeight / 2 + h / 2;
       if(drawEnd >= h)drawEnd = h - 1;
 
-      //choose wall color
+      // choisissez la couleur du mur
       ColorRGB color;
       switch(worldMap[mapX][mapY])
       {
@@ -171,40 +171,40 @@ int main(int /*argc*/, char */*argv*/[])
         default: color = RGB_Yellow; break; //yellow
       }
 
-      //give x and y sides different brightness
+      // donne aux côtés x et y une luminosité différente
       if(side == 1) {color = color / 2;}
 
-      //draw the pixels of the stripe as a vertical line
+      // dessine les pixels de la bande comme une ligne verticale
       verLine(x, drawStart, drawEnd, color);
     }
-    //timing for input and FPS counter
+    // timing pour l'entrée et le compteur FPS
     oldTime = time;
     time = getTicks();
-    double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-    print(1.0 / frameTime); //FPS counter
+    double frameTime = (time - oldTime) / 1000.0; // frameTime est le temps que cette image a pris, en secondes
+    print(1.0 / frameTime); // Compteur FPS
     redraw();
     cls();
 
-    //speed modifiers
-    double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-    double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+    // modificateurs de vitesse
+    double moveSpeed = frameTime * 5.0; // la valeur constante est en carrés / seconde
+    double rotSpeed = frameTime * 3.0; // la valeur constante est en radians / seconde
     readKeys();
-    //move forward if no wall in front of you
+    // avance si pas de mur devant toi
     if(keyDown(SDLK_UP))
     {
       if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
       if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
     }
-    //move backwards if no wall behind you
+    // recule si aucun mur derrière vous
     if(keyDown(SDLK_DOWN))
     {
       if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
       if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
     }
-    //rotate to the right
+    // tourner vers la droite
     if(keyDown(SDLK_RIGHT))
     {
-      //both camera direction and camera plane must be rotated
+      // La direction de la caméra et le plan de la caméra doivent être tournés
       double oldDirX = dirX;
       dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
       dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
@@ -212,10 +212,10 @@ int main(int /*argc*/, char */*argv*/[])
       planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
       planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
     }
-    //rotate to the left
+    // tourner vers la gauche
     if(keyDown(SDLK_LEFT))
     {
-      //both camera direction and camera plane must be rotated
+      // La direction de la caméra et le plan de la caméra doivent être tournés
       double oldDirX = dirX;
       dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
       dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
