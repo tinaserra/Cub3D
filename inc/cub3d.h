@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/22 15:25:23 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/26 11:59:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,16 +229,27 @@ int		check_strend(char *str, t_parsing *parse, int ctrl);
 ** PARSE_WALL
 */
 
-void check_top_left_angle(t_parsing *parse, int i, int j);
-void check_bot_left_angle(t_parsing *parse, int i, int j);
-void check_top_right_angle(t_parsing *parse, int i, int j);
-void check_bot_right_angle(t_parsing *parse, int i, int j);
+void	check_top_left_angle(t_parsing *parse, int i, int j);
+void	check_bot_left_angle(t_parsing *parse, int i, int j);
+void	check_top_right_angle(t_parsing *parse, int i, int j);
+void	check_bot_right_angle(t_parsing *parse, int i, int j);
 
 /*
 ** RAYCASTING_START
 */
 
-int	start_mlx(t_env *env);
+int		start_mlx(t_env *env);
+
+/*
+** RAY_UTILS
+*/
+
+void	put_px_to_img(t_image *img, int x, int y, int color);
+void	screen_size(t_env *env);
+int		ft_key_release(int key, t_env *env);
+int		ft_key_press(int key, t_env *env);
+int		ft_quit(t_env *env);
+int		ft_convert_color(t_color color, int endian);
 
 /*
 ** ERROR
@@ -249,6 +260,7 @@ void	file_error(t_parsing *parse, int error);
 void	element_error(t_parsing *parse, int error);
 void	map_error(t_parsing *parse, int error);
 void	mlx_error(t_parsing *parse, int error);
+void	put_px_to_img(t_image *img, int x, int y, int color);
 
 /*
 ** DEBUG
