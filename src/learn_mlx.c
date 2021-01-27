@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   learn_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:08 by vserra            #+#    #+#             */
-/*   Updated: 2020/10/22 11:40:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/27 15:01:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	game_update(t_env *env)
 {
 	if (env->keyboard[KEY_ESCAPE])
 		ft_quit(env);
-	if(env->keyboard[KEY_D] && env->square_origin.x < env->width_x)
+	if (env->keyboard[KEY_D] && env->square_origin.x < env->width_x)
 		env->square_origin.x++;
-	if(env->keyboard[KEY_A] && env->square_origin.x > 0)
+	if (env->keyboard[KEY_A] && env->square_origin.x > 0)
 		env->square_origin.x--;
-	if(env->keyboard[KEY_W] && env->square_origin.y > 0)
+	if (env->keyboard[KEY_W] && env->square_origin.y > 0)
 		env->square_origin.y--;
-	if(env->keyboard[KEY_S] && env->square_origin.y < env->height_y)
+	if (env->keyboard[KEY_S] && env->square_origin.y < env->height_y)
 		env->square_origin.y++;
 	ft_bzero(env->img.data, env->img.size_line * env->height_y);
 	draw_square(env);

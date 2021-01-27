@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/26 15:51:00 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/27 13:14:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,40 +110,45 @@ typedef struct	s_env
 	int			height_y; // learn_mlx
 	int			width_x; // learn_mlx
 
-	double posX;  // position de départ du joueur x
-	double posY; // position de départ du joueur y
-	double dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
-	double dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
+	double		posX;  // position de départ du joueur x
+	double		posY; // position de départ du joueur y
+	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+	double		dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 	// la version 2D raycaster du plan de la caméra
-	double planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-	double time; // heure de la trame courante
-	double oldTime;// heure de l'image précédente
-	double cameraX; // coordonnée x dans l'espace caméra
-	double rayDirX; // la direction du rayon x
-	double rayDirY; // la direction du rayon y
+	double		planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		time; // heure de la trame courante
+	double		oldTime; // heure de l'image précédente
+	double		cameraX; // coordonnée x dans l'espace caméra
+	double		rayDirX; // la direction du rayon x
+	double		rayDirY; // la direction du rayon y
 
 	// dans quel carré de la carte nous nous trouvons
-	int mapX;
-	int mapY;
+	int			mapX;
+	int			mapY;
 
 	// longueur du rayon de la position actuelle au cote x ou y suivant
-	double sideDistX; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
-	double sideDistY; // distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
+	double		sideDistX; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
+	double		sideDistY; // distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
 
 	// longueur du rayon d'un côté x ou y au coté x ou y
-	double deltaDistX; // = std::abs(1 / rayDirX);
-	double deltaDistY; // = std::abs(1 / rayDirY);
-	double perpWallDist; // distance du joueur au mur
+	double		deltaDistX; // = std::abs(1 / rayDirX);
+	double		deltaDistY; // = std::abs(1 / rayDirY);
+	double		perpWallDist; // distance du joueur au mur
 
 	// dans quelle direction avancer dans la direction x ou y (+1 ou -1)
-	int stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-	int stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
+	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
+	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
 
-	int hit; // y a-t-il eu un mur touché?
-	int side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
+	int			hit; // y a-t-il eu un mur touché?
+	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
 
-	int lineHeight; // hauteur de la ligne a dessiner
+	int			lineHeight; // hauteur de la ligne a dessiner
+	int			drawStart;
+	int			drawEnd;
+	double		frameTime;
+	double		moveSpeed;
+	double		rotSpeed;
 
 	t_coord		square_origin;
 

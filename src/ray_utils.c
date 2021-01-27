@@ -63,7 +63,7 @@ void	screen_size(t_env *env)
 	// avec mlx_get_screen_size -> connaitre la resolutiion de l'ecran utilisé,
 	// si la res demandé dans le file.cub est supperieur a l'ecran alors choisr une resolution plus petite (celle de l'ecran)
 
-	mlx_get_screen_size(env->mlx, env->screen_width, env->screen_height);
+	mlx_get_screen_size(env->mlx, &env->screen_width, &env->screen_height);
 	if (env->parse.resx > env->screen_width)
 		env->parse.resx = env->screen_width;
 	if (env->parse.resy > env->screen_height)
