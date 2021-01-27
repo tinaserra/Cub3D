@@ -66,7 +66,7 @@
 ### Error : Il y a un ou plusieurs espaces dans la map
 
 - [ ] wrong_map06e01.cub    -> Pas d'erreur.
-- [ ] wrong_map06e02.cub    -> ```bus error```        
+- [ ] wrong_map06e02.cub    -> ```bus error```
 - [ ] wrong_map06e03.cub    -> Pas d'erreur.
 - [ ] wrong_map06e04.cub    -> ```bus error```
 - [ ] wrong_map06e05.cub    -> Pas d'erreur.

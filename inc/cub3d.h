@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/27 13:14:24 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/27 20:46:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct	s_env
 	int			height_y; // learn_mlx
 	int			width_x; // learn_mlx
 
+	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
 	double		posX;  // position de départ du joueur x
 	double		posY; // position de départ du joueur y
 	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
