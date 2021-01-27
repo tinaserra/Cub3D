@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/27 20:56:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/01/27 21:00:15 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	algo_dda(t_env *env)
 			env->side = 1; // c'est un cote y qui est touche (horizontal)
 		}
 		// Vérifie si le rayon a heurté un mur
-		if(env->parse.map[env->mapX][env->mapY] == '1') // == '1' ?
+		if(env->parse.map[env->mapX][env->mapY] == '1')
 			env->hit = 1;
 	}
 	ft_putstr_fd("YOHANN EST UN GROS PD 4\n", 1);

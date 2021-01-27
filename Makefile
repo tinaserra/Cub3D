@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/01/27 20:53:15 by vserra           ###   ########.fr        #
+#    Updated: 2021/01/27 21:01:38 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = 	main.c \
 		parse_map.c \
 		parse_check.c \
 		parse_wall.c \
-		raycasting_start.c \
+		ray_start.c \
 		ray_utils.c
 
 NAME = Cub3D
