@@ -6,38 +6,47 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/01 11:18:33 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/01 15:44:21 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
+// void	init_env(t_env *env)
+// {
+// 	*env = (t_env) {
+// 	// calculer la position et la direction
+// 	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
+// 	.rayDirX = env->dirX + env->planeX * env->cameraX,
+// 	.rayDirY = env->dirY + env->planeY * env->cameraX,
+// 	// dans quel carré de la carte nous nous trouvons
+// 	.mapX = (int)env->posX,
+// 	.mapY = (int)env->posY,
+// 	// longueur du rayon d'un côté x ou y au coté x ou y
+// 	.deltaDistX = fabs (1 / env->rayDirX), //= sqrt(1 + (env->rayDirY * env->rayDirY) / (env->rayDirX * env->rayDirX));
+// 	.deltaDistY = fabs (1 / env->rayDirY), //= sqrt(1 + (env->rayDirX * env->rayDirX) / (env->rayDirY * env->rayDirY));
+// 	.hit = 0, // y a-t-il eu un mur touché?
+// 	};
+// 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
+// }
+
 void	init_env(t_env *env)
 {
-	*env = (t_env) {
-	// calculer la position et la direction
-	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
-	.rayDirX = env->dirX + env->planeX * env->cameraX,
-	.rayDirY = env->dirY + env->planeY * env->cameraX,
-	// dans quel carré de la carte nous nous trouvons
-	.mapX = (int)env->posX,
-	.mapY = (int)env->posY,
-	// longueur du rayon d'un côté x ou y au coté x ou y
-	.deltaDistX = fabs (1 / env->rayDirX), //= sqrt(1 + (env->rayDirY * env->rayDirY) / (env->rayDirX * env->rayDirX));
-	.deltaDistY = fabs (1 / env->rayDirY), //= sqrt(1 + (env->rayDirX * env->rayDirX) / (env->rayDirY * env->rayDirY));
-	.hit = 0, // y a-t-il eu un mur touché?
-	};
+	env->cameraX = 2 * env->x / (double)env->parse.resx - 1;
+	env->rayDirX = env->dirX + env->planeX * env->cameraX;
+	env->rayDirY = env->dirY + env->planeY * env->cameraX;
+	env->mapX = (int)env->posX;
+	env->mapY = (int)env->posY;
+	printf("pos x = %f\n", env->posX);
+	printf("pos y = %f\n", env->posY);
+	printf("env->mapX = %d\n", env->mapX);
+	env->deltaDistX = fabs (1 / env->rayDirX);
+	env->deltaDistY = fabs (1 / env->rayDirY);
+	env->hit = 0;
 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
 }
-	// env->cameraX = 2 * x / (double)env->parse.resx - 1;
-	// env->rayDirX = env->dirX + env->planeX * env->cameraX;
-	// env->rayDirY = env->dirY + env->planeY * env->cameraX;
-	// env->mapX = (int)env->posX;
-	// env->mapY = (int)env->posY;
-	// env->deltaDistX = fabs (1 / env->rayDirX);
-	// env->deltaDistY = fabs (1 / env->rayDirY);
-	// env->hit = 0;
+
 void	calc_sidedist(t_env *env)
 {
 	// calculer le pas et le sideDist initial
@@ -45,28 +54,49 @@ void	calc_sidedist(t_env *env)
 	{
 		env->stepX = -1;
 		env->sideDistX = (env->posX - env->mapX) * env->deltaDistX;
+		printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	else
 	{
 		env->stepX = 1;
 		env->sideDistX = (env->mapX + 1.0 - env->posX) * env->deltaDistX;
+		printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	if (env->rayDirY < 0)
 	{
 		env->stepY = -1;
 		env->sideDistY = (env->posY - env->mapY) * env->deltaDistY;
+		printf("env->sideDistY = %f\n", env->sideDistY);
 	}
 	else
 	{
 		env->stepY = 1;
 		env->sideDistY = (env->mapY + 1.0 - env->posY) * env->deltaDistY;
+		printf("env->sideDistY = %f\n", env->sideDistY);
 	}
-	ft_putstr_fd("YOHANN EST UN GROS PD 3\n", 1);
+
+	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
+	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
+	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
+	printf("env->deltaDistX = %f\n", env->deltaDistX);
+	printf("env->deltaDistY = %f\n", env->deltaDistY);
+	// printf("env->sideDistX = %f\n", env->sideDistX);
+	// printf("env->sideDistY = %f\n", env->sideDistY);
+	printf("env->mapX = %d\n", env->mapX);
+	printf("env->stepX = %d\n", env->stepX);
+	printf("env->side = %d\n", env->side);
+	printf("env->hit = %d\n", env->hit);
 }
 
 void	algo_dda(t_env *env)
 {
 	// exécute DDA
+	printf("env->sideDistX = %f", env->sideDistX);
+	printf("env->sideDistY = %f", env->sideDistY);
+	printf("env->mapX = %d", env->mapX);
+	printf("env->stepX = %d", env->stepX);
+	printf("env->side = %d", env->side);
+	printf("env->hit = %d", env->hit);
 	while (env->hit == 0)
 	{
 		// passe au carré suivant de la carte, OU dans la direction x, OU dans la direction y
@@ -109,7 +139,7 @@ void	calc_column(t_env *env)
 	if (env->drawStart < 0)
 		env->drawStart = 0;
 	env->drawEnd = env->lineHeight / 2 + env->parse.resy / 2;
-	if (env->drawEnd >= env->parse.resy)
+	if (env->drawEnd >= env->parse.resy || env->drawEnd < 0)
 		env->drawEnd = env->parse.resy - 1;
 	ft_putstr_fd("YOHANN EST UN GROS PD 6\n", 1);
 }
@@ -164,25 +194,14 @@ int	game_update(t_env *env)
 {
 	ft_putstr_fd("\nYOHANN EST UN GROS PD 1\n", 1);
 	env->x = 0;
-	while (env->x < env->parse.resx - 1)
+	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
+	while (env->x < env->parse.resx)
 	{
 		init_env(env);
 		calc_sidedist(env);
 		algo_dda(env);
 		calc_player_to_wall(env);
 		calc_column(env);
-
-		// choisissez la couleur du mur
-		// ColorRGB color;
-		// switch(worldMap[mapX][mapY])
-		// {
-		// 	case 1:  color = RGB_Red;    break; //red
-		// 	case 2:  color = RGB_Green;  break; //green
-		// 	case 3:  color = RGB_Blue;   break; //blue
-		// 	case 4:  color = RGB_White;  break; //white
-		// 	default: color = RGB_Yellow; break; //yellow
-		// }
-
 		draw_column(env, env->x);
 		ft_putstr_fd("YOHANN EST UN GROS PD 8\n", 1);
 		env->x++;
@@ -244,15 +263,15 @@ int	game_update(t_env *env)
 	// 	env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
 	// }
 	ft_putstr_fd("YOHANN EST UN GROS PD 9\n", 1);
-	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
+	// ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	return (0);
 }
 
 int	start_mlx(t_env *env)
 {
-	env->posX = 22;  // position de départ du joueur x
-	env->posY = 12; // position de départ du joueur y
+	env->posX = -1; // position de départ du joueur x
+	env->posY = -1; // position de départ du joueur y
 	env->dirX = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
 	env->dirY = 0; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 	env->planeX = 0;
