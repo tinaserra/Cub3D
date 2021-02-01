@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/27 20:46:06 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/01 10:45:44 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct	s_env
 	int			hit; // y a-t-il eu un mur touché?
 	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
 
-	int			lineHeight; // hauteur de la ligne a dessiner
+	int			lineHeight; // hauteur de la ligne du mur a dessiner
 	int			drawStart;
 	int			drawEnd;
 	double		frameTime;

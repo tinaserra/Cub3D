@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/28 14:37:01 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/01 11:18:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 void	init_env(t_env *env)
 {
 	*env = (t_env) {
-	.x = 0,
 	// calculer la position et la direction
 	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
 	.rayDirX = env->dirX + env->planeX * env->cameraX,
@@ -97,6 +96,7 @@ void	calc_player_to_wall(t_env *env)
 		env->perpWallDist = (env->mapX - env->posX + (1 - env->stepX) / 2) / env->rayDirX;
 	else
 		env->perpWallDist = (env->mapY - env->posY + (1 - env->stepY) / 2) / env->rayDirY;
+	ft_putstr_fd("YOHANN EST UN GROS PD 5\n", 1);
 }
 
 void	calc_column(t_env *env)
@@ -111,37 +111,60 @@ void	calc_column(t_env *env)
 	env->drawEnd = env->lineHeight / 2 + env->parse.resy / 2;
 	if (env->drawEnd >= env->parse.resy)
 		env->drawEnd = env->parse.resy - 1;
+	ft_putstr_fd("YOHANN EST UN GROS PD 6\n", 1);
 }
 
-void	draw_column(t_env *env, int coord_x, int coord_y)
+int		ret_color(t_env *env, int alpha, int red, int green, int blue)
+{
+	int all;
+
+	t_color color;
+	color.argb[BGRA_ALPHA] = alpha;
+	color.argb[BGRA_RED] = red;
+	color.argb[BGRA_GREEN] = green;
+	color.argb[BGRA_BLUE] = blue;
+	all = ft_convert_color(color, env->img.endian);
+	return (all);
+}
+
+void	draw_column(t_env *env, int coord_x)
 {
 	// dessine les pixels de la bande comme une ligne verticale
 	// verLine(x, env->drawStart, env->drawEnd, all);
-	int all; // couleur
+	int color; // couleur
 	int y = 0;
-	while (y < env->lineHeight)
+	// dessine le plafond
+	while (y < env->drawStart)
 	{
-		t_color color;
-		color.argb[BGRA_ALPHA] = 0;
-		color.argb[BGRA_RED] = 255;
-		color.argb[BGRA_GREEN] = 95;
-		color.argb[BGRA_BLUE] = 95;
-		all = ft_convert_color(color, env->img.endian);
-		// donne aux côtés x et y une luminosité différente
-		if (env->side == 1)
-			all = all / 2;
-		put_px_to_img(&env->img, coord_x, coord_y + y, all);
+		color = ret_color(env, 0, env->parse.col.red_c, env->parse.col.green_c, env->parse.col.blue_c);
+		put_px_to_img(&env->img, coord_x, y, color);
 		y++;
 	}
+	// dessine le mur
+	while (y <= env->drawEnd)
+	{
+		color = ret_color(env, 0, 255, 95, 95);
+		// donne aux côtés x et y une luminosité différente
+		if (env->side == 1)
+			color = color / 2;
+		put_px_to_img(&env->img, coord_x, y, color);
+		y++;
+	}
+	// dessine le sol
+	while (y < env->parse.resy)
+	{
+		color = ret_color(env, 0, env->parse.col.red_f, env->parse.col.green_f, env->parse.col.blue_f);
+		put_px_to_img(&env->img, coord_x, y, color);
+		y++;
+	}
+	ft_putstr_fd("YOHANN EST UN GROS PD 7\n", 1);
 }
 
 int	game_update(t_env *env)
 {
 	ft_putstr_fd("\nYOHANN EST UN GROS PD 1\n", 1);
-	env->sideDistX = 0;
-	env->sideDistY = 0;
-	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
-	while (env->x < env->parse.resx)
+	env->x = 0;
+	while (env->x < env->parse.resx - 1)
 	{
 		init_env(env);
 		calc_sidedist(env);
@@ -160,8 +183,8 @@ int	game_update(t_env *env)
 		// 	default: color = RGB_Yellow; break; //yellow
 		// }
 
-		draw_column(env, env->x, env->drawStart);
-		ft_putstr_fd("YOHANN EST UN GROS PD 5\n", 1);
+		draw_column(env, env->x);
+		ft_putstr_fd("YOHANN EST UN GROS PD 8\n", 1);
 		env->x++;
 	}
 
@@ -220,7 +243,7 @@ int	game_update(t_env *env)
 	// 	env->planeX = env->planeX * cos(env->rotSpeed) - env->planeY * sin(env->rotSpeed);
 	// 	env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
 	// }
-	ft_putstr_fd("YOHANN EST UN GROS PD 6\n", 1);
+	ft_putstr_fd("YOHANN EST UN GROS PD 9\n", 1);
 	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	return (0);
