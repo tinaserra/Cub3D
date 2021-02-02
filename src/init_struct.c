@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/14 14:26:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:50:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	init_parse(t_parsing *parse)
 	.col.green_c = -1,
 	.col.blue_c = -1,
 	.map = NULL,
-	.player.orient_start = 'o'
+	.player.px = 'o',
+	.player.dirX = 0,
+	.player.dirY = 0,
 	};
 }
 

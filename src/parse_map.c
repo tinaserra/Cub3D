@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/15 16:05:12 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:51:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,18 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 	// printf("str[j] = %c\n", c);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		if (parse->player.orient_start == 'o')
+		if (parse->player.px == 'o')
 		{
-			parse->player.orient_start = c;
 			parse->player.px = i;
 			parse->player.py = j;
+			if (c == 'N')
+				parse->player.dirX = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+			if (c == 'E')
+				parse->player.dirY = 1;
+			if (c == 'S')
+				parse->player.dirX = 1;
+			if (c == 'W')
+				parse->player.dirY = -1;
 			return (0);
 		}
 		else
@@ -97,7 +104,7 @@ int		dup_map(char *str, t_parsing *parse)
 		if (player_position(parse, str[j], i, j) == 0)
 			parse->map[i][j] = '0';
 		else if (str[j] == ' ')
-			parse->map[i][j] = '.';
+			parse->map[i][j] = '.'; // remplace des espaces par des 1 !
 		else
 			parse->map[i][j] = str[j];
 		j++;

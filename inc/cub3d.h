@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/01 10:45:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:50:10 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@
 
 typedef struct	s_player
 {
-	char		orient_start;
+	// char		orient_start;
 	int			px;
 	int			py;
+	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+	double		dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 }				t_player;
 
 typedef struct	s_pcolor
@@ -113,8 +115,6 @@ typedef struct	s_env
 	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
 	double		posX;  // position de départ du joueur x
 	double		posY; // position de départ du joueur y
-	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
-	double		dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 	// la version 2D raycaster du plan de la caméra
 	double		planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 	double		planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)

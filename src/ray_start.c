@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/01 15:44:21 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/02 13:00:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 // 	*env = (t_env) {
 // 	// calculer la position et la direction
 // 	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
-// 	.rayDirX = env->dirX + env->planeX * env->cameraX,
-// 	.rayDirY = env->dirY + env->planeY * env->cameraX,
+// 	.rayDirX = env->parse.player.dirX + env->planeX * env->cameraX,
+// 	.rayDirY = env->parse.player.dirY + env->planeY * env->cameraX,
 // 	// dans quel carré de la carte nous nous trouvons
-// 	.mapX = (int)env->posX,
-// 	.mapY = (int)env->posY,
+// 	.mapX = (int)env->parse.player.px,
+// 	.mapY = (int)env->parse.player.py,
 // 	// longueur du rayon d'un côté x ou y au coté x ou y
 // 	.deltaDistX = fabs (1 / env->rayDirX), //= sqrt(1 + (env->rayDirY * env->rayDirY) / (env->rayDirX * env->rayDirX));
 // 	.deltaDistY = fabs (1 / env->rayDirY), //= sqrt(1 + (env->rayDirX * env->rayDirX) / (env->rayDirY * env->rayDirY));
@@ -34,17 +34,13 @@
 void	init_env(t_env *env)
 {
 	env->cameraX = 2 * env->x / (double)env->parse.resx - 1;
-	env->rayDirX = env->dirX + env->planeX * env->cameraX;
-	env->rayDirY = env->dirY + env->planeY * env->cameraX;
-	env->mapX = (int)env->posX;
-	env->mapY = (int)env->posY;
-	printf("pos x = %f\n", env->posX);
-	printf("pos y = %f\n", env->posY);
-	printf("env->mapX = %d\n", env->mapX);
+	env->rayDirX = env->parse.player.dirX + env->planeX * env->cameraX;
+	env->rayDirY = env->parse.player.dirY + env->planeY * env->cameraX;
+	env->mapX = (int)env->parse.player.px;
+	env->mapY = (int)env->parse.player.py;
 	env->deltaDistX = fabs (1 / env->rayDirX);
 	env->deltaDistY = fabs (1 / env->rayDirY);
 	env->hit = 0;
-	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
 }
 
 void	calc_sidedist(t_env *env)
@@ -53,50 +49,32 @@ void	calc_sidedist(t_env *env)
 	if (env->rayDirX < 0)
 	{
 		env->stepX = -1;
-		env->sideDistX = (env->posX - env->mapX) * env->deltaDistX;
-		printf("env->sideDistX = %f\n", env->sideDistX);
+		env->sideDistX = (env->parse.player.px - env->mapX) * env->deltaDistX;
+		// printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	else
 	{
 		env->stepX = 1;
-		env->sideDistX = (env->mapX + 1.0 - env->posX) * env->deltaDistX;
-		printf("env->sideDistX = %f\n", env->sideDistX);
+		env->sideDistX = (env->mapX + 1.0 - env->parse.player.px) * env->deltaDistX;
+		// printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	if (env->rayDirY < 0)
 	{
 		env->stepY = -1;
-		env->sideDistY = (env->posY - env->mapY) * env->deltaDistY;
-		printf("env->sideDistY = %f\n", env->sideDistY);
+		env->sideDistY = (env->parse.player.py - env->mapY) * env->deltaDistY;
+		// printf("env->sideDistY = %f\n", env->sideDistY);
 	}
 	else
 	{
 		env->stepY = 1;
-		env->sideDistY = (env->mapY + 1.0 - env->posY) * env->deltaDistY;
-		printf("env->sideDistY = %f\n", env->sideDistY);
+		env->sideDistY = (env->mapY + 1.0 - env->parse.player.py) * env->deltaDistY;
+		// printf("env->sideDistY = %f\n", env->sideDistY);
 	}
-
-	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
-	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
-	ft_putstr_fd("YOHANN EST UN GROS FDPPPP 3\n", 1);
-	printf("env->deltaDistX = %f\n", env->deltaDistX);
-	printf("env->deltaDistY = %f\n", env->deltaDistY);
-	// printf("env->sideDistX = %f\n", env->sideDistX);
-	// printf("env->sideDistY = %f\n", env->sideDistY);
-	printf("env->mapX = %d\n", env->mapX);
-	printf("env->stepX = %d\n", env->stepX);
-	printf("env->side = %d\n", env->side);
-	printf("env->hit = %d\n", env->hit);
 }
 
 void	algo_dda(t_env *env)
 {
 	// exécute DDA
-	printf("env->sideDistX = %f", env->sideDistX);
-	printf("env->sideDistY = %f", env->sideDistY);
-	printf("env->mapX = %d", env->mapX);
-	printf("env->stepX = %d", env->stepX);
-	printf("env->side = %d", env->side);
-	printf("env->hit = %d", env->hit);
 	while (env->hit == 0)
 	{
 		// passe au carré suivant de la carte, OU dans la direction x, OU dans la direction y
@@ -116,17 +94,15 @@ void	algo_dda(t_env *env)
 		if(env->parse.map[env->mapX][env->mapY] == '1')
 			env->hit = 1;
 	}
-	ft_putstr_fd("YOHANN EST UN GROS PD 4\n", 1);
 }
 
 void	calc_player_to_wall(t_env *env)
 {
 	// Calculer la distance projetée sur la direction de la caméra (la distance euclidienne donnera un effet fisheye!)
 	if (env->side == 0)
-		env->perpWallDist = (env->mapX - env->posX + (1 - env->stepX) / 2) / env->rayDirX;
+		env->perpWallDist = (env->mapX - env->parse.player.px + (1 - env->stepX) / 2) / env->rayDirX;
 	else
-		env->perpWallDist = (env->mapY - env->posY + (1 - env->stepY) / 2) / env->rayDirY;
-	ft_putstr_fd("YOHANN EST UN GROS PD 5\n", 1);
+		env->perpWallDist = (env->mapY - env->parse.player.py + (1 - env->stepY) / 2) / env->rayDirY;
 }
 
 void	calc_column(t_env *env)
@@ -141,7 +117,6 @@ void	calc_column(t_env *env)
 	env->drawEnd = env->lineHeight / 2 + env->parse.resy / 2;
 	if (env->drawEnd >= env->parse.resy || env->drawEnd < 0)
 		env->drawEnd = env->parse.resy - 1;
-	ft_putstr_fd("YOHANN EST UN GROS PD 6\n", 1);
 }
 
 int		ret_color(t_env *env, int alpha, int red, int green, int blue)
@@ -160,7 +135,6 @@ int		ret_color(t_env *env, int alpha, int red, int green, int blue)
 void	draw_column(t_env *env, int coord_x)
 {
 	// dessine les pixels de la bande comme une ligne verticale
-	// verLine(x, env->drawStart, env->drawEnd, all);
 	int color; // couleur
 	int y = 0;
 	// dessine le plafond
@@ -173,7 +147,7 @@ void	draw_column(t_env *env, int coord_x)
 	// dessine le mur
 	while (y <= env->drawEnd)
 	{
-		color = ret_color(env, 0, 255, 95, 95);
+		color = ret_color(env, 0, 255, 167, 95);
 		// donne aux côtés x et y une luminosité différente
 		if (env->side == 1)
 			color = color / 2;
@@ -187,12 +161,10 @@ void	draw_column(t_env *env, int coord_x)
 		put_px_to_img(&env->img, coord_x, y, color);
 		y++;
 	}
-	ft_putstr_fd("YOHANN EST UN GROS PD 7\n", 1);
 }
 
 int	game_update(t_env *env)
 {
-	ft_putstr_fd("\nYOHANN EST UN GROS PD 1\n", 1);
 	env->x = 0;
 	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	while (env->x < env->parse.resx)
@@ -203,7 +175,6 @@ int	game_update(t_env *env)
 		calc_player_to_wall(env);
 		calc_column(env);
 		draw_column(env, env->x);
-		ft_putstr_fd("YOHANN EST UN GROS PD 8\n", 1);
 		env->x++;
 	}
 
@@ -219,68 +190,62 @@ int	game_update(t_env *env)
 	// env->moveSpeed = env->frameTime * 5.0; // la valeur constante est en carrés / seconde
 	// env->rotSpeed = env->frameTime * 3.0; // la valeur constante est en radians / seconde
 
-	// readKeys();
-	// avance si pas de mur devant toi
 
 	if (env->keyboard[KEY_ESCAPE])
 		ft_quit(env);
 
-	// if (env->keyboard[KEY_W]) // (keyDown(SDLK_UP))
-	// {
-	// 	if (env->parse.map[(int)(env->posX + env->dirX /** env->moveSpeed*/)][(int)(env->posY)] == false)
-	// 		env->posX += env->dirX /** env->moveSpeed*/;
-	// 	if (env->parse.map[(int)(env->posX)][(int)(env->posY + env->dirY /** env->moveSpeed)*/)] == false)
-	// 		env->posY += env->dirY /** env->moveSpeed*/;
-	// }
-	// // recule si aucun mur derrière vous
-	// if (env->keyboard[KEY_S]) // (keyDown(SDLK_DOWN))
-	// {
-	// 	if (env->parse.map[(int)(env->posX - env->dirX /** env->moveSpeed*/)][(int)(env->posY)] == false)
-	// 		env->posX -= env->dirX /** env->moveSpeed*/;
-	// 	if (env->parse.map[(int)(env->posX)][(int)(env->posY - env->dirY /** env->moveSpeed*/)] == false)
-	// 		env->posY -= env->dirY /** env->moveSpeed*/;
-	// }
-	// // tourner vers la droite
-	// if (env->keyboard[KEY_D]) // (keyDown(SDLK_RIGHT))
-	// {
-	// 	// La direction de la caméra et le plan de la caméra doivent être tournés
-	// 	double oldDirX = env->dirX;
-	// 	env->dirX = env->dirX * cos(-env->rotSpeed) - env->dirY * sin(-env->rotSpeed);
-	// 	env->dirY = oldDirX * sin(-env->rotSpeed) + env->dirY * cos(-env->rotSpeed);
-	// 	double oldPlaneX = env->planeX;
-	// 	env->planeX = env->planeX * cos(-env->rotSpeed) - env->planeY * sin(-env->rotSpeed);
-	// 	env->planeY = oldPlaneX * sin(-env->rotSpeed) + env->planeY * cos(-env->rotSpeed);
-	// }
-	// // tourner vers la gauche
-	// if (env->keyboard[KEY_A]) // (keyDown(SDLK_LEFT))
-	// {
-	// 	// La direction de la caméra et le plan de la caméra doivent être tournés
-	// 	double oldDirX = env->dirX;
-	// 	env->dirX = env->dirX * cos(env->rotSpeed) - env->dirY * sin(env->rotSpeed);
-	// 	env->dirY = oldDirX * sin(env->rotSpeed) + env->dirY * cos(env->rotSpeed);
-	// 	double oldPlaneX = env->planeX;
-	// 	env->planeX = env->planeX * cos(env->rotSpeed) - env->planeY * sin(env->rotSpeed);
-	// 	env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
-	// }
-	ft_putstr_fd("YOHANN EST UN GROS PD 9\n", 1);
-	// ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
+	// avance si pas de mur devant toi
+	if (env->keyboard[KEY_W]) // (keyDown(SDLK_UP))
+	{
+		if (env->parse.map[(int)(env->parse.player.px + env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
+			env->parse.player.px += env->parse.player.dirX /** env->moveSpeed*/;
+		if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py + env->parse.player.dirY /** env->moveSpeed)*/)] == '0')
+			env->parse.player.py += env->parse.player.dirY /** env->moveSpeed*/;
+	}
+	// recule si aucun mur derrière vous
+	if (env->keyboard[KEY_S]) // (keyDown(SDLK_DOWN))
+	{
+		if (env->parse.map[(int)(env->parse.player.px - env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
+			env->parse.player.px -= env->parse.player.dirX /** env->moveSpeed*/;
+		if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py - env->parse.player.dirY /** env->moveSpeed*/)] == '0')
+			env->parse.player.py -= env->parse.player.dirY /** env->moveSpeed*/;
+	}
+	// tourner vers la droite
+	if (env->keyboard[KEY_D]) // (keyDown(SDLK_RIGHT))
+	{
+		// La direction de la caméra et le plan de la caméra doivent être tournés
+		double oldDirX = env->parse.player.dirX;
+		env->parse.player.dirX = env->parse.player.dirX * cos(-env->rotSpeed) - env->parse.player.dirY * sin(-env->rotSpeed);
+		env->parse.player.dirY = oldDirX * sin(-env->rotSpeed) + env->parse.player.dirY * cos(-env->rotSpeed);
+		double oldPlaneX = env->planeX;
+		env->planeX = env->planeX * cos(-env->rotSpeed) - env->planeY * sin(-env->rotSpeed);
+		env->planeY = oldPlaneX * sin(-env->rotSpeed) + env->planeY * cos(-env->rotSpeed);
+	}
+	// tourner vers la gauche
+	if (env->keyboard[KEY_A]) // (keyDown(SDLK_LEFT))
+	{
+		// La direction de la caméra et le plan de la caméra doivent être tournés
+		double oldDirX = env->parse.player.dirX;
+		env->parse.player.dirX = env->parse.player.dirX * cos(env->rotSpeed) - env->parse.player.dirY * sin(env->rotSpeed);
+		env->parse.player.dirY = oldDirX * sin(env->rotSpeed) + env->parse.player.dirY * cos(env->rotSpeed);
+		double oldPlaneX = env->planeX;
+		env->planeX = env->planeX * cos(env->rotSpeed) - env->planeY * sin(env->rotSpeed);
+		env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
+	}
+
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	return (0);
 }
 
 int	start_mlx(t_env *env)
 {
-	env->posX = -1; // position de départ du joueur x
-	env->posY = -1; // position de départ du joueur y
-	env->dirX = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
-	env->dirY = 0; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
+	// env->parse.player.px = env->parse.player.px; // position de départ du joueur x
+	// env->parse.player.py = env->parse.player.py; // position de départ du joueur y
 	env->planeX = 0;
 	env->planeY = 0.66; // la version 2D raycaster du plan de la caméra
 
 	env->time = 0; // heure de la trame courante
 	env->oldTime = 0; // heure de l'image précédente
-	// env->parse.resx = 1200;
-	// env->parse.resy = 600;
 
 	if ((env->mlx = mlx_init()) == NULL)
 		mlx_error(&env->parse, MLX_INIT);
