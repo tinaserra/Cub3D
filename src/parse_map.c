@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 16:06:06 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 17:07:27 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ void	wall_in_col(t_parsing *parse)
 		while (parse->map[row][col] == '.')
 			row++;
 		if (parse->map[row][col] != '1')
-			print_error(parse, MAP_WALL);;
+			print_error(parse, MAP_WALL);
+		while (parse->map[row][col] != '.')
+		{
+			if (parse->map[row - 1][col - 1] != '1')
+				print_error(parse, MAP_WALL);
+			row++;
+		}
 		check_top_left_angle(parse, row, col);
 		check_top_right_angle(parse, row, col);
 		row = parse->nb_lines - 1;
