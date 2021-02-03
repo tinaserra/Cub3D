@@ -10,11 +10,13 @@ Supprimer tout
 make fclean
 ```
 
-## TO DO ‼️
+### TO DO ‼️
 
-# Le parsing
+#### Le parsing
 - [ ] Les textures : recup le path, check s'il est good.
 - [ ] Les sprites : recuperer la texture et garder sa position.
+- [ ] Erreurs de map non fermée
+- [ ] Tester toutes les maps !
 
 ## INTRODUCTION 🤓
 
