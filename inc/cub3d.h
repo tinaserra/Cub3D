@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 11:02:13 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:26:48 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,6 @@ int		start_mlx(t_env *env);
 ** RAY_UTILS
 */
 
-void	put_px_to_img(t_image *img, int x, int y, int color);
 void	screen_size(t_env *env);
 int		ft_key_release(int key, t_env *env);
 int		ft_key_press(int key, t_env *env);
@@ -302,6 +301,14 @@ void	go_straight(t_env *env);
 void	go_back(t_env *env);
 void	go_left(t_env *env);
 void	go_right(t_env *env);
+
+/*
+** RAY_DRAW
+*/
+
+// int		ret_color(t_env *env, int alpha, int red, int green, int blue);
+// void	put_px_to_img(t_image *img, int x, int y, int color);
+void	draw_column(t_env *env, int coord_x);
 
 /*
 ** ERROR
