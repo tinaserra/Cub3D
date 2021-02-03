@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 11:26:51 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:55:16 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_px_to_img(t_image *img, int x, int y, int color)
 {
-	img->data[img->size_line / 4 * y + x] = color;
+	img->data[y * (img->size_line / 4) + x] = color;
 }
 
 /*
@@ -47,31 +47,59 @@ int		ret_color(t_env *env, int alpha, int red, int green, int blue)
 
 void	draw_column(t_env *env, int coord_x)
 {
-	// dessine les pixels de la bande comme une ligne verticale
-	int color; // couleur
-	int y = 0;
-	// dessine le plafond
-	while (y < env->drawStart)
+	int y;
+	int color;
+
+	y = -1;
+	while (++y < env->parse.resy)
 	{
-		color = ret_color(env, 0, env->parse.col.red_c, env->parse.col.green_c, env->parse.col.blue_c);
-		put_px_to_img(&env->img, coord_x, y, color);
-		y++;
-	}
-	// dessine le mur
-	while (y <= env->drawEnd)
-	{
-		color = ret_color(env, 0, 255, 167, 95);
-		// donne aux côtés x et y une luminosité différente
-		if (env->side == 1)
-			color = color / 2;
-		put_px_to_img(&env->img, coord_x, y, color);
-		y++;
-	}
-	// dessine le sol
-	while (y < env->parse.resy)
-	{
-		color = ret_color(env, 0, env->parse.col.red_f, env->parse.col.green_f, env->parse.col.blue_f);
-		put_px_to_img(&env->img, coord_x, y, color);
-		y++;
+		// dessine le mur
+		if (y > env->drawStart && y <= env->drawEnd)
+		{
+			color = ret_color(env, 0, 255, 167, 95);
+			put_px_to_img(&env->img, coord_x, y, color);
+		}
+		// dessine le plafond
+		else if (y < env->parse.resy / 2)
+		{
+			color = ret_color(env, 0, env->parse.col.red_c, env->parse.col.green_c, env->parse.col.blue_c);
+			put_px_to_img(&env->img, coord_x, y, color);
+		}
+		else
+		{
+			color = ret_color(env, 0, env->parse.col.red_f, env->parse.col.green_f, env->parse.col.blue_f);
+			put_px_to_img(&env->img, coord_x, y, color);
+		}
 	}
 }
+
+// void	draw_column(t_env *env, int coord_x)
+// {
+// 	// dessine les pixels de la bande comme une ligne verticale
+// 	int color; // couleur
+// 	int y = 0;
+// 	// dessine le plafond
+// 	while (y < env->drawStart)
+// 	{
+// 		color = ret_color(env, 0, env->parse.col.red_c, env->parse.col.green_c, env->parse.col.blue_c);
+// 		put_px_to_img(&env->img, coord_x, y, color);
+// 		y++;
+// 	}
+// 	// dessine le mur
+// 	while (y <= env->drawEnd)
+// 	{
+// 		color = ret_color(env, 0, 255, 167, 95);
+// 		// donne aux côtés x et y une luminosité différente
+// 		if (env->side == 1)
+// 			color = color / 2;
+// 		put_px_to_img(&env->img, coord_x, y, color);
+// 		y++;
+// 	}
+// 	// dessine le sol
+// 	while (y < env->parse.resy)
+// 	{
+// 		color = ret_color(env, 0, env->parse.col.red_f, env->parse.col.green_f, env->parse.col.blue_f);
+// 		put_px_to_img(&env->img, coord_x, y, color);
+// 		y++;
+// 	}
+// }

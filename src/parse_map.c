@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 14:58:59 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 16:06:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 		if (parse->player.orient_start == 'o')
 		{
 			parse->player.orient_start = c;
-			parse->player.px = i;
-			parse->player.py = j;
+			parse->player.px = i + 0.5; // se positioner au centre de la case
+			parse->player.py = j + 0.5;
 			if (c == 'N')
 				parse->player.dirX = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
 			if (c == 'E')
@@ -93,30 +93,30 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 
 int		dup_map(char *str, t_parsing *parse)
 {
-	static int	i = 0;
-	int			j;
+	static int	y = 0;
+	int			x;
 
-	j = 0;
-	parse->map[i] = NULL;
-	if (!(parse->map[i] = malloc(sizeof(char) * parse->len_line + 1)))
+	x = 0;
+	parse->map[y] = NULL;
+	if (!(parse->map[y] = malloc(sizeof(char) * parse->len_line + 1)))
 		print_error(parse, MALLOC_FAILED);
-	while (str[j] != '\0')
+	while (str[x] != '\0')
 	{
-		if (player_position(parse, str[j], i, j) == 0)
-			parse->map[i][j] = '0';
-		else if (str[j] == ' ')
-			parse->map[i][j] = '.'; // remplace des espaces par des 1 !
+		if (player_position(parse, str[x], y, x) == 0)
+			parse->map[y][x] = '0';
+		else if (str[x] == ' ')
+			parse->map[y][x] = '.'; // remplace des espaces par des 1 !
 		else
-			parse->map[i][j] = str[j];
-		j++;
+			parse->map[y][x] = str[x];
+		x++;
 	}
-	while (j < parse->len_line)
+	while (x < parse->len_line)
 	{
-		parse->map[i][j] = '.';
-		j++;
+		parse->map[y][x] = '.';
+		x++;
 	}
-	parse->map[i][j] = '\0';
-	i++;
+	parse->map[y][x] = '\0';
+	y++;
 	return (0);
 }
 

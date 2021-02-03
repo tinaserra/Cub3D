@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 14:58:06 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 16:15:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 typedef struct	s_player
 {
 	char		orient_start;
-	int			px;
-	int			py;
+	double		px;
+	double		py;
 	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
 	double		dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 }				t_player;
@@ -114,8 +114,6 @@ typedef struct	s_env
 	int			width_x; // learn_mlx
 
 	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
-	double		posX;  // position de départ du joueur x
-	double		posY; // position de départ du joueur y
 	// la version 2D raycaster du plan de la caméra
 	double		planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 	double		planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
@@ -126,8 +124,8 @@ typedef struct	s_env
 	double		rayDirY; // la direction du rayon y
 
 	// dans quel carré de la carte nous nous trouvons
-	int			mapX;
-	int			mapY;
+	int		mapX;
+	int		mapY;
 
 	// longueur du rayon de la position actuelle au cote x ou y suivant
 	double		sideDistX; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
@@ -148,7 +146,6 @@ typedef struct	s_env
 	int			lineHeight; // hauteur de la ligne du mur a dessiner
 	int			drawStart;
 	int			drawEnd;
-	double		frameTime;
 	double		moveSpeed;
 	double		rotSpeed;
 
@@ -203,7 +200,7 @@ typedef union		u_color
 
 void	init_parse(t_parsing *parse);
 void	init_env(t_env *env);
-
+void	init_start_mlx(t_env *env);
 
 /*
 ** PARSE_START

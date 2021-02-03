@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 15:04:01 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 16:13:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,11 @@ void	calc_column(t_env *env)
 		env->drawEnd = env->parse.resy - 1;
 }
 
-// void	timing(t_env *env)
-// {
-// 	// timing pour l'entrée et le compteur FPS
-// 	env->oldTime = env->time;
-// 	env->time = getTicks();
-// 	env->frameTime = (env->time - env->oldTime) / 1000.0; // frameTime est le temps que cette image a pris, en secondes
-// 	print(1.0 / env->frameTime); // Compteur FPS
-// 	redraw();
-// 	cls();
-// 	// modificateurs de vitesse
-// 	env->moveSpeed = env->frameTime * 5.0; // la valeur constante est en carrés / seconde
-// 	env->rotSpeed = env->frameTime * 3.0; // la valeur constante est en radians / seconde
-// }
-
 int	game_update(t_env *env)
 {
+	env->moveSpeed = 0.1; // la valeur constante est en carrés / seconde
+	env->rotSpeed =  0.033 * 1.8; // la valeur constante est en radians / seconde
+
 	if (env->keyboard[KEY_ESCAPE])
 		ft_quit(env);
 	if (env->keyboard[KEY_W]) // avance si pas de mur devant toi
@@ -111,7 +100,7 @@ int	game_update(t_env *env)
 		go_right(env);
 	if (env->keyboard[KEY_A]) // tourner vers la gauche
 		go_left(env);
-	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
+	// ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	env->x = 0;
 	while (env->x < env->parse.resx)
 	{
@@ -122,8 +111,11 @@ int	game_update(t_env *env)
 		draw_column(env, env->x);
 		env->x++;
 	}
-	// timing(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
+	mlx_destroy_image(env->mlx, env->img.image);
+	if (!(env->img.image = mlx_new_image(env->mlx, env->parse.resx, env->parse.resy)))
+		print_error(&env->parse, NEW_IMAGE);
+	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	return (0);
 }
 

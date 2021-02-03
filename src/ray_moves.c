@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:32 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 10:59:55 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 16:14:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 void	go_straight(t_env *env)
 {
-	if (env->parse.map[(int)(env->parse.player.px + env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
-		env->parse.player.px += env->parse.player.dirX /** env->moveSpeed*/;
-	if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py + env->parse.player.dirY /** env->moveSpeed)*/)] == '0')
-		env->parse.player.py += env->parse.player.dirY /** env->moveSpeed*/;
+	if (env->parse.map[(int)(env->parse.player.px + env->parse.player.dirX * env->moveSpeed)][(int)(env->parse.player.py)] == '0')
+		env->parse.player.px += env->parse.player.dirX * env->moveSpeed;
+		// env->parse.player.py += env->parse.player.dirY * env->moveSpeed;
+	if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py + env->parse.player.dirY * env->moveSpeed)] == '0')
+		env->parse.player.py += env->parse.player.dirY * env->moveSpeed;
+		// env->parse.player.px += env->parse.player.dirX * env->moveSpeed;
 }
 
 void	go_back(t_env *env)
 {
-	if (env->parse.map[(int)(env->parse.player.px - env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
-		env->parse.player.px -= env->parse.player.dirX /** env->moveSpeed*/;
-	if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py - env->parse.player.dirY /** env->moveSpeed*/)] == '0')
-		env->parse.player.py -= env->parse.player.dirY /** env->moveSpeed*/;
+	if (env->parse.map[(int)(env->parse.player.px - env->parse.player.dirX * env->moveSpeed)][(int)(env->parse.player.py)] == '0')
+		env->parse.player.px -= env->parse.player.dirX * env->moveSpeed;
+		// env->parse.player.py -= env->parse.player.dirY * env->moveSpeed;
+	if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py - env->parse.player.dirY * env->moveSpeed)] == '0')
+		env->parse.player.py -= env->parse.player.dirY * env->moveSpeed;
+		// env->parse.player.px -= env->parse.player.dirX * env->moveSpeed;
 }
 
 void	go_left(t_env *env)
