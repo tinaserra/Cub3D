@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 10:39:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:03:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_parse(t_parsing *parse)
 	.col.green_c = -1,
 	.col.blue_c = -1,
 	.map = NULL,
-	.player.px = 'o',
+	.player.orient_start = 'o',
 	.player.dirX = 0,
 	.player.dirY = 0,
 	};
@@ -57,6 +57,21 @@ void	init_parse(t_parsing *parse)
 ** printf("G = %d\n", parse->col.green_c);
 ** printf("B = %d\n", parse->col.blue_c);
 */
+
+void	init_start_mlx(t_env *env)
+{
+	// env->planeX = 0;
+	// env->time = 0; // heure de la trame courante
+	// env->oldTime = 0; // heure de l'image précédente
+	if (env->parse.player.orient_start == 'N')
+		env->planeY = 0.66;
+	if (env->parse.player.orient_start == 'S')
+		env->planeY = -0.66;
+	if (env->parse.player.orient_start == 'E')
+		env->planeX = 0.66;
+	if (env->parse.player.orient_start == 'W')
+		env->planeX = -0.66;
+}
 
 void	init_env(t_env *env)
 {

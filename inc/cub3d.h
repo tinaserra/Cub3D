@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 13:08:18 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:58:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 typedef struct	s_player
 {
-	// char		orient_start;
+	char		orient_start;
 	int			px;
 	int			py;
 	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)

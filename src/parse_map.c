@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 14:32:34 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:58:59 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 	// printf("str[j] = %c\n", c);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		if (parse->player.px == 'o')
+		if (parse->player.orient_start == 'o')
 		{
+			parse->player.orient_start = c;
 			parse->player.px = i;
 			parse->player.py = j;
 			if (c == 'N')

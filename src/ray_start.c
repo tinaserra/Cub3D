@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 14:34:36 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:04:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,7 @@ int	game_update(t_env *env)
 
 int	start_mlx(t_env *env)
 {
-	// env->planeX = 0;
-	env->planeY = 0.66; // la version 2D raycaster du plan de la caméra -> init_env()
-	// env->time = 0; // heure de la trame courante
-	// env->oldTime = 0; // heure de l'image précédente
-
+	init_start_mlx(env);
 	if ((env->mlx = mlx_init()) == NULL)
 		print_error(&env->parse, MLX_INIT);
 	// screen_size(env);
