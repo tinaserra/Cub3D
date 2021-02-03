@@ -6,42 +6,11 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/02 13:00:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 10:39:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
-// void	init_env(t_env *env)
-// {
-// 	*env = (t_env) {
-// 	// calculer la position et la direction
-// 	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
-// 	.rayDirX = env->parse.player.dirX + env->planeX * env->cameraX,
-// 	.rayDirY = env->parse.player.dirY + env->planeY * env->cameraX,
-// 	// dans quel carré de la carte nous nous trouvons
-// 	.mapX = (int)env->parse.player.px,
-// 	.mapY = (int)env->parse.player.py,
-// 	// longueur du rayon d'un côté x ou y au coté x ou y
-// 	.deltaDistX = fabs (1 / env->rayDirX), //= sqrt(1 + (env->rayDirY * env->rayDirY) / (env->rayDirX * env->rayDirX));
-// 	.deltaDistY = fabs (1 / env->rayDirY), //= sqrt(1 + (env->rayDirX * env->rayDirX) / (env->rayDirY * env->rayDirY));
-// 	.hit = 0, // y a-t-il eu un mur touché?
-// 	};
-// 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
-// }
-
-void	init_env(t_env *env)
-{
-	env->cameraX = 2 * env->x / (double)env->parse.resx - 1;
-	env->rayDirX = env->parse.player.dirX + env->planeX * env->cameraX;
-	env->rayDirY = env->parse.player.dirY + env->planeY * env->cameraX;
-	env->mapX = (int)env->parse.player.px;
-	env->mapY = (int)env->parse.player.py;
-	env->deltaDistX = fabs (1 / env->rayDirX);
-	env->deltaDistY = fabs (1 / env->rayDirY);
-	env->hit = 0;
-}
 
 void	calc_sidedist(t_env *env)
 {

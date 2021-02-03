@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/02 12:50:10 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 10:40:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,7 @@ typedef enum	e_error{
 */
 
 void	init_parse(t_parsing *parse);
+void	init_env(t_env *env);
 
 
 /*
