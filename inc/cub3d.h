@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 11:26:48 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:08:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "keycode_mac.h"
+# include "error.h"
 
 /* LIBRARIES ----------- */
 
@@ -194,34 +195,6 @@ typedef union		u_color
 // La nuance, et elle est de taille, est qu’une union est un agrégat qui ne peut contenir qu'un seul de ses membres à la fois.
 // Autrement dit, une union peut accueillir la valeur de n’importe lequel de ses membres, mais un seul à la fois.
 
-/* Errors */
-
-typedef enum	e_error{
-	FILE_NAME,
-	CUB_DIR,
-	CUB_INVALIDE,
-	RESOLUTION,
-	RESOLUTION_END,
-	F_COLOR,
-	F_COLOR_END,
-	C_COLOR,
-	C_COLOR_END,
-	MORE_NUM,
-	DOUBLE_ELEMENT,
-	MAP_WRONG_CHAR,
-	MAP_CHAR_AFTER,
-	NO_MAP,
-	MULTI_PLAYER,
-	NO_PLAYER,
-	MAP_WALL,
-	MAP_INCOMPLETE,
-	MLX_INIT,
-	NEW_WINDOW,
-	NEW_IMAGE,
-
-	MALLOC_FAILED
-}				t_error;
-
 /* PROTOTYPES ------------ */
 
 /*
@@ -319,7 +292,7 @@ void	file_error(t_parsing *parse, int error);
 void	element_error(t_parsing *parse, int error);
 void	map_error(t_parsing *parse, int error);
 void	mlx_error(t_parsing *parse, int error);
-void	put_px_to_img(t_image *img, int x, int y, int color);
+int		print_error(t_parsing *parse, int error);
 
 /*
 ** DEBUG

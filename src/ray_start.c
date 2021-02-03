@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 11:24:48 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:04:48 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,15 @@ int	start_mlx(t_env *env)
 	// env->oldTime = 0; // heure de l'image précédente
 
 	if ((env->mlx = mlx_init()) == NULL)
-		mlx_error(&env->parse, MLX_INIT);
+		print_error(&env->parse, MLX_INIT);
+		// mlx_error(&env->parse, MLX_INIT);
 	// screen_size(env);
 	if (!(env->window = mlx_new_window(env->mlx, env->parse.resx, env->parse.resy, "Mon super titre")))
-		mlx_error(&env->parse, NEW_WINDOW);
+		print_error(&env->parse, NEW_WINDOW);
+		// mlx_error(&env->parse, NEW_WINDOW);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->parse.resx, env->parse.resy)))
-		mlx_error(&env->parse, NEW_IMAGE);
+		print_error(&env->parse, NEW_IMAGE);
+		// mlx_error(&env->parse, NEW_IMAGE);
 	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);

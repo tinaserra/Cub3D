@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/02 12:51:32 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 12:54:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ void	wall_in_col(t_parsing *parse)
 		while (parse->map[row][col] == '.')
 			row++;
 		if (parse->map[row][col] != '1')
-			map_error(parse, MAP_WALL);
+			print_error(parse, MAP_WALL);
+			// map_error(parse, MAP_WALL);
 		check_top_left_angle(parse, row, col);
 		check_top_right_angle(parse, row, col);
 		row = parse->nb_lines - 1;
 		while (parse->map[row][col] == '.')
 			row--;
 		if (parse->map[row][col] != '1')
-			map_error(parse, MAP_WALL);
+			print_error(parse, MAP_WALL);
+			// map_error(parse, MAP_WALL);
 		check_bot_left_angle(parse, row, col);
 		check_bot_right_angle(parse, row, col);
 		col++;
@@ -50,14 +52,16 @@ void	wall_in_row(t_parsing *parse)
 		while (parse->map[row][col] == '.')
 			col++;
 		if (parse->map[row][col] != '1')
-			map_error(parse, MAP_WALL);
+			print_error(parse, MAP_WALL);
+			// map_error(parse, MAP_WALL);
 		check_top_left_angle(parse, row, col);
 		check_bot_left_angle(parse, row, col);
 		col = parse->len_line - 1;
 		while (parse->map[row][col] == '.')
 			col--;
 		if (parse->map[row][col] != '1')
-			map_error(parse, MAP_WALL);
+			print_error(parse, MAP_WALL);
+			// map_error(parse, MAP_WALL);
 		check_top_right_angle(parse, row, col);
 		check_bot_right_angle(parse, row, col);
 		row++;
@@ -84,7 +88,8 @@ int		player_position(t_parsing *parse, char c, int i, int j) // Static
 			return (0);
 		}
 		else
-			map_error(parse, MULTI_PLAYER);
+			print_error(parse, MULTI_PLAYER);
+			// map_error(parse, MULTI_PLAYER);
 	}
 	// printf("Player position = %c\n\n", parse->player.orient_start);
 	return (-1);
@@ -98,7 +103,8 @@ int		dup_map(char *str, t_parsing *parse)
 	j = 0;
 	parse->map[i] = NULL;
 	if (!(parse->map[i] = malloc(sizeof(char) * parse->len_line + 1)))
-		free_error(parse, MALLOC_FAILED); // A MODIF
+		print_error(parse, MALLOC_FAILED);
+		// free_error(parse, MALLOC_FAILED); // A MODIF
 	while (str[j] != '\0')
 	{
 		if (player_position(parse, str[j], i, j) == 0)
@@ -129,7 +135,8 @@ int		is_char_map(char *str, t_parsing *parse)
 			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
 			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
 			{
-					map_error(parse, MAP_WRONG_CHAR);
+				print_error(parse, MAP_WRONG_CHAR);
+					// map_error(parse, MAP_WRONG_CHAR);
 			}
 		parse->i++;
 	}

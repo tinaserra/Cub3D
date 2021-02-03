@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/02 12:52:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 12:57:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		get_map(char *file, t_parsing *parse)
 	str = NULL;
 	fd = open(file, O_RDONLY);
 	if (!(parse->map = malloc(sizeof(char*) * parse->nb_lines)))
-		free_error(parse, MALLOC_FAILED);
+		print_error(parse, MALLOC_FAILED);
+		// free_error(parse, MALLOC_FAILED);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
@@ -49,7 +50,8 @@ int		get_map(char *file, t_parsing *parse)
 	}
 	close(fd);
 	if (parse->player.px == 'o')
-		map_error(parse, NO_PLAYER);
+		print_error(parse, NO_PLAYER);
+		// map_error(parse, NO_PLAYER);
 	wall_in_row(parse);
 	wall_in_col(parse);
 	return (0);
@@ -75,7 +77,8 @@ void	get_size_map(char *str, t_parsing *parse)
 			parse->len_line = len;
 	}
 	if (parse->len_line == 1) // la map fait une ligne parse->nb_lines == 1
-			map_error(parse, MAP_INCOMPLETE);
+		print_error(parse, MAP_INCOMPLETE);
+			// map_error(parse, MAP_INCOMPLETE);
 }
 
 int		get_elements(char *str, t_parsing *parse)
@@ -117,9 +120,11 @@ void	parsing(char *file, t_env *env)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
-		file_error(&env->parse, CUB_DIR);
+		print_error(&env->parse, CUB_DIR);
+		// file_error(&env->parse, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		file_error(&env->parse, CUB_INVALIDE);
+		print_error(&env->parse, CUB_INVALIDE);
+		// file_error(&env->parse, CUB_INVALIDE);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
@@ -132,7 +137,8 @@ void	parsing(char *file, t_env *env)
 	}
 	close(fd);
 	if (env->parse.nb_lines == -1)
-		map_error(&env->parse, NO_MAP);
+		print_error(&env->parse, NO_MAP);
+		// map_error(&env->parse, NO_MAP);
 	get_map(file, &env->parse);
 	debug_parsing(&env->parse);
 	// debug_print_map(&env->parse);

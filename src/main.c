@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/01/21 16:21:23 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:03:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		check_file_name(char *file, t_parsing *parse)
 		i++;
 	if (file[0] == '.' || (file[i - 4] != '.' && file[i - 3] != 'c'
 		&& file[i - 2] != 'u' && file[i - 1] != 'b'))
-		file_error(parse, FILE_NAME);
+		print_error(parse, FILE_NAME);
+		// file_error(parse, FILE_NAME);
 	return (0);
 }
 
