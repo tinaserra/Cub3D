@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 10:39:38 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:21:31 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,14 @@ void	algo_dda(t_env *env)
 	}
 }
 
-void	calc_player_to_wall(t_env *env)
+void	calc_column(t_env *env)
 {
 	// Calculer la distance projetée sur la direction de la caméra (la distance euclidienne donnera un effet fisheye!)
 	if (env->side == 0)
 		env->perpWallDist = (env->mapX - env->parse.player.px + (1 - env->stepX) / 2) / env->rayDirX;
 	else
 		env->perpWallDist = (env->mapY - env->parse.player.py + (1 - env->stepY) / 2) / env->rayDirY;
-}
 
-void	calc_column(t_env *env)
-{
 	// Calcule la hauteur de la colonne à dessiner sur l'écran
 	env->lineHeight = (int)(env->parse.resy / env->perpWallDist); // env->parse.resy -> h = hauteur fenetre !
 
@@ -132,89 +129,54 @@ void	draw_column(t_env *env, int coord_x)
 	}
 }
 
+// void	timing(t_env *env)
+// {
+// 	// timing pour l'entrée et le compteur FPS
+// 	env->oldTime = env->time;
+// 	env->time = getTicks();
+// 	env->frameTime = (env->time - env->oldTime) / 1000.0; // frameTime est le temps que cette image a pris, en secondes
+// 	print(1.0 / env->frameTime); // Compteur FPS
+// 	redraw();
+// 	cls();
+// 	// modificateurs de vitesse
+// 	env->moveSpeed = env->frameTime * 5.0; // la valeur constante est en carrés / seconde
+// 	env->rotSpeed = env->frameTime * 3.0; // la valeur constante est en radians / seconde
+// }
+
 int	game_update(t_env *env)
 {
-	env->x = 0;
+	if (env->keyboard[KEY_ESCAPE])
+		ft_quit(env);
+	if (env->keyboard[KEY_W]) // avance si pas de mur devant toi
+		go_straight(env);
+	if (env->keyboard[KEY_S]) // recule si aucun mur derrière vous
+		go_back(env);
+	if (env->keyboard[KEY_D]) // tourner vers la droite
+		go_right(env);
+	if (env->keyboard[KEY_A]) // tourner vers la gauche
+		go_left(env);
 	ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
+	env->x = 0;
 	while (env->x < env->parse.resx)
 	{
 		init_env(env);
 		calc_sidedist(env);
 		algo_dda(env);
-		calc_player_to_wall(env);
 		calc_column(env);
 		draw_column(env, env->x);
 		env->x++;
 	}
-
-	// timing pour l'entrée et le compteur FPS
-	// env->oldTime = env->time;
-	// env->time = getTicks();
-	// env->frameTime = (env->time - env->oldTime) / 1000.0; // frameTime est le temps que cette image a pris, en secondes
-	// print(1.0 / env->frameTime); // Compteur FPS
-	// redraw();
-	// cls();
-
-	// // modificateurs de vitesse
-	// env->moveSpeed = env->frameTime * 5.0; // la valeur constante est en carrés / seconde
-	// env->rotSpeed = env->frameTime * 3.0; // la valeur constante est en radians / seconde
-
-
-	if (env->keyboard[KEY_ESCAPE])
-		ft_quit(env);
-
-	// avance si pas de mur devant toi
-	if (env->keyboard[KEY_W]) // (keyDown(SDLK_UP))
-	{
-		if (env->parse.map[(int)(env->parse.player.px + env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
-			env->parse.player.px += env->parse.player.dirX /** env->moveSpeed*/;
-		if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py + env->parse.player.dirY /** env->moveSpeed)*/)] == '0')
-			env->parse.player.py += env->parse.player.dirY /** env->moveSpeed*/;
-	}
-	// recule si aucun mur derrière vous
-	if (env->keyboard[KEY_S]) // (keyDown(SDLK_DOWN))
-	{
-		if (env->parse.map[(int)(env->parse.player.px - env->parse.player.dirX /** env->moveSpeed*/)][(int)(env->parse.player.py)] == '0')
-			env->parse.player.px -= env->parse.player.dirX /** env->moveSpeed*/;
-		if (env->parse.map[(int)(env->parse.player.px)][(int)(env->parse.player.py - env->parse.player.dirY /** env->moveSpeed*/)] == '0')
-			env->parse.player.py -= env->parse.player.dirY /** env->moveSpeed*/;
-	}
-	// tourner vers la droite
-	if (env->keyboard[KEY_D]) // (keyDown(SDLK_RIGHT))
-	{
-		// La direction de la caméra et le plan de la caméra doivent être tournés
-		double oldDirX = env->parse.player.dirX;
-		env->parse.player.dirX = env->parse.player.dirX * cos(-env->rotSpeed) - env->parse.player.dirY * sin(-env->rotSpeed);
-		env->parse.player.dirY = oldDirX * sin(-env->rotSpeed) + env->parse.player.dirY * cos(-env->rotSpeed);
-		double oldPlaneX = env->planeX;
-		env->planeX = env->planeX * cos(-env->rotSpeed) - env->planeY * sin(-env->rotSpeed);
-		env->planeY = oldPlaneX * sin(-env->rotSpeed) + env->planeY * cos(-env->rotSpeed);
-	}
-	// tourner vers la gauche
-	if (env->keyboard[KEY_A]) // (keyDown(SDLK_LEFT))
-	{
-		// La direction de la caméra et le plan de la caméra doivent être tournés
-		double oldDirX = env->parse.player.dirX;
-		env->parse.player.dirX = env->parse.player.dirX * cos(env->rotSpeed) - env->parse.player.dirY * sin(env->rotSpeed);
-		env->parse.player.dirY = oldDirX * sin(env->rotSpeed) + env->parse.player.dirY * cos(env->rotSpeed);
-		double oldPlaneX = env->planeX;
-		env->planeX = env->planeX * cos(env->rotSpeed) - env->planeY * sin(env->rotSpeed);
-		env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
-	}
-
+	// timing(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	return (0);
 }
 
 int	start_mlx(t_env *env)
 {
-	// env->parse.player.px = env->parse.player.px; // position de départ du joueur x
-	// env->parse.player.py = env->parse.player.py; // position de départ du joueur y
-	env->planeX = 0;
-	env->planeY = 0.66; // la version 2D raycaster du plan de la caméra
-
-	env->time = 0; // heure de la trame courante
-	env->oldTime = 0; // heure de l'image précédente
+	// env->planeX = 0;
+	env->planeY = 0.66; // la version 2D raycaster du plan de la caméra -> init_env()
+	// env->time = 0; // heure de la trame courante
+	// env->oldTime = 0; // heure de l'image précédente
 
 	if ((env->mlx = mlx_init()) == NULL)
 		mlx_error(&env->parse, MLX_INIT);

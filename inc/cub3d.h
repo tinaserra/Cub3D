@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 10:40:54 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:02:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,15 @@ int		ft_key_release(int key, t_env *env);
 int		ft_key_press(int key, t_env *env);
 int		ft_quit(t_env *env);
 int		ft_convert_color(t_color color, int endian);
+
+/*
+** RAY_MOVES
+*/
+
+void	go_straight(t_env *env);
+void	go_back(t_env *env);
+void	go_left(t_env *env);
+void	go_right(t_env *env);
 
 /*
 ** ERROR
