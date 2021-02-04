@@ -6,69 +6,149 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 17:07:27 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:23:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	wall_in_col(t_parsing *parse)
-{
-	int row;
-	int col;
+//  1   1     1 // y-1
+//  1   0     1 // y
+//  1   1     1 // y + 1
+// x-1  x    x+1
 
-	col = 0;
-	while (col < parse->len_line)
+void	check_spaces(t_parsing *parse, int x, int y)
+{
+	// ligne au dessus
+	if (y != 0 && x != 0 && parse->map[y - 1][x - 1] == '.')
+		print_error(parse, MAP_WALL);
+	if (y != 0 && parse->map[y - 1][x] == '.')
+		print_error(parse, MAP_WALL);
+	if (y != 0 && x != parse->len_line && parse->map[y - 1][x + 1] == '.')
+		print_error(parse, MAP_WALL);
+
+	// ligne
+	if (x != 0 && parse->map[y][x - 1] == '.')
+		print_error(parse, MAP_WALL);
+	if (x != parse->len_line && parse->map[y][x + 1] == '.')
+		print_error(parse, MAP_WALL);
+
+	// ligne en dessous
+	if (y != parse->len_line && x != 0 && parse->map[y + 1][x - 1] == '.')
+		print_error(parse, MAP_WALL);
+	if (y != parse->len_line && parse->map[y + 1][x] == '.')
+		print_error(parse, MAP_WALL);
+	if (y != parse->len_line && x != parse->len_line
+		&& parse->map[y + 1][x + 1] == '.')
+		print_error(parse, MAP_WALL);
+}
+
+void	check_borders(t_parsing *parse)
+{
+	int x;
+	int y;
+	// first colonne & last colonne
+	y = 0;
+	x = 0;
+	while (y < parse->nb_lines)
 	{
-		row = 0;
-		while (parse->map[row][col] == '.')
-			row++;
-		if (parse->map[row][col] != '1')
+		if (parse->map[y][0] != '1' && parse->map[y][0] != '.')
 			print_error(parse, MAP_WALL);
-		while (parse->map[row][col] != '.')
+		if (parse->map[y][parse->len_line - 1] != '1' && parse->map[y][parse->len_line - 1] != '.')
+			print_error(parse, MAP_WALL);
+		y++;
+	}
+	// first line & last line
+	while (x < parse->len_line)
+	{
+		if (parse->map[0][x] != '1' && parse->map[0][x] != '.')
+			print_error(parse, MAP_WALL);
+		if (parse->map[parse->nb_lines - 1][x] != '1' && parse->map[parse->nb_lines - 1][x] != '.')
+			print_error(parse, MAP_WALL);
+		x++;
+	}
+}
+
+void	check_walls(t_parsing *parse)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (y < parse->nb_lines)
+	{
+		x = 0;
+		while (x < parse->len_line) // parse->nb_lines
 		{
-			if (parse->map[row - 1][col - 1] != '1')
-				print_error(parse, MAP_WALL);
-			row++;
+			if (parse->map[y][x] == '0' || parse->map[y][x] == '2' ||
+				parse->map[y][x] == 'N' || parse->map[y][x] == 'S' ||
+				parse->map[y][x] == 'E' || parse->map[y][x] == 'W')
+			{
+				check_spaces(parse, x, y);
+			}
+			x++;
 		}
-		check_top_left_angle(parse, row, col);
-		check_top_right_angle(parse, row, col);
-		row = parse->nb_lines - 1;
-		while (parse->map[row][col] == '.')
-			row--;
-		if (parse->map[row][col] != '1')
-			print_error(parse, MAP_WALL);
-		check_bot_left_angle(parse, row, col);
-		check_bot_right_angle(parse, row, col);
-		col++;
+		y++;
 	}
 }
 
-void	wall_in_row(t_parsing *parse)
-{
-	int row;
-	int col;
+// void	wall_in_col(t_parsing *parse)
+// {
+// 	int row;
+// 	int col;
 
-	row = 0;
-	while (row < parse->nb_lines)
-	{
-		col = 0;
-		while (parse->map[row][col] == '.')
-			col++;
-		if (parse->map[row][col] != '1')
-			print_error(parse, MAP_WALL);
-		check_top_left_angle(parse, row, col);
-		check_bot_left_angle(parse, row, col);
-		col = parse->len_line - 1;
-		while (parse->map[row][col] == '.')
-			col--;
-		if (parse->map[row][col] != '1')
-			print_error(parse, MAP_WALL);
-		check_top_right_angle(parse, row, col);
-		check_bot_right_angle(parse, row, col);
-		row++;
-	}
-}
+// 	col = 0;
+// 	while (col < parse->len_line)
+// 	{
+// 		row = 0;
+// 		while (parse->map[row][col] == '.')
+// 			row++;
+// 		if (parse->map[row][col] != '1')
+// 			print_error(parse, MAP_WALL);
+// 		// while (parse->map[row][col] != '.')
+// 		// {
+// 		// 	if (parse->map[row - 1][col - 1] != '1')
+// 		// 		print_error(parse, MAP_WALL);
+// 		// 	row++;
+// 		// }
+// 		check_top_left_angle(parse, row, col);
+// 		check_top_right_angle(parse, row, col);
+// 		row = parse->nb_lines - 1;
+// 		while (parse->map[row][col] == '.')
+// 			row--;
+// 		if (parse->map[row][col] != '1')
+// 			print_error(parse, MAP_WALL);
+// 		check_bot_left_angle(parse, row, col);
+// 		check_bot_right_angle(parse, row, col);
+// 		col++;
+// 	}
+// }
+
+// void	wall_in_row(t_parsing *parse)
+// {
+// 	int row;
+// 	int col;
+
+// 	row = 0;
+// 	while (row < parse->nb_lines)
+// 	{
+// 		col = 0;
+// 		while (parse->map[row][col] == '.')
+// 			col++;
+// 		if (parse->map[row][col] != '1')
+// 			print_error(parse, MAP_WALL);
+// 		check_top_left_angle(parse, row, col);
+// 		check_bot_left_angle(parse, row, col);
+// 		col = parse->len_line - 1;
+// 		while (parse->map[row][col] == '.')
+// 			col--;
+// 		if (parse->map[row][col] != '1')
+// 			print_error(parse, MAP_WALL);
+// 		check_top_right_angle(parse, row, col);
+// 		check_bot_right_angle(parse, row, col);
+// 		row++;
+// 	}
+// }
 
 int		player_position(t_parsing *parse, char c, int i, int j) // Static
 {
