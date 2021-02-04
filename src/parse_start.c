@@ -6,27 +6,11 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/04 11:18:21 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/04 12:29:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int		is_a_map(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '1' && str[i] != ' ' && str[i] != '0' 
-			&& str[i] != '2' && str[i] != 'N' && str[i] != 'S'
-			&& str[i] != 'E' && str[i] != 'W' && str[i])
-			return (-1);
-		i++;
-	}
-	return (0);
-}
 
 // printf("str = |%s|\n", str);
 
@@ -44,20 +28,17 @@ int		get_map(char *file, t_parsing *parse)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		parse->i = 0; // essayer d'utiliser plutot le pointeur de str et supprimer le i ??
-		while (str[parse->i] == ' ')
-		parse->i++;
-		if (str[0] != '\0' && is_a_map(str) == 0) //str[parse->i] == '1'
+		// parse->i = 0; // useless ?
+		// while (str[parse->i] == ' ')
+		// parse->i++;
+		if (str[0] != '\0' && is_a_map(str) == 0)
 			dup_map(str, parse);
 		free(str);
 	}
 	close(fd);
 	if (parse->player.px == 'o')
 		print_error(parse, NO_PLAYER);
-	// wall_in_row(parse);
-	// wall_in_col(parse);
 	check_borders(parse);
-	printf("caca\n");
 	check_walls(parse);
 	return (0);
 }
@@ -70,6 +51,8 @@ void	get_size_map(char *str, t_parsing *parse)
 	len = -1;
 	if(parse->end_map == 1)
 		check_after_map(str, parse);
+	while (str[parse->i] && str[parse->i] == ' ')
+		parse->i++;
 	if ((str[0] != '\0') && (is_char_map(str, parse) == 0)) //check que les char de la map soient good
 	{
 		// ft_putstr_fd("Cette ligne est une map\n", 1);
