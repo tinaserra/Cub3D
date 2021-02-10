@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 13:19:21 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 13:45:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,21 @@ void	calc_sidedist(t_env *env)
 	{
 		env->stepX = -1;
 		env->sideDistX = (env->parse.player.px - env->mapX) * env->deltaDistX;
-		// printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	else
 	{
 		env->stepX = 1;
 		env->sideDistX = (env->mapX + 1.0 - env->parse.player.px) * env->deltaDistX;
-		// printf("env->sideDistX = %f\n", env->sideDistX);
 	}
 	if (env->rayDirY < 0)
 	{
 		env->stepY = -1;
 		env->sideDistY = (env->parse.player.py - env->mapY) * env->deltaDistY;
-		// printf("env->sideDistY = %f\n", env->sideDistY);
 	}
 	else
 	{
 		env->stepY = 1;
 		env->sideDistY = (env->mapY + 1.0 - env->parse.player.py) * env->deltaDistY;
-		// printf("env->sideDistY = %f\n", env->sideDistY);
 	}
 }
 

@@ -1,10 +1,12 @@
 # Cub3D
+
 A 3D game using raycasting.
 
 Start
 ```
 make && ./Cub3D description.cub
 ```
+
 Supprimer tout
 ```
 make fclean
@@ -13,10 +15,14 @@ make fclean
 ### TO DO ‼️
 
 #### Le parsing
+
+- [x] Le player : sa position, s'il existe, s'il est multiple
+- [x] La resolution, les couleurs
 - [ ] Les textures : recup le path, check s'il est good.
 - [ ] Les sprites : recuperer la texture et garder sa position.
-- [ ] Erreurs de map non fermée
+- [x] Les murs : map non fermée, espaces
 - [ ] Tester toutes les maps !
+- [ ] 
 
 ## INTRODUCTION 🤓
 

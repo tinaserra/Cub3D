@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/04 12:29:00 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:21:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ int		get_elements(char *str, t_parsing *parse)
 	else if (str[parse->i] == 'C')
 		get_c_color(str, parse);
 	else if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
-		ft_putstr_fd("c'est texture (NO)\n", 1);
+		parse->path_no = get_texture(str, 2, parse);
 	else if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
-		ft_putstr_fd("c'est texture (WE)\n", 1);
+		parse->path_we = get_texture(str, 2, parse);
 	else if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
-		ft_putstr_fd("c'est texture (SO)\n", 1);
+		parse->path_so = get_texture(str, 2, parse);
 	else if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
-		ft_putstr_fd("c'est texture (EA)\n", 1);
+		parse->path_ea = get_texture(str, 2, parse);
 	else if (str[parse->i] == 'S')
-		ft_putstr_fd("c'est S sprite\n", 1);
+		parse->path_s = get_texture(str, 1, parse);
 	else
 	{
 		// ft_putstr_fd("cette ligne n'est pas un element\n", 1);

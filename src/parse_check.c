@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:01:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 13:14:47 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 14:09:53 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int		check_element(t_parsing *parse)
 {
 	if (parse->resx == -1)
 		print_error(parse, RESOLUTION);
-		// element_error(parse, RESOLUTION);
-	// if (parse->no == -1)
+	// if (parse->path_no == NULL)
 	// 	ft_putstr_fd("Error :\n[NO] is wrong or not specified\n", 1);
 	// if (parse->ea == -1)
 	// 	ft_putstr_fd("Error :\n[EA] is wrong or not specified\n", 1);

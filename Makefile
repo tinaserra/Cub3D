@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/02/10 13:29:36 by vserra           ###   ########.fr        #
+#    Updated: 2021/02/10 14:13:47 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC =	main.c \
 		init_struct.c \
 		parse_start.c \
 		parse_int.c \
+		parse_texture.c \
 		parse_map.c \
 		parse_check.c \
 		parse_wall.c \

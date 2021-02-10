@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:11:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 13:10:31 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:33:53 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ typedef enum	e_error{
 	C_COLOR_END,
 	MORE_NUM,
 	DOUBLE_ELEMENT,
+	DOUBLE_NO,
+	DOUBLE_WE,
+	DOUBLE_SO,
+	DOUBLE_EA,
+	DOUBLE_S,
 	MAP_WRONG_CHAR,
 	MAP_CHAR_AFTER,
 	NO_MAP,
@@ -55,6 +60,11 @@ static char g_str_error[NUMBER][256] =
 	[C_COLOR_END]= "Error :\n[C] Wrong caracter\n",
 	[MORE_NUM] = "Error :\n[INT] More numbers than expected\n",
 	[DOUBLE_ELEMENT] = "Error :\n[ELEMENT] in double\n",
+	[DOUBLE_NO] = "Error :\n[NO] in double\n",
+	[DOUBLE_WE] = "Error :\n[WE] in double\n",
+	[DOUBLE_SO] = "Error :\n[SO] in double\n",
+	[DOUBLE_EA] = "Error :\n[EA] in double\n",
+	[DOUBLE_S] = "Error :\n[S] in double\n",
 	[MAP_WRONG_CHAR] = "Error :\n[MAP] Wrong char in map\n",
 	[MAP_CHAR_AFTER] = "Error :\n[MAP] Wrong caracter after the map\n",
 	[NO_MAP] = "Error :\n[MAP] No map in file\n",
