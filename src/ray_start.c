@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 16:13:26 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 13:19:21 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,7 @@ int	game_update(t_env *env)
 {
 	env->moveSpeed = 0.1; // la valeur constante est en carrés / seconde
 	env->rotSpeed =  0.033 * 1.8; // la valeur constante est en radians / seconde
-
-	if (env->keyboard[KEY_ESCAPE])
-		ft_quit(env);
-	if (env->keyboard[KEY_W]) // avance si pas de mur devant toi
-		go_straight(env);
-	if (env->keyboard[KEY_S]) // recule si aucun mur derrière vous
-		go_back(env);
-	if (env->keyboard[KEY_D]) // tourner vers la droite
-		go_right(env);
-	if (env->keyboard[KEY_A]) // tourner vers la gauche
-		go_left(env);
+	void	keys_control(t_env *env);
 	// ft_bzero(env->img.data, env->img.size_line * env->parse.resy);
 	env->x = 0;
 	while (env->x < env->parse.resx)

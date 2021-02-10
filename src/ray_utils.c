@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 11:26:34 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 13:29:10 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ int	ft_convert_color(t_color color, int endian)
 		color.bgra[BGRA_BLUE] = temp.argb[ARGB_BLUE];
 	}
 	return (color.all);
-}
-
-int ft_quit(t_env *env)
-{
-	mlx_destroy_image(env->mlx, env->img.image);
-	mlx_destroy_window(env->mlx, env->window);
-	exit(0);
 }
 
 int	ft_key_press(int key, t_env *env)

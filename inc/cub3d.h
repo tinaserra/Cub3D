@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/04 12:19:15 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 13:29:08 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,17 +258,20 @@ int		start_mlx(t_env *env);
 void	screen_size(t_env *env);
 int		ft_key_release(int key, t_env *env);
 int		ft_key_press(int key, t_env *env);
-int		ft_quit(t_env *env);
 int		ft_convert_color(t_color color, int endian);
 
 /*
-** RAY_MOVES
+** RAY_MOVES 1 & 2
 */
 
+int		ft_quit(t_env *env);
 void	go_straight(t_env *env);
 void	go_back(t_env *env);
 void	go_left(t_env *env);
 void	go_right(t_env *env);
+// void	turn_left(t_env *env);
+// void	turn_right(t_env *env);
+void	keys_control(t_env *env);
 
 /*
 ** RAY_DRAW
@@ -282,11 +285,6 @@ void	draw_column(t_env *env, int coord_x);
 ** ERROR
 */
 
-void	free_error(t_parsing *parse, int error);
-void	file_error(t_parsing *parse, int error);
-void	element_error(t_parsing *parse, int error);
-void	map_error(t_parsing *parse, int error);
-void	mlx_error(t_parsing *parse, int error);
 int		print_error(t_parsing *parse, int error);
 
 /*
