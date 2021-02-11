@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 13:15:17 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:52:31 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		bb_atoi(char *str, t_parsing *parse)
 void	get_c_color(char* str, t_parsing *parse)
 {
 	if (parse->col.red_c != -1) // Check le double element C
-		print_error(parse, DOUBLE_ELEMENT);
+		print_error(parse, DOUBLE_COLOR);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -71,7 +71,7 @@ void	get_c_color(char* str, t_parsing *parse)
 void	get_f_color(char* str, t_parsing *parse)
 {
 	if (parse->col.red_f != -1) // Check le double element F
-		print_error(parse, DOUBLE_ELEMENT);
+		print_error(parse, DOUBLE_COLOR);
 	if (str[parse->i])
 	{
 		parse->i++;
@@ -101,7 +101,7 @@ void	get_f_color(char* str, t_parsing *parse)
 void	get_resolution(char *str, t_parsing *parse)
 {
 	if (parse->resx != -1) // Check le double element R
-		print_error(parse, DOUBLE_ELEMENT);
+		print_error(parse, DOUBLE_RESOLUTION);
 	if (str[parse->i])
 	{
 		parse->i++;

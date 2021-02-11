@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 17:19:33 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:55:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void	init_start_mlx(t_env *env);
 ** PARSE_START
 */
 
-char	*get_texture(char *str, int i, t_parsing *parse);
+char	*get_path(char *str, int i, t_parsing *parse);
 void	parsing(char *file, t_env *env);
 // void	get_elements(char *str, t_parsing *parse);
 // void	get_size_map(char *str, t_parsing *parse);

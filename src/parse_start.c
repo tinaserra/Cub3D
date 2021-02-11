@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 17:21:00 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/10 18:00:44 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ int		get_elements(char *str, t_parsing *parse)
 	else if (str[parse->i] == 'C')
 		get_c_color(str, parse);
 	else if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
-		parse->path_no = get_texture(str, 2, parse);
+		parse->path_no = get_path(str, 2, parse);
 	else if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
-		parse->path_we = get_texture(str, 2, parse);
+		parse->path_we = get_path(str, 2, parse);
 	else if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
-		parse->path_so = get_texture(str, 2, parse);
+		parse->path_so = get_path(str, 2, parse);
 	else if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
-		parse->path_ea = get_texture(str, 2, parse);
+		parse->path_ea = get_path(str, 2, parse);
 	else if (str[parse->i] == 'S')
-		parse->path_s = get_texture(str, 1, parse);
+		parse->path_s = get_path(str, 1, parse);
 	else
 	{
 		// ft_putstr_fd("cette ligne n'est pas un element\n", 1);
@@ -125,6 +125,11 @@ void	parsing(char *file, t_env *env)
 		print_error(&env->parse, NO_MAP);
 	get_map(file, &env->parse);
 	debug_parsing(&env->parse);
+	printf("path no : |%s|\n", env->parse.path_no);
+	printf("path we : |%s|\n", env->parse.path_we);
+	printf("path so : |%s|\n", env->parse.path_so);
+	printf("path ea : |%s|\n", env->parse.path_ea);
+	printf("path s : |%s|\n", env->parse.path_s);
 	// debug_print_map(&env->parse);
 	start_mlx(env);
 }
