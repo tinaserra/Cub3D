@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 17:55:55 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/16 08:39:59 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct	s_parsing
 	int			nb_lines;
 	int			len_line;
 	int			end_map;
-
 	char		*path_no;
 	char		*path_we;
 	char		*path_so;
@@ -77,9 +76,7 @@ typedef struct	s_parsing
 	int			ea;
 	int			so;
 	int			we;
-
 	char		**map;
-
 	t_player	player;
 	t_pcolor	col;
 }				t_parsing;
@@ -105,21 +102,33 @@ typedef struct	s_coord
 	int			y;
 }				t_coord;
 
+/* Textures */
+
+typedef struct	s_texture
+{
+	int			dir;
+	double		wallx;
+	int			x;
+	int			y;
+	double		step;
+	double		pos;
+}				t_texture;
+
 /* Structure mère */
 
 typedef struct	s_env
 {
+	int			height_y; // learn_mlx
+	int			width_x; // learn_mlx
+	t_coord		square_origin; // learn_mlx
+
 	void		*mlx;
 	void		*window;
 	int 		screen_width;
 	int 		screen_height;
 	char		keyboard[512];
 
-	int			height_y; // learn_mlx
-	int			width_x; // learn_mlx
-
 	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
-	// la version 2D raycaster du plan de la caméra
 	double		planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 	double		planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 	double		time; // heure de la trame courante
@@ -127,35 +136,27 @@ typedef struct	s_env
 	double		cameraX; // coordonnée x dans l'espace caméra
 	double		rayDirX; // la direction du rayon x
 	double		rayDirY; // la direction du rayon y
-
-	// dans quel carré de la carte nous nous trouvons
-	int		mapX;
-	int		mapY;
-
+	int			mapX; // coordonnee x dans quel carré de la carte nous nous trouvons
+	int			mapY; // coordonnee y dans quel carré de la carte nous nous trouvons
 	// longueur du rayon de la position actuelle au cote x ou y suivant
 	double		sideDistX; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
 	double		sideDistY; // distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-
 	// longueur du rayon d'un côté x ou y au coté x ou y
-	double		deltaDistX; // = std::abs(1 / rayDirX);
-	double		deltaDistY; // = std::abs(1 / rayDirY);
+	double		deltaDistX; // distance du rayon d'un cote x au cote x
+	double		deltaDistY; // distance du rayon d'un cote y au cote y
 	double		perpWallDist; // distance du joueur au mur
-
 	// dans quelle direction avancer dans la direction x ou y (+1 ou -1)
 	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
 	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-
 	int			hit; // y a-t-il eu un mur touché?
 	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-
 	int			lineHeight; // hauteur de la ligne du mur a dessiner
 	int			drawStart;
 	int			drawEnd;
 	double		moveSpeed;
 	double		rotSpeed;
 
-	t_coord		square_origin;
-
+	t_texture	tex;
 	t_image		img;
 	t_parsing	parse;
 }				t_env;
