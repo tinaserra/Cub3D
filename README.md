@@ -18,11 +18,17 @@ make fclean
 
 - [x] Le player : sa position, s'il existe, s'il est multiple
 - [x] La resolution, les couleurs
-- [ ] Les textures : recup le path, check s'il est good.
+- [x] Les textures : recup le path, check s'il est good.
 - [ ] Les sprites : recuperer la texture et garder sa position.
 - [x] Les murs : map non fermée, espaces
 - [ ] Tester toutes les maps !
-- [ ] 
+
+#### Autre
+
+- [ ] Afficher les textures
+- [ ] Afficher les sprites
+- [ ] --save : recupeter une image en bmp
+- [ ] Leaks : free la map, les textures, les images
 
 ## INTRODUCTION 🤓
 
