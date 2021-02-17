@@ -6,64 +6,64 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/04 12:17:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:40:11 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		player_position(t_parsing *parse, char c, int i, int j) // Static
+int		player_position(t_env *env, char c, int i, int j) // Static
 {
 	// printf("str[j] = %c\n", c);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		if (parse->player.orient_start == 'o')
+		if (env->player.orient_start == 'o')
 		{
-			parse->player.orient_start = c;
-			parse->player.px = i + 0.5; // se positioner au centre de la case
-			parse->player.py = j + 0.5;
+			env->player.orient_start = c;
+			env->player.px = i + 0.5; // se positioner au centre de la case
+			env->player.py = j + 0.5;
 			if (c == 'N')
-				parse->player.dirX = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+				env->player.dirx = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
 			if (c == 'E')
-				parse->player.dirY = 1;
+				env->player.diry = 1;
 			if (c == 'S')
-				parse->player.dirX = 1;
+				env->player.dirx = 1;
 			if (c == 'W')
-				parse->player.dirY = -1;
+				env->player.diry = -1;
 			return (0);
 		}
 		else
-			print_error(parse, MULTI_PLAYER);
+			print_error(env, MULTI_PLAYER);
 	}
-	// printf("Player position = %c\n\n", parse->player.orient_start);
+	// printf("Player position = %c\n\n", env->player.orient_start);
 	return (-1);
 }
 
-int		dup_map(char *str, t_parsing *parse)
+int		dup_map(char *str, t_env *env)
 {
 	static int	y = 0;
 	int			x;
 
 	x = 0;
-	parse->map[y] = NULL;
-	if (!(parse->map[y] = malloc(sizeof(char) * parse->len_line + 1)))
-		print_error(parse, MALLOC_FAILED);
+	env->map.map[y] = NULL;
+	if (!(env->map.map[y] = malloc(sizeof(char) * env->map.len_line + 1)))
+		print_error(env, MALLOC_FAILED);
 	while (str[x] != '\0')
 	{
-		if (player_position(parse, str[x], y, x) == 0)
-			parse->map[y][x] = '0';
+		if (player_position(env, str[x], y, x) == 0)
+			env->map.map[y][x] = '0';
 		else if (str[x] == ' ')
-			parse->map[y][x] = '.'; // remplace des espaces par des 1 !
+			env->map.map[y][x] = '.'; // remplace des espaces par des 1 !
 		else
-			parse->map[y][x] = str[x];
+			env->map.map[y][x] = str[x];
 		x++;
 	}
-	while (x < parse->len_line)
+	while (x < env->map.len_line)
 	{
-		parse->map[y][x] = '.';
+		env->map.map[y][x] = '.';
 		x++;
 	}
-	parse->map[y][x] = '\0';
+	env->map.map[y][x] = '\0';
 	y++;
 	return (0);
 }
@@ -84,17 +84,17 @@ int		is_a_map(char *str)
 	return (0);
 }
 
-int		is_char_map(char *str, t_parsing *parse)
+int		is_char_map(char *str, t_env *env)
 {
-	while (str[parse->i])
+	while (str[env->i])
 	{
-		if (str[parse->i] != '1' && str[parse->i] != ' ' && str[parse->i] != '0'
-			&& str[parse->i] != '2' && str[parse->i] != 'N' && str[parse->i] != 'S'
-			&& str[parse->i] != 'E' && str[parse->i] != 'W' && str[parse->i])
+		if (str[env->i] != '1' && str[env->i] != ' ' && str[env->i] != '0'
+			&& str[env->i] != '2' && str[env->i] != 'N' && str[env->i] != 'S'
+			&& str[env->i] != 'E' && str[env->i] != 'W' && str[env->i])
 			{
-				print_error(parse, MAP_WRONG_CHAR);
+				print_error(env, MAP_WRONG_CHAR);
 			}
-		parse->i++;
+		env->i++;
 	}
 	return (0);
 }

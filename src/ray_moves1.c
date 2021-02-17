@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:14:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 13:27:26 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:44:30 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,32 @@ int ft_quit(t_env *env)
 
 void	turn_left(t_env *env)
 {
-	double oldDirX;
-	double oldPlaneX;
+	double olddirx;
+	double oldplanex;
 
-	oldDirX = env->parse.player.dirX;
-	oldPlaneX = env->planeX;
+	olddirx = env->player.dirx;
+	oldplanex = env->planex;
 
 	// La direction de la caméra et le plan de la caméra doivent être tournés
-	env->parse.player.dirX = env->parse.player.dirX * cos(env->rotSpeed) - env->parse.player.dirY * sin(env->rotSpeed);
-	env->parse.player.dirY = oldDirX * sin(env->rotSpeed) + env->parse.player.dirY * cos(env->rotSpeed);
-	env->planeX = env->planeX * cos(env->rotSpeed) - env->planeY * sin(env->rotSpeed);
-	env->planeY = oldPlaneX * sin(env->rotSpeed) + env->planeY * cos(env->rotSpeed);
+	env->player.dirx = env->player.dirx * cos(env->rotspeed) - env->player.diry * sin(env->rotspeed);
+	env->player.diry = olddirx * sin(env->rotspeed) + env->player.diry * cos(env->rotspeed);
+	env->planex = env->planex * cos(env->rotspeed) - env->planey * sin(env->rotspeed);
+	env->planey = oldplanex * sin(env->rotspeed) + env->planey * cos(env->rotspeed);
 }
 
 void	turn_right(t_env *env)
 {
-	double oldDirX;
-	double oldPlaneX;
+	double olddirx;
+	double oldplanex;
 
-	oldDirX = env->parse.player.dirX;
-	oldPlaneX = env->planeX;
+	olddirx = env->player.dirx;
+	oldplanex = env->planex;
 
 	// La direction de la caméra et le plan de la caméra doivent être tournés
-	env->parse.player.dirX = env->parse.player.dirX * cos(-env->rotSpeed) - env->parse.player.dirY * sin(-env->rotSpeed);
-	env->parse.player.dirY = oldDirX * sin(-env->rotSpeed) + env->parse.player.dirY * cos(-env->rotSpeed);
-	env->planeX = env->planeX * cos(-env->rotSpeed) - env->planeY * sin(-env->rotSpeed);
-	env->planeY = oldPlaneX * sin(-env->rotSpeed) + env->planeY * cos(-env->rotSpeed);
+	env->player.dirx = env->player.dirx * cos(-env->rotspeed) - env->player.diry * sin(-env->rotspeed);
+	env->player.diry = olddirx * sin(-env->rotspeed) + env->player.diry * cos(-env->rotspeed);
+	env->planex = env->planex * cos(-env->rotspeed) - env->planey * sin(-env->rotspeed);
+	env->planey = oldplanex * sin(-env->rotspeed) + env->planey * cos(-env->rotspeed);
 }
 
 void	keys_control(t_env *env)

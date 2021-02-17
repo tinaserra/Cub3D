@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 18:00:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:24:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // printf("str = |%s|\n", str);
 
-int		get_map(char *file, t_parsing *parse)
+int		get_map(char *file, t_env *env)
 {
 	int fd;
 	int ret;
@@ -23,73 +23,73 @@ int		get_map(char *file, t_parsing *parse)
 	ret = 1;
 	str = NULL;
 	fd = open(file, O_RDONLY);
-	if (!(parse->map = malloc(sizeof(char*) * parse->nb_lines)))
-		print_error(parse, MALLOC_FAILED);
+	if (!(env->map.map = malloc(sizeof(char*) * env->map.nb_lines)))
+		print_error(env, MALLOC_FAILED);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
-		// parse->i = 0; // useless ?
-		// while (str[parse->i] == ' ')
-		// parse->i++;
+		// env->i = 0; // useless ?
+		// while (str[env->i] == ' ')
+		// env->i++;
 		if (str[0] != '\0' && is_a_map(str) == 0)
-			dup_map(str, parse);
+			dup_map(str, env);
 		free(str);
 	}
 	close(fd);
-	if (parse->player.px == 'o')
-		print_error(parse, NO_PLAYER);
-	check_borders(parse);
-	check_walls(parse);
+	if (env->player.px == 'o')
+		print_error(env, NO_PLAYER);
+	check_borders(env);
+	check_walls(env);
 	return (0);
 }
 
-void	get_size_map(char *str, t_parsing *parse)
+void	get_size_map(char *str, t_env *env)
 {
 	int len;
 
-	parse->i = 0;
+	env->i = 0;
 	len = -1;
-	if(parse->end_map == 1)
-		check_after_map(str, parse);
-	while (str[parse->i] && str[parse->i] == ' ')
-		parse->i++;
-	if ((str[0] != '\0') && (is_char_map(str, parse) == 0)) //check que les char de la map soient good
+	if(env->map.end_map == 1)
+		check_after_map(str, env);
+	while (str[env->i] && str[env->i] == ' ')
+		env->i++;
+	if ((str[0] != '\0') && (is_char_map(str, env) == 0)) //check que les char de la map soient good
 	{
 		// ft_putstr_fd("Cette ligne est une map\n", 1);
-		check_element(parse);
-		if (parse->nb_lines == -1) // init nb_lines a 0 pour virer ces deux lignes
-			parse->nb_lines++;
-		parse->nb_lines++;
+		check_element(env);
+		if (env->map.nb_lines == -1) // init nb_lines a 0 pour virer ces deux lignes
+			env->map.nb_lines++;
+		env->map.nb_lines++;
 		len = ft_strlen(str);
-		if (len > parse->len_line)
-			parse->len_line = len;
+		if (len > env->map.len_line)
+			env->map.len_line = len;
 	}
-	if (parse->len_line == 1) // la map fait une ligne parse->nb_lines == 1
-		print_error(parse, MAP_INCOMPLETE);
+	if (env->map.len_line == 1) // la map fait une ligne env->nb_lines == 1
+		print_error(env, MAP_INCOMPLETE);
 }
 
-int		get_elements(char *str, t_parsing *parse)
+int		get_elements(char *str, t_env *env)
 {
-	parse->i = 0;
+	env->i = 0;
 
-	while (str[parse->i] == ' ')
-		parse->i++;
-	if (str[parse->i] == 'R')
-		get_resolution(str, parse);
-	else if (str[parse->i] == 'F')
-		get_f_color(str, parse);
-	else if (str[parse->i] == 'C')
-		get_c_color(str, parse);
-	else if (str[parse->i] == 'N' && str[parse->i + 1] == 'O')
-		parse->path_no = get_path(str, 2, parse);
-	else if (str[parse->i] == 'W' && str[parse->i + 1] == 'E')
-		parse->path_we = get_path(str, 2, parse);
-	else if (str[parse->i] == 'S' && str[parse->i + 1] == 'O')
-		parse->path_so = get_path(str, 2, parse);
-	else if (str[parse->i] == 'E' && str[parse->i + 1] == 'A')
-		parse->path_ea = get_path(str, 2, parse);
-	else if (str[parse->i] == 'S')
-		parse->path_s = get_path(str, 1, parse);
+	while (str[env->i] == ' ')
+		env->i++;
+	if (str[env->i] == 'R')
+		get_resolution(str, env);
+	else if (str[env->i] == 'F')
+		get_f_color(str, env);
+	else if (str[env->i] == 'C')
+		get_c_color(str, env);
+	else if (str[env->i] == 'N' && str[env->i + 1] == 'O')
+		env->tex.path_no = get_path(str, 2, env);
+	else if (str[env->i] == 'W' && str[env->i + 1] == 'E')
+		env->tex.path_we = get_path(str, 2, env);
+	else if (str[env->i] == 'S' && str[env->i + 1] == 'O')
+		env->tex.path_so = get_path(str, 2, env);
+	else if (str[env->i] == 'E' && str[env->i + 1] == 'A')
+		env->tex.path_ea = get_path(str, 2, env);
+	else if (str[env->i] == 'S')
+		env->tex.path_s = get_path(str, 1, env);
 	else
 	{
 		// ft_putstr_fd("cette ligne n'est pas un element\n", 1);
@@ -107,29 +107,29 @@ void	parsing(char *file, t_env *env)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
-		print_error(&env->parse, CUB_DIR);
+		print_error(env, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
-		print_error(&env->parse, CUB_INVALIDE);
+		print_error(env, CUB_INVALIDE);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str);
 		// printf("\n\n* ligne = |%s| ---------- *\n", str);
-		if (get_elements(str, &env->parse) == -1)
-			get_size_map(str, &env->parse);
-		if (str[0] == '\0' && env->parse.nb_lines != -1) // Check apres map
-			env->parse.end_map = 1;
+		if (get_elements(str, env) == -1)
+			get_size_map(str, env);
+		if (str[0] == '\0' && env->map.nb_lines != -1) // Check apres map
+			env->map.end_map = 1;
 		free(str);
 	}
 	close(fd);
-	if (env->parse.nb_lines == -1)
-		print_error(&env->parse, NO_MAP);
-	get_map(file, &env->parse);
-	debug_parsing(&env->parse);
-	printf("path no : |%s|\n", env->parse.path_no);
-	printf("path we : |%s|\n", env->parse.path_we);
-	printf("path so : |%s|\n", env->parse.path_so);
-	printf("path ea : |%s|\n", env->parse.path_ea);
-	printf("path s : |%s|\n", env->parse.path_s);
-	// debug_print_map(&env->parse);
+	if (env->map.nb_lines == -1)
+		print_error(env, NO_MAP);
+	get_map(file, env);
+	debug_parsing(env);
+	printf("path no : |%s|\n", env->tex.path_no);
+	printf("path we : |%s|\n", env->tex.path_we);
+	printf("path so : |%s|\n", env->tex.path_so);
+	printf("path ea : |%s|\n", env->tex.path_ea);
+	printf("path s : |%s|\n", env->tex.path_s);
+	// debug_print_map(&env->env);
 	start_mlx(env);
 }

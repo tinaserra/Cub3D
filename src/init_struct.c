@@ -6,35 +6,31 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 12:53:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:47:37 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_parse(t_parsing *parse)
+void	init_parse(t_env *env)
 {
-	*parse = (t_parsing) {
+	*env = (t_env) {
 	.save = 0,
-	.resx = -1,
-	.resy = -1,
-	.nb_lines = -1,
-	.len_line = -1,
-	.end_map = 0,
-	.no = -1,
-	.ea = -1,
-	.so = -1,
-	.we = -1,
+	.res.x = -1,
+	.res.y = -1,
+	.map.nb_lines = -1,
+	.map.len_line = -1,
+	.map.end_map = 0,
 	.col.red_f = -1,
 	.col.green_f = -1,
 	.col.blue_f = -1,
 	.col.red_c = -1,
 	.col.green_c = -1,
 	.col.blue_c = -1,
-	.map = NULL,
+	.map.map = NULL,
 	.player.orient_start = 'o',
-	.player.dirX = 0,
-	.player.dirY = 0,
+	.player.dirx = 0,
+	.player.diry = 0,
 	};
 }
 
@@ -60,28 +56,25 @@ void	init_parse(t_parsing *parse)
 
 void	init_start_mlx(t_env *env)
 {
-	// env->planeX = 0;
-	// env->time = 0; // heure de la trame courante
-	// env->oldTime = 0; // heure de l'image précédente
-	if (env->parse.player.orient_start == 'N')
-		env->planeY = 0.66;
-	if (env->parse.player.orient_start == 'S')
-		env->planeY = -0.66;
-	if (env->parse.player.orient_start == 'E')
-		env->planeX = 0.66;
-	if (env->parse.player.orient_start == 'W')
-		env->planeX = -0.66;
+	if (env->player.orient_start == 'N')
+		env->planey = 0.66;
+	if (env->player.orient_start == 'S')
+		env->planey = -0.66;
+	if (env->player.orient_start == 'E')
+		env->planex = 0.66;
+	if (env->player.orient_start == 'W')
+		env->planex = -0.66;
 }
 
 void	init_env(t_env *env)
 {
-	env->cameraX = 2 * env->x / (double)env->parse.resx - 1;
-	env->rayDirX = env->parse.player.dirX + env->planeX * env->cameraX;
-	env->rayDirY = env->parse.player.dirY + env->planeY * env->cameraX;
-	env->mapX = (int)env->parse.player.px;
-	env->mapY = (int)env->parse.player.py;
-	env->deltaDistX = fabs (1 / env->rayDirX);
-	env->deltaDistY = fabs (1 / env->rayDirY);
+	env->camerax = 2 * env->x / (double)env->res.x - 1;
+	env->raydirx = env->player.dirx + env->planex * env->camerax;
+	env->raydiry = env->player.diry + env->planey * env->camerax;
+	env->map.x = (int)env->player.px;
+	env->map.y = (int)env->player.py;
+	env->deltadistx = fabs (1 / env->raydirx);
+	env->deltadisty = fabs (1 / env->raydiry);
 	env->hit = 0;
 }
 
@@ -89,15 +82,15 @@ void	init_env(t_env *env)
 // {
 // 	*env = (t_env) {
 // 	// calculer la position et la direction
-// 	.cameraX = 2 * env->x / (double)env->parse.resx - 1, // coordonnée x dans l'espace caméra
-// 	.rayDirX = env->parse.player.dirX + env->planeX * env->cameraX,
-// 	.rayDirY = env->parse.player.dirY + env->planeY * env->cameraX,
+// 	.camerax = 2 * env->x / (double)env->res.x - 1, // coordonnée x dans l'espace caméra
+// 	.raydirx = env->player.dirx + env->planex * env->camerax,
+// 	.raydiry = env->player.diry + env->planey * env->camerax,
 // 	// dans quel carré de la carte nous nous trouvons
-// 	.mapX = (int)env->parse.player.px,
-// 	.mapY = (int)env->parse.player.py,
+// 	.map.x = (int)env->player.px,
+// 	.map.y = (int)env->player.py,
 // 	// longueur du rayon d'un côté x ou y au coté x ou y
-// 	.deltaDistX = fabs (1 / env->rayDirX), //= sqrt(1 + (env->rayDirY * env->rayDirY) / (env->rayDirX * env->rayDirX));
-// 	.deltaDistY = fabs (1 / env->rayDirY), //= sqrt(1 + (env->rayDirX * env->rayDirX) / (env->rayDirY * env->rayDirY));
+// 	.deltadistx = fabs (1 / env->raydirx), //= sqrt(1 + (env->raydiry * env->raydiry) / (env->raydirx * env->raydirx));
+// 	.deltadisty = fabs (1 / env->raydiry), //= sqrt(1 + (env->raydirx * env->raydirx) / (env->raydiry * env->raydiry));
 // 	.hit = 0, // y a-t-il eu un mur touché?
 // 	};
 // 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);

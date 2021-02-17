@@ -6,52 +6,52 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 08:46:03 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/11 18:04:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:23:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	quit(t_parsing *parse)
+// void	quit(t_env *env)
 // {
 // 	exit(EXIT_FAILURE);
 // }
 
-void	free_textures(t_parsing *parse)
+void	free_textures(t_env *env)
 {
-	if (parse->path_no != NULL)
-		free(parse->path_no);
-	if (parse->path_ea != NULL)
-		free(parse->path_ea);
-	if (parse->path_so != NULL)
-		free(parse->path_so);
-	if (parse->path_we != NULL)
-		free(parse->path_we);
-	if (parse->path_s != NULL)
-		free(parse->path_s);
+	if (env->tex.path_no != NULL)
+		free(env->tex.path_no);
+	if (env->tex.path_ea != NULL)
+		free(env->tex.path_ea);
+	if (env->tex.path_so != NULL)
+		free(env->tex.path_so);
+	if (env->tex.path_we != NULL)
+		free(env->tex.path_we);
+	if (env->tex.path_s != NULL)
+		free(env->tex.path_s);
 }
 
-void	free_map(t_parsing *parse)
+void	free_map(t_env *env)
 {
 	int		i;
 
 	i = 0;
-	while (parse->map[i])
+	while (env->map.map[i])
 	{
-		// if (parse->map[i] != NULL)
-		free(parse->map[i]);
+		// if (env->map.map[i] != NULL)
+		free(env->map.map[i]);
 		i++;
 	}
-	free(parse->map);
+	free(env->map.map);
 }
 
-int print_error(t_parsing *parse, int error)
+int print_error(t_env *env, int error)
 {
-	free_textures(parse);
-	if (parse->map != NULL)
-		free_map(parse);
+	free_textures(env);
+	if (env->map.map != NULL)
+		free_map(env);
 	ft_putstr_fd(g_str_error[error], 2);
 	exit(EXIT_FAILURE);
 }
 
-// print_error(parse, RESOLUTION);
+// print_error(env, RESOLUTION);

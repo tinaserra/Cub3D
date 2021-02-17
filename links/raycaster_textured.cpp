@@ -56,11 +56,11 @@ Uint32 buffer[screenHeight][screenWidth];
 int main(int /*argc*/, char */*argv*/[])
 {
   double posX = 22.0, posY = 11.5;  //x and y start position
-  double dirX = -1.0, dirY = 0.0; //initial direction vector
-  double planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
+  double dirx = -1.0, diry = 0.0; //initial direction vector
+  double planex = 0.0, planey = 0.66; //the 2d raycaster version of camera plane
 
   double time = 0; //time of current frame
-  double oldTime = 0; //time of previous frame
+  double oldtime = 0; //time of previous frame
 
   std::vector<Uint32> texture[8];
   for(int i = 0; i < 8; i++) texture[i].resize(texWidth * texHeight);
@@ -104,104 +104,104 @@ int main(int /*argc*/, char */*argv*/[])
     for(int x = 0; x < w; x++)
     {
       //calculate ray position and direction
-      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
-      double rayDirX = dirX + planeX*cameraX;
-      double rayDirY = dirY + planeY*cameraX;
+      double camerax = 2 * x / (double)w - 1; //x-coordinate in camera space
+      double raydirx = dirx + planex*camerax;
+      double raydiry = diry + planey*camerax;
 
       //which box of the map we're in
-      int mapX = int(posX);
-      int mapY = int(posY);
+      int map.x = int(posX);
+      int map.y = int(posY);
 
       //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+      double sidedistx;
+      double sidedisty;
 
       //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = std::abs(1 / rayDirX);
-      double deltaDistY = std::abs(1 / rayDirY);
-      double perpWallDist;
+      double deltadistx = std::abs(1 / raydirx);
+      double deltadisty = std::abs(1 / raydiry);
+      double pwalldist;
 
       //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
+      int stepx;
+      int stepy;
 
       int hit = 0; //was there a wall hit?
       int side; //was a NS or a EW wall hit?
 
       //calculate step and initial sideDist
-      if(rayDirX < 0)
+      if(raydirx < 0)
       {
-        stepX = -1;
-        sideDistX = (posX - mapX) * deltaDistX;
+        stepx = -1;
+        sidedistx = (posX - map.x) * deltadistx;
       }
       else
       {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+        stepx = 1;
+        sidedistx = (map.x + 1.0 - posX) * deltadistx;
       }
-      if(rayDirY < 0)
+      if(raydiry < 0)
       {
-        stepY = -1;
-        sideDistY = (posY - mapY) * deltaDistY;
+        stepy = -1;
+        sidedisty = (posY - map.y) * deltadisty;
       }
       else
       {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+        stepy = 1;
+        sidedisty = (map.y + 1.0 - posY) * deltadisty;
       }
       //perform DDA
       while (hit == 0)
       {
         //jump to next map square, OR in x-direction, OR in y-direction
-        if(sideDistX < sideDistY)
+        if(sidedistx < sidedisty)
         {
-          sideDistX += deltaDistX;
-          mapX += stepX;
+          sidedistx += deltadistx;
+          map.x += stepx;
           side = 0;
         }
         else
         {
-          sideDistY += deltaDistY;
-          mapY += stepY;
+          sidedisty += deltadisty;
+          map.y += stepy;
           side = 1;
         }
         //Check if ray has hit a wall
-        if(worldMap[mapX][mapY] > 0) hit = 1;
+        if(worldMap[map.x][map.y] > 0) hit = 1;
       }
 
       //Calculate distance of perpendicular ray (Euclidean distance will give fisheye effect!)
-      if(side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
-      else          perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
+      if(side == 0) pwalldist = (map.x - posX + (1 - stepx) / 2) / raydirx;
+      else          pwalldist = (map.y - posY + (1 - stepy) / 2) / raydiry;
 
       //Calculate height of line to draw on screen
-      int lineHeight = (int)(h / perpWallDist);
+      int lineheight = (int)(h / pwalldist);
 
       //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + h / 2;
-      if(drawStart < 0) drawStart = 0;
-      int drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd >= h) drawEnd = h - 1;
+      int drawstart = -lineheight / 2 + h / 2;
+      if(drawstart < 0) drawstart = 0;
+      int drawend = lineheight / 2 + h / 2;
+      if(drawend >= h) drawend = h - 1;
 
       //texturing calculations
-      int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+      int texNum = worldMap[map.x][map.y] - 1; //1 subtracted from it so that texture 0 can be used!
 
       //calculate value of wallX
       double wallX; //where exactly the wall was hit
-      if(side == 0) wallX = posY + perpWallDist * rayDirY;
-      else          wallX = posX + perpWallDist * rayDirX;
+      if(side == 0) wallX = posY + pwalldist * raydiry;
+      else          wallX = posX + pwalldist * raydirx;
       wallX -= floor((wallX));
 
       //x coordinate on the texture
       int texX = int(wallX * double(texWidth));
-      if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-      if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+      if(side == 0 && raydirx > 0) texX = texWidth - texX - 1;
+      if(side == 1 && raydiry < 0) texX = texWidth - texX - 1;
 
       // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
       // How much to increase the texture coordinate per screen pixel
-      double step = 1.0 * texHeight / lineHeight;
+      double step = 1.0 * texHeight / lineheight;
       // Starting texture coordinate
-      double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
-      for(int y = drawStart; y < drawEnd; y++)
+      double texPos = (drawstart - h / 2 + lineheight / 2) * step;
+      for(int y = drawstart; y < drawend; y++)
       {
         // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
         int texY = (int)texPos & (texHeight - 1);
@@ -216,50 +216,50 @@ int main(int /*argc*/, char */*argv*/[])
     drawBuffer(buffer[0]);
     for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
     //timing for input and FPS counter
-    oldTime = time;
+    oldtime = time;
     time = getTicks();
-    double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
+    double frameTime = (time - oldtime) / 1000.0; //frametime is the time this frame has taken, in seconds
     print(1.0 / frameTime); //FPS counter
     redraw();
 
     //speed modifiers
-    double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-    double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+    double movespeed = frameTime * 5.0; //the constant value is in squares/second
+    double rotspeed = frameTime * 3.0; //the constant value is in radians/second
 
     readKeys();
     //move forward if no wall in front of you
     if(keyDown(SDLK_UP))
     {
-      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+      if(worldMap[int(posX + dirx * movespeed)][int(posY)] == false) posX += dirx * movespeed;
+      if(worldMap[int(posX)][int(posY + diry * movespeed)] == false) posY += diry * movespeed;
     }
     //move backwards if no wall behind you
     if(keyDown(SDLK_DOWN))
     {
-      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+      if(worldMap[int(posX - dirx * movespeed)][int(posY)] == false) posX -= dirx * movespeed;
+      if(worldMap[int(posX)][int(posY - diry * movespeed)] == false) posY -= diry * movespeed;
     }
     //rotate to the right
     if(keyDown(SDLK_RIGHT))
     {
       //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+      double olddirx = dirx;
+      dirx = dirx * cos(-rotspeed) - diry * sin(-rotspeed);
+      diry = olddirx * sin(-rotspeed) + diry * cos(-rotspeed);
+      double oldplanex = planex;
+      planex = planex * cos(-rotspeed) - planey * sin(-rotspeed);
+      planey = oldplanex * sin(-rotspeed) + planey * cos(-rotspeed);
     }
     //rotate to the left
     if(keyDown(SDLK_LEFT))
     {
       //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+      double olddirx = dirx;
+      dirx = dirx * cos(rotspeed) - diry * sin(rotspeed);
+      diry = olddirx * sin(rotspeed) + diry * cos(rotspeed);
+      double oldplanex = planex;
+      planex = planex * cos(rotspeed) - planey * sin(rotspeed);
+      planey = oldplanex * sin(rotspeed) + planey * cos(rotspeed);
     }
     if(keyDown(SDLK_ESCAPE))
     {

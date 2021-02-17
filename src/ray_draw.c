@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 16:19:29 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:44:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,23 @@ void	draw_column(t_env *env, int coord_x)
 	int color;
 
 	y = -1;
-	while (++y < env->parse.resy)
+	while (++y < env->res.y)
 	{
 		// dessine le mur
-		if (y > env->drawStart && y <= env->drawEnd)
+		if (y > env->drawstart && y <= env->drawend)
 		{
 			color = ret_color(env, 0, 255, 167, 95);
 			put_px_to_img(&env->img, coord_x, y, color);
 		}
 		// dessine le plafond
-		else if (y < env->parse.resy / 2)
+		else if (y < env->res.y / 2)
 		{
-			color = ret_color(env, 0, env->parse.col.red_c, env->parse.col.green_c, env->parse.col.blue_c);
+			color = ret_color(env, 0, env->col.red_c, env->col.green_c, env->col.blue_c);
 			put_px_to_img(&env->img, coord_x, y, color);
 		}
 		else
 		{
-			color = ret_color(env, 0, env->parse.col.red_f, env->parse.col.green_f, env->parse.col.blue_f);
+			color = ret_color(env, 0, env->col.red_f, env->col.green_f, env->col.blue_f);
 			put_px_to_img(&env->img, coord_x, y, color);
 		}
 	}

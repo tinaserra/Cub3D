@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/10 13:29:10 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:29:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	screen_size(t_env *env)
 	// si la res demandé dans le file.cub est supperieur a l'ecran alors choisr une resolution plus petite (celle de l'ecran)
 
 	mlx_get_screen_size(env->mlx, &env->screen_width, &env->screen_height);
-	if (env->parse.resx > env->screen_width)
-		env->parse.resx = env->screen_width;
-	if (env->parse.resy > env->screen_height)
-		env->parse.resy = env->screen_height;
+	if (env->res.x > env->screen_width)
+		env->res.x = env->screen_width;
+	if (env->res.y > env->screen_height)
+		env->res.y = env->screen_height;
 
 }

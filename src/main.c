@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/03 13:14:12 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:18:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		check_save(char *save)
 	return (-1);
 }
 
-int		check_file_name(char *file, t_parsing *parse)
+int		check_file_name(char *file, t_env *env)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int		check_file_name(char *file, t_parsing *parse)
 		i++;
 	if (file[0] == '.' || (file[i - 4] != '.' && file[i - 3] != 'c'
 		&& file[i - 2] != 'u' && file[i - 1] != 'b'))
-		print_error(parse, FILE_NAME);
+		print_error(env, FILE_NAME);
 	return (0);
 }
 
@@ -47,12 +47,12 @@ int		main(int ac, char **av)
 	t_env env;
 
 	ft_bzero(&env, sizeof(t_env));
-	init_parse(&env.parse);
+	init_parse(&env);
 	if (ac == 2 || (ac == 3 && check_save(av[2]) == 0))
 	{
 		if (ac == 3) // argument save
-			env.parse.save = 1;
-		check_file_name(av[1], &env.parse);
+			env.save = 1;
+		check_file_name(av[1], &env);
 		parsing(av[1], &env);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/16 08:39:59 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:47:04 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct	s_player
 	char		orient_start;
 	double		px;
 	double		py;
-	double		dirX; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
-	double		dirY; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
+	double		dirx; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+	double		diry; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 }				t_player;
 
 typedef struct	s_pcolor
@@ -58,28 +58,21 @@ typedef struct	s_pcolor
 	int			blue_f;
 }				t_pcolor;
 
-typedef struct	s_parsing
+typedef struct	s_map
 {
-	int			save;
-	int			i;
-	int			resx; // Résolution fenetre
-	int			resy; // Résolution fenetre
+	int			x; // coordonnee x dans quel carré de la carte nous nous trouvons
+	int			y; // coordonnee y dans quel carré de la carte nous nous trouvons
 	int			nb_lines;
 	int			len_line;
 	int			end_map;
-	char		*path_no;
-	char		*path_we;
-	char		*path_so;
-	char		*path_ea;
-	char		*path_s;
-	int			no;
-	int			ea;
-	int			so;
-	int			we;
 	char		**map;
-	t_player	player;
-	t_pcolor	col;
-}				t_parsing;
+}				t_map;
+
+typedef struct	s_res
+{
+	int			x; // Résolution fenetre
+	int			y; // Résolution fenetre
+}				t_res;
 
 /* RAYCSTING ----------- */
 
@@ -106,21 +99,25 @@ typedef struct	s_coord
 
 typedef struct	s_texture
 {
-	int			dir;
-	double		wallx;
 	int			x;
 	int			y;
+	int			dir;
+	double		wallx;
 	double		step;
 	double		pos;
+	char		*path_no;
+	char		*path_we;
+	char		*path_so;
+	char		*path_ea;
+	char		*path_s;
 }				t_texture;
 
 /* Structure mère */
 
 typedef struct	s_env
 {
-	int			height_y; // learn_mlx
-	int			width_x; // learn_mlx
-	t_coord		square_origin; // learn_mlx
+	int			i;
+	int			save;
 
 	void		*mlx;
 	void		*window;
@@ -129,36 +126,36 @@ typedef struct	s_env
 	char		keyboard[512];
 
 	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
-	double		planeX; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double		planeY; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-	double		time; // heure de la trame courante
-	double		oldTime; // heure de l'image précédente
-	double		cameraX; // coordonnée x dans l'espace caméra
-	double		rayDirX; // la direction du rayon x
-	double		rayDirY; // la direction du rayon y
-	int			mapX; // coordonnee x dans quel carré de la carte nous nous trouvons
-	int			mapY; // coordonnee y dans quel carré de la carte nous nous trouvons
+	double		planex; // vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double		planey; // vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double		oldtime; // heure de l'image précédente
+	double		camerax; // coordonnée x dans l'espace caméra
+	double		raydirx; // la direction du rayon x
+	double		raydiry; // la direction du rayon y
 	// longueur du rayon de la position actuelle au cote x ou y suivant
-	double		sideDistX; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
-	double		sideDistY; // distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
+	double		sidedistx; // distance que le rayon parcours jusqu'au premier point d'intersection vertical (= un coté x)
+	double		sidedisty; // distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
 	// longueur du rayon d'un côté x ou y au coté x ou y
-	double		deltaDistX; // distance du rayon d'un cote x au cote x
-	double		deltaDistY; // distance du rayon d'un cote y au cote y
-	double		perpWallDist; // distance du joueur au mur
+	double		deltadistx; // distance du rayon d'un cote x au cote x
+	double		deltadisty; // distance du rayon d'un cote y au cote y
+	double		pwalldist; // distance du joueur au mur
 	// dans quelle direction avancer dans la direction x ou y (+1 ou -1)
-	int			stepX; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-	int			stepY; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
+	int			stepx; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
+	int			stepy; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
 	int			hit; // y a-t-il eu un mur touché?
 	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-	int			lineHeight; // hauteur de la ligne du mur a dessiner
-	int			drawStart;
-	int			drawEnd;
-	double		moveSpeed;
-	double		rotSpeed;
+	int			lineheight; // hauteur de la ligne du mur a dessiner
+	int			drawstart;
+	int			drawend;
+	double		movespeed;
+	double		rotspeed;
 
+	t_res		res;
+	t_player	player;
+	t_pcolor	col;
+	t_map		map;
 	t_texture	tex;
 	t_image		img;
-	t_parsing	parse;
 }				t_env;
 
 /* Couleurs */
@@ -204,7 +201,7 @@ typedef union		u_color
 ** INIT_STRUCT
 */
 
-void	init_parse(t_parsing *parse);
+void	init_parse(t_env *env);
 void	init_env(t_env *env);
 void	init_start_mlx(t_env *env);
 
@@ -212,45 +209,45 @@ void	init_start_mlx(t_env *env);
 ** PARSE_START
 */
 
-char	*get_path(char *str, int i, t_parsing *parse);
+char	*get_path(char *str, int i, t_env *env);
 void	parsing(char *file, t_env *env);
-// void	get_elements(char *str, t_parsing *parse);
-// void	get_size_map(char *str, t_parsing *parse);
-// int		get_map(char *file, t_parsing *parse);
+// void	get_elements(char *str, t_env *env);
+// void	get_size_map(char *str, t_env *env);
+// int		get_map(char *file, t_env *env);
 
 /*
 ** PARSE_INT
 */
 
-void	get_resolution(char *str, t_parsing *parse);
-void	get_f_color(char* str, t_parsing *parse);
-void	get_c_color(char* str, t_parsing *parse);
+void	get_resolution(char *str, t_env *env);
+void	get_f_color(char* str, t_env *env);
+void	get_c_color(char* str, t_env *env);
 
 /*
 ** PARSE_MAP
 */
 
-// int		player_position(t_parsing *parse, char c, int i, int j);
-int		dup_map(char *str, t_parsing *parse);
+// int		player_position(t_env *env, char c, int i, int j);
+int		dup_map(char *str, t_env *env);
 int		is_a_map(char *str);
-int		is_char_map(char *str, t_parsing *parse);
+int		is_char_map(char *str, t_env *env);
 
 
 /*
 ** PARSE_CHECK
 */
 
-int		check_after_map(char *str, t_parsing *parse);
-int		check_element(t_parsing *parse);
-int		check_color(t_parsing *parse, int ctrl);
-int		check_strend(char *str, t_parsing *parse, int ctrl);
+int		check_after_map(char *str, t_env *env);
+int		check_element(t_env *env);
+int		check_color(t_env *env, int ctrl);
+int		check_strend(char *str, t_env *env, int ctrl);
 
 /*
 ** PARSE_WALL
 */
 
-void	check_walls(t_parsing *parse);
-void	check_borders(t_parsing *parse);
+void	check_walls(t_env *env);
+void	check_borders(t_env *env);
 
 /*
 ** RAYCASTING_START
@@ -292,16 +289,16 @@ void	draw_column(t_env *env, int coord_x);
 ** ERROR
 */
 
-int		print_error(t_parsing *parse, int error);
+int		print_error(t_env *env, int error);
 
 /*
 ** DEBUG
 */
 
-void	debug_parsing(t_parsing *parse);
-void	debug_colors(t_parsing *parse, int ctrl);
-void	debug_size_map(t_parsing *parse);
-void	debug_resolution(t_parsing *parse);
-void	debug_print_map(t_parsing *parse);
+void	debug_parsing(t_env *env);
+void	debug_colors(t_env *env, int ctrl);
+void	debug_size_map(t_env *env);
+void	debug_resolution(t_env *env);
+void	debug_print_map(t_env *env);
 
 #endif

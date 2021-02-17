@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:59:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/11 16:16:37 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/17 19:23:39 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,29 @@
 // il peut y avoir des espaces avant et apres
 // s'il y a une erreur (malloc failes ou double element il faut free)
 
-void	check_double_texture(char *str, t_parsing *parse)
+void	check_double_texture(char *str, t_env *env)
 {
-	if (str[parse->i] == 'N' && parse->path_no != NULL)
-		print_error(parse, DOUBLE_NO);
-	if (str[parse->i] == 'E' && parse->path_ea != NULL)
-		print_error(parse, DOUBLE_EA);
-	if (str[parse->i] == 'W' && parse->path_we != NULL)
-		print_error(parse, DOUBLE_WE);
-	if (str[parse->i] == 'S' && str[parse->i + 1] == 'O'
-		&& parse->path_so != NULL)
-		print_error(parse, DOUBLE_SO);
-	if (str[parse->i] == 'S' && str[parse->i + 1] != 'O'
-		&& parse->path_s != NULL)
-		print_error(parse, DOUBLE_S);
+	if (str[env->i] == 'N' && env->tex.path_no != NULL)
+		print_error(env, DOUBLE_NO);
+	if (str[env->i] == 'E' && env->tex.path_ea != NULL)
+		print_error(env, DOUBLE_EA);
+	if (str[env->i] == 'W' && env->tex.path_we != NULL)
+		print_error(env, DOUBLE_WE);
+	if (str[env->i] == 'S' && str[env->i + 1] == 'O'
+		&& env->tex.path_so != NULL)
+		print_error(env, DOUBLE_SO);
+	if (str[env->i] == 'S' && str[env->i + 1] != 'O'
+		&& env->tex.path_s != NULL)
+		print_error(env, DOUBLE_S);
 }
 
-char	*get_path(char *str, int i, t_parsing *parse)
+char	*get_path(char *str, int i, t_env *env)
 {
 	int		len;
 	int		c;
 	char	*path;
 
-	check_double_texture(str, parse);
+	check_double_texture(str, env);
 	len = 0;
 	while (str[i] == ' ')
 		i++;
@@ -48,7 +48,7 @@ char	*get_path(char *str, int i, t_parsing *parse)
 		len++;
 	path = malloc(len + 1);
 	if (path == NULL)
-		print_error(parse, MALLOC_FAILED);
+		print_error(env, MALLOC_FAILED);
 	c = 0;
 	while (c < len)
 	{
