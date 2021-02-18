@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:26:21 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:55:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,6 @@ int	game_update(t_env *env)
 }
 
 // recup->texture[0].addr = (int *)mlx_get_data_addr(recup->texture[0].img, &recup->texture[0].bits_per_pixel, &recup->texture[0].line_length, &recup->texture[0].endian);
-
-// if (!(recup->texture[0].img = mlx_xpm_file_to_image(recup->data.mlx_ptr, recup->no, &(recup->texture[0].width), &(recup->texture[0].height))))
-// 		ft_error(recup, "Texture SO\n");
 
 // void	get_texture(t_env *env)
 // {

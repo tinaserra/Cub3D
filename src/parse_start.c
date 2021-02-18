@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:24:06 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:54:14 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_size_map(char *str, t_env *env)
 		check_after_map(str, env);
 	while (str[env->i] && str[env->i] == ' ')
 		env->i++;
-	if ((str[0] != '\0') && (is_char_map(str, env) == 0)) //check que les char de la map soient good
+	if ((str[0] != '\0') && (is_char_map(str, env) == 0))
 	{
 		// ft_putstr_fd("Cette ligne est une map\n", 1);
 		check_element(env);
@@ -125,11 +125,11 @@ void	parsing(char *file, t_env *env)
 		print_error(env, NO_MAP);
 	get_map(file, env);
 	debug_parsing(env);
-	printf("path no : |%s|\n", env->tex.path_no);
-	printf("path we : |%s|\n", env->tex.path_we);
-	printf("path so : |%s|\n", env->tex.path_so);
-	printf("path ea : |%s|\n", env->tex.path_ea);
-	printf("path s : |%s|\n", env->tex.path_s);
+	// printf("path no : |%s|\n", env->tex.path_no);
+	// printf("path we : |%s|\n", env->tex.path_we);
+	// printf("path so : |%s|\n", env->tex.path_so);
+	// printf("path ea : |%s|\n", env->tex.path_ea);
+	// printf("path s : |%s|\n", env->tex.path_s);
 	// debug_print_map(&env->env);
 	start_mlx(env);
 }

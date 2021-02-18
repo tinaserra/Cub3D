@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:59:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:23:39 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:53:49 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	check_double_texture(char *str, t_env *env)
 		print_error(env, DOUBLE_S);
 }
 
+	// printf("path : |%s|\n", path);
 char	*get_path(char *str, int i, t_env *env)
 {
 	int		len;
@@ -56,6 +57,5 @@ char	*get_path(char *str, int i, t_env *env)
 		c++;
 	}
 	path[len] = '\0';
-	// printf("path : |%s|\n", path);
 	return (path);
 }

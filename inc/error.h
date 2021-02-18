@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:11:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 08:56:52 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:49:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ typedef enum	e_error{
 	MORE_NUM,
 	DOUBLE_RESOLUTION,
 	DOUBLE_COLOR,
+	EMPTY_NO,
+	EMPTY_WE,
+	EMPTY_SO,
+	EMPTY_EA,
+	EMPTY_S,
 	DOUBLE_NO,
 	DOUBLE_WE,
 	DOUBLE_SO,
@@ -67,6 +72,11 @@ static char g_str_error[NUMBER][256] =
 	[MORE_NUM] = "Error :\n[INT] More numbers than expected\n",
 	[DOUBLE_RESOLUTION] = "Error :\n[R] in double\n",
 	[DOUBLE_COLOR] = "Error :\n[COLOR] in double\n",
+	[EMPTY_NO] = "Error :\n[NO] is not specified\n",
+	[EMPTY_WE] = "Error :\n[WE] is not specified\n",
+	[EMPTY_SO] = "Error :\n[SO] is not specified\n",
+	[EMPTY_EA] = "Error :\n[EA] is not specified\n",
+	[EMPTY_S] = "Error :\n[S] is not specified\n",
 	[DOUBLE_NO] = "Error :\n[NO] in double\n",
 	[DOUBLE_WE] = "Error :\n[WE] in double\n",
 	[DOUBLE_SO] = "Error :\n[SO] in double\n",

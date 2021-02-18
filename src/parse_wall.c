@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 17:47:22 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:05:07 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:54:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	check_borders(t_env *env)
 {
 	int x;
 	int y;
-	// first colonne & last colonne
 	y = 0;
 	x = 0;
+	// first colonne & last colonne
 	while (y < env->map.nb_lines)
 	{
 		if (env->map.map[y][0] != '1' && env->map.map[y][0] != '.')

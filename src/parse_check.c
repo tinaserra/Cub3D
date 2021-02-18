@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:01:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:28:47 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:50:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ int		check_element(t_env *env)
 {
 	if (env->res.x == -1)
 		print_error(env, RESOLUTION);
-	// if (env->path_no == NULL)
-	// 	ft_putstr_fd("Error :\n[NO] is wrong or not specified\n", 1);
-	// if (env->ea == -1)
-	// 	ft_putstr_fd("Error :\n[EA] is wrong or not specified\n", 1);
-	// if (env->so == -1)
-	// 	ft_putstr_fd("Error :\n[SO] is wrong or not specified\n", 1);
-	// if (env->we == -1)
-	// 	ft_putstr_fd("Error :\n[WE] is wrong or not specified\n", 1);
+	if (env->tex.path_no == NULL)
+		print_error(env, EMPTY_NO);
+	if (env->tex.path_ea == NULL)
+		print_error(env, EMPTY_EA);
+	if (env->tex.path_so == NULL)
+		print_error(env, EMPTY_SO);
+	if (env->tex.path_we == NULL)
+		print_error(env, EMPTY_WE);
+	if (env->tex.path_s == NULL)
+		print_error(env, EMPTY_S);
 	if (env->col.blue_f == -1)
 		print_error(env, F_COLOR);
 	if (env->col.blue_c == -1)

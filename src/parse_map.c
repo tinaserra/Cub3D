@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:40:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:52:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		player_position(t_env *env, char c, int i, int j) // Static
 {
-	// printf("str[j] = %c\n", c);
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
 		if (env->player.orient_start == 'o')
@@ -35,7 +34,6 @@ int		player_position(t_env *env, char c, int i, int j) // Static
 		else
 			print_error(env, MULTI_PLAYER);
 	}
-	// printf("Player position = %c\n\n", env->player.orient_start);
 	return (-1);
 }
 

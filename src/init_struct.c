@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 09:23:51 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:41:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ void	init_parse(t_env *env)
 }
 
 /*
-** parse->col.red_f = -1;
-** parse->col.green_f = -1;
-** parse->col.blue_f = -1;
-**
-** parse->col.red_c = -1;
-** parse->col.green_c = -1;
-** parse->col.blue_c = -1;
-**
-** parse->resx = -1;
-** parse->resy = -1;
-**
 ** printf("R = %d\n", parse->col.red_f);
 ** printf("G = %d\n", parse->col.green_f);
 ** printf("B = %d\n", parse->col.blue_f);

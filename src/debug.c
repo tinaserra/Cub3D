@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:32:40 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:29:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:40:44 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	debug_colors(t_env *env, int ctrl)
 void	debug_size_map(t_env *env)
 {
 	printf("\n\n********* DEBUG SIZE MAP *********\n\n");
-	printf("nb_lines = %d\n", env->map.map.nb_lines);
+	printf("nb_lines = %d\n", env->map.nb_lines);
 	printf("len_line = %d\n", env->len_line);
 }
 #else
@@ -78,7 +78,7 @@ void	debug_print_map(t_env *env)
 	printf("Player position = %c\n\n", env->player.orient_start);
 	printf("-------------\n|    MAP    |\n-------------\n");
 	i = 0;
-	while (i < env->map.map.nb_lines)
+	while (i < env->map.nb_lines)
 	{
 		j = 0;
 		while (env->map.map[i][j] != '\0')

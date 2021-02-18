@@ -6,14 +6,12 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:29:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:52:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// while (str[env->i] == '\t' || str[env->i] == '\n' || str[env->i] == '\r'
-//			|| str[env->i] == '\v' || str[env->i] == '\f' || str[env->i] == ' ')
 int		bb_atoi(char *str, t_env *env)
 {
 	int			len;

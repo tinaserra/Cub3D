@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:30:48 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:55:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ void	screen_size(t_env *env)
 		env->res.x = env->screen_width;
 	if (env->res.y > env->screen_height)
 		env->res.y = env->screen_height;
-
 }
