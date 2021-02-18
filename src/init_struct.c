@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:41:28 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 15:58:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,17 @@
 void	init_parse(t_env *env)
 {
 	*env = (t_env) {
-	.save = 0,
 	.res.x = -1,
 	.res.y = -1,
 	.map.nb_lines = -1,
 	.map.len_line = -1,
-	.map.end_map = 0,
 	.col.red_f = -1,
 	.col.green_f = -1,
 	.col.blue_f = -1,
 	.col.red_c = -1,
 	.col.green_c = -1,
 	.col.blue_c = -1,
-	.map.map = NULL,
 	.player.orient_start = 'o',
-	.player.dirx = 0,
-	.player.diry = 0,
 	};
 }
 
@@ -66,21 +61,3 @@ void	init_env(t_env *env)
 	env->deltadist.y = fabs(1 / env->raydir.y);
 	env->wall.hit = 0;
 }
-
-// void	init_env(t_env *env)
-// {
-// 	*env = (t_env) {
-// 	// calculer la position et la direction
-// 	.camerax = 2 * env->x / (double)env->res.x - 1, // coordonnée x dans l'espace caméra
-// 	.raydir.x = env->player.dirx + env->plane.x * env->camerax,
-// 	.raydir.y = env->player.diry + env->plane.y * env->camerax,
-// 	// dans quel carré de la carte nous nous trouvons
-// 	.map.x = (int)env->player.px,
-// 	.map.y = (int)env->player.py,
-// 	// longueur du rayon d'un côté x ou y au coté x ou y
-// 	.deltadist.x = fabs (1 / env->raydir.x), //= sqrt(1 + (env->raydir.y * env->raydir.y) / (env->raydir.x * env->raydir.x));
-// 	.deltadist.y = fabs (1 / env->raydir.y), //= sqrt(1 + (env->raydir.x * env->raydir.x) / (env->raydir.y * env->raydir.y));
-// 	.wall.hit = 0, // y a-t-il eu un mur touché?
-// 	};
-// 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
-// }
