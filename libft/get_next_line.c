@@ -1,104 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/18 15:42:00 by vserra            #+#    #+#             */
+/*   Updated: 2021/02/18 15:42:02 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int		ft_check(char *str)
+char	*get_line(char *s)
 {
+	char	*res;
 	int		i;
 
 	i = 0;
-	while (str[i])
+	if (!s)
+		return (NULL);
+	while (s[i] && s[i] != '\n')
+		i++;
+	if (!(res = malloc(i + 1)))
+		return (NULL);
+	i = 0;
+	while (s[i] && s[i] != '\n')
 	{
-		if (str[i] == '\n')
-			return (i);
+		res[i] = s[i];
 		i++;
 	}
-	return (-1);
+	res[i] = '\0';
+	return (res);
 }
 
-char		*ft_subbuff(char *buff, int start, int len)
+char	*get_str(char *s)
 {
 	int		i;
-	char	*str;
+	int		j;
+	char	*out;
 
-	str = NULL;
-	str = ft_strjoin(str, buff);
 	i = 0;
-	while (str[i] != '\0' && i < len)
-	{
-		buff[i] = str[start];
+	while (s[i] && s[i] != '\n')
 		i++;
-		start++;
-	}
-	buff[i] = 0;
-	free(str);
-	return (buff);
-}
-
-int		ft_duplicate(char **line, char **buff)
-{
-	int		start;
-	char	*temp;
-	char	*line_temp;
-
-	if ((start = ft_check(*buff)) >= 0)
+	if (!s[i])
 	{
-		temp = ft_substr(*buff, 0, start);
-		line_temp = *line;
-		*line = ft_strjoin(*line, temp);
-		free(temp);
-		free(line_temp);
-		*buff = ft_subbuff(*buff, start + 1, (ft_strlen(*buff) - start));
-		return (0);
+		free(s);
+		return (NULL);
 	}
-	else
-	{
-		temp = NULL;
-		if (*line)
-			temp = *line;
-		*line = ft_strjoin(*line, *buff);
-		if (temp)
-			free(temp);
-		return (1);
-	}
-	return (-1);
-}
-
-int		ft_eof(int ret, char **buff, char **line)
-{
-	if (ret == -1)
-		return (-1);
-	free(*buff);
-	*buff = NULL;
-	if (*line == NULL)
-	{
-		*line = malloc(sizeof(char) * 1);
-		*line[0] = 0;
-	}
-	return (0);
+	if (!(out = malloc(ft_strlen(s) - i + 1)))
+		return (NULL);
+	i++;
+	j = 0;
+	while (s && s[i])
+		out[j++] = s[i++];
+	out[j] = '\0';
+	free(s);
+	return (out);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*buff = NULL;
 	int			ret;
+	char		*buffer;
+	static char	*str;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (!line || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	*line = NULL;
+	if (!(buffer = malloc(BUFFER_SIZE + 1)))
+		return (-1);
 	ret = 1;
-	if (buff)
-		ret = ft_duplicate(line, &buff);
-	if (ret == 0)
-		return (1);
-	if (!buff)
-		if (!(buff = malloc(sizeof(char) * BUFFER_SIZE + 1)))
-			return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	while (ft_strchr(str, '\n') == NULL && ret != 0)
 	{
-		buff[ret] = '\0';
-		if (!ft_duplicate(line, &buff))
-			return (1);
+		if ((ret = read(fd, buffer, BUFFER_SIZE)) == -1)
+		{
+			free(buffer);
+			return (-1);
+		}
+		buffer[ret] = '\0';
+		str = ft_strjoin_free(str, buffer, 'L');
 	}
-	if (ret <= 0)
-		return (ft_eof(ret, &buff, line));
-	return (1);
+	free(buffer);
+	*line = get_line(str);
+	str = get_str(str);
+	return (ret == 0 ? 0 : 1);
 }

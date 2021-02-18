@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/02/18 10:20:50 by vserra           ###   ########.fr        #
+#    Updated: 2021/02/18 14:39:35 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 # -j multisreder / ameliore la vitesse de compliation
 # Pas de regle opti car makefile mlx pas compatible
 all:
-	@$(MAKE) -C $(MLX_DIR)
+	#@$(MAKE) -C $(MLX_DIR)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -j $(NAME)
 
@@ -75,7 +75,7 @@ debug : fclean
 	make all CFLAGS:="-DDEBUG -g"
 
 clean:
-	@$(MAKE) clean -C $(MLX_DIR)
+	#@$(MAKE) clean -C $(MLX_DIR)
 	@$(MAKE) clean -C $(LIBFT_DIR)
 	@rm -rf $(OBJ_DIR)
 	@echo "obj deleted"

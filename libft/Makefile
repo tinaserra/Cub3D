@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 09:12:21 by vserra            #+#    #+#              #
-#    Updated: 2020/10/24 10:13:19 by vserra           ###   ########.fr        #
+#    Updated: 2021/02/18 14:11:43 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS	= ft_memset.c \
 		ft_strdup.c \
 		ft_substr.c \
 		ft_strjoin.c \
+		ft_strjoin_free.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_itoa.c \

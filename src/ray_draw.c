@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:54:55 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 13:29:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	draw_column(t_env *env, int coord_x)
 			color = ret_color(env, 0, env->col.red_c, env->col.green_c, env->col.blue_c);
 			put_px_to_img(&env->img, coord_x, y, color);
 		}
+		// dessine le sol
 		else
 		{
 			color = ret_color(env, 0, env->col.red_f, env->col.green_f, env->col.blue_f);

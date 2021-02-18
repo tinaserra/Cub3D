@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/07 23:12:20 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 13:53:07 by vserra           ###   ########.fr       */
+/*   Created: 2021/02/18 14:03:31 by vserra            #+#    #+#             */
+/*   Updated: 2021/02/18 14:26:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_free(char *s1, char *s2, int ctrl)
 {
 	int		i;
 	int		j;
@@ -33,5 +33,9 @@ char		*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	out[i + j] = '\0';
+	if (ctrl == 'L' || ctrl == 'B')
+		free(s1);
+	if (ctrl == 'R' || ctrl == 'B')
+		free(s2);
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 22:00:09 by vserra            #+#    #+#             */
-/*   Updated: 2019/11/14 22:59:16 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 14:36:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 30
+#  define BUFFER_SIZE 2048
 # endif
 
 typedef struct	s_list
@@ -53,6 +53,7 @@ char			**ft_split(char const *s, char c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s1);
 char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin_free(char *s1, char *s2, int ctrl);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t			ft_strlen(const char *s);
