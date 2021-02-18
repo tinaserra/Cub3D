@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:55:40 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:59:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,27 +107,27 @@ int	game_update(t_env *env)
 
 // recup->texture[0].addr = (int *)mlx_get_data_addr(recup->texture[0].img, &recup->texture[0].bits_per_pixel, &recup->texture[0].line_length, &recup->texture[0].endian);
 
-// void	get_texture(t_env *env)
-// {
-// 	if (!(env->tx[NO].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_no, &env->tx[NO].width, &env->tx[NO].height)))
-// 		print_error(env, WRONG_NO);
-// 	if (!(env->tx[WE].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_we, &env->tx[WE].width, &env->tx[WE].height)))
-// 		print_error(env, WRONG_WE);
-// 	if (!(env->tx[SO].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_so, &env->tx[SO].width, &env->tx[SO].height)))
-// 		print_error(env, WRONG_SO);
-// 	if (!(env->tx[EA].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_ea, &env->tx[EA].width, &env->tx[EA].height)))
-// 		print_error(env, WRONG_EA);
-// 	if (!(env->tx[S].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_s, &env->tx[S].width, &env->tx[S].height)))
-// 		print_error(env, WRONG_S);
-// }
+void	get_texture(t_env *env)
+{
+	if (!(env->tx[NO].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_no, &env->tx[NO].width, &env->tx[NO].height)))
+		print_error(env, WRONG_NO);
+	if (!(env->tx[WE].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_we, &env->tx[WE].width, &env->tx[WE].height)))
+		print_error(env, WRONG_WE);
+	if (!(env->tx[SO].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_so, &env->tx[SO].width, &env->tx[SO].height)))
+		print_error(env, WRONG_SO);
+	if (!(env->tx[EA].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_ea, &env->tx[EA].width, &env->tx[EA].height)))
+		print_error(env, WRONG_EA);
+	if (!(env->tx[S].image = mlx_xpm_file_to_image(env->mlx, env->tex.path_s, &env->tx[S].width, &env->tx[S].height)))
+		print_error(env, WRONG_S);
+}
 
 int	start_mlx(t_env *env)
 {
 	init_start_mlx(env);
 	if ((env->mlx = mlx_init()) == NULL)
 		print_error(env, MLX_INIT);
-	// screen_size(env);
-	// get_texture(env);
+	screen_size(env);
+	get_texture(env);
 	if (!(env->window = mlx_new_window(env->mlx, env->res.x, env->res.y, "<3")))
 		print_error(env, NEW_WINDOW);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
