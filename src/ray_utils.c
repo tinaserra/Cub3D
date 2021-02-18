@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:29:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 10:30:48 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	ft_key_release(int key, t_env *env)
 	env->keyboard[key] = 0;
 	return (0);
 }
-
-// Fonction a changer de fichier ! 😎
 
 void	screen_size(t_env *env)
 {

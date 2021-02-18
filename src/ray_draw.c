@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:44:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 09:21:59 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_column(t_env *env, int coord_x)
 	while (++y < env->res.y)
 	{
 		// dessine le mur
-		if (y > env->drawstart && y <= env->drawend)
+		if (y > env->wall.dstart && y <= env->wall.dend)
 		{
 			color = ret_color(env, 0, 255, 167, 95);
 			put_px_to_img(&env->img, coord_x, y, color);

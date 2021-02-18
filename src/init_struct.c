@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/17 19:47:37 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/18 09:23:51 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,25 @@ void	init_parse(t_env *env)
 void	init_start_mlx(t_env *env)
 {
 	if (env->player.orient_start == 'N')
-		env->planey = 0.66;
+		env->plane.y = 0.66;
 	if (env->player.orient_start == 'S')
-		env->planey = -0.66;
+		env->plane.y = -0.66;
 	if (env->player.orient_start == 'E')
-		env->planex = 0.66;
+		env->plane.x = 0.66;
 	if (env->player.orient_start == 'W')
-		env->planex = -0.66;
+		env->plane.x = -0.66;
 }
 
 void	init_env(t_env *env)
 {
 	env->camerax = 2 * env->x / (double)env->res.x - 1;
-	env->raydirx = env->player.dirx + env->planex * env->camerax;
-	env->raydiry = env->player.diry + env->planey * env->camerax;
+	env->raydir.x = env->player.dirx + env->plane.x * env->camerax;
+	env->raydir.y = env->player.diry + env->plane.y * env->camerax;
 	env->map.x = (int)env->player.px;
 	env->map.y = (int)env->player.py;
-	env->deltadistx = fabs (1 / env->raydirx);
-	env->deltadisty = fabs (1 / env->raydiry);
-	env->hit = 0;
+	env->deltadist.x = fabs(1 / env->raydir.x);
+	env->deltadist.y = fabs(1 / env->raydir.y);
+	env->wall.hit = 0;
 }
 
 // void	init_env(t_env *env)
@@ -83,15 +83,15 @@ void	init_env(t_env *env)
 // 	*env = (t_env) {
 // 	// calculer la position et la direction
 // 	.camerax = 2 * env->x / (double)env->res.x - 1, // coordonnée x dans l'espace caméra
-// 	.raydirx = env->player.dirx + env->planex * env->camerax,
-// 	.raydiry = env->player.diry + env->planey * env->camerax,
+// 	.raydir.x = env->player.dirx + env->plane.x * env->camerax,
+// 	.raydir.y = env->player.diry + env->plane.y * env->camerax,
 // 	// dans quel carré de la carte nous nous trouvons
 // 	.map.x = (int)env->player.px,
 // 	.map.y = (int)env->player.py,
 // 	// longueur du rayon d'un côté x ou y au coté x ou y
-// 	.deltadistx = fabs (1 / env->raydirx), //= sqrt(1 + (env->raydiry * env->raydiry) / (env->raydirx * env->raydirx));
-// 	.deltadisty = fabs (1 / env->raydiry), //= sqrt(1 + (env->raydirx * env->raydirx) / (env->raydiry * env->raydiry));
-// 	.hit = 0, // y a-t-il eu un mur touché?
+// 	.deltadist.x = fabs (1 / env->raydir.x), //= sqrt(1 + (env->raydir.y * env->raydir.y) / (env->raydir.x * env->raydir.x));
+// 	.deltadist.y = fabs (1 / env->raydir.y), //= sqrt(1 + (env->raydir.x * env->raydir.x) / (env->raydir.y * env->raydir.y));
+// 	.wall.hit = 0, // y a-t-il eu un mur touché?
 // 	};
 // 	ft_putstr_fd("YOHANN EST UN GROS PD 2\n", 1);
 // }
