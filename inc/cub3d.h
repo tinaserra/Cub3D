@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 09:37:54 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/19 16:20:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ enum	e_tex
 
 typedef struct	s_texture
 {
-	int			x;
-	int			y;
-	int			dir;
-	double		wallx;
-	double		step;
-	double		pos;
+	int			x; // coordonnée x de la texture
+	int			y; // coordonée y de la texture
+	int			dir; //direction NO, S, EA, WE de la texture
+	double		wallx; // valeur où le mur a été touché : coordonnée y si side == 0, coordonnée x si side == 1
+	double		step; // indique de combien augmenter les coordonnées de la texture pour chaque pixel
+	double		pos; // coordonnée de départ
 	char		*path_no;
 	char		*path_we;
 	char		*path_so;
@@ -207,6 +207,7 @@ typedef struct	s_env
 void	init_parse(t_env *env);
 void	init_env(t_env *env);
 void	init_start_mlx(t_env *env);
+void	init_texture(t_env *env);
 
 /*
 ** PARSE_START
@@ -286,7 +287,16 @@ void	keys_control(t_env *env);
 
 // int		ret_color(t_env *env, int alpha, int red, int green, int blue);
 // void	put_px_to_img(t_image *img, int x, int y, int color);
+void	ta_maman_la_tchoin(t_env *env);
 void	draw_column(t_env *env, int coord_x);
+
+/*
+** RAY_TEXTURE
+*/
+
+// void	get_data(t_env *env);
+void	get_texture(t_env *env);
+
 
 /*
 ** ERROR

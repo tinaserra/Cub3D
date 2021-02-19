@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/02/18 14:39:35 by vserra           ###   ########.fr        #
+#    Updated: 2021/02/19 16:08:23 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC =	main.c \
 		ray_utils.c \
 		ray_moves1.c \
 		ray_moves2.c \
-		ray_draw.c
+		ray_draw.c \
+		ray_texture.c
 
 NAME = Cub3D
 
@@ -38,7 +39,7 @@ MLX = libmlx.dylib
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
 # override -> permet de reecrire la suite de la variable
-override CFLAGS += -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+override CFLAGS += -Wall -Wextra -Werror -MMD -O3 -fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
