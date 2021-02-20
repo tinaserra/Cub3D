@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 09:18:46 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 11:00:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_parse(t_env *env)
 	.col.red_c = -1,
 	.col.green_c = -1,
 	.col.blue_c = -1,
-	.player.orient_start = 'o',
+	.ply.orient_start = 'o',
 	};
 }
 
@@ -40,23 +40,23 @@ void	init_parse(t_env *env)
 
 void	init_start_mlx(t_env *env)
 {
-	if (env->player.orient_start == 'N')
+	if (env->ply.orient_start == 'N')
 		env->plane.y = 0.66;
-	if (env->player.orient_start == 'S')
+	if (env->ply.orient_start == 'S')
 		env->plane.y = -0.66;
-	if (env->player.orient_start == 'E')
+	if (env->ply.orient_start == 'E')
 		env->plane.x = 0.66;
-	if (env->player.orient_start == 'W')
+	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
 }
 
 void	init_env(t_env *env)
 {
 	env->camerax = 2 * env->x / (double)env->res.x - 1;
-	env->raydir.x = env->player.dirx + env->plane.x * env->camerax;
-	env->raydir.y = env->player.diry + env->plane.y * env->camerax;
-	env->map.x = (int)env->player.px;
-	env->map.y = (int)env->player.py;
+	env->raydir.x = env->ply.dirx + env->plane.x * env->camerax;
+	env->raydir.y = env->ply.diry + env->plane.y * env->camerax;
+	env->map.x = (int)env->ply.px;
+	env->map.y = (int)env->ply.py;
 	env->deltadist.x = fabs(1 / env->raydir.x);
 	env->deltadist.y = fabs(1 / env->raydir.y);
 	env->hit = 0;

@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:42:24 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:05:11 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		check_save(char *save)
+static int	check_save(char *save)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int		check_save(char *save)
 	return (-1);
 }
 
-int		check_file_name(char *file, t_env *env)
+static int	check_file_name(char *file, t_env *env)
 {
 	int	i;
 
@@ -39,10 +39,12 @@ int		check_file_name(char *file, t_env *env)
 	return (0);
 }
 
-// 2 args -> nom du programme & fichier.cub
-// 3 args -> nom du programme & fichier.cub & --save
+/*
+** 2 args -> nom du programme & fichier.cub
+** 3 args -> nom du programme & fichier.cub & --save
+*/
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_env env;
 
@@ -50,7 +52,7 @@ int		main(int ac, char **av)
 	init_parse(&env);
 	if (ac == 2 || (ac == 3 && check_save(av[2]) == 0))
 	{
-		if (ac == 3) // argument save
+		if (ac == 3)
 			env.save = 1;
 		check_file_name(av[1], &env);
 		parsing(av[1], &env);

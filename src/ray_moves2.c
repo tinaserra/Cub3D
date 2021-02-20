@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:32 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:55:27 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 void	go_straight(t_env *env)
 {
-	if (env->map.map[(int)(env->player.px + env->player.dirx * env->player.mspeed)][(int)(env->player.py)] == '0')
-		env->player.px += env->player.dirx * env->player.mspeed;
-	if (env->map.map[(int)(env->player.px)][(int)(env->player.py + env->player.diry * env->player.mspeed)] == '0')
-		env->player.py += env->player.diry * env->player.mspeed;
+	if (env->map.map[(int)(env->ply.px + env->ply.dirx * env->ply.mspeed)][(int)(env->ply.py)] == '0')
+		env->ply.px += env->ply.dirx * env->ply.mspeed;
+	if (env->map.map[(int)(env->ply.px)][(int)(env->ply.py + env->ply.diry * env->ply.mspeed)] == '0')
+		env->ply.py += env->ply.diry * env->ply.mspeed;
 }
 
 void	go_back(t_env *env)
 {
-	if (env->map.map[(int)(env->player.px - env->player.dirx * env->player.mspeed)][(int)(env->player.py)] == '0')
-		env->player.px -= env->player.dirx * env->player.mspeed;
-	if (env->map.map[(int)(env->player.px)][(int)(env->player.py - env->player.diry * env->player.mspeed)] == '0')
-		env->player.py -= env->player.diry * env->player.mspeed;
+	if (env->map.map[(int)(env->ply.px - env->ply.dirx * env->ply.mspeed)][(int)(env->ply.py)] == '0')
+		env->ply.px -= env->ply.dirx * env->ply.mspeed;
+	if (env->map.map[(int)(env->ply.px)][(int)(env->ply.py - env->ply.diry * env->ply.mspeed)] == '0')
+		env->ply.py -= env->ply.diry * env->ply.mspeed;
 }
 
 void	go_right(t_env *env)
 {
-	if (env->map.map[(int)(env->player.px + env->player.diry * (env->player.mspeed /** 2*/))][(int)env->player.py] == '0')
-		env->player.px += env->player.diry * env->player.mspeed;
-	if (env->map.map[(int)env->player.px][(int)(env->player.py - env->player.dirx * (env->player.mspeed * 2))] == '0')
-		env->player.py -= env->player.dirx * env->player.mspeed;
+	if (env->map.map[(int)(env->ply.px + env->ply.diry * (env->ply.mspeed /** 2*/))][(int)env->ply.py] == '0')
+		env->ply.px += env->ply.diry * env->ply.mspeed;
+	if (env->map.map[(int)env->ply.px][(int)(env->ply.py - env->ply.dirx * (env->ply.mspeed * 2))] == '0')
+		env->ply.py -= env->ply.dirx * env->ply.mspeed;
 }
 
 void	go_left(t_env *env)
 {
-	if (env->map.map[(int)(env->player.px - env->player.diry * (env->player.mspeed /** 2*/))][(int)env->player.py] == '0')
-		env->player.px -= env->player.diry * env->player.mspeed;
-	if (env->map.map[(int)env->player.px][(int)(env->player.py + env->player.dirx  * (env->player.mspeed * 2))] == '0')
-		env->player.py += env->player.dirx  * env->player.mspeed;
+	if (env->map.map[(int)(env->ply.px - env->ply.diry * (env->ply.mspeed /** 2*/))][(int)env->ply.py] == '0')
+		env->ply.px -= env->ply.diry * env->ply.mspeed;
+	if (env->map.map[(int)env->ply.px][(int)(env->ply.py + env->ply.dirx  * (env->ply.mspeed * 2))] == '0')
+		env->ply.py += env->ply.dirx  * env->ply.mspeed;
 }

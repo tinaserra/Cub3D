@@ -6,29 +6,35 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:52:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		player_position(t_env *env, char c, int i, int j) // Static
+/*
+** env->ply.px	-> [+0,5] Pour se positioner au centre de la case
+** player.dirx		-> commence à -1 pour N, 1 pour S, 0 sinon
+** player.diry		-> commence à -1 pour W, 1 pour E, 0 sinon
+*/
+
+static int	player_position(t_env *env, char c, int i, int j)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 	{
-		if (env->player.orient_start == 'o')
+		if (env->ply.orient_start == 'o')
 		{
-			env->player.orient_start = c;
-			env->player.px = i + 0.5; // se positioner au centre de la case
-			env->player.py = j + 0.5;
+			env->ply.orient_start = c;
+			env->ply.px = i + 0.5;
+			env->ply.py = j + 0.5;
 			if (c == 'N')
-				env->player.dirx = -1; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
+				env->ply.dirx = -1;
 			if (c == 'E')
-				env->player.diry = 1;
+				env->ply.diry = 1;
 			if (c == 'S')
-				env->player.dirx = 1;
+				env->ply.dirx = 1;
 			if (c == 'W')
-				env->player.diry = -1;
+				env->ply.diry = -1;
 			return (0);
 		}
 		else
@@ -37,7 +43,7 @@ int		player_position(t_env *env, char c, int i, int j) // Static
 	return (-1);
 }
 
-int		dup_map(char *str, t_env *env)
+int			dup_map(char *str, t_env *env)
 {
 	static int	y = 0;
 	int			x;
@@ -51,7 +57,7 @@ int		dup_map(char *str, t_env *env)
 		if (player_position(env, str[x], y, x) == 0)
 			env->map.map[y][x] = '0';
 		else if (str[x] == ' ')
-			env->map.map[y][x] = '.'; // remplace des espaces par des 1 !
+			env->map.map[y][x] = '.';
 		else
 			env->map.map[y][x] = str[x];
 		x++;
@@ -66,7 +72,7 @@ int		dup_map(char *str, t_env *env)
 	return (0);
 }
 
-int		is_a_map(char *str)
+int			is_a_map(char *str)
 {
 	int i;
 
@@ -82,7 +88,7 @@ int		is_a_map(char *str)
 	return (0);
 }
 
-int		is_char_map(char *str, t_env *env)
+int			is_char_map(char *str, t_env *env)
 {
 	while (str[env->i])
 	{

@@ -6,21 +6,25 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 09:21:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 11:02:27 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* HEADERS ------------------------------------------------------------------ */
+/*
+** HEADERS ------------------------------------------------------------------ **
+*/
 
 # include "mlx.h"
 # include "libft.h"
 # include "keycode_mac.h"
 # include "error.h"
 
-/* LIBRARIES ---------------------------------------------------------------- */
+/*
+** LIBRARIES ---------------------------------------------------------------- **
+*/
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,12 +36,16 @@
 # include <math.h>
 # include <limits.h>
 
-/* VALUES ------------------------------------------------------------------- */
+/*
+** VALUES ------------------------------------------------------------------- **
+*/
 
 #define DESTROYNOTIFY		17
 #define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
 
-/* STRUCTURES --------------------------------------------------------------- */
+/*
+** STRUCTURES --------------------------------------------------------------- **
+*/
 
 enum	e_bgra
 {
@@ -183,7 +191,7 @@ typedef struct	s_env
 	t_dbcoord	raydir; // la direction du rayon
 	t_image		tx[ALL];
 	t_coord		res;
-	t_player	player;
+	t_player	ply;
 	t_pcolor	col;
 	t_map		map;
 	t_texture	tex;
@@ -191,117 +199,69 @@ typedef struct	s_env
 }				t_env;
 
 
-/* PROTOTYPES --------------------------------------------------------------- */
-
 /*
-** INIT_STRUCT
+** PROTOTYPES --------------------------------------------------------------- **
 */
 
+/* init_struct */
 void	init_parse(t_env *env);
 void	init_env(t_env *env);
 void	init_start_mlx(t_env *env);
 void	init_texture(t_env *env);
 
-/*
-** PARSE_START
-*/
-
-char	*get_path(char *str, int i, t_env *env);
+/* parse_start */
 void	parsing(char *file, t_env *env);
-// void	get_elements(char *str, t_env *env);
-// void	get_size_map(char *str, t_env *env);
-// int		get_map(char *file, t_env *env);
 
-/*
-** PARSE_INT
-*/
-
+/* parse_int */
 void	get_resolution(char *str, t_env *env);
 void	get_f_color(char* str, t_env *env);
 void	get_c_color(char* str, t_env *env);
 
-/*
-** PARSE_MAP
-*/
-
-// int		player_position(t_env *env, char c, int i, int j);
+/* parse_map */
 int		dup_map(char *str, t_env *env);
 int		is_a_map(char *str);
 int		is_char_map(char *str, t_env *env);
 
-
-/*
-** PARSE_CHECK
-*/
-
+/* parse_check */
 int		check_after_map(char *str, t_env *env);
 int		check_element(t_env *env);
 int		check_color(t_env *env, int ctrl);
 int		check_strend(char *str, t_env *env, int ctrl);
 
-/*
-** PARSE_WALL
-*/
-
+/* parse_wall */
 void	check_walls(t_env *env);
-void	check_borders(t_env *env);
 
-/*
-** RAYCASTING_START
-*/
+/* parse_texture */
+char	*get_path(char *str, int i, t_env *env);
 
+/* ray_start */
 int		start_mlx(t_env *env);
 
-/*
-** RAY_UTILS
-*/
-
+/* ray_utils */
 void	screen_size(t_env *env);
 int		ft_key_release(int key, t_env *env);
 int		ft_key_press(int key, t_env *env);
 int		ft_convert_color(t_color color, int endian);
 
-/*
-** RAY_MOVES 1 & 2
-*/
-
+/* ray_moves 1 & 2 */
 int		ft_quit(t_env *env);
 void	go_straight(t_env *env);
 void	go_back(t_env *env);
 void	go_left(t_env *env);
 void	go_right(t_env *env);
-// void	turn_left(t_env *env);
-// void	turn_right(t_env *env);
 void	keys_control(t_env *env);
 
-/*
-** RAY_DRAW
-*/
-
-// int		ret_color(t_env *env, int alpha, int red, int green, int blue);
-// void	put_px_to_img(t_image *img, int x, int y, int color);
+/* ray_draw */
 void	draw_column(t_env *env, int coord_x);
 
-/*
-** RAY_TEXTURE
-*/
-
-// void	get_texdir(t_env *env);
+/* ray_texture */
 void	calc_texture(t_env *env);
-// void	get_data(t_env *env);
 void	get_texture(t_env *env);
 
-
-/*
-** ERROR
-*/
-
+/* error */
 int		print_error(t_env *env, int error);
 
-/*
-** DEBUG
-*/
-
+/* debug */
 void	debug_parsing(t_env *env);
 void	debug_colors(t_env *env, int ctrl);
 void	debug_size_map(t_env *env);

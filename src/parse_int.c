@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:52:07 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:11:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		bb_atoi(char *str, t_env *env)
+static int	bb_atoi(char *str, t_env *env)
 {
 	int			len;
 	long long	nbr;
@@ -34,11 +34,9 @@ int		bb_atoi(char *str, t_env *env)
 	return (nbr);
 }
 
-// while ((str[env->i] >= 9 && str[env->i] <= 13) || str[env->i] == ' ')
-
 void	get_c_color(char* str, t_env *env)
 {
-	if (env->col.red_c != -1) // Check le double element C
+	if (env->col.red_c != -1)
 		print_error(env, DOUBLE_COLOR);
 	if (str[env->i])
 	{
@@ -68,7 +66,7 @@ void	get_c_color(char* str, t_env *env)
 
 void	get_f_color(char* str, t_env *env)
 {
-	if (env->col.red_f != -1) // Check le double element F
+	if (env->col.red_f != -1)
 		print_error(env, DOUBLE_COLOR);
 	if (str[env->i])
 	{
@@ -98,7 +96,7 @@ void	get_f_color(char* str, t_env *env)
 
 void	get_resolution(char *str, t_env *env)
 {
-	if (env->res.x != -1) // Check le double element R
+	if (env->res.x != -1)
 		print_error(env, DOUBLE_RESOLUTION);
 	if (str[env->i])
 	{

@@ -6,19 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:59:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:53:49 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:31:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// check :
-// pas d'espaces dans le path
-// double element
-// il peut y avoir des espaces avant et apres
-// s'il y a une erreur (malloc failes ou double element il faut free)
-
-void	check_double_texture(char *str, t_env *env)
+static void	check_double_texture(char *str, t_env *env)
 {
 	if (str[env->i] == 'N' && env->tex.path_no != NULL)
 		print_error(env, DOUBLE_NO);
@@ -34,8 +28,7 @@ void	check_double_texture(char *str, t_env *env)
 		print_error(env, DOUBLE_S);
 }
 
-	// printf("path : |%s|\n", path);
-char	*get_path(char *str, int i, t_env *env)
+char		*get_path(char *str, int i, t_env *env)
 {
 	int		len;
 	int		c;

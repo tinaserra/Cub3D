@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:21:53 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 09:21:53 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 11:12:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_texdir(t_env *env)
+static void	get_texdir(t_env *env)
 {
 	if (env->side == 0 && env->raydir.x < 0)
 		env->tex.dir = NO;
@@ -24,28 +24,32 @@ void	get_texdir(t_env *env)
 		env->tex.dir = EA;
 }
 
+/*
+** On calcule la valeur de wallx, où exactement le mur a été touché.
+** On calcule tex.x, coordonnée x sur la texture.
+** floor() -> calc l'arrondi entier inférieur de la valeur donnée en paramètre
+** Le tex.step : de combien augmenter la coordonnée de texture par pixel d'écran
+** tex.pos : coordonnée de départ de la texture
+*/
+
 void	calc_texture(t_env *env)
 {
 	get_texdir(env);
-	// calculer la valeur de wallx, où exactement le mur a été touché
 	if (env->side == 0)
-		env->tex.wallx = env->player.py + env->pwdist * env->raydir.y;
+		env->tex.wallx = env->ply.py + env->pwdist * env->raydir.y;
 	else
-		env->tex.wallx = env->player.px + env->pwdist * env->raydir.x;
-	env->tex.wallx -= floor((env->tex.wallx)); // calcule l'arrondi entier inférieur de la valeur spécifiée en paramètre
-	// coordonnée x sur la texture
+		env->tex.wallx = env->ply.px + env->pwdist * env->raydir.x;
+	env->tex.wallx -= floor((env->tex.wallx));
 	env->tex.x = (int)(env->tex.wallx * (double)env->tx[env->tex.dir].width);
 	if (env->side == 0 && env->raydir.x > 0)
 		env->tex.x = env->tx[env->tex.dir].width - env->tex.x - 1;
 	if (env->side == 1 && env->raydir.y < 0)
 		env->tex.x = env->tx[env->tex.dir].width - env->tex.x - 1;
-	// De combien augmenter la coordonnée de texture par pixel d'écran
 	env->tex.step = 1.0 * env->tx[0].height / env->lineh;
-	// Coordonnée de départ de la texture
 	env->tex.pos = (env->dstart - env->res.y / 2 + env->lineh / 2) * env->tex.step;
 }
 
-void	get_data(t_env *env)
+static void	get_data(t_env *env)
 {
 	env->tx[NO].data = (int *)mlx_get_data_addr(env->tx[NO].image, \
 	&env->tx[NO].bits_per_pixel, &env->tx[NO].size_line, &env->tx[NO].endian);

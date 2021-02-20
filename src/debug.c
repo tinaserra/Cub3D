@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:32:40 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:40:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	debug_print_map(t_env *env)
 	int j;
 
 	printf("\n\n********* DEBUG PRINT MAP *********\n\n");
-	printf("Player position = %c\n\n", env->player.orient_start);
+	printf("Player position = %c\n\n", env->ply.orient_start);
 	printf("-------------\n|    MAP    |\n-------------\n");
 	i = 0;
 	while (i < env->map.nb_lines)
@@ -99,11 +99,30 @@ void	debug_print_map(t_env *env)
 #endif
 
 #ifdef DEBUG
+void	debug_print_texture(t_env *env)
+{
+	printf("\n\n********* DEBUG PRINT TEXTURE *********\n\n");
+	printf("path no : |%s|\n", env->tex.path_no);
+	printf("path we : |%s|\n", env->tex.path_we);
+	printf("path so : |%s|\n", env->tex.path_so);
+	printf("path ea : |%s|\n", env->tex.path_ea);
+	printf("path s : |%s|\n", env->tex.path_s);
+}
+#else
+void	debug_print_texture(t_env *env)
+{
+	(void)env;
+	return ;
+}
+#endif
+
+#ifdef DEBUG
 void	debug_parsing(t_env *env)
 {
 	debug_resolution(env);
 	debug_colors(env, 'B');
 	debug_size_map(env);
+	debug_print_texture(env);
 	debug_print_map(env);
 }
 #else
