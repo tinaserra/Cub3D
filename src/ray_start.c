@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/19 16:20:24 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 08:49:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	game_update(t_env *env)
 		calc_sidedist(env);
 		algo_dda(env);
 		calc_column(env);
-		ta_maman_la_tchoin(env);
+		calc_texture(env);
 		draw_column(env, env->x);
 		env->x++;
 	}

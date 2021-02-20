@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:55:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:10:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ int	ft_key_release(int key, t_env *env)
 	return (0);
 }
 
+// avec mlx_get_screen_size -> connaitre la resolutiion de l'ecran utilisé,
+// si la resolution demandée dans le file.cub est supperieure a l'ecran
+// -> on redimentionne a la taille de l'ecran.
+
 void	screen_size(t_env *env)
 {
-	// avec mlx_get_screen_size -> connaitre la resolutiion de l'ecran utilisé,
-	// si la res demandé dans le file.cub est supperieur a l'ecran alors choisr une resolution plus petite (celle de l'ecran)
-
 	mlx_get_screen_size(env->mlx, &env->screen_width, &env->screen_height);
 	if (env->res.x > env->screen_width)
 		env->res.x = env->screen_width;

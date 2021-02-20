@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/19 16:44:52 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 08:46:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,6 @@ void	init_parse(t_env *env)
 ** printf("G = %d\n", parse->col.green_c);
 ** printf("B = %d\n", parse->col.blue_c);
 */
-
-void	init_texture(t_env *env)
-{
-	if (env->wall.side == 0 && env->raydir.x < 0)
-		env->tex.dir = NO;
-	if (env->wall.side == 1 && env->raydir.y < 0)
-		env->tex.dir = WE;
-	if (env->wall.side == 0 && env->raydir.x >= 0)
-		env->tex.dir = SO;
-	if (env->wall.side == 1 && env->raydir.y >= 0)
-		env->tex.dir = EA;
-
-	// // calculer la valeur de wallx, où exactement le mur a été touché
-	// if (env->wall.side == 0)
-	// 	env->tex.wallx = env->player.py + env->wall.pdist * env->raydir.y;
-	// else
-	// 	env->tex.wallx = env->player.px + env->wall.pdist * env->raydir.x;
-	// env->tex.wallx -= floor((env->tex.wallx)); // calcule l'arrondi entier inférieur de la valeur spécifiée en paramètre
-}
 
 void	init_start_mlx(t_env *env)
 {

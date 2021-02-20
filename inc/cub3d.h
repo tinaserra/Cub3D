@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/19 16:20:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:05:30 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,13 +287,14 @@ void	keys_control(t_env *env);
 
 // int		ret_color(t_env *env, int alpha, int red, int green, int blue);
 // void	put_px_to_img(t_image *img, int x, int y, int color);
-void	ta_maman_la_tchoin(t_env *env);
 void	draw_column(t_env *env, int coord_x);
 
 /*
 ** RAY_TEXTURE
 */
 
+// void	get_texdir(t_env *env);
+void	calc_texture(t_env *env);
 // void	get_data(t_env *env);
 void	get_texture(t_env *env);
 
