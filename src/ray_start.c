@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 08:49:05 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:21:53 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,45 +40,45 @@ void	calc_sidedist(t_env *env)
 void	algo_dda(t_env *env)
 {
 	// exécute DDA
-	while (env->wall.hit == 0)
+	while (env->hit == 0)
 	{
 		// passe au carré suivant de la carte, OU dans la direction x, OU dans la direction y
 		if (env->sidedist.x < env->sidedist.y)
 		{
 			env->sidedist.x += env->deltadist.x;
 			env->map.x += env->step.x;
-			env->wall.side = 0; // c'est un cote x qui est touche (vertical)
+			env->side = 0; // c'est un cote x qui est touche (vertical)
 		}
 		else
 		{
 			env->sidedist.y += env->deltadist.y;
 			env->map.y += env->step.y;
-			env->wall.side = 1; // c'est un cote y qui est touche (horizontal)
+			env->side = 1; // c'est un cote y qui est touche (horizontal)
 		}
 		// Vérifie si le rayon a heurté un mur
 		if(env->map.map[env->map.x][env->map.y] == '1')
-			env->wall.hit = 1;
+			env->hit = 1;
 	}
 }
 
 void	calc_column(t_env *env)
 {
 	// Calculer la distance projetée sur la direction de la caméra (la distance euclidienne donnera un effet fisheye!)
-	if (env->wall.side == 0)
-		env->wall.pdist = (env->map.x - env->player.px + (1 - env->step.x) / 2) / env->raydir.x;
+	if (env->side == 0)
+		env->pwdist = (env->map.x - env->player.px + (1 - env->step.x) / 2) / env->raydir.x;
 	else
-		env->wall.pdist = (env->map.y - env->player.py + (1 - env->step.y) / 2) / env->raydir.y;
+		env->pwdist = (env->map.y - env->player.py + (1 - env->step.y) / 2) / env->raydir.y;
 
 	// Calcule la hauteur de la colonne à dessiner sur l'écran
-	env->wall.lineh = (int)(env->res.y / env->wall.pdist); // env->res.y -> h = hauteur fenetre !
+	env->lineh = (int)(env->res.y / env->pwdist); // env->res.y -> h = hauteur fenetre !
 
 	// calcule le pixel le plus bas et le plus élevé pour remplir la bande courante
-	env->wall.dstart = -env->wall.lineh / 2 + env->res.y / 2;
-	if (env->wall.dstart < 0)
-		env->wall.dstart = 0;
-	env->wall.dend = env->wall.lineh / 2 + env->res.y / 2;
-	if (env->wall.dend >= env->res.y || env->wall.dend < 0)
-		env->wall.dend = env->res.y - 1;
+	env->dstart = -env->lineh / 2 + env->res.y / 2;
+	if (env->dstart < 0)
+		env->dstart = 0;
+	env->dend = env->lineh / 2 + env->res.y / 2;
+	if (env->dend >= env->res.y || env->dend < 0)
+		env->dend = env->res.y - 1;
 }
 
 int	game_update(t_env *env)

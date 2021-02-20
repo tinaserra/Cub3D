@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 08:55:18 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:20:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_column(t_env *env, int coord_x)
 	while (++y < env->res.y)
 	{
 		// dessine le mur
-		if (y >= env->wall.dstart && y <= env->wall.dend)
+		if (y >= env->dstart && y <= env->dend)
 			draw_texture(env, env->x, y);
 		// dessine le plafond
 		else if (y < env->res.y / 2)

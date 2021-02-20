@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 09:05:30 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:21:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,18 +131,6 @@ typedef struct	s_map
 	char		**map;
 }				t_map;
 
-
-typedef struct	s_wall
-{
-	double		pdist; // distance du joueur au mur
-	int			hit; // y a-t-il eu un mur touché?
-	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-	int			lineh; // hauteur de la ligne du mur a dessiner
-	int			dstart;
-	int			dend;
-
-}				t_wall;
-
 /* Toute la data de l'image (mlx_get_data_addr) */
 
 typedef struct	s_image
@@ -177,12 +165,17 @@ typedef struct	s_env
 	int 		screen_width;
 	int 		screen_height;
 	int			save;
+	int			hit; // y a-t-il eu un mur touché?
+	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
+	int			lineh; // hauteur de la ligne du mur a dessiner
+	int			dstart;
+	int			dend;
 	void		*mlx;
 	void		*window;
 	double		camerax; // coordonnée x dans l'espace caméra
+	double		pwdist; // distance du joueur au mur
 	char		keyboard[512];
 
-	t_wall		wall;
 	t_coord		step; // -1 si doit sauter un carre dans direction x ou y negative, 1 dans la direction x ou y positive
 	t_dbcoord	deltadist; // longueur du rayon d'un côté x ou y au coté x ou y
 	t_dbcoord	sidedist; // distance que le rayon parcours jusqu'au premier point d'intersection (vertical = un coté x, horizontal = un coté y)

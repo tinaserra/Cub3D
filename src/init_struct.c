@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 08:46:41 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/20 09:18:46 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void	init_env(t_env *env)
 	env->map.y = (int)env->player.py;
 	env->deltadist.x = fabs(1 / env->raydir.x);
 	env->deltadist.y = fabs(1 / env->raydir.y);
-	env->wall.hit = 0;
+	env->hit = 0;
 }
