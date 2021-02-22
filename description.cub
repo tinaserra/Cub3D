@@ -1,8 +1,8 @@
 R 1200 800
-NO    ./textures/red.xpm 
-WE ./textures/purplestone.xpm
-SO ./textures/bluestone.xpm
-EA ./textures/greystone.xpm
+NO    ./textures/north1.xpm 
+WE ./textures/west1.xpm
+SO ./textures/south1.xpm
+EA ./textures/east1.xpm
 S ./textures/tonneau.xpm
 F 95,255,218
 C 163,95,255
