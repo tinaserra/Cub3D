@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 11:13:54 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/23 15:23:29 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ static int	ret_color(t_env *env, int alpha, int red, int green, int blue)
 
 static void	draw_texture(t_env *env, int x, int y)
 {
-	env->tex.y = (int)env->tex.pos & (env->tx[env->tex.dir].height - 1);
-	env->tex.pos += env->tex.step;
+	// env->tex.y = (int)env->tex.pos & (env->tx[env->tex.dir].height - 1);
+	// env->tex.pos += env->tex.step;
 	if (y < env->res.y && x < env->res.x)
+	{
 		put_px_to_img(&env->img, x, y, \
-		env->tx[env->tex.dir].data[env->tex.y * \
+		env->tx[env->tex.dir].data[(int)env->tex.pos * \
 		env->tx[env->tex.dir].size_line / 4 + env->tex.x]);
+
+		// env->tx[env->tex.dir].data[(int)env->tex.pos
+		// 	* (g->mlx.texture[env->tex.dir].size_line / 4) + env->tex.x]
+
+	}
 }
 
 /*
@@ -74,7 +80,10 @@ void	draw_column(t_env *env, int coord_x)
 	while (++y < env->res.y)
 	{
 		if (y >= env->dstart && y <= env->dend)
+		{
 			draw_texture(env, env->x, y);
+			env->tex.pos += env->tex.step;
+		}
 		else if (y < env->res.y / 2)
 		{
 			color = ret_color(env, 0, env->col.red_c, env->col.green_c, env->col.blue_c);
