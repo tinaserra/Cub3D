@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/02/20 09:06:56 by vserra           ###   ########.fr        #
+#    Updated: 2021/02/24 09:15:30 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ MLX = libmlx.dylib
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
 # override -> permet de reecrire la suite de la variable
-override CFLAGS += -Wall -Wextra -Werror -MMD -O3 -fsanitize=address
+override CFLAGS += -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
