@@ -54,6 +54,11 @@ Plus le rayon met du temps à atteindre le mur, plus il est loin.
 Plus il est loin plus la colonne de pixels est petite.
 La couleur dépend aussi de la distance : plus c’est loin plus c’est foncé plus c’est près plus c’est clair.
 
+### Les Sprites
+
+Tuto :</br>
+[Fraire des sprites de bg soyeux](https://lodev.org/cgtutor/raycasting3.html)
+
 
 ## USEFUL LINKS 🤙🏼
 * [Raycasting tutorial video](https://courses.pikuma.com/courses/take/raycasting/lessons/7485598-introduction-and-learning-outcomes)
