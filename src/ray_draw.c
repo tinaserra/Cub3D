@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/23 15:26:42 by vserra           ###   ########.fr       */
+/*   Updated: 2021/02/24 13:42:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ static void	draw_texture(t_env *env, int x, int y)
 		put_px_to_img(&env->img, x, y, \
 		env->tx[env->tex.dir].data[(int)env->tex.pos * \
 		env->tx[env->tex.dir].size_line / 4 + env->tex.x]);
-
-		// env->tx[env->tex.dir].data[(int)env->tex.pos
-		// 	* (g->mlx.texture[env->tex.dir].size_line / 4) + env->tex.x]
-
 	}
 }
 
@@ -84,7 +80,7 @@ void	draw_column(t_env *env, int coord_x)
 			draw_texture(env, env->x, y);
 			env->tex.pos += env->tex.step;
 		}
-		else if (y < env->res.y / 2)
+		else if (y <= env->res.y / 2)
 		{
 			color = ret_color(env, 0, env->col.red_c, env->col.green_c, env->col.blue_c);
 			put_px_to_img(&env->img, coord_x, y, color);
