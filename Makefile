@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/02/24 09:15:30 by vserra           ###   ########.fr        #
+#    Updated: 2021/03/11 12:28:42 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC =	main.c \
 		ray_moves1.c \
 		ray_moves2.c \
 		ray_draw.c \
-		ray_texture.c
+		ray_texture.c \
+		ray_sprite.c
 
 NAME = Cub3D
 

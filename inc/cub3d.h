@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/09 17:16:27 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/11 12:27:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,12 @@ typedef struct	s_texture
 
 typedef struct	s_sprite
 {
-	double		*zbuffer;
+	int			nbr;
+	double		zbuffer[env->res.x]; // ??
+	int			spriteOrder [nbr];
+	double		spriteDistance [nbr];
+	t_dbcoord	coord;
+	t_dbcoord	transform;
 }				t_sprite;
 
 
@@ -200,7 +205,7 @@ typedef struct	s_env
 	t_player	ply;
 	t_pcolor	col;
 	t_map		map;
-	t_sprite	spr;
+	t_sprite	sprite;
 	t_texture	tex;
 	t_image		img;
 }				t_env;
