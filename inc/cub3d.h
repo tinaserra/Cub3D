@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:10:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 17:11:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ typedef struct	s_dbcoord
 
 typedef struct	s_sprite
 {
-	// int			nbr;
 	// double		zbuffer[env->res.x]; // ??
 	// int			spriteOrder [nbr];
 	// double		spriteDistance [nbr];
