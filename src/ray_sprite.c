@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/11 12:31:48 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 17:09:50 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,38 @@
 
 void	sprite_ctrl(t_env *env)
 {
-	(void)env;
-	printf("SPLENDIDE !\n");
+	// printf("SPLENDIDE !\n");
+	double zbuffer [env->res.x];
+
+	// tableaux utilisés pour trier les sprites
+	int spriteOrder[env->nbsprite];
+	double spriteDistance[env->nbsprite];
+
+	// SPRITE CASTING
+	// trier les sprites de loin à pret
+	int i = 0;
+	while (i < env->nbsprite)
+	{
+		spriteOrder[i] = i;
+		spriteDistance[i] = ((env->ply.px - env->sprite[i].x) * (env->ply.px - env->sprite[i].x) + (env->ply.py - env->sprite[i].y) * (env->ply.py - env->sprite[i].y)) ; // sqrt pas pris, inutile
+
+		i++;
+	}
 }
 
-// 1D Zbuffer
- double ZBuffer [screenWidth];
+// // 1D Zbuffer
+// double ZBuffer [env->res.x];
 
-// tableaux utilisés pour trier les sprites
- int spriteOrder [numSprites];
-double spriteDistance [numSprites];
+// // tableaux utilisés pour trier les sprites
+// int spriteOrder [numSprites];
+// double spriteDistance [numSprites];
 
-// fonction utilisée pour trier les sprites
- void sortSprites (int * order, double * dist, int amount);
+// // fonction utilisée pour trier les sprites
+// void sortSprites (int * order, double * dist, int amount);
 
- // SPRITE CASTING
+// SPRITE CASTING
 	 // trier les sprites de loin à fermer
-	 pour (int i = 0; i <numSprites; i ++)
+	 for (int i = 0; i <numSprites; i ++)
 	{
 	  spriteOrder [i] = i;
 	  spriteDistance [i] = ((posX - sprite [i] .x) * (posX - sprite [i] .x) + (posY - sprite [i] .y) * (posY - sprite [i] .y)) ; // sqrt pas pris, inutile

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/11 12:29:36 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ static int	game_update(t_env *env)
 		draw_column(env, env->x);
 		env->x++;
 	}
-	sprite_ctrl(env);
+	if (env->nbsprite > 0)
+		sprite_ctrl(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	mlx_destroy_image(env->mlx, env->img.image);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))

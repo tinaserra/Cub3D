@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:11:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 10:49:05 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 17:01:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char g_str_error[NUMBER][256] =
 	[NEW_WINDOW] = "Error :\n[MLX] Create new window\n",
 	[NEW_IMAGE] = "Error :\n[MLX] Create new image\n",
 
-	[MALLOC_FAILED] = "Error :\n[Failed] memory allocation in get_map\n"
+	[MALLOC_FAILED] = "Error :\n[Failed] memory allocation\n"
 };
 
 #endif

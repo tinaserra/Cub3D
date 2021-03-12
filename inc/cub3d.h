@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/11 12:27:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 17:01:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,6 @@ typedef struct	s_texture
 	char		*path_s;
 }				t_texture;
 
-typedef struct	s_sprite
-{
-	int			nbr;
-	double		zbuffer[env->res.x]; // ??
-	int			spriteOrder [nbr];
-	double		spriteDistance [nbr];
-	t_dbcoord	coord;
-	t_dbcoord	transform;
-}				t_sprite;
-
-
 typedef struct	s_player
 {
 	char		orient_start;
@@ -175,6 +164,16 @@ typedef struct	s_dbcoord
 	double		y;
 }				t_dbcoord;
 
+typedef struct	s_sprite
+{
+	// int			nbr;
+	// double		zbuffer[env->res.x]; // ??
+	// int			spriteOrder [nbr];
+	// double		spriteDistance [nbr];
+	t_dbcoord	coord;
+	t_dbcoord	transform;
+}				t_sprite;
+
 /* Structure mère */
 
 typedef struct	s_env
@@ -194,6 +193,7 @@ typedef struct	s_env
 	double		camerax; // coordonnée x dans l'espace caméra
 	double		pwdist; // distance du joueur au mur
 	char		keyboard[512];
+	int			nbsprite;
 
 	t_coord		step; // -1 si doit sauter un carre dans direction x ou y negative, 1 dans la direction x ou y positive
 	t_dbcoord	deltadist; // longueur du rayon d'un côté x ou y au coté x ou y
@@ -205,7 +205,7 @@ typedef struct	s_env
 	t_player	ply;
 	t_pcolor	col;
 	t_map		map;
-	t_sprite	sprite;
+	t_sprite	*sprite; // en fonction du nombre de sprite
 	t_texture	tex;
 	t_image		img;
 }				t_env;
@@ -269,6 +269,9 @@ void	draw_column(t_env *env, int coord_x);
 /* ray_texture */
 void	calc_texture(t_env *env);
 void	get_texture(t_env *env);
+
+/* ray_sprite */
+void	sprite_ctrl(t_env *env);
 
 /* error */
 int		print_error(t_env *env, int error);

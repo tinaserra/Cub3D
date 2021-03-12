@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,14 @@ int			dup_map(char *str, t_env *env)
 	{
 		if (player_position(env, str[x], y, x) == 0)
 			env->map.map[y][x] = '0';
-		else if (str[x] == ' ')
-			env->map.map[y][x] = '.';
-		else
-			env->map.map[y][x] = str[x];
+		if (str[x] == '2')
+			env->nbsprite++;
+		env->map.map[y][x] = str[x];
 		x++;
 	}
 	while (x < env->map.len_line)
 	{
-		env->map.map[y][x] = '.';
+		env->map.map[y][x] = ' ';
 		x++;
 	}
 	env->map.map[y][x] = '\0';
@@ -79,7 +78,7 @@ int			is_a_map(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && str[i] != ' ' && str[i] != '0' 
+		if (str[i] != '1' && str[i] != ' ' && str[i] != '0'
 			&& str[i] != '2' && str[i] != 'N' && str[i] != 'S'
 			&& str[i] != 'E' && str[i] != 'W' && str[i])
 			return (-1);
@@ -95,9 +94,9 @@ int			is_char_map(char *str, t_env *env)
 		if (str[env->i] != '1' && str[env->i] != ' ' && str[env->i] != '0'
 			&& str[env->i] != '2' && str[env->i] != 'N' && str[env->i] != 'S'
 			&& str[env->i] != 'E' && str[env->i] != 'W' && str[env->i])
-			{
-				print_error(env, MAP_WRONG_CHAR);
-			}
+		{
+			print_error(env, MAP_WRONG_CHAR);
+		}
 		env->i++;
 	}
 	return (0);

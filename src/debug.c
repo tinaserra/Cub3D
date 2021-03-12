@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:32:40 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	debug_size_map(t_env *env)
 {
 	printf("\n\n********* DEBUG SIZE MAP *********\n\n");
 	printf("nb_lines = %d\n", env->map.nb_lines);
-	printf("len_line = %d\n", env->len_line);
+	printf("len_line = %d\n", env->map.len_line);
 }
 #else
 void	debug_size_map(t_env *env)
@@ -75,7 +75,8 @@ void	debug_print_map(t_env *env)
 	int j;
 
 	printf("\n\n********* DEBUG PRINT MAP *********\n\n");
-	printf("Player position = %c\n\n", env->ply.orient_start);
+	printf("Player position = %c\n", env->ply.orient_start);
+	printf("Number of sprite = %d\n\n", env->nbsprite);
 	printf("-------------\n|    MAP    |\n-------------\n");
 	i = 0;
 	while (i < env->map.nb_lines)
@@ -83,7 +84,10 @@ void	debug_print_map(t_env *env)
 		j = 0;
 		while (env->map.map[i][j] != '\0')
 		{
-			printf("%2c", env->map.map[i][j]);
+			if (env->map.map[i][j] == ' ')
+				printf(" .");
+			else
+				printf("%2c", env->map.map[i][j]);
 			j++;
 		}
 		printf("\n");

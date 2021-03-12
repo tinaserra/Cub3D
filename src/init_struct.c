@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 11:00:22 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_start_mlx(t_env *env)
 		env->plane.x = 0.66;
 	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
+	env->sprite = malloc(sizeof(t_sprite) * env->nbsprite)
 }
 
 void	init_env(t_env *env)
