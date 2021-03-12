@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:01:28 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/12 17:10:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ typedef struct	s_sprite
 	// double		zbuffer[env->res.x]; // ??
 	// int			spriteOrder [nbr];
 	// double		spriteDistance [nbr];
-	t_dbcoord	coord;
+	double		x;
+	double		y;
 	t_dbcoord	transform;
 }				t_sprite;
 
