@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 17:11:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 18:03:49 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	sort_sprite(t_env *env)
 	{
 		if (env->spr[i].dist > env->spr[i + 1].dist)
 		{
-			// ft_swap(&env->spr[i], & env->spr[i + 1]);
 			tmp = env->spr[i];
 			env->spr[i] = env->spr[i + 1];
 			env->spr[i + 1] = tmp;
