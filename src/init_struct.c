@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:11:18 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 12:20:53 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	init_start_mlx(t_env *env)
 		env->plane.x = 0.66;
 	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
-	if (!(env->sprite = malloc(sizeof(t_sprite) * env->nbsprite)))
-		print_error(env, MALLOC_FAILED);
 }
 
 void	init_env(t_env *env)
@@ -57,8 +55,8 @@ void	init_env(t_env *env)
 	env->camerax = 2 * env->x / (double)env->res.x - 1;
 	env->raydir.x = env->ply.dirx + env->plane.x * env->camerax;
 	env->raydir.y = env->ply.diry + env->plane.y * env->camerax;
-	env->map.x = (int)env->ply.px;
-	env->map.y = (int)env->ply.py;
+	env->map.x = (int)env->ply.x;
+	env->map.y = (int)env->ply.y;
 	env->deltadist.x = fabs(1 / env->raydir.x);
 	env->deltadist.y = fabs(1 / env->raydir.y);
 	env->hit = 0;

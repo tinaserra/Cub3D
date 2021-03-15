@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:11:17 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 15:52:28 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ typedef struct	s_texture
 typedef struct	s_player
 {
 	char		orient_start;
-	double		px;
-	double		py;
+	double		x;
+	double		y;
 	double		dirx; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
 	double		diry; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
 	double		mspeed;
@@ -166,12 +166,18 @@ typedef struct	s_dbcoord
 
 typedef struct	s_sprite
 {
-	// double		zbuffer[env->res.x]; // ??
-	// int			spriteOrder [nbr];
-	// double		spriteDistance [nbr];
 	double		x;
 	double		y;
-	t_dbcoord	transform;
+	double		dist;
+	double		invdet;
+	int			sx;
+	int			h;
+	int			w;
+	int			color;
+	t_coord		dstart;
+	t_coord		dend;
+	t_coord		tex;
+	t_dbcoord	tform;
 }				t_sprite;
 
 /* Structure mère */
@@ -194,6 +200,7 @@ typedef struct	s_env
 	double		pwdist; // distance du joueur au mur
 	char		keyboard[512];
 	int			nbsprite;
+	double		*zbuffer;
 
 	t_coord		step; // -1 si doit sauter un carre dans direction x ou y negative, 1 dans la direction x ou y positive
 	t_dbcoord	deltadist; // longueur du rayon d'un côté x ou y au coté x ou y
@@ -205,7 +212,7 @@ typedef struct	s_env
 	t_player	ply;
 	t_pcolor	col;
 	t_map		map;
-	t_sprite	*sprite; // en fonction du nombre de sprite
+	t_sprite	*spr; // en fonction du nombre de sprite
 	t_texture	tex;
 	t_image		img;
 }				t_env;
@@ -265,13 +272,14 @@ void	keys_control(t_env *env);
 
 /* ray_draw */
 void	draw_column(t_env *env, int coord_x);
+void	draw_sprite(t_env *env, int i);
 
 /* ray_texture */
 void	calc_texture(t_env *env);
 void	get_texture(t_env *env);
 
 /* ray_sprite */
-void	sprite_ctrl(t_env *env);
+void	sprite_casting(t_env *env);
 
 /* error */
 int		print_error(t_env *env, int error);

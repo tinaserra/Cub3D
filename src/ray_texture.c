@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:21:53 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 11:12:28 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 11:50:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	calc_texture(t_env *env)
 {
 	get_texdir(env);
 	if (env->side == 0)
-		env->tex.wallx = env->ply.py + env->pwdist * env->raydir.y;
+		env->tex.wallx = env->ply.y + env->pwdist * env->raydir.y;
 	else
-		env->tex.wallx = env->ply.px + env->pwdist * env->raydir.x;
+		env->tex.wallx = env->ply.x + env->pwdist * env->raydir.x;
 	env->tex.wallx -= floor((env->tex.wallx));
 	env->tex.x = (int)(env->tex.wallx * (double)env->tx[env->tex.dir].width);
 	if (env->side == 0 && env->raydir.x > 0)

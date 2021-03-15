@@ -6,14 +6,14 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 11:50:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-** env->ply.px	-> [+0,5] Pour se positioner au centre de la case
+** env->ply.x	-> [+0,5] Pour se positioner au centre de la case
 ** player.dirx		-> commence à -1 pour N, 1 pour S, 0 sinon
 ** player.diry		-> commence à -1 pour W, 1 pour E, 0 sinon
 */
@@ -25,8 +25,8 @@ static int	player_position(t_env *env, char c, int i, int j)
 		if (env->ply.orient_start == 'o')
 		{
 			env->ply.orient_start = c;
-			env->ply.px = i + 0.5;
-			env->ply.py = j + 0.5;
+			env->ply.x = i + 0.5;
+			env->ply.y = j + 0.5;
 			if (c == 'N')
 				env->ply.dirx = -1;
 			if (c == 'E')

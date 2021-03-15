@@ -6,102 +6,180 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:09:50 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 17:11:44 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	sprite_ctrl(t_env *env)
+void	get_sprite_coord(t_env *env)
 {
-	// printf("SPLENDIDE !\n");
-	double zbuffer [env->res.x];
+	int y;
+	int x;
+	int i;
 
-	// tableaux utilisés pour trier les sprites
-	int spriteOrder[env->nbsprite];
-	double spriteDistance[env->nbsprite];
-
-	// SPRITE CASTING
-	// trier les sprites de loin à pret
-	int i = 0;
-	while (i < env->nbsprite)
+	if (!(env->spr = malloc(sizeof(t_sprite) * env->nbsprite)))
+		print_error(env, MALLOC_FAILED);
+	y = 0;
+	i = 0;
+	while (y < env->nbsprite)
 	{
-		spriteOrder[i] = i;
-		spriteDistance[i] = ((env->ply.px - env->sprite[i].x) * (env->ply.px - env->sprite[i].x) + (env->ply.py - env->sprite[i].y) * (env->ply.py - env->sprite[i].y)) ; // sqrt pas pris, inutile
+		x = 0;
+		while (env->map.map[y][x])
+		{
+			if (env->map.map[y][x] == '2')
+			{
+				env->spr[i].x = x;
+				env->spr[i].y = y;
+				i++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
+/*
+** Calculer les distances entre le joueur et chaque sprite
+*/
+
+void	dist_sprite_player(t_env *env)
+{
+	int i;
+	
+	i = 0;
+	while (i < env->nbsprite - 1)
+	{
+		env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x, 2)
+			+ pow(env->ply.y - env->spr[i].y, 2));
+		// env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x)
+		// 	* (env->ply.x - env->spr[i].x) + (env->ply.y - env->spr[i].y)
+		// 	* (env->ply.y - env->spr[i].y)) ;
 		i++;
 	}
 }
 
-// // 1D Zbuffer
-// double ZBuffer [env->res.x];
+/*
+** Trier les sprites de loin à pret
+*/
 
-// // tableaux utilisés pour trier les sprites
-// int spriteOrder [numSprites];
-// double spriteDistance [numSprites];
+// void	sort_sprite(t_env *env)
+// {
+// 	int i;
+// 	int a;  
 
-// // fonction utilisée pour trier les sprites
-// void sortSprites (int * order, double * dist, int amount);
+// 	dist_sprite_player(env);
+// 	i = 0;
+// 	while (i < env->nbsprite)
+// 	{
+// 		if (env->spr[i].dist > env->spr[i + 1].dist)
+// 		{
+// 			ft_swap(&env->spr[i].dist, & env->spr[i + 1].dist);
+// 			a = i;
+// 		}
+// 		while (a)
+// 		{
+// 			if (env->spr[i - 1].dist > env->spr[a].dist)
+// 			{
+// 				ft_swap(&env->spr[a - 1].dist, &env->spr[a].dist);
+// 				--a;
+// 			}
+// 			else
+// 				a = 0;
+// 		}
+// 		i++;
+// 	}
+// }
 
-// SPRITE CASTING
-	 // trier les sprites de loin à fermer
-	 for (int i = 0; i <numSprites; i ++)
+
+void	sort_sprite(t_env *env)
+{
+	int i;
+	t_sprite tmp;
+
+	i = 0;
+	dist_sprite_player(env);
+	while (i < env->nbsprite - 1)
 	{
-	  spriteOrder [i] = i;
-	  spriteDistance [i] = ((posX - sprite [i] .x) * (posX - sprite [i] .x) + (posY - sprite [i] .y) * (posY - sprite [i] .y)) ; // sqrt pas pris, inutile
-	 }
-	sortSprites (spriteOrder, spriteDistance, numSprites);
-
-	// après avoir trié les sprites, faites la projection et dessinez-les
-	 pour (int i = 0; i <numSprites; i ++)
-	{
-	  // traduit la position du sprite en relative à la caméra
-	   double spriteX = sprite [spriteOrder [i]]. x - posX;
-	  double spriteY = sprite [spriteOrder [i]]. y - posY;
-
-	  // transformer le sprite avec la matrice de caméra inverse
-	   // [planeX dirX] -1 [dirY -dirX]
-	   // [] = 1 / (planeX * dirY-dirX * planeY) * []
-	   // [planeY dirY] [-planeY planeX]
- 
-	  double invDet = 1.0 / (planeX * dirY - dirX * planeY); // requis pour une multiplication correcte de la matrice
-
-	  double transformX = invDet * (dirY * spriteX - dirX * spriteY);
-	  double transformY = invDet * (-planeY * spriteX + planeX * spriteY); // c'est en fait la profondeur à l'intérieur de l'écran, ce que Z est en 3D
-
-	  int spriteScreenX = int ((w / 2) * (1 + transformX / transformY));
-
-	  // calculer la hauteur du sprite à l'écran
-	   int spriteHeight = abs (int (h / (transformY))); // utiliser 'transformY' au lieu de la distance réelle empêche fisheye
-	   // calculer le pixel le plus bas et le plus élevé pour remplir la bande courante
-	   int drawStartY = -spriteHeight / 2 + h / 2;
-	  if (drawStartY <0) drawStartY = 0;
-	  int drawEndY = spriteHeight / 2 + h / 2;
-	  if (drawEndY> = h) drawEndY = h - 1;
-
-	  // calcul de la largeur du sprite
-	   int spriteWidth = abs (int (h / (transformY)));
-	  int drawStartX = -spriteWidth / 2 + spriteScreenX;
-	  if (drawStartX <0) drawStartX = 0;
-	  int drawEndX = spriteWidth / 2 + spriteScreenX;
-	  if (drawEndX> = w) drawEndX = w - 1;
-
-	  // boucle à travers chaque bande verticale du sprite à l'écran
-	   pour (int stripe = drawStartX; stripe <drawEndX; stripe ++)
-	  {
-		int texX = int (256 * (bande - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
-		// les conditions dans le if sont:
-		 // 1) c'est devant le plan de la caméra donc vous ne voyez pas les choses derrière vous
-		 // 2) c'est sur l'écran (à gauche)
-		 // 3) c'est sur l'écran (à droite)
-		 // 4) ZBuffer, avec une distance perpendiculaire
-		 if (transformY> 0 && stripe> 0 && stripe <w && transformY <ZBuffer [stripe])
-		for (int y = drawStartY; y <drawEndY; y ++) // pour chaque pixel de la bande courante
-		 {
-		  int d = (y) * 256 - h * 128 + spriteHeight * 128; // 256 et 128 facteurs pour éviter les flottants
-		   int texY = ((d * texHeight) / spriteHeight) / 256;
-		  Uint32 couleur = texture [sprite [spriteOrder [i]]. Texture] [texWidth * texY + texX]; // récupère la couleur actuelle de la texture
-		   if ((color & 0x00FFFFFF)! = 0) buffer [y] [stripe] = color; // peindre le pixel s'il n'est pas noir, le noir est la couleur invisible
-		 }
-	  }
+		if (env->spr[i].dist > env->spr[i + 1].dist)
+		{
+			// ft_swap(&env->spr[i], & env->spr[i + 1]);
+			tmp = env->spr[i];
+			env->spr[i] = env->spr[i + 1];
+			env->spr[i + 1] = tmp;
+			i = 0;
+		}
+		i++;
 	}
+}
+
+/*
+** SPRITE POSITION
+**
+** 1. Traduit la position du sprite en relative à la caméra
+** 2. Calculer invdet : requis pour une multiplication correcte de la matrice.
+** 3. tform.y : c'est en fait la profondeur à l'intérieur de l'écran, ce que Z est en 3D.
+*/
+
+void	sprite_position(t_env *env, int i)
+{
+	double spr_x;
+	double spr_y;
+
+	spr_x = env->spr[i].x - env->ply.x + 0.5;
+	spr_y = env->spr[i].y - env->ply.y + 0.5;
+	env->spr[i].invdet = 1.0 / (env->plane.x * env->ply.diry \
+							- env->ply.dirx * env->plane.y);
+	env->spr[i].tform.x = env->spr[i].invdet * \
+						(env->ply.diry * spr_x - env->ply.dirx * spr_y);
+	env->spr[i].tform.y = env->spr[i].invdet * \
+						(-env->plane.y * spr_x + env->plane.x * spr_y);
+	env->spr[i].sx = (int)((env->res.x / 2) * \
+					(1 + env->spr[i].tform.x / env->spr[i].tform.y));
+}
+
+/*
+** SPRITE CASTING
+**
+** 1. Calculer la hauteur du sprite à l'écran en utilisant 'tform.y' 
+**    au lieu de la distance réelle empêche fisheye.
+** 2. Calculer le pixel le plus bas et le plus élevé pour remplir la bande courante.
+** 3. Calculer la largeur du sprite
+*/
+
+void	sprite_casting(t_env *env)
+{
+	int i;
+
+	// if (!(env->zbuffer = malloc(sizeof(env->zbuffer) * env->res.x)))
+	// 	print_error(env, MALLOC_FAILED);
+	// printf("OOOOOOOOO \n");
+	get_sprite_coord(env);
+	sort_sprite(env);
+	i = 0;
+	while (i < env->nbsprite)
+	{
+		sprite_position(env, i);
+		env->spr[i].h = abs((int)(env->res.y / (env->spr[i].tform.y)));
+
+
+		env->spr[i].dstart.y = -env->spr[i].h / 2 + env->res.y / 2;
+
+		if (env->spr[i].dstart.y < 0)
+			env->spr[i].dstart.y = 0;
+		env->spr[i].dend.y = env->spr[i].h / 2 + env->res.y / 2;
+		if (env->spr[i].dend.y >= env->res.y)
+			env->spr[i].dend.y = env->res.y - 1;
+		env->spr[i].w = abs((int)(env->res.y / (env->spr[i].tform.y)));
+		env->spr[i].dstart.x = -env->spr[i].w / 2 + env->spr[i].sx;
+		if (env->spr[i].dstart.x < 0)
+			env->spr[i].dstart.x = 0;
+		env->spr[i].dend.x = env->spr[i].w / 2 + env->spr[i].sx;
+		if (env->spr[i].dend.x >= env->res.x)
+			env->spr[i].dend.x = env->res.x - 1;
+		// printf("* dstart %d\n", env->spr[i].dstart.x);
+		// printf("* dend %d\n", env->spr[i].dend.x);
+		i++;
+	}
+	draw_sprite(env, i);
+}

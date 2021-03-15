@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 11:50:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_map(char *file, t_env *env)
 		free(str);
 	}
 	close(fd);
-	if (env->ply.px == 'o')
+	if (env->ply.x == 'o')
 		print_error(env, NO_PLAYER);
 	check_walls(env);
 	return (0);

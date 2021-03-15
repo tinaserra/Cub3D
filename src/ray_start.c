@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 16:58:17 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 17:17:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ static void	calc_sidedist(t_env *env)
 	if (env->raydir.x < 0)
 	{
 		env->step.x = -1;
-		env->sidedist.x = (env->ply.px - env->map.x) * env->deltadist.x;
+		env->sidedist.x = (env->ply.x - env->map.x) * env->deltadist.x;
 	}
 	else
 	{
 		env->step.x = 1;
-		env->sidedist.x = (env->map.x + 1.0 - env->ply.px) * env->deltadist.x;
+		env->sidedist.x = (env->map.x + 1.0 - env->ply.x) * env->deltadist.x;
 	}
 	if (env->raydir.y < 0)
 	{
 		env->step.y = -1;
-		env->sidedist.y = (env->ply.py - env->map.y) * env->deltadist.y;
+		env->sidedist.y = (env->ply.y - env->map.y) * env->deltadist.y;
 	}
 	else
 	{
 		env->step.y = 1;
-		env->sidedist.y = (env->map.y + 1.0 - env->ply.py) * env->deltadist.y;
+		env->sidedist.y = (env->map.y + 1.0 - env->ply.y) * env->deltadist.y;
 	}
 }
 
@@ -82,9 +82,9 @@ static void	algo_dda(t_env *env)
 static void	calc_column(t_env *env)
 {
 	if (env->side == 0)
-		env->pwdist = (env->map.x - env->ply.px + (1 - env->step.x) / 2) / env->raydir.x;
+		env->pwdist = (env->map.x - env->ply.x + (1 - env->step.x) / 2) / env->raydir.x;
 	else
-		env->pwdist = (env->map.y - env->ply.py + (1 - env->step.y) / 2) / env->raydir.y;
+		env->pwdist = (env->map.y - env->ply.y + (1 - env->step.y) / 2) / env->raydir.y;
 	env->lineh = (int)(env->res.y / env->pwdist);
 	env->dstart = -env->lineh / 2 + env->res.y / 2;
 	if (env->dstart < 0)
@@ -116,8 +116,8 @@ static int	game_update(t_env *env)
 		draw_column(env, env->x);
 		env->x++;
 	}
-	if (env->nbsprite > 0)
-		sprite_ctrl(env);
+	// if (env->nbsprite > 0)
+		sprite_casting(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	mlx_destroy_image(env->mlx, env->img.image);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
@@ -138,6 +138,8 @@ int			start_mlx(t_env *env)
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 		print_error(env, NEW_IMAGE);
 	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
+	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
+		print_error(env, MALLOC_FAILED);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
 	mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
