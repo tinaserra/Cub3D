@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/24 09:12:21 by vserra            #+#    #+#              #
-#    Updated: 2021/02/18 15:47:08 by vserra           ###   ########.fr        #
+#    Updated: 2021/03/15 12:27:28 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS	= ft_memset.c \
 		ft_isalnum.c \
 		ft_isascii.c \
 		ft_isprint.c \
+		ft_swap.c \
 		ft_toupper.c \
 		ft_tolower.c \
 		ft_strchr.c \

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 22:00:09 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/18 14:36:18 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/15 12:26:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char			*ft_strnstr(const char *haystack,
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strtrim(char const *s, char const *charset);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+void			ft_swap(double *a, double *b);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
 t_list			*ft_lstnew(void *content);
