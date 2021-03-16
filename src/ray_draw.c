@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 17:07:49 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/16 14:39:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,30 +100,63 @@ void	draw_column(t_env *env, int coord_x)
 ** Peindre le pixel s'il n'est pas noir, le noir est la couleur invisible.
 */
 
+// void		s_draw_sprites(t_g *g)
+// {
+// 	int	i;
+// 	int	sprite_id;
+
+// 	sprite_id = 0;
+// 	s_sort_sprites(g);
+// 	while (sprite_id < g->parse.count_sprite)
+// 	{
+// 		s_get_screen_sprite_pos(g, sprite_id);
+// 		i = g->mlx.sprites[sprite_id].draw_start.x - 1;
+// 		while (++i < g->mlx.sprites[sprite_id].draw_end.x)
+// 		{
+// 			g->mlx.sprites[sprite_id].texture.x = (int)(256 *
+// 			(i - (-g->mlx.sprites[sprite_id].size.w / 2
+// 			+ g->mlx.sprites[sprite_id].screen)) * g->mlx.texture[4].width
+// 			/ g->mlx.sprites[sprite_id].size.w) / 256;
+
+// 			if (g->mlx.sprites[sprite_id].transform.y > 0 && i > 0
+// 			&& i < g->parse.size.w && g->mlx.sprites[sprite_id].transform.y
+// 			< g->mlx.ray.z_buffer[i])
+// 			{
+// 				s_draw_sprite(g, sprite_id, i);
+// 			}
+// 		}
+// 		sprite_id++;
+// 	}
+// }
+
 void	draw_sprite(t_env *env, int i)
 {
 	i = 0;
 	int x = env->spr[i].dstart.x;
 	int y = env->spr[i].dstart.y;
-	// printf("dstart %d\n", env->spr[i].dstart.x);
-	// printf("x --------- %d\n", x);
-	// printf("dstart %d\n", env->spr[i].dstart.x);
-	// printf("dend %d\n", env->spr[i].dend.x);
-	// printf("y --------- %d\n", y);
-	// printf("dstart %d\n", env->spr[i].dstart.y);
-	// printf("dend %d\n", env->spr[i].dend.y);
+
+	printf("x --------- %d\n", x);
+	printf("dstart %d\n", env->spr[i].dstart.x);
+	printf("dend %d\n", env->spr[i].dend.x);
+	printf("y --------- %d\n", y);
+	printf("dstart %d\n", env->spr[i].dstart.y);
+	printf("dend %d\n", env->spr[i].dend.y);
+	
+	printf("tform.y %f\n", env->spr[i].tform.y);
 	// boucle à travers chaque bande verticale du sprite à l'écran
 	while (x < env->spr[i].dend.x)
 	{
+		// printf("DRAWWWW 1\n");
 		env->spr[i].tex.x = (int)(256 * (x - (-env->spr[i].w / 2 + \
 					env->spr[i].sx)) * env->tx[S].width / env->spr[i].w) / 256;
 		if (env->spr[i].tform.y > 0 && x > 0 && x < env->res.x \
 			&& env->spr[i].tform.y < env->zbuffer[x])
 		{
+			printf("DRAWWWW 2\n");
 			// pour chaque pixel de la bande courante
 			while (y < env->spr[i].dend.y)
 			{
-				printf("DRAWWWW\n");
+				printf("DRAWWWW 3\n");
 				env->spr[i].tex.y = (((y * 256 - env->res.y * 128 + env->spr[i].h
 				* 128) * env->tx[S].height) / env->spr[i].h) / 256;
 				env->spr[i].color = env->tx[S].data[env->spr[i].tex.y \

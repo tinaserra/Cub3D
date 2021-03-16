@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 18:03:49 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/16 14:42:11 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	dist_sprite_player(t_env *env)
 	{
 		env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x, 2)
 			+ pow(env->ply.y - env->spr[i].y, 2));
-		// env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x)
+		// env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x, 2) \
 		// 	* (env->ply.x - env->spr[i].x) + (env->ply.y - env->spr[i].y)
 		// 	* (env->ply.y - env->spr[i].y)) ;
 		i++;
@@ -70,7 +70,7 @@ void	dist_sprite_player(t_env *env)
 
 // 	dist_sprite_player(env);
 // 	i = 0;
-// 	while (i < env->nbsprite)
+// 	while (i < env->nbsprite - 1)
 // 	{
 // 		if (env->spr[i].dist > env->spr[i + 1].dist)
 // 		{
@@ -127,13 +127,15 @@ void	sprite_position(t_env *env, int i)
 
 	spr_x = env->spr[i].x - env->ply.x + 0.5;
 	spr_y = env->spr[i].y - env->ply.y + 0.5;
-	env->spr[i].invdet = 1.0 / (env->plane.x * env->ply.diry \
+	env->spr[i].invdet = 1.0 / (env->plane.x * env->ply.diry
 							- env->ply.dirx * env->plane.y);
-	env->spr[i].tform.x = env->spr[i].invdet * \
+	env->spr[i].tform.x = env->spr[i].invdet *
 						(env->ply.diry * spr_x - env->ply.dirx * spr_y);
-	env->spr[i].tform.y = env->spr[i].invdet * \
+	// printf("tform.y 0 = %f\n", env->spr[i].tform.y);
+	env->spr[i].tform.y = env->spr[i].invdet *
 						(-env->plane.y * spr_x + env->plane.x * spr_y);
-	env->spr[i].sx = (int)((env->res.x / 2) * \
+	printf("tform.y 1 = %f\n", env->spr[i].tform.y);
+	env->spr[i].sx = (int)((env->res.x / 2) *
 					(1 + env->spr[i].tform.x / env->spr[i].tform.y));
 }
 
@@ -150,8 +152,6 @@ void	sprite_casting(t_env *env)
 {
 	int i;
 
-	// if (!(env->zbuffer = malloc(sizeof(env->zbuffer) * env->res.x)))
-	// 	print_error(env, MALLOC_FAILED);
 	// printf("OOOOOOOOO \n");
 	get_sprite_coord(env);
 	sort_sprite(env);
@@ -160,10 +160,7 @@ void	sprite_casting(t_env *env)
 	{
 		sprite_position(env, i);
 		env->spr[i].h = abs((int)(env->res.y / (env->spr[i].tform.y)));
-
-
 		env->spr[i].dstart.y = -env->spr[i].h / 2 + env->res.y / 2;
-
 		if (env->spr[i].dstart.y < 0)
 			env->spr[i].dstart.y = 0;
 		env->spr[i].dend.y = env->spr[i].h / 2 + env->res.y / 2;

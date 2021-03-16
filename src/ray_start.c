@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 17:17:17 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/16 14:35:50 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static void	calc_column(t_env *env)
 ** rspeed -> la valeur constante est en radians / seconde
 */
 
-// ft_bzero(env->img.data, env->img.size_line * env->res.y);
 static int	game_update(t_env *env)
 {
 	env->ply.mspeed = 0.1;
@@ -116,7 +115,7 @@ static int	game_update(t_env *env)
 		draw_column(env, env->x);
 		env->x++;
 	}
-	// if (env->nbsprite > 0)
+	if (env->nbsprite > 0)
 		sprite_casting(env);
 	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
 	mlx_destroy_image(env->mlx, env->img.image);
