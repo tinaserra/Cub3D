@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 14:58:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:02:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ void	get_sprite_coord(t_env *env)
 			{
 				env->spr[i].x = y;
 				env->spr[i].y = x;
-				// printf("env->spr[i].x %f\n", env->spr[i].x);
-				// printf("            x %d\n", x);
-				// printf("env->spr[i].y %f\n", env->spr[i].y);
-				// printf("            y %d\n", y);
 				i++;
 			}
 			x++;

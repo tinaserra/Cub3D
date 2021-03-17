@@ -9,26 +9,19 @@ Cube3D
 copy/
 
 # C
-objs
+obj
 a.out*
 *.o
 *.d
 
 # OTHERS
 .DS_Store
-*.swp
-.README.md.swp
-libmlx.dylib 
 */.DS_Store
 */*/.DS_Store
+*.swp
+libmlx.dylib
 libft/libft.a
 
 # mlx
-mlx/*.swiftdoc
-mlx/*.swiftmodule
-# mlx/mlx_image.swiftdoc
-# mlx/mlx_image.swiftmodule
-# mlx/mlx_init.swiftdoc
-# mlx/mlx_init.swiftmodule
-# mlx/mlx_window.swiftdoc
-# mlx/mlx_window.swiftmodule
+# mlx/*.swiftdoc
+# mlx/*.swiftmodule
