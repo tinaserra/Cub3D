@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 15:22:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:27:46 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:41:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,19 @@ void	save_bmp(t_env *env)
 	int x;
 	int y;
 
-	fd = open("salope.bmp", O_CREAT | O_WRONLY)
+
+	if ((fd = open("salope.bmp", O_CREAT | O_WRONLY, S_IRWXU)) == -1)
+    print_error(env, BMP);
+  header(env, fd);
+  y = env->res.y;
+  while (y >= 0)
+  {
+    x = 0;
+    while (x < env->res.x)
+    {
+      write(fd, &env->img.data[y * (env->img.size_line / 4) + x], 4);
+      x++;
+    }
+    y--;
+  }
 }

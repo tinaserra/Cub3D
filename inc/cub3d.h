@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 15:52:28 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:40:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,9 @@ void	get_texture(t_env *env);
 
 /* ray_sprite */
 void	sprite_casting(t_env *env);
+
+/* bmp */
+void	save_bmp(t_env *env);
 
 /* error */
 int		print_error(t_env *env, int error);

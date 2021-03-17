@@ -21,7 +21,7 @@ a.out*
 *.swp
 libmlx.dylib
 libft/libft.a
-
+*.bmp
 # mlx
 # mlx/*.swiftdoc
 # mlx/*.swiftmodule

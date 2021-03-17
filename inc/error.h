@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:11:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/12 17:01:25 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:41:08 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef enum	e_error{
 	MLX_INIT,
 	NEW_WINDOW,
 	NEW_IMAGE,
+	BMP,
 
 	MALLOC_FAILED,
 	NUMBER
@@ -97,6 +98,7 @@ static char g_str_error[NUMBER][256] =
 	[MLX_INIT] = "Error :\n[MLX] Init mlx\n",
 	[NEW_WINDOW] = "Error :\n[MLX] Create new window\n",
 	[NEW_IMAGE] = "Error :\n[MLX] Create new image\n",
+	[BMP] = "Error :\n[BMP] Failed to create image\n",
 
 	[MALLOC_FAILED] = "Error :\n[Failed] memory allocation\n"
 };
