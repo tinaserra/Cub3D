@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 14:08:57 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 14:49:51 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,85 +100,6 @@ void	draw_column(t_env *env, int coord_x)
 ** Peindre le pixel s'il n'est pas noir, le noir est la couleur invisible.
 */
 
-// void		s_draw_sprites(t_g *g)
-// {
-// 	int	i;
-// 	int	sprite_id;
-
-// 	sprite_id = 0;
-// 	s_sort_sprites(g);
-// 	while (sprite_id < g->parse.count_sprite)
-// 	{
-// 		s_get_screen_sprite_pos(g, sprite_id);
-// 		i = g->mlx.sprites[sprite_id].draw_start.x - 1;
-// 		while (++i < g->mlx.sprites[sprite_id].draw_end.x)
-// 		{
-// 			g->mlx.sprites[sprite_id].texture.x = (int)(256 *
-// 			(i - (-g->mlx.sprites[sprite_id].size.w / 2
-// 			+ g->mlx.sprites[sprite_id].screen)) * g->mlx.texture[4].width
-// 			/ g->mlx.sprites[sprite_id].size.w) / 256;
-
-// 			if (g->mlx.sprites[sprite_id].transform.y > 0 && i > 0
-// 			&& i < g->parse.size.w && g->mlx.sprites[sprite_id].transform.y
-// 			< g->mlx.ray.z_buffer[i])
-// 			{
-// 				s_draw_sprite(g, sprite_id, i);
-// 			}
-// 		}
-// 		sprite_id++;
-// 	}
-// }
-
-// void	draw_sprites(t_env *env)
-// {
-// 	int	x;
-// 	int	id;
-
-// 	id = -1;
-// 	sort_sprites(env);
-// 	while (++id < env->nbsprite)
-// 	{
-// 		get_sprite_position(env, id);
-// 		x = env->spr[id].dstart.x - 1;
-// 		//printf("%d  %d\n", x, env->spr[id].dend.x);
-// 		while (++x < env->spr[id].dend.x)
-// 		{
-// 			env->spr[id].tex.x = (int)(256 * (x - (-env->spr[id].w / 2 +
-// 					env->spr[id].sx)) * env->tx[S].width / env->spr[id].w) / 256;
-// 			printf("%f %f\n", env->spr[id].tform.y, env->zbuffer[x]);
-// 			if (env->spr[id].tform.y > 0 && x > 0
-// 				&& x < env->res.x && env->spr[id].tform.y
-// 				< env->zbuffer[x])
-// 			{
-// 				//printf("DRAW\n");
-// 				draw_sprite(env, id, x);
-// 			}
-// 		}
-// 	}
-// }
-
-// void	draw_sprite(t_env *env, int id, int i)
-// {
-// 	int	y;
-
-// 	y = env->spr[id].dstart.y;
-// 	//printf("dstart: %d dend: %d\n", y, env->spr[id].dend.y);
-// 	while (++y < env->spr[id].dend.y)
-// 	{
-// 		env->spr[id].tex.y = (((y * 256 - env->res.y * 128 +
-// 		env->spr[id].h * 128) * env->tx[S].height) /
-// 		env->spr[id].h) / 256;
-// 		//printf("tex y %d x %d \n", env->spr[id].tex.y, env->spr[i].tex.x);
-// 		//printf("color %d \n", env->tx[S].data[env->spr[id].tex.y * 64 + env->spr[id].tex.x]);
-// 		env->spr[id].color = env->tx[S].data[
-// 			env->spr[id].tex.y * 64 + env->spr[id].tex.x];
-// 		if (env->spr[id].color != 0)
-// 		{
-// 			//printf("DRAWWWW\n\n\n\n\n\n\n");
-// 			put_px_to_img(&env->img, i, y, env->spr[id].color);
-// 		}
-// 	}
-// }
 
 void	draw_sprite(t_env *env, int i)
 {
@@ -213,16 +134,3 @@ void	draw_sprite(t_env *env, int i)
 		x++;
 	}
 }
-
-	// printf("x --------- %d\n", x);
-	// printf("dstart %d\n", env->spr[i].dstart.x);
-	// printf("dend %d\n", env->spr[i].dend.x);
-	// printf("y --------- %d\n", y);
-	// printf("dstart %d\n", env->spr[i].dstart.y);
-	// printf("dend %d\n", env->spr[i].dend.y);
-
-
-				// printf("tex.x %d\n", env->spr[i].tex.x);
-				// printf("tex.y %d\n", env->spr[i].tex.y);
-				// printf("color %d\n", env->spr[i].color);
-				// printf("TRANSFORM Y %f\n\n\n", env->spr[i].tform.y);
