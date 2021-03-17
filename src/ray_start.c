@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/16 14:35:50 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 13:57:44 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static void	calc_column(t_env *env)
 	env->dend = env->lineh / 2 + env->res.y / 2;
 	if (env->dend >= env->res.y || env->dend < 0)
 		env->dend = env->res.y - 1;
+	env->zbuffer[env->x] = env->pwdist;
 }
 
 /*
@@ -128,6 +129,8 @@ static int	game_update(t_env *env)
 int			start_mlx(t_env *env)
 {
 	init_start_mlx(env);
+	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
+		print_error(env, MALLOC_FAILED);
 	if ((env->mlx = mlx_init()) == NULL)
 		print_error(env, MLX_INIT);
 	screen_size(env);
@@ -137,8 +140,6 @@ int			start_mlx(t_env *env)
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 		print_error(env, NEW_IMAGE);
 	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
-	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
-		print_error(env, MALLOC_FAILED);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
 	mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);

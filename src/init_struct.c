@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 12:20:53 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 11:32:52 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	init_parse(t_env *env)
 void	init_start_mlx(t_env *env)
 {
 	if (env->ply.orient_start == 'N')
+	{
 		env->plane.y = 0.66;
+		env->plane.x = 0;
+	}
 	if (env->ply.orient_start == 'S')
 		env->plane.y = -0.66;
 	if (env->ply.orient_start == 'E')

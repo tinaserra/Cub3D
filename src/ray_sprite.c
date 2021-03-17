@@ -6,12 +6,16 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/16 14:42:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 14:11:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+				// printf("env->spr[i].x %f\n", env->spr[i].x);
+				// printf("            x %d\n", x);
+				// printf("env->spr[i].y %f\n", env->spr[i].y);
+				// printf("            y %d\n", y);
 void	get_sprite_coord(t_env *env)
 {
 	int y;
@@ -22,7 +26,7 @@ void	get_sprite_coord(t_env *env)
 		print_error(env, MALLOC_FAILED);
 	y = 0;
 	i = 0;
-	while (y < env->nbsprite)
+	while (y < env->map.nb_lines)
 	{
 		x = 0;
 		while (env->map.map[y][x])
@@ -48,13 +52,10 @@ void	dist_sprite_player(t_env *env)
 	int i;
 	
 	i = 0;
-	while (i < env->nbsprite - 1)
+	while (i < env->nbsprite)
 	{
 		env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x, 2)
 			+ pow(env->ply.y - env->spr[i].y, 2));
-		// env->spr[i].dist = sqrt(pow(env->ply.x - env->spr[i].x, 2) \
-		// 	* (env->ply.x - env->spr[i].x) + (env->ply.y - env->spr[i].y)
-		// 	* (env->ply.y - env->spr[i].y)) ;
 		i++;
 	}
 }
@@ -91,24 +92,24 @@ void	dist_sprite_player(t_env *env)
 // 	}
 // }
 
-
 void	sort_sprite(t_env *env)
 {
 	int i;
 	t_sprite tmp;
 
-	i = 0;
 	dist_sprite_player(env);
+	i = 0;
 	while (i < env->nbsprite - 1)
 	{
-		if (env->spr[i].dist > env->spr[i + 1].dist)
+		if (env->spr[i].dist < env->spr[i + 1].dist)
 		{
 			tmp = env->spr[i];
 			env->spr[i] = env->spr[i + 1];
 			env->spr[i + 1] = tmp;
 			i = 0;
 		}
-		i++;
+		else
+			i++;
 	}
 }
 
@@ -131,10 +132,9 @@ void	sprite_position(t_env *env, int i)
 							- env->ply.dirx * env->plane.y);
 	env->spr[i].tform.x = env->spr[i].invdet *
 						(env->ply.diry * spr_x - env->ply.dirx * spr_y);
-	// printf("tform.y 0 = %f\n", env->spr[i].tform.y);
 	env->spr[i].tform.y = env->spr[i].invdet *
 						(-env->plane.y * spr_x + env->plane.x * spr_y);
-	printf("tform.y 1 = %f\n", env->spr[i].tform.y);
+	// printf("tform.y 1 = %f\n", env->spr[i].tform.y);
 	env->spr[i].sx = (int)((env->res.x / 2) *
 					(1 + env->spr[i].tform.x / env->spr[i].tform.y));
 }
@@ -152,7 +152,6 @@ void	sprite_casting(t_env *env)
 {
 	int i;
 
-	// printf("OOOOOOOOO \n");
 	get_sprite_coord(env);
 	sort_sprite(env);
 	i = 0;
@@ -173,9 +172,7 @@ void	sprite_casting(t_env *env)
 		env->spr[i].dend.x = env->spr[i].w / 2 + env->spr[i].sx;
 		if (env->spr[i].dend.x >= env->res.x)
 			env->spr[i].dend.x = env->res.x - 1;
-		// printf("* dstart %d\n", env->spr[i].dstart.x);
-		// printf("* dend %d\n", env->spr[i].dend.x);
+		draw_sprite(env, i);
 		i++;
 	}
-	draw_sprite(env, i);
 }
