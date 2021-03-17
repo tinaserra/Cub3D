@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 13:57:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:19:34 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ static void	calc_column(t_env *env)
 
 static int	game_update(t_env *env)
 {
-	env->ply.mspeed = 0.1;
-	env->ply.rspeed =  0.033 * 1.8;
 	keys_control(env);
 	env->x = 0;
 	while (env->x < env->res.x)
@@ -118,19 +116,22 @@ static int	game_update(t_env *env)
 	}
 	if (env->nbsprite > 0)
 		sprite_casting(env);
-	mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
-	mlx_destroy_image(env->mlx, env->img.image);
-	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
-		print_error(env, NEW_IMAGE);
-	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
+	if (env->save == 1)
+		save_bmp(env);
+	else
+	{
+		mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
+		mlx_destroy_image(env->mlx, env->img.image);
+		if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
+			print_error(env, NEW_IMAGE);
+		env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
+	}
 	return (0);
 }
 
 int			start_mlx(t_env *env)
 {
 	init_start_mlx(env);
-	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
-		print_error(env, MALLOC_FAILED);
 	if ((env->mlx = mlx_init()) == NULL)
 		print_error(env, MLX_INIT);
 	screen_size(env);
@@ -141,10 +142,15 @@ int			start_mlx(t_env *env)
 		print_error(env, NEW_IMAGE);
 	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
-	mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
-	mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
-	mlx_hook(env->window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, env);
-	mlx_loop_hook(env->mlx, game_update, env);
-	mlx_loop(env->mlx);
+	if (env->save == 1)
+		game_update(env);
+	else
+	{
+		mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
+		mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
+		mlx_hook(env->window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, env);
+		mlx_loop_hook(env->mlx, game_update, env);
+		mlx_loop(env->mlx);
+	}
 	return (0);
 }

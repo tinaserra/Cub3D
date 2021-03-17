@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 11:32:52 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:16:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ void	init_parse(t_env *env)
 void	init_start_mlx(t_env *env)
 {
 	if (env->ply.orient_start == 'N')
-	{
 		env->plane.y = 0.66;
-		env->plane.x = 0;
-	}
 	if (env->ply.orient_start == 'S')
 		env->plane.y = -0.66;
 	if (env->ply.orient_start == 'E')
 		env->plane.x = 0.66;
 	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
+	env->ply.mspeed = 0.1;
+	env->ply.rspeed =  0.033 * 1.8;
+	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
+		print_error(env, MALLOC_FAILED);
 }
 
 void	init_env(t_env *env)

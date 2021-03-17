@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 11:50:19 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:18:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,4 @@ void	parsing(char *file, t_env *env)
 		print_error(env, NO_MAP);
 	get_map(file, env);
 	debug_parsing(env);
-	start_mlx(env);
 }

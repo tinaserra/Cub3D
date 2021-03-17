@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 17:13:49 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:05:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/17 15:17:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			main(int ac, char **av)
 			env.save = 1;
 		check_file_name(av[1], &env);
 		parsing(av[1], &env);
+		start_mlx(&env);
 	}
 	else
 		write(2, "Error\nInvalid arguments\n", 30);
