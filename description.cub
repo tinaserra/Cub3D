@@ -1,11 +1,11 @@
 R 1200 800
-NO ./textures/north1.xpm
-WE ./textures/west2.xpm
-SO ./textures/south1.xpm
-EA ./textures/east2.xpm
+NO ./textures/wall.xpm
+WE ./textures/wall.xpm
+SO ./textures/wall.xpm
+EA ./textures/wall.xpm
 S ./textures/tonneau.xpm
-F 95,255,218
-C 163,95,255
+F 214,0,124
+C 16,12,39
 
 
         1111111111111111111111111

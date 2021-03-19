@@ -1,11 +1,11 @@
 R 1200 800
-NO ./textures/red.xpm
-WE ./textures/purplestone.xpm
-SO ./textures/bluestone.xpm
-EA ./textures/greystone.xpm
+NO ./textures/wall.xpm
+WE ./textures/wall.xpm
+SO ./textures/wall.xpm
+EA ./textures/wall.xpm
 S ./textures/tonneau.xpm
-F 100,20,0
-C 0,30,0
+F 214,0,124
+C 16,12,39
 
 
    11111111      11111111   
