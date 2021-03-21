@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:21:53 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/15 11:50:19 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 19:59:31 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	get_texdir(t_env *env)
 ** tex.pos : coordonnée de départ de la texture
 */
 
-void	calc_texture(t_env *env)
+void		calc_texture(t_env *env)
 {
 	get_texdir(env);
 	if (env->side == 0)
@@ -46,7 +46,8 @@ void	calc_texture(t_env *env)
 	if (env->side == 1 && env->raydir.y < 0)
 		env->tex.x = env->tx[env->tex.dir].width - env->tex.x - 1;
 	env->tex.step = 1.0 * env->tx[0].height / env->lineh;
-	env->tex.pos = (env->dstart - env->res.y / 2 + env->lineh / 2) * env->tex.step;
+	env->tex.pos = (env->dstart - env->res.y / 2 + env->lineh / 2) \
+					* env->tex.step;
 }
 
 static void	get_data(t_env *env)
@@ -63,7 +64,7 @@ static void	get_data(t_env *env)
 	&env->tx[S].bits_per_pixel, &env->tx[S].size_line, &env->tx[S].endian);
 }
 
-void	get_texture(t_env *env)
+void		get_texture(t_env *env)
 {
 	if (!(env->tx[NO].image = mlx_xpm_file_to_image(env->mlx, \
 		env->tex.path_no, &env->tx[NO].width, &env->tx[NO].height)))

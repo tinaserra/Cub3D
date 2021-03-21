@@ -6,14 +6,16 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:11:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:41:08 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:26:04 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-/* Errors */
+/*
+** Errors
+*/
 
 typedef enum	e_error{
 	FILE_NAME,
@@ -54,7 +56,6 @@ typedef enum	e_error{
 	NEW_WINDOW,
 	NEW_IMAGE,
 	BMP,
-
 	MALLOC_FAILED,
 	NUMBER
 }				t_error;
@@ -63,7 +64,7 @@ static char g_str_error[NUMBER][256] =
 {
 	[FILE_NAME] = "Error :\n[FILE] Ivalide name or extention\n",
 	[CUB_DIR] = "Error :\n[FILE] The argument .cub is a directory\n",
-	[CUB_INVALIDE] = "Error :\n[FILE] The argument .cub dosn't exist or is invalide\n",
+	[CUB_INVALIDE] = "Error :\n[FILE] The argument .cub is wrong or missing\n",
 	[RESOLUTION] = "Error :\n[R] Wrong resolution or not specified\n",
 	[RESOLUTION_END] = "Error :\n[R] Wrong caracter\n",
 	[F_COLOR] = "Error :\n[F] Wrong color or not specified\n",
@@ -99,7 +100,6 @@ static char g_str_error[NUMBER][256] =
 	[NEW_WINDOW] = "Error :\n[MLX] Create new window\n",
 	[NEW_IMAGE] = "Error :\n[MLX] Create new image\n",
 	[BMP] = "Error :\n[BMP] Failed to create image\n",
-
 	[MALLOC_FAILED] = "Error :\n[Failed] memory allocation\n"
 };
 

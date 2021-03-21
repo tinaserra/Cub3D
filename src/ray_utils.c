@@ -6,13 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:45:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:17:53 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:04:12 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_convert_color(t_color color, int endian)
+int		ft_convert_color(t_color color, int endian)
 {
 	t_color	temp;
 
@@ -27,13 +27,13 @@ int	ft_convert_color(t_color color, int endian)
 	return (color.all);
 }
 
-int	ft_key_press(int key, t_env *env)
+int		ft_key_press(int key, t_env *env)
 {
 	env->keyboard[key] = 1;
 	return (0);
 }
 
-int	ft_key_release(int key, t_env *env)
+int		ft_key_release(int key, t_env *env)
 {
 	env->keyboard[key] = 0;
 	return (0);

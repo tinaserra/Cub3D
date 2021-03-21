@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 17:19:19 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 19:49:16 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	algo_dda(t_env *env)
 			env->map.y += env->step.y;
 			env->side = 1;
 		}
-		if(env->map.map[env->map.x][env->map.y] == '1')
+		if (env->map.map[env->map.x][env->map.y] == '1')
 			env->hit = 1;
 	}
 }
@@ -82,9 +82,11 @@ static void	algo_dda(t_env *env)
 static void	calc_column(t_env *env)
 {
 	if (env->side == 0)
-		env->pwdist = (env->map.x - env->ply.x + (1 - env->step.x) / 2) / env->raydir.x;
+		env->pwdist = (env->map.x - env->ply.x +
+						(1 - env->step.x) / 2) / env->raydir.x;
 	else
-		env->pwdist = (env->map.y - env->ply.y + (1 - env->step.y) / 2) / env->raydir.y;
+		env->pwdist = (env->map.y - env->ply.y +
+						(1 - env->step.y) / 2) / env->raydir.y;
 	env->lineh = (int)(env->res.y / env->pwdist);
 	env->dstart = -env->lineh / 2 + env->res.y / 2;
 	if (env->dstart < 0)
@@ -103,8 +105,8 @@ static void	calc_column(t_env *env)
 static int	game_update(t_env *env)
 {
 	keys_control(env);
-	env->x = 0;
-	while (env->x < env->res.x)
+	env->x = -1;
+	while (++env->x < env->res.x)
 	{
 		init_env(env);
 		calc_sidedist(env);
@@ -112,7 +114,6 @@ static int	game_update(t_env *env)
 		calc_column(env);
 		calc_texture(env);
 		draw_column(env);
-		env->x++;
 	}
 	if (env->nbsprite > 0)
 		sprite_casting(env);
@@ -124,7 +125,8 @@ static int	game_update(t_env *env)
 		mlx_destroy_image(env->mlx, env->img.image);
 		if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 			print_error(env, NEW_IMAGE);
-		env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
+		env->img.data = (int*)mlx_get_data_addr(env->img.image, \
+			&env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	}
 	return (0);
 }
@@ -140,7 +142,8 @@ int			start_mlx(t_env *env)
 		print_error(env, NEW_WINDOW);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 		print_error(env, NEW_IMAGE);
-	env->img.data = (int*)mlx_get_data_addr(env->img.image, &env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
+	env->img.data = (int*)mlx_get_data_addr(env->img.image,
+			&env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
 	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	if (env->save == 1)
 		game_update(env);

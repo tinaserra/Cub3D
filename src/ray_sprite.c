@@ -6,19 +6,17 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:16:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:02:01 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 19:34:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-
 void	get_sprite_coord(t_env *env)
 {
-	int y;
-	int x;
-	int i;
+	int	y;
+	int	x;
+	int	i;
 
 	if (!(env->spr = malloc(sizeof(t_sprite) * env->nbsprite)))
 		print_error(env, MALLOC_FAILED);
@@ -47,8 +45,8 @@ void	get_sprite_coord(t_env *env)
 
 void	dist_sprite_player(t_env *env)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < env->nbsprite)
 	{
@@ -62,38 +60,10 @@ void	dist_sprite_player(t_env *env)
 ** Trier les sprites de loin à pret
 */
 
-// void	sort_sprite(t_env *env)
-// {
-// 	int i;
-// 	int a;  
-
-// 	dist_sprite_player(env);
-// 	i = 0;
-// 	while (i < env->nbsprite - 1)
-// 	{
-// 		if (env->spr[i].dist > env->spr[i + 1].dist)
-// 		{
-// 			ft_swap(&env->spr[i].dist, & env->spr[i + 1].dist);
-// 			a = i;
-// 		}
-// 		while (a)
-// 		{
-// 			if (env->spr[i - 1].dist > env->spr[a].dist)
-// 			{
-// 				ft_swap(&env->spr[a - 1].dist, &env->spr[a].dist);
-// 				--a;
-// 			}
-// 			else
-// 				a = 0;
-// 		}
-// 		i++;
-// 	}
-// }
-
 void	sort_sprite(t_env *env)
 {
-	int i;
-	t_sprite tmp;
+	int			i;
+	t_sprite	tmp;
 
 	dist_sprite_player(env);
 	i = 0;
@@ -116,13 +86,14 @@ void	sort_sprite(t_env *env)
 **
 ** 1. Traduit la position du sprite en relative à la caméra
 ** 2. Calculer invdet : requis pour une multiplication correcte de la matrice.
-** 3. tform.y : c'est en fait la profondeur à l'intérieur de l'écran, ce que Z est en 3D.
+** 3. tform.y : c'est en fait la profondeur à l'intérieur de l'écran,
+** ce que Z est en 3D.
 */
 
 void	sprite_position(t_env *env, int i)
 {
-	double spr_x;
-	double spr_y;
+	double	spr_x;
+	double	spr_y;
 
 	spr_x = env->spr[i].x - env->ply.x + 0.5;
 	spr_y = env->spr[i].y - env->ply.y + 0.5;
@@ -132,7 +103,6 @@ void	sprite_position(t_env *env, int i)
 						(env->ply.diry * spr_x - env->ply.dirx * spr_y);
 	env->spr[i].tform.y = env->spr[i].invdet *
 						(-env->plane.y * spr_x + env->plane.x * spr_y);
-	// printf("tform.y 1 = %f\n", env->spr[i].tform.y);
 	env->spr[i].sx = (int)((env->res.x / 2) *
 					(1 + env->spr[i].tform.x / env->spr[i].tform.y));
 }
@@ -140,15 +110,16 @@ void	sprite_position(t_env *env, int i)
 /*
 ** SPRITE CASTING
 **
-** 1. Calculer la hauteur du sprite à l'écran en utilisant 'tform.y' 
+** 1. Calculer la hauteur du sprite à l'écran en utilisant 'tform.y'
 **    au lieu de la distance réelle empêche fisheye.
-** 2. Calculer le pixel le plus bas et le plus élevé pour remplir la bande courante.
+** 2. Calculer le pixel le plus bas et le plus élevé pour remplir
+**    la bande courante.
 ** 3. Calculer la largeur du sprite
 */
 
 void	sprite_casting(t_env *env)
 {
-	int i;
+	int	i;
 
 	get_sprite_coord(env);
 	sort_sprite(env);

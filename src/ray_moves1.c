@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:14:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:58:09 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 19:16:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,14 @@ static void	turn_left(t_env *env)
 
 	olddirx = env->ply.dirx;
 	oldplanex = env->plane.x;
-	env->ply.dirx = env->ply.dirx * cos(env->ply.rspeed) - env->ply.diry * sin(env->ply.rspeed);
-	env->ply.diry = olddirx * sin(env->ply.rspeed) + env->ply.diry * cos(env->ply.rspeed);
-	env->plane.x = env->plane.x * cos(env->ply.rspeed) - env->plane.y * sin(env->ply.rspeed);
-	env->plane.y = oldplanex * sin(env->ply.rspeed) + env->plane.y * cos(env->ply.rspeed);
+	env->ply.dirx = env->ply.dirx * cos(env->ply.rspeed)
+					- env->ply.diry * sin(env->ply.rspeed);
+	env->ply.diry = olddirx * sin(env->ply.rspeed) + env->ply.diry
+					* cos(env->ply.rspeed);
+	env->plane.x = env->plane.x * cos(env->ply.rspeed)
+					- env->plane.y * sin(env->ply.rspeed);
+	env->plane.y = oldplanex * sin(env->ply.rspeed)
+					+ env->plane.y * cos(env->ply.rspeed);
 }
 
 static void	turn_right(t_env *env)
@@ -43,10 +47,14 @@ static void	turn_right(t_env *env)
 
 	olddirx = env->ply.dirx;
 	oldplanex = env->plane.x;
-	env->ply.dirx = env->ply.dirx * cos(-env->ply.rspeed) - env->ply.diry * sin(-env->ply.rspeed);
-	env->ply.diry = olddirx * sin(-env->ply.rspeed) + env->ply.diry * cos(-env->ply.rspeed);
-	env->plane.x = env->plane.x * cos(-env->ply.rspeed) - env->plane.y * sin(-env->ply.rspeed);
-	env->plane.y = oldplanex * sin(-env->ply.rspeed) + env->plane.y * cos(-env->ply.rspeed);
+	env->ply.dirx = env->ply.dirx * cos(-env->ply.rspeed)
+					- env->ply.diry * sin(-env->ply.rspeed);
+	env->ply.diry = olddirx * sin(-env->ply.rspeed)
+					+ env->ply.diry * cos(-env->ply.rspeed);
+	env->plane.x = env->plane.x * cos(-env->ply.rspeed)
+					- env->plane.y * sin(-env->ply.rspeed);
+	env->plane.y = oldplanex * sin(-env->ply.rspeed)
+					+ env->plane.y * cos(-env->ply.rspeed);
 }
 
 void		keys_control(t_env *env)

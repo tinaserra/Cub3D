@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 17:19:40 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:23:53 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@
 ** VALUES ------------------------------------------------------------------- **
 */
 
-#define DESTROYNOTIFY		17
-#define STRUCTURENOTIFYMASK		0x20000 //1L<<17 // L = long
+# define DESTROYNOTIFY 17
+# define STRUCTURENOTIFYMASK 0x20000
 
 /*
 ** STRUCTURES --------------------------------------------------------------- **
 */
 
-enum	e_bgra
+enum				e_bgra
 {
 	BGRA_BLUE,
 	BGRA_GREEN,
@@ -55,7 +55,7 @@ enum	e_bgra
 	BGRA_ALPHA
 };
 
-enum	e_argb
+enum				e_argb
 {
 	ARGB_ALPHA,
 	ARGB_RED,
@@ -68,7 +68,7 @@ typedef union		u_color
 	int				all;
 	unsigned char	argb[4];
 	unsigned char	bgra[4];
-}				t_color;
+}					t_color;
 
 /*
 ** argb[0] == alpha; argb[1] == r; argb[2] == g; argb[3] == b;
@@ -83,7 +83,7 @@ typedef union		u_color
 ** de ses membres, mais un seul à la fois.
 */
 
-enum	e_tex
+enum				e_tex
 {
 	NO,
 	WE,
@@ -93,200 +93,249 @@ enum	e_tex
 	ALL
 };
 
-typedef struct	s_texture
+typedef struct		s_texture
 {
-	int			x; // coordonnée x de la texture
-	int			y; // coordonée y de la texture
-	int			dir; //direction NO, S, EA, WE de la texture
-	double		wallx; // valeur où le mur a été touché : coordonnée y si side == 0, coordonnée x si side == 1
-	double		step; // indique de combien augmenter les coordonnées de la texture pour chaque pixel
-	double		pos; // coordonnée de départ
-	char		*path_no;
-	char		*path_we;
-	char		*path_so;
-	char		*path_ea;
-	char		*path_s;
-}				t_texture;
+	int				x;
+	int				y;
+	int				dir;
+	double			wallx;
+	double			step;
+	double			pos;
+	char			*path_no;
+	char			*path_we;
+	char			*path_so;
+	char			*path_ea;
+	char			*path_s;
+}					t_texture;
 
-typedef struct	s_player
+typedef struct		s_player
 {
-	char		orient_start;
-	double		x;
-	double		y;
-	double		dirx; // vecteur de direction initiale (commence à -1 pour N, 1 pour S, 0 sinon)
-	double		diry; // vecteur de direction initiale (commence à -1 pour W, 1 pour E, 0 sinon)
-	double		mspeed;
-	double		rspeed;
-}				t_player;
+	char			orient_start;
+	double			x;
+	double			y;
+	double			dirx;
+	double			diry;
+	double			rspeed;
+}					t_player;
 
-typedef struct	s_pcolor
+typedef struct		s_pcolor
 {
-	int			red;
-	int			green;
-	int			blue;
-}				t_pcolor;
+	int				red;
+	int				green;
+	int				blue;
+}					t_pcolor;
 
-typedef struct	s_map
+typedef struct		s_map
 {
-	int			x; // coordonnee x dans quel carré de la carte nous nous trouvons
-	int			y; // coordonnee y dans quel carré de la carte nous nous trouvons
-	int			nb_lines;
-	int			len_line;
-	int			end_map;
-	char		**map;
-}				t_map;
+	int				x;
+	int				y;
+	int				nb_lines;
+	int				len_line;
+	int				end_map;
+	char			**map;
+}					t_map;
 
-/* Toute la data de l'image (mlx_get_data_addr) */
+/*
+** Toute la data de l'image (mlx_get_data_addr)
+*/
 
-typedef struct	s_image
+typedef struct		s_image
 {
-	void		*image; 
-	int			*data; //normalement char* addr
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	int			width;
-	int			height;
-}				t_image;
+	void			*image;
+	int				*data;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	int				width;
+	int				height;
+}					t_image;
 
-typedef struct	s_coord
+typedef struct		s_coord
 {
-	int			x;
-	int			y;
-}				t_coord;
+	int				x;
+	int				y;
+}					t_coord;
 
-typedef struct	s_dbcoord
+typedef struct		s_dbcoord
 {
-	double		x;
-	double		y;
-}				t_dbcoord;
+	double			x;
+	double			y;
+}					t_dbcoord;
 
-typedef struct	s_sprite
+typedef struct		s_sprite
 {
-	double		x;
-	double		y;
-	double		dist;
-	double		invdet;
-	int			sx;
-	int			h;
-	int			w;
-	int			color;
-	t_coord		dstart;
-	t_coord		dend;
-	t_coord		tex;
-	t_dbcoord	tform;
-}				t_sprite;
+	double			x;
+	double			y;
+	double			dist;
+	double			invdet;
+	int				sx;
+	int				h;
+	int				w;
+	int				color;
+	t_coord			dstart;
+	t_coord			dend;
+	t_coord			tex;
+	t_dbcoord		tform;
+}					t_sprite;
 
-/* Structure mère */
+/*
+** Structure mère
+*/
 
-typedef struct	s_env
+typedef struct		s_env
 {
-	int			i;
-	int			x; // chaque bande verticale de la fenetre, permet de parcourir les rayons
-	int 		screen_width;
-	int 		screen_height;
-	int			save;
-	int			hit; // y a-t-il eu un mur touché?
-	int			side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-	int			lineh; // hauteur de la ligne du mur a dessiner
-	int			dstart;
-	int			dend;
-	void		*mlx;
-	void		*window;
-	double		camerax; // coordonnée x dans l'espace caméra
-	double		pwdist; // distance du joueur au mur
-	char		keyboard[512];
-	int			nbsprite;
-	double		*zbuffer;
+	int				i;
+	int				x;
+	int				screen_width;
+	int				screen_height;
+	int				save;
+	int				hit;
+	int				side;
+	int				lineh;
+	int				dstart;
+	int				dend;
+	void			*mlx;
+	void			*window;
+	double			camerax;
+	double			pwdist;
+	char			keyboard[512];
+	int				nbsprite;
+	double			*zbuffer;
 
-	t_coord		step; // -1 si doit sauter un carre dans direction x ou y negative, 1 dans la direction x ou y positive
-	t_dbcoord	deltadist; // longueur du rayon d'un côté x ou y au coté x ou y
-	t_dbcoord	sidedist; // distance que le rayon parcours jusqu'au premier point d'intersection (vertical = un coté x, horizontal = un coté y)
-	t_dbcoord	plane; // vecteur du plan (plane.x = commence à 0.66 pour E, -0.66 pour W, 0 sinon, plane.y = commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-	t_dbcoord	raydir; // la direction du rayon
-	t_image		tx[ALL];
-	t_coord		res;
-	t_player	ply;
-	t_pcolor	f;
-	t_pcolor	c;
-	t_map		map;
-	t_sprite	*spr; // en fonction du nombre de sprite
-	t_texture	tex;
-	t_image		img;
-}				t_env;
-
+	t_coord			step;
+	t_dbcoord		deltadist;
+	t_dbcoord		plane;
+	t_dbcoord		raydir;
+	t_image			tx[ALL];
+	t_coord			res;
+	t_player		ply;
+	t_pcolor		f;
+	t_pcolor		c;
+	t_map			map;
+	t_sprite		*spr;
+	t_texture		tex;
+	t_image			img;
+}					t_env;
 
 /*
 ** PROTOTYPES --------------------------------------------------------------- **
 */
 
-/* init_struct */
-void	init_parse(t_env *env);
-void	init_env(t_env *env);
-void	init_start_mlx(t_env *env);
-void	init_texture(t_env *env);
+/*
+** init_struct
+*/
 
-/* parse_start */
-void	parsing(char *file, t_env *env);
+void				init_parse(t_env *env);
+void				init_env(t_env *env);
+void				init_start_mlx(t_env *env);
+void				init_texture(t_env *env);
 
-/* parse_int */
-void	get_resolution(char *str, t_env *env);
-void	get_f_color(char *str, t_env *env);
-void	get_c_color(char *str, t_env *env);
+/*
+** parse_start
+*/
 
-/* parse_map */
-int		dup_map(char *str, t_env *env);
-int		is_a_map(char *str);
-int		is_char_map(char *str, t_env *env);
+void				parsing(char *file, t_env *env);
 
-/* parse_check */
-int		check_after_map(char *str, t_env *env);
-int		check_element(t_env *env);
-int		check_color(t_env *env, int ctrl);
-int		check_strend(char *str, t_env *env, int ctrl);
+/*
+** parse_int
+*/
 
-/* parse_wall */
-void	check_walls(t_env *env);
+void				get_resolution(char *str, t_env *env);
+void				get_f_color(char *str, t_env *env);
+void				get_c_color(char *str, t_env *env);
 
-/* parse_texture */
-char	*get_path(char *str, int i, t_env *env);
+/*
+** parse_map
+*/
 
-/* ray_start */
-int		start_mlx(t_env *env);
+int					dup_map(char *str, t_env *env);
+int					is_a_map(char *str);
+int					is_char_map(char *str, t_env *env);
 
-/* ray_utils */
-void	screen_size(t_env *env);
-int		ft_key_release(int key, t_env *env);
-int		ft_key_press(int key, t_env *env);
-int		ft_convert_color(t_color color, int endian);
+/*
+** parse_check
+*/
 
-/* ray_moves 1 & 2 */
-int		ft_quit(t_env *env);
-void	go_straight(t_env *env);
-void	go_back(t_env *env);
-void	go_left(t_env *env);
-void	go_right(t_env *env);
-void	keys_control(t_env *env);
+int					check_after_map(char *str, t_env *env);
+int					check_element(t_env *env);
+int					check_color(t_env *env, int ctrl);
+int					check_strend(char *str, t_env *env, int ctrl);
 
-/* ray_draw */
-void	draw_column(t_env *env);
-void	draw_sprite(t_env *env, int i);
+/*
+** parse_wall
+*/
 
-/* ray_texture */
-void	calc_texture(t_env *env);
-void	get_texture(t_env *env);
+void				check_walls(t_env *env);
 
-/* ray_sprite */
-void	sprite_casting(t_env *env);
+/*
+** parse_texture
+*/
 
-/* bmp */
-void	save_bmp(t_env *env);
+char				*get_path(char *str, int i, t_env *env);
 
-/* error */
-int		print_error(t_env *env, int error);
+/*
+** ray_start
+*/
 
-/* debug */
-void	debug_parsing(t_env *env);
-void	debug_print_map(t_env *env);
+int					start_mlx(t_env *env);
+
+/*
+** ray_utils
+*/
+
+void				screen_size(t_env *env);
+int					ft_key_release(int key, t_env *env);
+int					ft_key_press(int key, t_env *env);
+int					ft_convert_color(t_color color, int endian);
+
+/*
+** ray_moves 1 & 2
+*/
+
+int					ft_quit(t_env *env);
+void				go_straight(t_env *env);
+void				go_back(t_env *env);
+void				go_left(t_env *env);
+void				go_right(t_env *env);
+void				keys_control(t_env *env);
+
+/*
+** ray_draw
+*/
+
+void				draw_column(t_env *env);
+void				draw_sprite(t_env *env, int i);
+
+/*
+** ray_texture
+*/
+
+void				calc_texture(t_env *env);
+void				get_texture(t_env *env);
+
+/*
+** ray_sprite
+*/
+
+void				sprite_casting(t_env *env);
+
+/*
+** bmp
+*/
+
+void				save_bmp(t_env *env);
+
+/*
+** error
+*/
+
+int					print_error(t_env *env, int error);
+
+/*
+** debug
+*/
+
+void				debug_parsing(t_env *env);
+void				debug_print_map(t_env *env);
 
 #endif
