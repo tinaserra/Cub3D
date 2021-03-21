@@ -16,9 +16,16 @@ make fclean
 
 - [x] Tester toutes les maps !
 - [ ] Wrong path -> maps/good_map03.cub
-- [ ] Leaks : free la map, les textures, les images
+- [ ] pb trous entre sol et murs
 - [ ] Adapter a linux
 - [ ] La norme
+</br>
+- [ ] **Leaks :**
+- [ ] free la map
+- [ ] les textures
+- [ ] les images
+- [ ] la structure des sprites
+- [ ] le zbuffer
 
 ## INTRODUCTION 🤓
 
