@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:18:05 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 18:04:29 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	get_map(char *file, t_env *env)
 {
-	int fd;
-	int ret;
-	char *str;
+	int		fd;
+	int		ret;
+	char	*str;
 
 	ret = 1;
 	str = NULL;
@@ -31,7 +31,7 @@ static int	get_map(char *file, t_env *env)
 		free(str);
 	}
 	close(fd);
-	if (env->ply.x == 'o')
+	if (env->ply.orient_start == 'o')
 		print_error(env, NO_PLAYER);
 	check_walls(env);
 	return (0);
@@ -43,15 +43,13 @@ static void	get_size_map(char *str, t_env *env)
 
 	env->i = 0;
 	len = -1;
-	if(env->map.end_map == 1)
+	if (env->map.end_map == 1)
 		check_after_map(str, env);
 	while (str[env->i] && str[env->i] == ' ')
 		env->i++;
 	if ((str[0] != '\0') && (is_char_map(str, env) == 0))
 	{
 		check_element(env);
-		if (env->map.nb_lines == -1) // init nb_lines a 0 pour virer ces deux lignes
-			env->map.nb_lines++;
 		env->map.nb_lines++;
 		len = ft_strlen(str);
 		if (len > env->map.len_line)
@@ -64,7 +62,6 @@ static void	get_size_map(char *str, t_env *env)
 static int	get_elements(char *str, t_env *env)
 {
 	env->i = 0;
-
 	while (str[env->i] == ' ')
 		env->i++;
 	if (str[env->i] == 'R')
@@ -88,11 +85,11 @@ static int	get_elements(char *str, t_env *env)
 	return (0);
 }
 
-void	parsing(char *file, t_env *env)
+void		parsing(char *file, t_env *env)
 {
-	int fd;
-	int ret;
-	char *str;
+	int		fd;
+	int		ret;
+	char	*str;
 
 	ret = 1;
 	str = NULL;
@@ -105,12 +102,12 @@ void	parsing(char *file, t_env *env)
 		ret = get_next_line(fd, &str);
 		if (get_elements(str, env) == -1)
 			get_size_map(str, env);
-		if (str[0] == '\0' && env->map.nb_lines != -1) // Check apres map
+		if (str[0] == '\0' && env->map.nb_lines != 0)
 			env->map.end_map = 1;
 		free(str);
 	}
 	close(fd);
-	if (env->map.nb_lines == -1)
+	if (env->map.nb_lines == 0)
 		print_error(env, NO_MAP);
 	get_map(file, env);
 	debug_parsing(env);

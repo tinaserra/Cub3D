@@ -14,9 +14,11 @@ make fclean
 
 ### TO DO ‼️
 
-- [ ] Tester toutes les maps !
+- [x] Tester toutes les maps !
+- [ ] Wrong path -> maps/good_map03.cub
 - [ ] Leaks : free la map, les textures, les images
 - [ ] Adapter a linux
+- [ ] La norme
 
 ## INTRODUCTION 🤓
 

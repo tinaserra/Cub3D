@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 13:48:09 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 17:19:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,9 @@ typedef struct	s_player
 
 typedef struct	s_pcolor
 {
-	int			red_c;
-	int			green_c;
-	int			blue_c;
-	int			red_f;
-	int			green_f;
-	int			blue_f;
+	int			red;
+	int			green;
+	int			blue;
 }				t_pcolor;
 
 typedef struct	s_map
@@ -210,7 +207,8 @@ typedef struct	s_env
 	t_image		tx[ALL];
 	t_coord		res;
 	t_player	ply;
-	t_pcolor	col;
+	t_pcolor	f;
+	t_pcolor	c;
 	t_map		map;
 	t_sprite	*spr; // en fonction du nombre de sprite
 	t_texture	tex;
@@ -233,8 +231,8 @@ void	parsing(char *file, t_env *env);
 
 /* parse_int */
 void	get_resolution(char *str, t_env *env);
-void	get_f_color(char* str, t_env *env);
-void	get_c_color(char* str, t_env *env);
+void	get_f_color(char *str, t_env *env);
+void	get_c_color(char *str, t_env *env);
 
 /* parse_map */
 int		dup_map(char *str, t_env *env);
@@ -271,7 +269,7 @@ void	go_right(t_env *env);
 void	keys_control(t_env *env);
 
 /* ray_draw */
-void	draw_column(t_env *env, int coord_x);
+void	draw_column(t_env *env);
 void	draw_sprite(t_env *env, int i);
 
 /* ray_texture */
