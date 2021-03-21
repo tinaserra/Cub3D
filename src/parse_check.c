@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 15:01:52 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:09:44 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 14:03:39 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		check_element(t_env *env)
 		print_error(env, EMPTY_WE);
 	if (env->tex.path_s == NULL)
 		print_error(env, EMPTY_S);
-	if (env->col.blue_f == -1)
+	if (env->f.blue == -1)
 		print_error(env, F_COLOR);
-	if (env->col.blue_c == -1)
+	if (env->c.blue == -1)
 		print_error(env, C_COLOR);
 	return (0);
 }
@@ -48,18 +48,18 @@ int		check_color(t_env *env, int ctrl)
 {
 	if (ctrl == 'C')
 	{
-		if (env->col.red_c == -1 || env->col.green_c == -1 || env->col.blue_c == -1)
+		if (env->c.red == -1 || env->c.green == -1 || env->c.blue == -1)
 			print_error(env, C_COLOR);
 	}
 	if (ctrl == 'F')
 	{
-		if (env->col.red_f == -1 || env->col.green_f == -1 || env->col.blue_f == -1)
+		if (env->f.red == -1 || env->f.green == -1 || env->f.blue == -1)
 			print_error(env, F_COLOR);
 	}
 	return (0);
 }
 
-int	check_strend(char *str, t_env *env, int ctrl)
+int		check_strend(char *str, t_env *env, int ctrl)
 {
 	while (str[env->i])
 	{
@@ -69,12 +69,12 @@ int	check_strend(char *str, t_env *env, int ctrl)
 				print_error(env, MORE_NUM);
 			if (ctrl == 'F')
 			{
-				env->col.blue_f = -1;
+				env->f.blue = -1;
 				print_error(env, F_COLOR_END);
 			}
 			if (ctrl == 'C')
 			{
-				env->col.blue_c = -1;
+				env->c.blue = -1;
 				print_error(env, C_COLOR_END);
 			}
 			if (ctrl == 'R')
