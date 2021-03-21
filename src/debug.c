@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 17:32:40 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 13:47:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 14:03:39 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	debug_parsing(t_env *env)
 	printf("resy	= %d\n", env->res.y);
 	printf("\n\n********* DEBUG COLORS *********\n\n");
 	printf("red_c   = %d\ngreen_c = %d\nblue_c  = %d\n",
-				env->col.red_c, env->col.green_c, env->col.blue_c);
+				env->c.red, env->c.green, env->c.blue);
 	printf("red_f   = %d\ngreen_f = %d\nblue_f  = %d\n",
-				env->col.red_f, env->col.green_f, env->col.blue_f);
+				env->f.red, env->f.green, env->f.blue);
 	printf("\n\n********* DEBUG PRINT TEXTURE *********\n\n");
 	printf("path no : |%s|\n", env->tex.path_no);
 	printf("path we : |%s|\n", env->tex.path_we);
