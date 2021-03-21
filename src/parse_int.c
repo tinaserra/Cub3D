@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:39:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/02/20 10:11:33 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 17:01:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,67 +34,65 @@ static int	bb_atoi(char *str, t_env *env)
 	return (nbr);
 }
 
-void	get_c_color(char* str, t_env *env)
+void		get_c_color(char *str, t_env *env)
 {
-	if (env->col.red_c != -1)
+	if (env->c.red != -1)
 		print_error(env, DOUBLE_COLOR);
 	if (str[env->i])
 	{
 		env->i++;
-		env->col.red_c = bb_atoi(str, env);
+		env->c.red = bb_atoi(str, env);
 		while (str[env->i] == ' ')
 			env->i++;
-		if ((env->col.red_c > -1 && env->col.red_c < 256) && str[env->i] == ',')
+		if ((env->c.red > -1 && env->c.red < 256) && str[env->i] == ',')
 		{
 			env->i++;
-			env->col.green_c = bb_atoi(str, env);
+			env->c.green = bb_atoi(str, env);
 			while (str[env->i] == ' ')
 				env->i++;
-			if (env->col.green_c < 256 && str[env->i] == ',')
+			if (env->c.green < 256 && str[env->i] == ',')
 			{
 				env->i++;
-				env->col.blue_c = bb_atoi(str, env);
+				env->c.blue = bb_atoi(str, env);
 			}
 		}
-		if (env->col.blue_c > 255)
-			env->col.blue_c = -1;
-		// debug_colors(env, 'C');
+		if (env->c.blue > 255)
+			env->c.blue = -1;
 		check_strend(str, env, 'C');
 	}
 	check_color(env, 'C');
 }
 
-void	get_f_color(char* str, t_env *env)
+void		get_f_color(char *str, t_env *env)
 {
-	if (env->col.red_f != -1)
+	if (env->f.red != -1)
 		print_error(env, DOUBLE_COLOR);
 	if (str[env->i])
 	{
 		env->i++;
-		env->col.red_f = bb_atoi(str, env);
+		env->f.red = bb_atoi(str, env);
 		while (str[env->i] == ' ')
 			env->i++;
-		if ((env->col.red_f > -1 && env->col.red_f < 256) && str[env->i] == ',')
+		if ((env->f.red > -1 && env->f.red < 256) && str[env->i] == ',')
 		{
 			env->i++;
-			env->col.green_f = bb_atoi(str, env);
+			env->f.green = bb_atoi(str, env);
 			while (str[env->i] == ' ')
 				env->i++;
-			if (env->col.green_f < 256 && str[env->i] == ',')
+			if (env->f.green < 256 && str[env->i] == ',')
 			{
 				env->i++;
-				env->col.blue_f = bb_atoi(str, env);
+				env->f.blue = bb_atoi(str, env);
 			}
 		}
-		if (env->col.blue_f > 255)
-			env->col.blue_f = -1;
-		// debug_colors(env, 'F');
+		if (env->f.blue > 255)
+			env->f.blue = -1;
 		check_strend(str, env, 'F');
 	}
 	check_color(env, 'F');
 }
 
-void	get_resolution(char *str, t_env *env)
+void		get_resolution(char *str, t_env *env)
 {
 	if (env->res.x != -1)
 		print_error(env, DOUBLE_RESOLUTION);
@@ -105,7 +103,8 @@ void	get_resolution(char *str, t_env *env)
 			print_error(env, RESOLUTION);
 		if ((env->res.y = bb_atoi(str, env)) == -1)
 			print_error(env, RESOLUTION);
-		// debug_resolution(env);
+		if (env->res.x == 0 || env->res.y == 0)
+			print_error(env, RESOLUTION);
 		check_strend(str, env, 'R');
 	}
 }
