@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:40:26 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 13:48:09 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,9 +289,6 @@ int		print_error(t_env *env, int error);
 
 /* debug */
 void	debug_parsing(t_env *env);
-void	debug_colors(t_env *env, int ctrl);
-void	debug_size_map(t_env *env);
-void	debug_resolution(t_env *env);
 void	debug_print_map(t_env *env);
 
 #endif
