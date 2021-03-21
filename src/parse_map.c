@@ -6,14 +6,14 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:42:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/16 13:08:31 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 18:02:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-** env->ply.x	-> [+0,5] Pour se positioner au centre de la case
+** env->ply.x		-> [+0,5] Pour se positioner au centre de la case
 ** player.dirx		-> commence à -1 pour N, 1 pour S, 0 sinon
 ** player.diry		-> commence à -1 pour W, 1 pour E, 0 sinon
 */
@@ -56,8 +56,8 @@ int			dup_map(char *str, t_env *env)
 	{
 		if (player_position(env, str[x], y, x) == 0)
 			env->map.map[y][x] = '0';
- 		else
- 			env->map.map[y][x] = str[x];
+		else
+			env->map.map[y][x] = str[x];
 		if (str[x] == '2')
 			env->nbsprite++;
 		x++;
@@ -95,9 +95,7 @@ int			is_char_map(char *str, t_env *env)
 		if (str[env->i] != '1' && str[env->i] != ' ' && str[env->i] != '0'
 			&& str[env->i] != '2' && str[env->i] != 'N' && str[env->i] != 'S'
 			&& str[env->i] != 'E' && str[env->i] != 'W' && str[env->i])
-		{
 			print_error(env, MAP_WRONG_CHAR);
-		}
 		env->i++;
 	}
 	return (0);
