@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 15:19:34 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 17:19:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static int	game_update(t_env *env)
 		algo_dda(env);
 		calc_column(env);
 		calc_texture(env);
-		draw_column(env, env->x);
+		draw_column(env);
 		env->x++;
 	}
 	if (env->nbsprite > 0)

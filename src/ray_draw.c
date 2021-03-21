@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/17 14:49:51 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/21 17:22:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,13 @@ static int	ret_color(t_env *env, int alpha, int red, int green, int blue)
 	return (all);
 }
 
-static void	draw_texture(t_env *env, int x, int y)
-{
-	if (y < env->res.y && x < env->res.x)
-	{
-		put_px_to_img(&env->img, x, y, \
-		env->tx[env->tex.dir].data[(int)env->tex.pos * \
-		env->tx[env->tex.dir].size_line / 4 + env->tex.x]);
-	}
-}
-
 /*
 ** [1] On dessine le mur
 ** [2] On dessine le plafond
 ** [3] On dessine le sol
 */
 
-void	draw_column(t_env *env, int coord_x)
+void	draw_column(t_env *env)
 {
 	int y;
 	int color;
@@ -70,18 +60,21 @@ void	draw_column(t_env *env, int coord_x)
 	{
 		if (y >= env->dstart && y <= env->dend)
 		{
-			draw_texture(env, env->x, y);
+			// draw_texture(env, env->x, y);
+			put_px_to_img(&env->img,env->x, y, \
+			env->tx[env->tex.dir].data[(int)env->tex.pos * \
+			env->tx[env->tex.dir].size_line / 4 + env->tex.x]);
 			env->tex.pos += env->tex.step;
 		}
 		else if (y <= env->res.y / 2)
 		{
-			color = ret_color(env, 0, env->col.red_c, env->col.green_c, env->col.blue_c);
-			put_px_to_img(&env->img, coord_x, y, color);
+			color = ret_color(env, 0, env->c.red, env->c.green, env->c.blue);
+			put_px_to_img(&env->img, env->x, y, color);
 		}
 		else
 		{
-			color = ret_color(env, 0, env->col.red_f, env->col.green_f, env->col.blue_f);
-			put_px_to_img(&env->img, coord_x, y, color);
+			color = ret_color(env, 0, env->f.red, env->f.green, env->f.blue);
+			put_px_to_img(&env->img, env->x, y, color);
 		}
 	}
 }
@@ -106,22 +99,18 @@ void	draw_sprite(t_env *env, int i)
 	int y;
 	int x = env->spr[i].dstart.x;
 
-	
 	// boucle à travers chaque bande verticale du sprite à l'écran
 	while (x < env->spr[i].dend.x)
 	{
-		// printf("DRAWWWW 1\n");
 		env->spr[i].tex.x = (int)(256 * (x - (-env->spr[i].w / 2 + \
 					env->spr[i].sx)) * env->tx[S].width / env->spr[i].w) / 256;
 		if (env->spr[i].tform.y > 0 && x > 0 && x < env->res.x \
 			&& env->spr[i].tform.y < env->zbuffer[x])
 		{
-			// printf("DRAWWWW 2\n");
 			// pour chaque pixel de la bande courante
 			y = env->spr[i].dstart.y;
 			while (y < env->spr[i].dend.y)
 			{
-				// printf("DRAWWWW 3\n");
 				env->spr[i].tex.y = (((y * 256 - env->res.y * 128 + env->spr[i].h
 				* 128) * env->tx[S].height) / env->spr[i].h) / 256;
 				env->spr[i].color = env->tx[S].data[env->spr[i].tex.y \
