@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 20:23:53 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 13:04:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct		s_player
 	double			dirx;
 	double			diry;
 	double			rspeed;
+	double			mspeed;
 }					t_player;
 
 typedef struct		s_pcolor
@@ -204,6 +205,7 @@ typedef struct		s_env
 
 	t_coord			step;
 	t_dbcoord		deltadist;
+	t_dbcoord		sidedist;
 	t_dbcoord		plane;
 	t_dbcoord		raydir;
 	t_image			tx[ALL];
