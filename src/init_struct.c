@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 16:49:57 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 17:30:06 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 14:04:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	init_parse(t_env *env)
 	};
 }
 
+/*
+** mspeed -> la valeur constante est en carrés / seconde
+** rspeed -> la valeur constante est en radians / seconde
+*/
+
 void	init_start_mlx(t_env *env)
 {
 	if (env->ply.orient_start == 'N')
@@ -38,8 +43,8 @@ void	init_start_mlx(t_env *env)
 		env->plane.x = 0.66;
 	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
-	env->ply.mspeed = 0.1;
-	env->ply.rspeed = 0.33 * 1.8;
+	// MSPEED = 0.1;
+	// RSPEED = 0.33 * 1.8;
 	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
 		print_error(env, MALLOC_FAILED);
 }

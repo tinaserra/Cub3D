@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:24:16 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 19:14:55 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 13:36:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void		draw_column(t_env *env)
 	int	y;
 	int	color;
 
-	y = -1;
-	while (++y < env->res.y)
+	y = 0;
+	while (y < env->res.y)
 	{
 		if (y >= env->dstart && y <= env->dend)
 		{
@@ -81,6 +81,7 @@ void		draw_column(t_env *env)
 			color = ret_color(env, env->f.red, env->f.green, env->f.blue);
 			put_px_to_img(&env->img, env->x, y, color);
 		}
+		y++;
 	}
 }
 
@@ -103,8 +104,8 @@ void		draw_sprite(t_env *env, int i)
 	int	y;
 	int	x;
 
-	x = env->spr[i].dstart.x - 1;
-	while (++x < env->spr[i].dend.x)
+	x = env->spr[i].dstart.x;
+	while (x < env->spr[i].dend.x)
 	{
 		env->spr[i].tex.x = (int)(256 * (x - (-env->spr[i].w / 2 + \
 					env->spr[i].sx)) * env->tx[S].width / env->spr[i].w) / 256;
@@ -124,5 +125,6 @@ void		draw_sprite(t_env *env, int i)
 				y++;
 			}
 		}
+		x++;
 	}
 }

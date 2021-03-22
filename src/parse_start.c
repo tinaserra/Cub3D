@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:05 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 18:04:29 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 13:33:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ static int	get_elements(char *str, t_env *env)
 	else if (str[env->i] == 'C')
 		get_c_color(str, env);
 	else if (str[env->i] == 'N' && str[env->i + 1] == 'O')
-		env->tex.path_no = get_path(str, 2, env);
+		env->tex.path_no = get_path(str, env->i + 2, env);
 	else if (str[env->i] == 'W' && str[env->i + 1] == 'E')
-		env->tex.path_we = get_path(str, 2, env);
+		env->tex.path_we = get_path(str, env->i + 2, env);
 	else if (str[env->i] == 'S' && str[env->i + 1] == 'O')
-		env->tex.path_so = get_path(str, 2, env);
+		env->tex.path_so = get_path(str, env->i + 2, env);
 	else if (str[env->i] == 'E' && str[env->i + 1] == 'A')
-		env->tex.path_ea = get_path(str, 2, env);
+		env->tex.path_ea = get_path(str, env->i + 2, env);
 	else if (str[env->i] == 'S')
-		env->tex.path_s = get_path(str, 1, env);
+		env->tex.path_s = get_path(str, env->i + 1, env);
 	else
 		return (-1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/22 14:03:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 14:13:17 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ typedef struct		s_player
 	double			y;
 	double			dirx;
 	double			diry;
-	double			rspeed;
-	double			mspeed;
+	// double			rspeed;
+	// double			mspeed;
 }					t_player;
 
 typedef struct		s_pcolor

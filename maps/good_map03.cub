@@ -1,7 +1,7 @@
-        R 800 300
+        R 1750 900
    NO ./textures/red.xpm
      WE ./textures/purplestone.xpm
-   SO ./textures/bluestone.xpm
+SO ./textures/bluestone.xpm
             EA ./textures/greystone.xpm
     S ./textures/tonneau.xpm
 

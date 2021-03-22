@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 15:05:43 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 19:49:16 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 14:01:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,11 @@ static void	calc_column(t_env *env)
 	env->zbuffer[env->x] = env->pwdist;
 }
 
-/*
-** mspeed -> la valeur constante est en carrés / seconde
-** rspeed -> la valeur constante est en radians / seconde
-*/
-
 static int	game_update(t_env *env)
 {
 	keys_control(env);
-	env->x = -1;
-	while (++env->x < env->res.x)
+	env->x = 0;
+	while (env->x < env->res.x)
 	{
 		init_env(env);
 		calc_sidedist(env);
@@ -114,6 +109,7 @@ static int	game_update(t_env *env)
 		calc_column(env);
 		calc_texture(env);
 		draw_column(env);
+		env->x++;
 	}
 	if (env->nbsprite > 0)
 		sprite_casting(env);
