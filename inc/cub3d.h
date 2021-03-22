@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:27 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/22 13:04:07 by vserra           ###   ########.fr       */
+/*   Updated: 2021/03/22 14:03:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 
 # define DESTROYNOTIFY 17
 # define STRUCTURENOTIFYMASK 0x20000
+# define MSPEED 0.1
+# define RSPEED 0.594
 
 /*
 ** STRUCTURES --------------------------------------------------------------- **
