@@ -15,7 +15,7 @@ make fclean
 ### TO DO ‼️
 
 - [x] Tester toutes les maps !
-- [ ] Wrong path -> maps/good_map03.cub
+- [x] Wrong path -> maps/good_map03.cub
 - [ ] pb trous entre sol et murs
 - [ ] Adapter a linux
 - [ ] La norme
