@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/22 11:40:18 by vserra            #+#    #+#              #
-#    Updated: 2021/03/17 15:41:37 by vserra           ###   ########.fr        #
+#    Updated: 2021/03/29 11:21:47 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ NAME = Cub3D
 
 LIBFT_DIR = libft
 LIBFT = libft.a
-MLX_DIR = mlx
-MLX = libmlx.dylib
+MLX_DIR = mlx-linux
+MLX = libmlx.a #libmlx.dylib
 
 # diff entre .a et .dylib :
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
@@ -48,7 +48,7 @@ SRC_DIR = src
 INC_DIR = inc
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
-DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
+# DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 # -C faire make comme si on etait dans le dossier
 # -j multisreder / ameliore la vitesse de compliation
@@ -62,7 +62,7 @@ all:
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ)
-		@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l mlx -L $(LIBFT_DIR) -l ft
+		@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lbsd -lX11 -lXext -lm -l mlx -L $(LIBFT_DIR) -l ft
 		@install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
 		@echo $(NAME) : Created !
 
@@ -94,4 +94,4 @@ re: fclean all
 .PHONY: all, clean, fclean, re
 
 # Utilise les .d (et ignore s'ils n'existe pas)
--include $(DPD)
+# -include $(DPD)
