@@ -13,14 +13,18 @@
 #ifndef KEYCODE_LINUX_H
 # define KEYCODE_LINUX_H
 
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define KEYPRESSMASK 1L<<0
+# define KEYRELEASEMASK 1L<<1
+# define DESTROYNOTIFY 33
+# define STRUCTURENOTIFYMASK 1L<<0
+
 /*
 ** Linux qwerty
 */
 
-/*
-** # define KEY_ESCAPE
-*/
-
+# define KEY_ESCAPE 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_W 119
@@ -28,12 +32,4 @@
 # define KEY_D 100
 # define KEY_A 97
 
-/*
-** Linux azerty
-*/
-
-/*
-** # define KEY_W 122
-** # define KEY_A 113
-*/
 #endif

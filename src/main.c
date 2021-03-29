@@ -59,6 +59,7 @@ int			main(int ac, char **av)
 		start_mlx(&env);
 	}
 	else
-		write(2, "Error\nInvalid arguments\n", 30);
+		print_error(&env, ARGS);
+		// write(2, "Error\nInvalid arguments\n", 30);
 	return (0);
 }

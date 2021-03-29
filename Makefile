@@ -41,7 +41,7 @@ MLX = libmlx.a #libmlx.dylib
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
 # override -> permet de reecrire la suite de la variable
-override CFLAGS += -Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+override CFLAGS += -Wall -Wextra -Werror #-MMD -O3 #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
@@ -61,9 +61,9 @@ all:
 # permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
+
 $(NAME): $(OBJ)
-		@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lbsd -lX11 -lXext -lm -l mlx -L $(LIBFT_DIR) -l ft
-		@install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
+		@gcc $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -L $(LIBFT_DIR) -l ft -lmlx -lm -lbsd -lX11 -lXext
 		@echo $(NAME) : Created !
 
 # si le .c est plus recent que le .o on rentre dans la regle

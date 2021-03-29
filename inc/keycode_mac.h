@@ -17,6 +17,8 @@
 # define KEYRELEASE 3
 # define KEYPRESSMASK 1
 # define KEYRELEASEMASK 2
+# define DESTROYNOTIFY 17
+# define STRUCTURENOTIFYMASK 0x20000
 
 # define KEY_ESCAPE			53
 # define KEY_F1 			122

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 
 void	free_textures(t_env *env)
 {

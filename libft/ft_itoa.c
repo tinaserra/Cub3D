@@ -58,11 +58,9 @@ static char	*ft_stocknbr(int n, char *str)
 
 char		*ft_itoa(int n)
 {
-	int		i;
 	int		len;
 	char	*out;
 
-	i = 0;
 	len = ft_len(n);
 	if (!(out = malloc(sizeof(*out) * (len + 1))))
 		return (0);

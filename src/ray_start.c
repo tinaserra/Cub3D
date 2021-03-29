@@ -145,9 +145,9 @@ int			start_mlx(t_env *env)
 		game_update(env);
 	else
 	{
-		mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
-		mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
-		mlx_hook(env->window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, env);
+		mlx_hook(env->window, 33, 1L<<0, ft_quit, env);
+		mlx_hook(env->window, 2, 1L<<0, ft_key_press, env);
+		mlx_hook(env->window, 3, 1L<<1, ft_key_release, env);
 		mlx_loop_hook(env->mlx, game_update, env);
 		mlx_loop(env->mlx);
 	}

@@ -19,8 +19,8 @@
 
 # include "mlx.h"
 # include "libft.h"
-# include "keycode_mac.h"
-# include "error.h"
+# include "keycode_linux.h"
+// # include "error.h"
 
 /*
 ** LIBRARIES ---------------------------------------------------------------- **
@@ -40,10 +40,56 @@
 ** VALUES ------------------------------------------------------------------- **
 */
 
-# define DESTROYNOTIFY 17
-# define STRUCTURENOTIFYMASK 0x20000
 # define MSPEED 0.1
 # define RSPEED 0.594
+
+/*
+** Errors
+*/
+
+typedef enum	e_error{
+	ARGS,
+	FILE_NAME,
+	CUB_DIR,
+	CUB_INVALIDE,
+	RESOLUTION,
+	RESOLUTION_END,
+	F_COLOR,
+	F_COLOR_END,
+	C_COLOR,
+	C_COLOR_END,
+	MORE_NUM,
+	DOUBLE_RESOLUTION,
+	DOUBLE_COLOR,
+	EMPTY_NO,
+	EMPTY_WE,
+	EMPTY_SO,
+	EMPTY_EA,
+	EMPTY_S,
+	DOUBLE_NO,
+	DOUBLE_WE,
+	DOUBLE_SO,
+	DOUBLE_EA,
+	DOUBLE_S,
+	WRONG_NO,
+	WRONG_WE,
+	WRONG_SO,
+	WRONG_EA,
+	WRONG_S,
+	MAP_WRONG_CHAR,
+	MAP_CHAR_AFTER,
+	NO_MAP,
+	MULTI_PLAYER,
+	NO_PLAYER,
+	MAP_WALL,
+	MAP_INCOMPLETE,
+	MLX_INIT,
+	NEW_WINDOW,
+	NEW_IMAGE,
+	BMP,
+	MALLOC_FAILED,
+	NUMBER
+}				t_error;
 
 /*
 ** STRUCTURES --------------------------------------------------------------- **
@@ -201,7 +247,7 @@ typedef struct		s_env
 	void			*window;
 	double			camerax;
 	double			pwdist;
-	char			keyboard[512];
+	char			keyboard[65364];
 	int				nbsprite;
 	double			*zbuffer;
 
