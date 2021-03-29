@@ -46,7 +46,7 @@ void	free_map(t_env *env)
 	free(env->map.map);
 }
 
-int		print_error(t_env *env, int error)
+int			ft_quit(t_env *env)
 {
 	free_textures(env);
 	if (env->map.map != NULL)
@@ -54,6 +54,22 @@ int		print_error(t_env *env, int error)
 	printf("JE FREE LA STRUCTURE DES SPRITE ENCULÉ\n");
 	if (env->spr)
 		free(env->spr);
-	ft_putstr_fd(g_str_error[error], 2);
+	if (env->zbuffer)
+		free(env->zbuffer);
+	if (env->img.image)
+		mlx_destroy_image(env->mlx, env->img.image);
+	if (env->window)
+		mlx_destroy_window(env->mlx, env->window);
+	if (env->mlx)
+	{
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+	}
 	exit(EXIT_FAILURE);
+}
+
+int		print_error(t_env *env, int error)
+{
+	ft_putstr_fd(g_str_error[error], 2);
+	return(ft_quit(env));
 }

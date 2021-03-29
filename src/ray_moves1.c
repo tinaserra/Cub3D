@@ -12,13 +12,6 @@
 
 #include "cub3d.h"
 
-int			ft_quit(t_env *env)
-{
-	mlx_destroy_image(env->mlx, env->img.image);
-	mlx_destroy_window(env->mlx, env->window);
-	exit(0);
-}
-
 /*
 ** La direction de la caméra et le plan de la caméra doivent être tournés
 */

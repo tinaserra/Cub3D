@@ -43,8 +43,6 @@ void	init_start_mlx(t_env *env)
 		env->plane.x = 0.66;
 	if (env->ply.orient_start == 'W')
 		env->plane.x = -0.66;
-	// MSPEED = 0.1;
-	// RSPEED = 0.33 * 1.8;
 	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
 		print_error(env, MALLOC_FAILED);
 }
