@@ -249,6 +249,8 @@ typedef struct		s_env
 	double			pwdist;
 	char			keyboard[65364];
 	int				nbsprite;
+	char			*str;
+	char			*line;
 	double			*zbuffer;
 
 	t_coord			step;
@@ -279,6 +281,12 @@ void				init_parse(t_env *env);
 void				init_env(t_env *env);
 void				init_start_mlx(t_env *env);
 void				init_texture(t_env *env);
+
+/*
+** parse_start
+*/
+
+int				get_next_line(t_env *env, int fd, char **line);
 
 /*
 ** parse_start

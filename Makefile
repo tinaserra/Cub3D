@@ -14,6 +14,7 @@ SRC =	main.c \
 		debug.c \
 		error.c \
 		init_struct.c \
+		get_next_line.c \
 		parse_start.c \
 		parse_int.c \
 		parse_texture.c \

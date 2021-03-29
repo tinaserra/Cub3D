@@ -49,7 +49,6 @@ int			dup_map(char *str, t_env *env)
 	int			x;
 
 	x = 0;
-	env->map.map[y] = NULL;
 	if (!(env->map.map[y] = malloc(sizeof(char) * env->map.len_line + 1)))
 		print_error(env, MALLOC_FAILED);
 	while (str[x] != '\0')

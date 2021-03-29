@@ -60,6 +60,5 @@ int			main(int ac, char **av)
 	}
 	else
 		print_error(&env, ARGS);
-		// write(2, "Error\nInvalid arguments\n", 30);
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
 char	*get_line(char *s)
 {
@@ -59,18 +59,18 @@ char	*get_str(char *s)
 	return (out);
 }
 
-int		get_next_line(int fd, char **line)
+int		get_next_line(t_env *env, int fd, char **line)
 {
 	int			ret;
 	char		*buffer;
-	static char	*str;
+	// static char	*str;
 
 	if (!line || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	ret = 1;
-	while (ft_strchr(str, '\n') == NULL && ret != 0)
+	while (ft_strchr(env->str, '\n') == NULL && ret != 0)
 	{
 		if ((ret = read(fd, buffer, BUFFER_SIZE)) == -1)
 		{
@@ -78,10 +78,10 @@ int		get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buffer[ret] = '\0';
-		str = ft_strjoin_free(str, buffer, 'L');
+		env->str = ft_strjoin_free(env->str, buffer, 'L');
 	}
 	free(buffer);
-	*line = get_line(str);
-	str = get_str(str);
+	*line = get_line(env->str);
+	env->str = get_str(env->str);
 	return (ret == 0 ? 0 : 1);
 }

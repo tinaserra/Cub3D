@@ -16,19 +16,23 @@ static int	get_map(char *file, t_env *env)
 {
 	int		fd;
 	int		ret;
-	char	*str;
+	int		i;
 
 	ret = 1;
-	str = NULL;
+	env->line = NULL;
 	fd = open(file, O_RDONLY);
 	if (!(env->map.map = malloc(sizeof(char*) * env->map.nb_lines)))
 		print_error(env, MALLOC_FAILED);
+	i = -1;
+	while (++i < env->map.nb_lines)
+		env->map.map[i] = NULL;
 	while (ret != 0)
 	{
-		ret = get_next_line(fd, &str);
-		if (str[0] != '\0' && is_a_map(str) == 0)
-			dup_map(str, env);
-		free(str);
+		ret = get_next_line(env, fd, &env->line);
+		if (env->line[0] != '\0' && is_a_map(env->line) == 0)
+			dup_map(env->line, env);
+		free(env->line);
+		env->line = NULL;
 	}
 	close(fd);
 	if (env->ply.orient_start == 'o')
@@ -89,22 +93,22 @@ void		parsing(char *file, t_env *env)
 {
 	int		fd;
 	int		ret;
-	char	*str;
 
 	ret = 1;
-	str = NULL;
+	env->line = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
 		print_error(env, CUB_DIR);
 	if ((fd = open(file, O_RDONLY)) == -1)
 		print_error(env, CUB_INVALIDE);
 	while (ret != 0)
 	{
-		ret = get_next_line(fd, &str);
-		if (get_elements(str, env) == -1)
-			get_size_map(str, env);
-		if (str[0] == '\0' && env->map.nb_lines != 0)
+		ret = get_next_line(env, fd, &env->line);
+		if (get_elements(env->line, env) == -1)
+			get_size_map(env->line, env);
+		if (env->line[0] == '\0' && env->map.nb_lines != 0)
 			env->map.end_map = 1;
-		free(str);
+		free(env->line);
+		env->line = NULL;
 	}
 	close(fd);
 	if (env->map.nb_lines == 0)
