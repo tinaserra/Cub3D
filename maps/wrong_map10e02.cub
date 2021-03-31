@@ -1,7 +1,7 @@
-V 800 300
+R 800 300
 NO ./textures/red.xpm
 WE ./textures/purplestone.xpm
-SO ./textures/bluestone.xpm
+SE ./textures/bluestone.xpm
 EA ./textures/greystone.xpm
 S ./textures/tonneau.xpm
 F 100,20,0

@@ -1,14 +1,13 @@
-R 800 300
+R 1
 NO ./textures/red.xpm
 WE ./textures/purplestone.xpm
 SO ./textures/bluestone.xpm
 EA ./textures/greystone.xpm
 S ./textures/tonneau.xpm
-F 100,20,0
-C 0,30,0
-
+F 220,100,0
+C 225,30,0
 111111
 100101
-10 001
+102001
 1100N1
 111111

@@ -1,5 +1,5 @@
-NO ./textures/red.xpm
 WE ./textures/purplestone.xpm
+R 800 300
 SO ./textures/bluestone.xpm
 EA ./textures/greystone.xpm
 S ./textures/tonneau.xpm
@@ -12,4 +12,4 @@ C 0,30,0
 1100N1
 111111
 
-R 800 300
+NO ./textures/red.xpm

@@ -1,4 +1,4 @@
-R 800 300
+
 NO ./textures/red.xpm
 WE ./textures/purplestone.xpm
 SO ./textures/bluestone.xpm

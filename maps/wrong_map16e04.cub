@@ -1,11 +1,11 @@
 R 1920 1080
 NO ./textures/red.xpm
 WE ./textures/purplestone.xpm
-SO
+SO ./textures/bluestone.xpm
 EA ./textures/greystone.xpm
 S ./textures/tonneau.xpm
-F 220,100,0
-C 225,30,0
+F
+C 42, 42, 42
 111111
 100101
 102001

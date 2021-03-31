@@ -31,6 +31,35 @@ make fclean
 
 Sujet -> [EN](https://github.com/tinaserra/Cub3D/blob/master/links/cub3d_en.pdf) | [FR](https://github.com/tinaserra/Cub3D/blob/master/links/cube3d_fr.pdf)
 
+## PARSING 😳
+
+Votre programme doit prendre en premier argument un fichier de description de scène avec pour extension **.cub**
+
+La carte doit être parsée en accord avec ce qui est présenté dans le fichier.</br>
+Vous devez pouvoir parser n’importe quelle sorte de carte, tant qu’elle respecte les règles de carte.
+
+[règles de la map](https://github.com/tinaserra/Cub3D/blob/master/links/cube3d_fr.pdf) Page 7
+
+### Les cas d'erreur
+
+=> [Ma liste de cas d'erreur](https://github.com/tinaserra/Cub3D/blob/master/links/map_error.md)
+
+### Retourner un message d'erreur
+
+Si un problème de configuration de n’importe quel type est rencontré dans le fichier, le programme doit **quitter et renvoyer "Error\n"** suivi d’un **message d’erreur explicite de votre choix.**
+
+### Fonctions autorisées
+
+On dispose de deux fonctions por nous aider dans la gestion d'erreur :</br>
+```perror``` et ```strerror```
+
+En gros, ```strerror``` prend en parametre un int correspondant a un numero d'erreur et retourne une string contenant le message correspondent au numero.</br>
+On peut ensuite imprimer la string sur la sortie standard avec ```perror```.
+
+
+[man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)
+[man perror](http://manpagesfr.free.fr/man/man3/perror.3.html)
+
 ## RAYCASTING 😎
 
 **Raycasting** est une technique de rendu permettant de créer une perspective 3D dans une carte 2D. Le jeu le plus connu qui utilise cette technique est bien sûr **Wolfenstein 3D**.
