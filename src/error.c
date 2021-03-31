@@ -28,49 +28,16 @@ void	free_textures(t_env *env)
 		free(env->tex.path_s);
 }
 
-void	print_map(t_env *env)
-{
-	int i;
-	int j;
-
-	printf("\n\n********* DEBUG PRINT MAP *********\n\n");
-	printf("nb_lines = %d\n", env->map.nb_lines);
-	printf("len_line = %d\n", env->map.len_line);
-	printf("Player position = %c\n", env->ply.orient_start);
-	printf("Number of sprite = %d\n\n", env->nbsprite);
-	printf("-------------\n|    MAP    |\n-------------\n");
-	i = 0;
-	while (i < env->map.nb_lines)
-	{
-		j = 0;
-		while (env->map.map[i][j] != '\0')
-		{
-			if (env->map.map[i][j] == ' ')
-				printf(" .");
-			else
-				printf("%2c", env->map.map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
 void	free_map(t_env *env)
 {
 	int		i;
 
 	printf("JE FREE LA MAP LA CON DE TA MERE\n");
-	// print_map(env);
-	// printf("%d\n", env->map.nb_lines);
 	i = 0;
 	while (i < env->map.nb_lines)
 	{
 		if (env->map.map[i] != NULL)
-		{
-			// env->map.map[i] = NULL;
 			free(env->map.map[i]);
-		}
 		i++;
 	}
 	free(env->map.map);
