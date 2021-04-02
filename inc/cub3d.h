@@ -20,7 +20,6 @@
 # include "mlx.h"
 # include "libft.h"
 # include "keycode_linux.h"
-// # include "error.h"
 
 /*
 ** LIBRARIES ---------------------------------------------------------------- **
@@ -47,7 +46,7 @@
 ** ERRORS ------------------------------------------------------------------- **
 */
 
-typedef enum	e_error{
+typedef enum		e_error{
 	ARGS,
 	FILE_NAME,
 	CUB_DIR,
@@ -89,7 +88,7 @@ typedef enum	e_error{
 	BMP,
 	MALLOC_FAILED,
 	NUMBER
-}				t_error;
+}					t_error;
 
 /*
 ** STRUCTURES --------------------------------------------------------------- **
@@ -284,7 +283,7 @@ void				init_texture(t_env *env);
 ** parse_start
 */
 
-int				get_next_line(t_env *env, int fd, char **line);
+int					get_next_line(t_env *env, int fd, char **line);
 
 /*
 ** parse_start
