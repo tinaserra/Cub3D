@@ -104,8 +104,8 @@ void		draw_sprite(t_env *env, int i)
 	int	y;
 	int	x;
 
-	x = env->spr[i].dstart.x;
-	while (x < env->spr[i].dend.x)
+	x = env->spr[i].dstart.x - 1;
+	while (++x < env->spr[i].dend.x)
 	{
 		env->spr[i].tex.x = (int)(256 * (x - (-env->spr[i].w / 2 + \
 					env->spr[i].sx)) * env->tx[S].width / env->spr[i].w) / 256;
@@ -125,6 +125,5 @@ void		draw_sprite(t_env *env, int i)
 				y++;
 			}
 		}
-		x++;
 	}
 }

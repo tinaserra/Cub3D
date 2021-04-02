@@ -60,8 +60,8 @@ int			ft_quit(t_env *env)
 	if (env->zbuffer)
 		free(env->zbuffer);
 	if (env->str)
-		free (env->str);
-	free (env->line);
+		free(env->str);
+	free(env->line);
 	if (env->img.image)
 		mlx_destroy_image(env->mlx, env->img.image);
 	if (env->wi)
@@ -74,8 +74,8 @@ int			ft_quit(t_env *env)
 	exit(EXIT_FAILURE);
 }
 
-int		print_error(t_env *env, int error)
+int			print_error(t_env *env, int error)
 {
 	ft_putstr_fd(g_str_error[error], 2);
-	return(ft_quit(env));
+	return (ft_quit(env));
 }

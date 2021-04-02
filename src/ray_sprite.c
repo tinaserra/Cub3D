@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	get_sprite_coord(t_env *env)
+void		get_sprite_coord(t_env *env)
 {
 	int	y;
 	int	x;
@@ -117,7 +117,7 @@ static void	sprite_position(t_env *env, int i)
 ** 3. Calculer la largeur du sprite
 */
 
-void	sprite_casting(t_env *env)
+void		sprite_casting(t_env *env)
 {
 	int	i;
 

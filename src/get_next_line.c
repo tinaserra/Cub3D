@@ -63,7 +63,6 @@ int		get_next_line(t_env *env, int fd, char **line)
 {
 	int			ret;
 	char		*buffer;
-	// static char	*str;
 
 	if (!line || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);

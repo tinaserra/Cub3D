@@ -111,8 +111,7 @@ static int	game_update(t_env *env)
 		draw_column(env);
 		env->x++;
 	}
-	if (env->nbsprite > 0)
-		sprite_casting(env);
+	sprite_casting(env);
 	if (env->save == 1)
 		save_bmp(env);
 	else
