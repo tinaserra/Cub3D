@@ -15,10 +15,10 @@
 
 # define KEYPRESS 2
 # define KEYRELEASE 3
-# define KEYPRESSMASK 1L<<0
-# define KEYRELEASEMASK 1L<<1
+# define KEYPRESSMASK 1
+# define KEYRELEASEMASK 2
 # define DESTROYNOTIFY 33
-# define STRUCTURENOTIFYMASK 1L<<0
+# define STRUCTURENOTIFYMASK 1
 
 /*
 ** Linux qwerty
