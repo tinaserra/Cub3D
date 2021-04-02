@@ -163,8 +163,6 @@ typedef struct		s_player
 	double			y;
 	double			dirx;
 	double			diry;
-	// double			rspeed;
-	// double			mspeed;
 }					t_player;
 
 typedef struct		s_pcolor
@@ -244,7 +242,7 @@ typedef struct		s_env
 	int				dstart;
 	int				dend;
 	void			*mlx;
-	void			*window;
+	void			*wi;
 	double			camerax;
 	double			pwdist;
 	char			keyboard[65364];
@@ -375,6 +373,7 @@ void				get_texture(t_env *env);
 ** ray_sprite
 */
 
+void				get_sprite_coord(t_env *env);
 void				sprite_casting(t_env *env);
 
 /*

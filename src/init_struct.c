@@ -45,6 +45,7 @@ void	init_start_mlx(t_env *env)
 		env->plane.x = -0.66;
 	if (!(env->zbuffer = malloc(sizeof(double) * env->res.x)))
 		print_error(env, MALLOC_FAILED);
+	get_sprite_coord(env);
 }
 
 void	init_env(t_env *env)

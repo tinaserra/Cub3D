@@ -43,7 +43,7 @@ void	get_sprite_coord(t_env *env)
 ** Calculer les distances entre le joueur et chaque sprite
 */
 
-void	dist_sprite_player(t_env *env)
+static void	dist_sprite_player(t_env *env)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ void	dist_sprite_player(t_env *env)
 ** Trier les sprites de loin à pret
 */
 
-void	sort_sprite(t_env *env)
+static void	sort_sprite(t_env *env)
 {
 	int			i;
 	t_sprite	tmp;
@@ -90,7 +90,7 @@ void	sort_sprite(t_env *env)
 ** ce que Z est en 3D.
 */
 
-void	sprite_position(t_env *env, int i)
+static void	sprite_position(t_env *env, int i)
 {
 	double	spr_x;
 	double	spr_y;
@@ -121,7 +121,6 @@ void	sprite_casting(t_env *env)
 {
 	int	i;
 
-	get_sprite_coord(env);
 	sort_sprite(env);
 	i = 0;
 	while (i < env->nbsprite)

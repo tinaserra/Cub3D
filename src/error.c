@@ -13,9 +13,17 @@
 #include "cub3d.h"
 #include "error.h"
 
-void	free_textures(t_env *env)
+static void	free_textures(t_env *env)
 {
-	printf("\nJE FREE LES TEXTURES FDP\n");
+	int i;
+
+	i = 0;
+	while (i < 5)
+	{
+		if (env->tx[i].image != NULL)
+			mlx_destroy_image(env->mlx, env->tx[i].image);
+		i++;
+	}
 	if (env->tex.path_no != NULL)
 		free(env->tex.path_no);
 	if (env->tex.path_ea != NULL)
@@ -28,11 +36,10 @@ void	free_textures(t_env *env)
 		free(env->tex.path_s);
 }
 
-void	free_map(t_env *env)
+static void	free_map(t_env *env)
 {
 	int		i;
 
-	printf("JE FREE LA MAP LA CON DE TA MERE\n");
 	i = 0;
 	while (i < env->map.nb_lines)
 	{
@@ -48,8 +55,7 @@ int			ft_quit(t_env *env)
 	free_textures(env);
 	if (env->map.map != NULL)
 		free_map(env);
-	printf("JE FREE LA STRUCTURE DES SPRITE ENCULÉ\n");
-	if (env->spr)
+	if (env->spr != NULL)
 		free(env->spr);
 	if (env->zbuffer)
 		free(env->zbuffer);
@@ -58,8 +64,8 @@ int			ft_quit(t_env *env)
 	free (env->line);
 	if (env->img.image)
 		mlx_destroy_image(env->mlx, env->img.image);
-	if (env->window)
-		mlx_destroy_window(env->mlx, env->window);
+	if (env->wi)
+		mlx_destroy_window(env->mlx, env->wi);
 	if (env->mlx)
 	{
 		mlx_destroy_display(env->mlx);

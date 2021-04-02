@@ -1,8 +1,6 @@
 # Binary
-Cub3d
+cub3D
 Cub3D
-Cube3d
-Cube3D
 
 # *.pdf
 *.zip
@@ -13,6 +11,7 @@ obj
 a.out*
 *.o
 *.d
+*.a
 
 # OTHERS
 .DS_Store
@@ -22,6 +21,5 @@ a.out*
 libmlx.dylib
 libft/libft.a
 *.bmp
-# mlx
-# mlx/*.swiftdoc
-# mlx/*.swiftmodule
+mlx-linux/test/mlx-test
+mlx-linux/*.a

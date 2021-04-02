@@ -117,7 +117,7 @@ static int	game_update(t_env *env)
 		save_bmp(env);
 	else
 	{
-		mlx_put_image_to_window(env->mlx, env->window, env->img.image, 0, 0);
+		mlx_put_image_to_window(env->mlx, env->wi, env->img.image, 0, 0);
 		mlx_destroy_image(env->mlx, env->img.image);
 		if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 			print_error(env, NEW_IMAGE);
@@ -134,20 +134,20 @@ int			start_mlx(t_env *env)
 		print_error(env, MLX_INIT);
 	screen_size(env);
 	get_texture(env);
-	if (!(env->window = mlx_new_window(env->mlx, env->res.x, env->res.y, "<3")))
-		print_error(env, NEW_WINDOW);
+	if (env->save != 1)
+		if (!(env->wi = mlx_new_window(env->mlx, env->res.x, env->res.y, "<3")))
+			print_error(env, NEW_WINDOW);
 	if (!(env->img.image = mlx_new_image(env->mlx, env->res.x, env->res.y)))
 		print_error(env, NEW_IMAGE);
 	env->img.data = (int*)mlx_get_data_addr(env->img.image,
 			&env->img.bits_per_pixel, &env->img.size_line, &env->img.endian);
-	ft_putstr_fd("Le temps est bon, le ciel est bleu !\n", 1);
 	if (env->save == 1)
 		game_update(env);
 	else
 	{
-		mlx_hook(env->window, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
-		mlx_hook(env->window, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
-		mlx_hook(env->window, KEYRELEASE, KEYRELEASEMASK, ft_key_release, env);
+		mlx_hook(env->wi, DESTROYNOTIFY, STRUCTURENOTIFYMASK, ft_quit, env);
+		mlx_hook(env->wi, KEYPRESS, KEYPRESSMASK, ft_key_press, env);
+		mlx_hook(env->wi, KEYRELEASE, KEYRELEASEMASK, ft_key_release, env);
 		mlx_loop_hook(env->mlx, game_update, env);
 		mlx_loop(env->mlx);
 	}

@@ -30,7 +30,7 @@ SRC =	main.c \
 		ray_sprite.c \
 		bmp.c
 
-NAME = Cub3D
+NAME = cub3D
 
 LIBFT_DIR = libft
 LIBFT = libft.a
